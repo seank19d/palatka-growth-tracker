@@ -1,11 +1,12 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { AppErrorComponent, NotFoundComponent } from "@/lib/error-component";
+import { AppErrorComponent, NotFoundComponent, clearStaleChunkReloadFlag } from "@/lib/error-component";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 import appCss from "../styles.css?url";
 
@@ -50,6 +51,9 @@ export const Route = createRootRoute({
 function RootDocument() {
   const { lastUpdated } = Route.useRouteContext();
   const plausible = import.meta.env.VITE_PLAUSIBLE_DOMAIN as string | undefined;
+  useEffect(() => {
+    clearStaleChunkReloadFlag();
+  }, []);
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
