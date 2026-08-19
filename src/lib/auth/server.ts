@@ -13,14 +13,14 @@
  *
  * Tri-mode:
  *   - Deployed: the deployer injects a per-app `GROK_AUTH_*` + `BETTER_AUTH_URL`
- *     + `DATABASE_URL`, so real federated auth is persisted in Postgres.
+ *     + database URL, so real federated auth is persisted in Postgres.
  *   - Sandbox live preview: no injection -> falls back to the shared **preview
  *     client** (`./preview`) and derives the preview's `https://*.grok-sandbox.com`
  *     origin from the request, so real sign-in works (no demo users). Sessions
  *     and identities persist in the embedded PGLite DB (same DB as app data);
  *     the process restart wipes both. Live-preview iframe clients use a bearer
  *     token (partitioned cookies) — see `client.ts`.
- *   - Explicitly off (`VITE_AUTH_ENABLED=false`): no providers; per-user server
+ *   - Explicitly off (`VITE_AUTH_ENABLED=false`): no providers; per-user info
  *     functions fall back to a dev user (see `verify.server.ts`).
  *
  * NEVER import this from client code — it pulls in `pg` + the preview secret +
@@ -45,7 +45,7 @@ import {
   PREVIEW_CLIENT_SECRET,
 } from "./preview";
 
-// Kick (and share) PGLite bootstrap as soon as the auth server module loads.
+// Kick (and share) DB bootstrap as soon as the auth server module loads.
 void ensureDbReady();
 
 /**
@@ -67,6 +67,18 @@ const env = (key: string): string | undefined => {
   const value = process.env[key]?.trim();
   return value ? value : undefined;
 };
+
+/** Vercel Marketplace Neon may inject any of these names. */
+function resolveDatabaseUrl(): string | undefined {
+  return (
+    env("DATABASE_URL") ||
+    env("POSTGRES_URL") ||
+    env("POSTGRES_PRISMA_URL") ||
+    env("NEON_DATABASE_URL") ||
+    env("DATABASE_URL_UNPOOLED") ||
+    env("POSTGRES_URL_NON_POOLING")
+  );
+}
 
 // Explicit off-switch. The deployer sets `VITE_AUTH_ENABLED=true` when it
 // provisions auth; set it to "false" to force auth off everywhere (dev user).
@@ -123,7 +135,7 @@ const trustedOrigins: string[] = explicitBaseURL
       ...LOCAL_DEV_ORIGINS,
     ];
 
-const databaseUrl = env("DATABASE_URL");
+const databaseUrl = resolveDatabaseUrl();
 
 // Static broker OAuth endpoints (skip OIDC discovery on every sign-in / callback).
 // Discovery would cost an extra network hop to the broker before the popup can
@@ -134,7 +146,7 @@ const grokAuthorizationUrl = `${issuerBase}/api/auth/oauth2/authorize`;
 const grokTokenUrl = `${issuerBase}/api/auth/oauth2/token`;
 const grokUserInfoUrl = `${issuerBase}/api/auth/oauth2/userinfo`;
 
-// Real Postgres when `DATABASE_URL` is set (deployed apps), else the app's
+// Real Postgres when a connection string is set (deployed apps), else the app's
 // embedded PGLite (preview) via a Kysely dialect — so Better Auth persists to the
 // SAME DB as app data, including email/password users. Both use the Better Auth
 // schema from `migrations/0001_auth.sql`.
