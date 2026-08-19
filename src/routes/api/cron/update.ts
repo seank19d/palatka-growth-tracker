@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-async function handle(request: Request) {
+function authorized(request: Request): boolean {
   const secret = process.env.CRON_SECRET;
-  if (!secret) {
-    return new Response(JSON.stringify({ ok: false, error: "CRON_SECRET is not configured" }), {
-      status: 401,
-      headers: { "content-type": "application/json" },
-    });
-  }
   const auth = request.headers.get("authorization") ?? "";
-  if (auth !== `Bearer ${secret}`) {
+  if (secret && auth === `Bearer ${secret}`) return true;
+  // Vercel Cron sets this header on scheduled invocations
+  if (request.headers.get("x-vercel-cron") === "1") return true;
+  return false;
+}
+
+async function handle(request: Request) {
+  if (!authorized(request)) {
     return new Response(JSON.stringify({ ok: false, error: "Unauthorized" }), {
       status: 401,
       headers: { "content-type": "application/json" },

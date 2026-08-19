@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { formatNumber } from "@/lib/format";
 import type { Project } from "@/lib/types";
@@ -8,7 +8,7 @@ import { ConfidenceBadge, StatusBadge } from "./status-badge";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link to="/developments/$slug" params={{ slug: project.slug }} className="group block h-full">
-      <Card className="flex h-full flex-col p-5 transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18),0_10px_28px_-14px_rgba(28,25,21,0.22)]">
+      <Card className="flex h-full flex-col border border-border bg-card p-5 shadow-none transition-colors group-hover:border-primary/35">
         <div className="flex flex-wrap items-center gap-2">
           <StatusBadge status={project.status} />
           <ConfidenceBadge confidence={project.confidence} />
@@ -25,13 +25,10 @@ export function ProjectCard({ project }: { project: Project }) {
         </p>
         <div className="mt-4 flex items-end justify-between gap-3 border-t border-border pt-3 text-sm">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.14em] text-subtle">Best-known lots</p>
+            <p className="text-[11px] uppercase tracking-[0.12em] text-subtle">Best-known lots</p>
             <p className="font-medium tabular-nums">{formatNumber(project.lotsCurrent)}</p>
           </div>
-          <span className="inline-flex items-center gap-1 text-primary">
-            Record
-            <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
-          </span>
+          <span className="text-primary">Open record →</span>
         </div>
       </Card>
     </Link>
