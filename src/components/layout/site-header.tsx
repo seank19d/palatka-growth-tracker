@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
+import { BrandMark } from "@/components/brand/mark";
 import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cn } from "@/lib/utils";
@@ -37,16 +38,19 @@ function AuthSlot() {
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="border-b border-border bg-bg">
-      <div className="h-1 w-full bg-primary" />
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
-          <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-muted">
-            Putnam County, Florida
-          </p>
-          <p className="font-display text-[1.35rem] font-semibold leading-none tracking-tight md:text-[1.6rem]">
-            Palatka Growth Tracker
-          </p>
+    <header className="border-b border-border bg-bg/80 backdrop-blur-sm">
+      <div className="river-ribbon w-full" />
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 md:px-6">
+        <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
+          <BrandMark className="size-10" title="Palatka Growth Tracker" />
+          <span className="min-w-0">
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+              St. Johns River town
+            </span>
+            <span className="block font-display text-[1.28rem] font-semibold leading-none tracking-tight md:text-[1.5rem]">
+              Palatka Growth Tracker
+            </span>
+          </span>
         </Link>
         <nav className="hidden items-center gap-6 lg:flex">
           {NAV.map((item) => (

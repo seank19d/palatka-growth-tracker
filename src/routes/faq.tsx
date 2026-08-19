@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Kicker } from "@/components/brand/kicker";
 import { JsonLd } from "@/components/json-ld";
 import { fetchFaqs } from "@/lib/data/api";
 
@@ -29,11 +30,11 @@ function FaqPage() {
           })),
         }}
       />
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">FAQ</p>
+      <Kicker>FAQ</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold">Questions people actually ask</h1>
       <p className="mt-3 text-muted">
         Answers track the public file, not builder talking points. If a sales agent and this page
-        disagree, ask for the ordinance number.
+        disagree, ask for the ordinance number. Charm is free. Case numbers are better.
       </p>
       <Accordion type="single" collapsible className="mt-8">
         {faqs.map((f) => (

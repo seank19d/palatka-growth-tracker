@@ -25,7 +25,8 @@ export function NotFoundComponent() {
       <p className="text-[11px] uppercase tracking-[0.2em] text-muted">404</p>
       <h1 className="mt-2 font-display text-3xl font-semibold">Page not in this plat book</h1>
       <p className="mt-3 text-muted">
-        That URL does not match a development, guide, or page on this site.
+        That URL does not match a development, a guide, or any other page we keep. The river is still
+        there. This file is not.
       </p>
       <Link to="/" className="mt-6 text-primary underline-offset-4 hover:underline">
         Return home

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Kicker } from "@/components/brand/kicker";
 import { DISCLOSURE } from "@/lib/constants";
 
 export const Route = createFileRoute("/about")({
@@ -9,18 +10,18 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">Method</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold">About this tracker</h1>
+      <Kicker>Method</Kicker>
+      <h1 className="mt-2 font-display text-4xl font-semibold">Who writes this, and from where</h1>
       <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
         <p>
           Palatka Growth Tracker is an independent public website. It is not Putnam County, the City
           of Palatka, a builder, a lender, or a real-estate brokerage. Nothing here is an offer to
-          sell real property.
+          sell real property. We like the river. We like ordinances more.
         </p>
         <p>
-          The point of the site is to keep a dated, boring record of significant residential
-          projects — starting with Alford Farms — and a living-in-Putnam guide that does not read
-          like a listing brochure.
+          The point is a dated record of significant residential projects — starting with Alford
+          Farms — and a living-in-Putnam guide that does not read like a listing brochure. Fun is
+          allowed. Hype is not.
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">Where the facts come from</h2>
         <ul className="list-disc space-y-2 pl-5">
@@ -38,7 +39,7 @@ function AboutPage() {
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">How automation works</h2>
         <p>
-          Twice a day (when deployed with a cron secret) a job fetches the source list, stores new
+          Once a day (when deployed with a cron secret) a job fetches the source list, stores new
           headlines, matches them to known projects, and — if an xAI key is configured — writes a
           plain-language summary. Failed scrapes are logged. The public pages keep the last good
           data, so a dead county CMS does not blank the site.
@@ -53,7 +54,7 @@ function AboutPage() {
         <p>
           If you have a primary document this site is missing — an ordinance, plat, or permit — the
           staff console is the place to file it. Prefer PDFs from the county over screenshots of
-          Facebook.
+          Facebook. We will take the PDF every time.
         </p>
       </div>
     </main>

@@ -1,9 +1,9 @@
 import type { ProjectStatus } from "./types";
 
 export const APP_NAME = "Palatka Growth Tracker";
-export const APP_TAGLINE = "What's being built in Palatka — and what it's like to live here.";
+export const APP_TAGLINE = "Palatka is growing. Here's the paper trail.";
 export const APP_DESCRIPTION =
-  "Independent tracker of planned and active housing developments in Palatka, East Palatka, and Putnam County, Florida, plus a practical guide for people moving here.";
+  "Independent tracker of planned and active housing in Palatka, East Palatka, and Putnam County, Florida — plus a practical field guide for people actually moving here.";
 
 export const STATUS_META: Record<
   ProjectStatus,
@@ -12,7 +12,7 @@ export const STATUS_META: Record<
   concept: {
     label: "Concept",
     step: 0,
-    hint: "Discussed or marketed; no county entitlement yet.",
+    hint: "Talk, rumors, or a pretty site plan. No county entitlement yet.",
   },
   rezoning: {
     label: "Rezoning",
@@ -37,17 +37,17 @@ export const STATUS_META: Record<
   under_construction: {
     label: "Under construction",
     step: 5,
-    hint: "Dirt is moving or vertical construction has started.",
+    hint: "Dirt is moving, or walls are going up. You can drive by and see it.",
   },
   selling: {
     label: "Selling",
     step: 6,
-    hint: "Builder or seller is taking contracts on homes or lots.",
+    hint: "A builder or seller is taking contracts. Still verify the address.",
   },
   built_out: {
     label: "Built-out",
     step: 7,
-    hint: "The community is largely complete; remaining activity is infill.",
+    hint: "Mostly done. Remaining activity is infill, resales, and the HOA.",
   },
 };
 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { GuideProse } from "@/components/guide/prose";
 import { ProductBlock } from "@/components/guide/product-block";
 import { formatDateShort } from "@/lib/format";
@@ -45,8 +46,11 @@ function GuidePage() {
       </aside>
       <article>
         <Link to="/guide" className="text-sm text-muted hover:text-primary">
-          All guide pages
+          ← Field guide
         </Link>
+        <div className="mt-4">
+          <GuideGlyph slug={page.slug} className="size-12 rounded-2xl" />
+        </div>
         <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">{page.title}</h1>
         <p className="mt-3 max-w-prose text-lg text-muted">{page.excerpt}</p>
         <p className="mt-2 text-xs text-subtle">

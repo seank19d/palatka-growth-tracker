@@ -3,6 +3,9 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
+import { Kicker } from "@/components/brand/kicker";
+import { RiverDivider } from "@/components/brand/river-divider";
+import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { CountyMap } from "@/components/projects/county-map";
 import { MapEmbed } from "@/components/projects/map-embed";
 import { ProjectCard } from "@/components/projects/project-card";
@@ -39,47 +42,81 @@ function Home() {
           },
         }}
       />
-      <section className="border-b border-border bg-bg">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-[1.2fr_0.8fr] md:px-6 md:py-16">
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">
-              Independent public tracker
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              What’s being built in Palatka.
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-              A straight record of planned and active housing in East Palatka, Palatka, and Putnam
-              County — plus a practical guide for people actually moving here. No renderings-as-promises.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild>
-                <Link to="/developments">
-                  Open the tracker
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link to="/guide">Living guide</Link>
-              </Button>
+
+      <section className="overflow-x-clip border-b border-border">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div>
+              <Kicker>St. Johns River town · Putnam County</Kicker>
+              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+                Palatka is growing.{" "}
+                <em className="font-medium not-italic text-primary md:italic">Here’s the paper trail.</em>
+              </h1>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+                An independent tracker of plats, permits, and pipeline housing in Palatka, East
+                Palatka, and Putnam County — plus a field guide for people who actually have to live
+                here. No renderings-as-promises.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link to="/developments">
+                    See what’s on the board
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/guide">Field guide</Link>
+                </Button>
+              </div>
             </div>
+            <figure className="relative">
+              <div className="absolute -right-3 -top-3 size-16 rounded-full bg-sun/80 blur-[1px] md:size-20" aria-hidden />
+              <img
+                src="/hero.jpg"
+                alt="Illustrated view of Palatka: live oaks and downtown on the St. Johns, new houses on the far bank."
+                width={1600}
+                height={520}
+                className="relative w-full rounded-[1.4rem] border border-border object-cover shadow-[var(--shadow-border)]"
+              />
+              <figcaption className="mt-3 text-sm leading-relaxed text-muted">
+                Palatka looking across a wide bend of the St. Johns. The pretty part is the river.
+                The useful part is the ordinance number.
+              </figcaption>
+            </figure>
           </div>
-          <dl className="grid grid-cols-3 gap-3 self-end md:grid-cols-1 md:gap-4">
-            <Stat label="Projects on the board" value={String(stats.projectCount)} />
-            <Stat label="Pipeline communities" value={String(stats.pipelineCount)} />
-            <Stat label="Lots in known layouts" value={formatNumber(stats.lotsPipeline)} />
+
+          <dl className="mt-10 grid grid-cols-3 gap-3">
+            <Stat label="On the board" shortLabel="Board" value={String(stats.projectCount)} hint="Files we keep" />
+            <Stat label="Still in the pipeline" shortLabel="Pipeline" value={String(stats.pipelineCount)} hint="Not built-out" />
+            <Stat
+              label="Lots on the books"
+              shortLabel="Lots"
+              value={formatNumber(stats.lotsPipeline)}
+              hint="Best-known layouts"
+            />
           </dl>
         </div>
       </section>
+
+      <aside className="border-b border-border bg-primary text-primary-fg">
+        <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
+          <p className="max-w-4xl text-sm leading-relaxed md:text-[0.98rem]">
+            Palatka sits on a north-flowing bend of the St. Johns. East Palatka is the other bank.
+            New subdivisions tend to show up on the high ground first — which is why we keep a{" "}
+            <Link to="/guide/$slug" params={{ slug: "local-tips" }} className="underline decoration-sun/80 underline-offset-4">
+              flood-and-road page
+            </Link>{" "}
+            and a lot of PDFs.
+          </p>
+        </div>
+      </aside>
 
       {featured ? (
         <section className="border-b border-border">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2 md:px-6 md:py-16">
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
-                Flagship file
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <Kicker>The one people keep asking about</Kicker>
+              <div className="mt-4 flex flex-wrap gap-2">
                 <StatusBadge status={featured.status} />
                 <ConfidenceBadge confidence={featured.confidence} />
               </div>
@@ -106,7 +143,7 @@ function Home() {
               </dl>
               <Button asChild className="mt-8">
                 <Link to="/developments/$slug" params={{ slug: featured.slug }}>
-                  Full Alford Farms record
+                  Open the Alford Farms file
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -120,7 +157,10 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl font-semibold">On the board</h2>
+          <div>
+            <Kicker>Tracker</Kicker>
+            <h2 className="mt-2 font-display text-3xl font-semibold">The pile of plans</h2>
+          </div>
           <Link to="/developments" className="hidden text-sm text-primary md:inline">
             All developments
           </Link>
@@ -133,9 +173,7 @@ function Home() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <CountyMap projects={projects} />
           <Card className="p-5 md:p-6">
-            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
-              What’s new
-            </p>
+            <Kicker>The log</Kicker>
             <ul className="mt-4 space-y-4">
               {updates.map((u) => (
                 <li key={u.id} className="border-b border-border pb-4 last:border-0 last:pb-0">
@@ -154,16 +192,22 @@ function Home() {
 
       {market ? (
         <section className="border-y border-border bg-bg-sunken">
+          <RiverDivider className="opacity-70" />
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-            <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
-              Housing snapshot · {formatDateShort(market.capturedOn)}
-            </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold">
-              Putnam County prices sit in a band, not a slogan.
+            <Kicker>Housing snapshot · {formatDateShort(market.capturedOn)}</Kicker>
+            <h2 className="mt-3 font-display text-3xl font-semibold">
+              Putnam prices sit in a band, not a slogan.
             </h2>
             <p className="mt-3 max-w-3xl leading-relaxed text-muted">{market.medianNote}</p>
+            <p className="mt-3 font-display text-lg italic text-primary">
+              Please do not ask if Palatka is “the next” anywhere. It is Palatka.
+            </p>
             <p className="mt-3 text-xs text-subtle">{market.sourceNote}</p>
-            <Link to="/guide/$slug" params={{ slug: "cost-of-living" }} className="mt-4 inline-flex text-sm text-primary">
+            <Link
+              to="/guide/$slug"
+              params={{ slug: "cost-of-living" }}
+              className="mt-4 inline-flex text-sm text-primary"
+            >
               Cost of living notes
             </Link>
           </div>
@@ -171,28 +215,34 @@ function Home() {
       ) : null}
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <h2 className="font-display text-3xl font-semibold">If you are moving here</h2>
+        <Kicker>If the U-Haul is pointed this way</Kicker>
+        <h2 className="mt-2 font-display text-3xl font-semibold">A field guide, not a listing</h2>
+        <p className="mt-3 max-w-2xl text-muted">
+          Utilities, flood maps, schools, and the small stuff a builder brochure will never mention.
+        </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {guides.slice(0, 6).map((g) => (
             <Link
               key={g.slug}
               to="/guide/$slug"
               params={{ slug: g.slug }}
-              className="rounded-xl bg-card p-5 shadow-[var(--shadow-border)] transition-shadow hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18)]"
+              className="rounded-xl bg-card p-5 shadow-[var(--shadow-border)] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18)]"
             >
-              <h3 className="font-display text-xl font-semibold">{g.navLabel}</h3>
+              <GuideGlyph slug={g.slug} />
+              <h3 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
             </Link>
           ))}
         </div>
         <div className="mt-10">
-          <ProductBlock products={products} heading="First-week moving kit" />
+          <ProductBlock products={products} heading="First-week kit (the unglamorous stuff)" />
         </div>
       </section>
 
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-          <h2 className="font-display text-3xl font-semibold">Common questions</h2>
+          <Kicker>FAQ</Kicker>
+          <h2 className="mt-2 font-display text-3xl font-semibold">Questions people actually ask</h2>
           <dl className="mt-6 grid gap-6 md:grid-cols-2">
             {faqs.map((f) => (
               <div key={f.id}>
@@ -210,11 +260,15 @@ function Home() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, hint, shortLabel }: { label: string; value: string; hint: string; shortLabel: string }) {
   return (
     <div className="rounded-xl bg-card px-3 py-4 shadow-[var(--shadow-border)] md:px-5">
-      <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">{label}</dt>
+      <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">
+        <span className="sm:hidden">{shortLabel}</span>
+        <span className="hidden sm:inline">{label}</span>
+      </dt>
       <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">{value}</dd>
+      <p className="mt-1 hidden text-xs text-subtle sm:block">{hint}</p>
     </div>
   );
 }

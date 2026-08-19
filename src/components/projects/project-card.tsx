@@ -8,7 +8,7 @@ import { ConfidenceBadge, StatusBadge } from "./status-badge";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link to="/developments/$slug" params={{ slug: project.slug }} className="group block h-full">
-      <Card className="flex h-full flex-col p-5 transition-shadow duration-200 hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18),0_8px_24px_-12px_rgba(28,25,21,0.18)]">
+      <Card className="flex h-full flex-col p-5 transition-[transform,box-shadow] duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18),0_10px_28px_-14px_rgba(28,25,21,0.22)]">
         <div className="flex flex-wrap items-center gap-2">
           <StatusBadge status={project.status} />
           <ConfidenceBadge confidence={project.confidence} />
@@ -29,7 +29,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <p className="font-medium tabular-nums">{formatNumber(project.lotsCurrent)}</p>
           </div>
           <span className="inline-flex items-center gap-1 text-primary">
-            Record
+            Open the file
             <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
           </span>
         </div>

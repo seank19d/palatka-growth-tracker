@@ -15,14 +15,16 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   const bySlug = new Map(projects.map((p) => [p.slug, p]));
   return (
     <div className="rounded-xl bg-card p-4 shadow-[var(--shadow-border)] md:p-6">
-      <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
-        Putnam County locator
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+        Putnam, as a napkin sketch
       </p>
       <p className="mt-1 max-w-md text-sm text-muted">
-        Schematic — not a survey. River on the east, Interlachen west, Crescent City south.
+        Not a survey. River on the east, Interlachen west, Crescent City south. Tap a pin for the
+        file.
       </p>
       <svg viewBox="0 0 100 78" className="mt-4 w-full" role="img" aria-label="Locator map of Putnam County">
-        <rect width="100" height="78" className="fill-bg" />
+        <rect width="100" height="78" rx="3" className="fill-bg" />
+        <circle cx="88" cy="12" r="5.5" fill="#e0a04a" opacity="0.9" />
         <path
           d="M8 18 C18 8, 40 10, 58 16 C70 20, 82 18, 90 28 C94 36, 93 52, 86 62 C74 72, 48 74, 28 68 C14 64, 6 48, 8 32 Z"
           className="fill-bg-sunken stroke-primary"
@@ -31,11 +33,19 @@ export function CountyMap({ projects }: { projects: Project[] }) {
         <path
           d="M64 10 C66 22, 62 34, 66 46 C70 58, 68 70, 72 78"
           fill="none"
-          className="stroke-primary"
-          strokeWidth="1.8"
+          stroke="#2f6d66"
+          strokeWidth="2.4"
           strokeLinecap="round"
         />
-        <text x="68" y="14" fontSize="3.2" className="fill-muted" fontFamily="Source Sans 3, sans-serif">
+        <path
+          d="M66 11 C68 23, 64 35, 68 47 C72 59, 70 71, 74 78"
+          fill="none"
+          stroke="#8ec5c0"
+          strokeWidth="0.7"
+          strokeLinecap="round"
+        />
+        <path d="M69.2 28 l3.2 1.1 -1.4 0.7 z" fill="#1c1915" />
+        <text x="70" y="13" fontSize="3.1" className="fill-muted" fontFamily="Source Sans 3, sans-serif">
           St. Johns River
         </text>
         <text x="12" y="70" fontSize="3" className="fill-subtle" fontFamily="Source Sans 3, sans-serif">
@@ -46,10 +56,10 @@ export function CountyMap({ projects }: { projects: Project[] }) {
           if (!p) return null;
           return (
             <a key={pin.slug} href={`/developments/${pin.slug}`}>
-              <circle cx={pin.x} cy={pin.y} r="2.2" className="fill-primary" />
-              <circle cx={pin.x} cy={pin.y} r="4" fill="none" className="stroke-primary" strokeWidth="0.4" />
+              <circle cx={pin.x} cy={pin.y} r="2.4" className="fill-primary" />
+              <circle cx={pin.x} cy={pin.y} r="4.2" fill="none" className="stroke-sun" strokeWidth="0.55" />
               <text
-                x={pin.x + 3.2}
+                x={pin.x + 3.4}
                 y={pin.y + 1.1}
                 fontSize="3.1"
                 className="fill-fg"

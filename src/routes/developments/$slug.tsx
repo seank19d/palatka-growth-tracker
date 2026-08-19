@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Kicker } from "@/components/brand/kicker";
 import { MapEmbed } from "@/components/projects/map-embed";
 import { StatusPipeline } from "@/components/projects/status-pipeline";
 import { Timeline } from "@/components/projects/timeline";
@@ -70,8 +71,9 @@ function ProjectPage() {
         }}
       />
       <Link to="/developments" className="text-sm text-muted hover:text-primary">
-        All developments
+        ← The pile of plans
       </Link>
+      <Kicker className="mt-5">Project file</Kicker>
       <div className="mt-4 flex flex-wrap gap-2">
         <StatusBadge status={project.status} />
         <ConfidenceBadge confidence={project.confidence} />
@@ -100,6 +102,7 @@ function ProjectPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold">File facts</h2>
+        <p className="mt-1 text-sm text-muted">The boring numbers. That’s the point.</p>
         <dl className="mt-4 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">

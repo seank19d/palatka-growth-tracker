@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Kicker } from "@/components/brand/kicker";
 import { formatDateShort } from "@/lib/format";
 import { fetchUpdates } from "@/lib/data/api";
 
@@ -12,11 +13,11 @@ function WhatsNew() {
   const updates = Route.useLoaderData();
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">Log</p>
+      <Kicker>The log</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold">What’s new</h1>
       <p className="mt-3 text-muted">
-        Short entries when the tracker sees a status change, a new document, or a source item worth
-        keeping. Older summaries stay on each project page.
+        Short entries when something actually happens — a status change, a new document, or a source
+        item worth keeping. Not a press-release graveyard. Older summaries stay on each project page.
       </p>
       <ol className="mt-10 space-y-8">
         {updates.map((u) => (
