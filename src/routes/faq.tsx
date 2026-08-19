@@ -31,7 +31,7 @@ function FaqPage() {
         }}
       />
       <Kicker>FAQ</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">Questions people actually ask</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold">Common questions</h1>
       <p className="mt-3 text-muted">
         Answers follow the public file, not builder talking points. If a sales agent and this page
         disagree, ask for the ordinance number.

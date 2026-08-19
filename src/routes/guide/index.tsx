@@ -30,7 +30,7 @@ function GuideHub() {
               <Link
                 to="/developments/$slug"
                 params={{ slug: p.slug }}
-                className="block rounded-xl bg-card p-4 shadow-[var(--shadow-border)] transition-transform duration-200 hover:-translate-y-0.5"
+                className="block rounded-lg border border-border bg-card p-4 hover:border-primary/35"
               >
                 <span className="font-medium">{p.name}</span>
                 <span className="mt-1 block text-sm text-muted">
@@ -48,7 +48,7 @@ function GuideHub() {
             key={g.slug}
             to="/guide/$slug"
             params={{ slug: g.slug }}
-            className="rounded-xl bg-card p-5 shadow-[var(--shadow-border)] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(30,74,70,0.18)]"
+            className="rounded-lg border border-border bg-card p-5 hover:border-primary/35"
           >
             <GuideGlyph slug={g.slug} />
             <h2 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h2>
