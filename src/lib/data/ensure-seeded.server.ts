@@ -253,5 +253,24 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
       [f.question, f.answer, f.sortOrder],
     );
   }
-}
 
+  // Keep guide copy current (callouts, plain-language fixes).
+  for (const g of SEED_GUIDES) {
+    await sql.query(
+      `update guide_pages
+       set title = $2, nav_label = $3, excerpt = $4, body = $5, sort_order = $6,
+           affiliate_category = $7, last_refreshed_at = $8
+       where slug = $1`,
+      [
+        g.slug,
+        g.title,
+        g.navLabel,
+        g.excerpt,
+        JSON.stringify(g.sections),
+        g.sortOrder,
+        g.affiliateCategory,
+        new Date().toISOString(),
+      ],
+    );
+  }
+}
