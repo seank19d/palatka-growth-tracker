@@ -4,6 +4,25 @@ import { ProductBlock } from "@/components/guide/product-block";
 import { formatDateShort } from "@/lib/format";
 import { fetchGuidePage } from "@/lib/data/api";
 import { seo } from "@/lib/seo";
+import type { GuideSection } from "@/lib/types";
+
+const SCHOOLS_CALLOUT: GuideSection = {
+  callout: {
+    title: "Do not trust marketing maps",
+    body: "A planned unit development (PUD) is the county’s name for a master-planned neighborhood on rezoned land — Alford Farms is one. It will eventually get a school assignment. Until Putnam County School District says so in writing, assume nothing. Call the district with the parcel number.",
+  },
+};
+
+function withSchoolsCallout(slug: string, sections: GuideSection[]): GuideSection[] {
+  if (slug !== "schools") return sections;
+  const has = sections.some((s) => s.callout?.title?.toLowerCase().includes("marketing maps"));
+  if (has) {
+    return sections.map((s) =>
+      s.callout?.title?.toLowerCase().includes("marketing maps") ? SCHOOLS_CALLOUT : s,
+    );
+  }
+  return [...sections, SCHOOLS_CALLOUT];
+}
 
 export const Route = createFileRoute("/guide/$slug")({
   loader: async ({ params }) => {
@@ -22,6 +41,7 @@ export const Route = createFileRoute("/guide/$slug")({
 
 function GuidePage() {
   const { page, nav, products } = Route.useLoaderData();
+  const sections = withSchoolsCallout(page.slug, page.sections);
   return (
     <main className="mx-auto grid max-w-6xl gap-10 px-4 py-10 md:grid-cols-[13rem_1fr] md:px-6 md:py-14">
       <aside className="hidden md:block">
@@ -51,7 +71,7 @@ function GuidePage() {
           Last refreshed {formatDateShort(page.lastRefreshedAt)}
         </p>
         <div className="mt-10">
-          <GuideProse sections={page.sections} />
+          <GuideProse sections={sections} />
         </div>
         <div className="mt-12">
           <ProductBlock products={products} />
