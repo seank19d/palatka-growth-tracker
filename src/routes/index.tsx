@@ -150,9 +150,10 @@ function Home() {
             <ProjectCard key={p.slug} project={p} />
           ))}
         </div>
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10">
           <CountyMap projects={projects} />
-          <Card className="p-5 md:p-6">
+        </div>
+        <Card className="mt-10 p-5 md:p-6">
             <Kicker>What’s new</Kicker>
             <ul className="mt-4 space-y-4">
               {updates.map((u) => (
@@ -167,7 +168,6 @@ function Home() {
               Full log
             </Link>
           </Card>
-        </div>
       </section>
 
       {market ? (
