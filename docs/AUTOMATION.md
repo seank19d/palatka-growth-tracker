@@ -1,30 +1,50 @@
-# How the automation works
+# Automation — no staff required
 
-Palatka Homes Report is designed to keep itself current after deploy. People should only step in for a new major PUD or a broken source.
+Palatka Homes Report runs itself after deploy. There is no daily editorial queue.
 
-## Loop
+## Daily loop
 
-1. **Vercel Cron** (12:00 UTC daily; Hobby plan allows one run per day) calls `GET /api/cron/update` with `Authorization: Bearer $CRON_SECRET`.
-2. The job fetches every enabled row in `sources` (Google News RSS, Palatka Daily News feed, Putnam County Planning, SJRWMD Putnam page).
-3. New items land in `source_items`. Titles are matched to known projects by name / case number.
-4. Headlines that look like a new subdivision and mention Palatka or Putnam are flagged as candidates. The job may insert an **unpublished** draft project (`confidence = watch`) for staff review.
-5. If `XAI_API_KEY` is present, Grok (`grok-4.5`) rewrites the project’s `latest_summary` and appends a What’s New entry. If the key is missing, scrapes still store; summaries stay as last written.
-6. `job_runs` records success/failure. Three or more source failures can email `ALERT_EMAIL` via Resend when those vars are set.
-7. Public pages always read the database. A dead scrape does not blank the site.
+1. **Vercel Cron** (`0 12 * * *` UTC) hits `GET /api/cron/update`.
+2. **GitHub Actions** (`15 12 * * *` UTC) is a backup caller of the same endpoint.
+3. The job fetches every enabled row in `sources` (Google News RSS, local news, Putnam Planning, SJRWMD).
+4. New items go into `source_items` and match known projects by name / case number.
+5. **Status can advance automatically** when source text clearly signals a later stage (rezoning approved → plat → construction → selling). Status never moves backward.
+6. **New subdivisions** mentioned with Palatka/Putnam language are auto-published as public **watch** projects (`confidence = watch`). Readers see them; they are labeled unconfirmed.
+7. If `XAI_API_KEY` is set, Grok rewrites `latest_summary` and posts a What’s New entry.
+8. Three or more source failures can email `ALERT_EMAIL` via Resend when configured.
+9. Public pages always read the database. A dead scrape does not blank the site.
 
-Staff can also press **Force source refresh** on `/admin` (signed in). That path does not need `CRON_SECRET`.
+## Auth on the cron route
 
-## Style guide used by the model
+Accepted when either:
 
-Service journalism: a local reporter who has read the file. Plain language, specific, dated. Distinguish public record from reports. Include dates and case numbers. No hype, no jokes, no exclamation points.
+- `Authorization: Bearer $CRON_SECRET`, or
+- `x-vercel-cron: 1` (Vercel’s scheduled invocation header)
 
-## What still needs a human
+## Env vars for full automation
 
-- Publishing an auto-detected draft project
-- Correcting a lot count or status when a plat records
-- Replacing a source URL if a county CMS moves
-- Setting `AMAZON_ASSOCIATE_TAG` so product links earn
+| Variable | Needed for |
+| --- | --- |
+| `DATABASE_URL` | Persistence across serverless instances (Neon) |
+| `CRON_SECRET` | Auth for cron + GitHub Action |
+| `XAI_API_KEY` | Plain-language summary rewrites |
+| `AMAZON_ASSOCIATE_TAG` | Affiliate earnings on product links |
+| `RESEND_API_KEY` + `ALERT_EMAIL` | Email only when the job is failing hard |
 
-## Affiliate products
+GitHub repo secrets: set `CRON_SECRET` to match Vercel. Optional repo variable `SITE_URL` (defaults to `https://www.palatkahomesreport.com`).
 
-Product rows live in `affiliate_products`. Links are Amazon search or ASIN URLs with the associate tag appended on the server. No per-page curation after launch; pages pick products by `affiliate_category`.
+## What never needs a human
+
+- Daily source fetch
+- Matching headlines to Alford Farms and other known projects
+- Advancing status on clear public signals
+- Publishing new watch-list projects from news
+- Writing What’s New digests when the AI key is present
+
+## What a human might still touch (optional)
+
+- Fixing a source URL if a county CMS moves
+- Deleting a false-positive watch item
+- Raising `confidence` from `watch` to `confirmed` after reading a PDF
+
+Those are optional quality edits, not required for the site to stay current.
