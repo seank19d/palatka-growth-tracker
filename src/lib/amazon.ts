@@ -1,6 +1,10 @@
 export function amazonTag(): string {
-  if (typeof process === "undefined") return "";
-  return (process.env.AMAZON_ASSOCIATE_TAG || process.env.VITE_AMAZON_ASSOCIATE_TAG || "").trim();
+  if (typeof process === "undefined") return "phr0dc-20";
+  return (
+    process.env.AMAZON_ASSOCIATE_TAG ||
+    process.env.VITE_AMAZON_ASSOCIATE_TAG ||
+    "phr0dc-20"
+  ).trim();
 }
 
 export function amazonUrl(opts: { asin?: string | null; query: string; tag?: string }): string {
