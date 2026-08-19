@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
-import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
+import { SignedIn, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cn } from "@/lib/utils";
 
@@ -16,8 +16,8 @@ const NAV = [
 
 function AuthSlot() {
   const { user, isPending } = useCurrentUserState();
-  if (isPending) return <div className="h-8 w-20 animate-pulse rounded-md bg-secondary" />;
-  return user ? (
+  if (isPending || !user) return null;
+  return (
     <div className="flex items-center gap-3">
       <Link to="/admin" className="text-sm text-muted hover:text-primary">
         Admin
@@ -26,19 +26,13 @@ function AuthSlot() {
         <UserButton />
       </SignedIn>
     </div>
-  ) : (
-    <SignedOut>
-      <Link to="/login" className="text-sm text-muted hover:text-primary">
-        Staff sign in
-      </Link>
-    </SignedOut>
   );
 }
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="border-b border-border bg-bg/80 backdrop-blur-sm">
+    <header className="border-b border-border bg-bg">
       <div className="river-ribbon w-full" />
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 md:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
@@ -47,7 +41,7 @@ export function SiteHeader() {
             <span className="block font-display text-[1.55rem] font-semibold tracking-tight md:text-[1.75rem]">
               Palatka
             </span>
-            <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+            <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
               Homes Report
             </span>
           </span>
