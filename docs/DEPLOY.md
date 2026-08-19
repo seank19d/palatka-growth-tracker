@@ -2,6 +2,8 @@
 
 This app is TanStack Start (Vite) on Vercel with Postgres (Neon). The live preview uses an embedded PGLite database so it runs without credentials.
 
+GitHub repo `seank19d/palatka-growth-tracker` is linked to the Vercel project **palatka-growth**. Pushes to `main` auto-deploy.
+
 ## Platform injects
 
 - `DATABASE_URL` — Neon Postgres. Migrations in `migrations/` apply on `npm run build`.
@@ -25,13 +27,13 @@ Vercel Analytics can be enabled on the project in the Vercel UI; no code change 
 
 ## Cron
 
-`vercel.json` registers:
+`vercel.json` registers a once-daily job (Vercel Hobby allows one run per day):
 
 ```
-0 6,18 * * *  →  /api/cron/update
+0 12 * * *  →  /api/cron/update
 ```
 
-Vercel Pro is required for cron on some plans. Until cron is live, use the admin **Force source refresh** button.
+Until cron is live, use the admin **Force source refresh** button.
 
 ## First launch checklist
 

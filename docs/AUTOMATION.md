@@ -4,7 +4,7 @@ Palatka Growth Tracker is designed to keep itself current after deploy. People s
 
 ## Loop
 
-1. **Vercel Cron** (06:00 and 18:00 UTC) calls `GET /api/cron/update` with `Authorization: Bearer $CRON_SECRET`.
+1. **Vercel Cron** (12:00 UTC daily; Hobby plan allows one run per day) calls `GET /api/cron/update` with `Authorization: Bearer $CRON_SECRET`.
 2. The job fetches every enabled row in `sources` (Google News RSS, Palatka Daily News feed, Putnam County Planning, SJRWMD Putnam page).
 3. New items land in `source_items`. Titles are matched to known projects by name / case number.
 4. Headlines that look like a new subdivision and mention Palatka or Putnam are flagged as candidates. The job may insert an **unpublished** draft project (`confidence = watch`) for staff review.

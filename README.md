@@ -2,7 +2,7 @@
 
 Independent public tracker of planned and active housing in **Palatka**, **East Palatka**, and **Putnam County, Florida** — plus a practical living guide for people actually moving here.
 
-**Live:** [palatka-growth-tracker.vercel.app](https://palatka-growth-tracker.vercel.app)
+**Live:** [palatka-growth.vercel.app](https://palatka-growth.vercel.app)
 
 No renderings-as-promises. Status is based on public records (rezoning, plats, permits) and attributed news.
 
@@ -19,16 +19,14 @@ React 19, TanStack Start, Vite, Tailwind v4. Postgres via Neon when `DATABASE_UR
 
 ## Deploy
 
-This repo is set up for **Vercel**. Production is already live at the URL above.
+This repo is linked to Vercel. Pushes to `main` auto-deploy.
 
-To auto-deploy on every push to `main`, install the [Vercel GitHub app](https://github.com/apps/vercel) on this repository, then import the project (or ask me to re-link it).
-
-Until then, set these in the Vercel project if you want persistence, cron, and sign-in:
+Set these in the Vercel project if you want persistence, cron, and sign-in:
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | Recommended in production | Neon (or other Postgres). Without it, each serverless instance uses ephemeral PGLite. |
-| `CRON_SECRET` | For cron | Bearer token for `GET /api/cron/update` (twice daily, see `vercel.json`). |
+| `CRON_SECRET` | For cron | Bearer token for `GET /api/cron/update` (once daily, see `vercel.json`). |
 | `AMAZON_ASSOCIATE_TAG` | For monetization | Appended to affiliate product URLs. |
 | `ADMIN_EMAILS` | Recommended | Comma-separated emails allowed on `/admin`. If unset, any signed-in user can open it. |
 | `XAI_API_KEY` | Optional | Grok summaries of new source items. |
@@ -48,10 +46,10 @@ Schema and seed load automatically into PGLite. `npm run build` must succeed bef
 
 ## Cron
 
-`vercel.json` registers:
+`vercel.json` registers a once-daily job (Hobby plan limit):
 
 ```
-0 6,18 * * *  →  /api/cron/update
+0 12 * * *  →  /api/cron/update
 ```
 
 Until cron is live, use **Force source refresh** on `/admin`.
