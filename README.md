@@ -2,6 +2,8 @@
 
 Independent public tracker of planned and active housing in **Palatka**, **East Palatka**, and **Putnam County, Florida** — plus a practical living guide for people actually moving here.
 
+**Live:** [palatka-growth-tracker.vercel.app](https://palatka-growth-tracker.vercel.app)
+
 No renderings-as-promises. Status is based on public records (rezoning, plats, permits) and attributed news.
 
 ## What’s on the site
@@ -17,11 +19,11 @@ React 19, TanStack Start, Vite, Tailwind v4. Postgres via Neon when `DATABASE_UR
 
 ## Deploy
 
-This repo is set up for **Vercel**.
+This repo is set up for **Vercel**. Production is already live at the URL above.
 
-1. Import the GitHub repo in Vercel (or push to `main` after linking).
-2. Framework / build: `npm run build` (Nitro `vercel` preset writes `.vercel/output`).
-3. Set environment variables in the Vercel project:
+To auto-deploy on every push to `main`, install the [Vercel GitHub app](https://github.com/apps/vercel) on this repository, then import the project (or ask me to re-link it).
+
+Until then, set these in the Vercel project if you want persistence, cron, and sign-in:
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
