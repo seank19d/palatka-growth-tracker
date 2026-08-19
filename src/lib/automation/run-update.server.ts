@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import { getSql } from "@/lib/db";
 import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
+import { STATUS_RANK, inferStatus } from "@/lib/automation/status-infer";
 
 const UA = "PalatkaHomesReport/1.0 (independent housing report; contact via /about)";
 
@@ -12,7 +13,7 @@ type SourceRow = {
   enabled: boolean;
 };
 
-type ProjectLite = { id: number; slug: string; name: string };
+type ProjectLite = { id: number; slug: string; name: string; status: string };
 
 const MATCHERS: { slug: string; keys: string[] }[] = [
   { slug: "alford-farms", keys: ["alford farms", "alford farm", "pud24-000004", "ordinance 2024-017"] },
@@ -144,9 +145,9 @@ async function maybeAlert(message: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Palatka Homes Report <alerts@example.com>",
+        from: "Palatka Homes Report <onboarding@resend.dev>",
         to: [to],
-        subject: "Tracker job needs a look",
+        subject: "Palatka Homes Report job needs a look",
         text: message,
       }),
     });
@@ -168,7 +169,7 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
 
   try {
     const sources = await sql<SourceRow>`select id, name, url, kind, enabled from sources where enabled = true`;
-    const projects = await sql<ProjectLite>`select id, slug, name from projects`;
+    const projects = await sql<ProjectLite>`select id, slug, name, status from projects`;
     const idBySlug = new Map(projects.map((p) => [p.slug, p]));
 
     for (const source of sources) {
@@ -208,7 +209,6 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
           );
           if (res[0]?.id) newItems += 1;
         } catch {
-          // unique index may not fire ON CONFLICT without a matching constraint name; try a lookup
           const exists = item.url
             ? await sql`select id from source_items where url = ${item.url} limit 1`
             : [];
@@ -228,6 +228,21 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
               ],
             );
             newItems += 1;
+          }
+        }
+
+        if (matched) {
+          const inferred = inferStatus(`${item.title} ${item.snippet}`);
+          if (inferred) {
+            const currentRank = STATUS_RANK[matched.status] ?? 0;
+            const nextRank = STATUS_RANK[inferred] ?? 0;
+            if (nextRank > currentRank) {
+              await sql.query(`update projects set status = $1, updated_at = now() where id = $2`, [
+                inferred,
+                matched.id,
+              ]);
+              matched.status = inferred;
+            }
           }
         }
       }
@@ -296,14 +311,13 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
       }
     }
 
-    // Promote obvious new-project candidates into unpublished drafts (no LLM required)
     const candidates = await sql<{ id: number; title: string; url: string | null; snippet: string | null }>`
       select id, title, url, snippet from source_items
       where is_new_project_candidate = true
         and matched_project_id is null
-        and created_at > now() - interval '7 days'
+        and created_at > now() - interval '14 days'
       order by created_at desc
-      limit 5
+      limit 8
     `;
     for (const c of candidates) {
       const slugBase = c.title
@@ -319,14 +333,14 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
         `insert into projects (
           slug, name, location_label, area, status, units_note, official_links,
           latest_summary, latest_summary_at, confidence, published, featured
-        ) values ($1,$2,$3,$4,'concept',$5,'[]',$6,now(),'watch', false, false)`,
+        ) values ($1,$2,$3,$4,'concept',$5,'[]',$6,now(),'watch', true, false)`,
         [
           slug,
           c.title.slice(0, 80),
           "Putnam County (auto-detected)",
           "Putnam County",
-          "Auto-created draft from news/county copy. Review before publishing.",
-          `Detected from source item: ${c.title}${c.url ? ` (${c.url})` : ""}. Not confirmed.`,
+          "Auto-published from news/county copy. Verify before relying on it.",
+          `Reported in public sources: ${c.title}${c.url ? ` (${c.url})` : ""}. Not yet confirmed against a county case file.`,
         ],
       );
     }
