@@ -2,10 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
 import { formatDateShort } from "@/lib/format";
 import { fetchUpdates } from "@/lib/data/api";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/whats-new")({
   loader: () => fetchUpdates(),
-  head: () => ({ meta: [{ title: "Palatka housing updates | Palatka Homes Report" }] }),
+  head: () =>
+    seo({
+      title: "Palatka housing updates",
+      description:
+        "Dated notes when Palatka and East Palatka subdivision status changes: Alford Farms permits, county filings, and new construction that is actually selling.",
+      path: "/whats-new",
+    }),
   component: WhatsNew,
 });
 

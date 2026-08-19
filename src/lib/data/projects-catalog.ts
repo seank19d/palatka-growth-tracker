@@ -326,6 +326,49 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
   },
+  {
+    slug: "collection-at-palatka",
+    name: "The Collection at Palatka",
+    locationLabel: "508 N. 17th Street, Palatka",
+    area: "Palatka",
+    lat: 29.6509,
+    lng: -81.6408,
+    status: "selling",
+    acres: null,
+    lotsCurrent: null,
+    lotsRezoning: null,
+    unitsNote:
+      "Century Complete lists three floor plans (about 1,150–1,680 sq ft) and advertised starting prices in the low-to-mid $200,000s in 2026, with some quick move-in homes. This is a small in-town community, not an East Palatka PUD.",
+    commercialSqft: null,
+    builder: "Century Complete (Century Communities)",
+    developer: "Century Complete",
+    countyCase: null,
+    ordinance: null,
+    sjrwmdFile: null,
+    officialLinks: [
+      {
+        label: "Century Complete — The Collection at Palatka",
+        url: "https://www.centurycommunities.com/find-your-new-home/florida/jacksonville-metro/palatka/the-collection-at-palatka/",
+      },
+      { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
+    ],
+    latestSummary:
+      "If you are searching “new construction Palatka FL” because you need a house this year, this is the file to open first — not Alford Farms. Century Complete (Century Communities’ value line) is selling The Collection at Palatka at 508 N. 17th Street, with three single-family plans and advertised prices starting around $217,000 as of 2026 listings. Quick move-in homes have been marketed. It is a small in-town community, not a 500-lot greenfield PUD on SR 207. Pricing, incentives, and inventory change on the builder’s site; this tracker records that homes are actually for sale, which Alford Farms is not.",
+    latestSummaryAt: "2026-08-19T12:00:00.000Z",
+    confidence: "reported",
+    published: true,
+    featured: false,
+    milestones: [
+      {
+        occurredOn: "2025-07-01",
+        title: "Builder lists the community as selling",
+        body: "Century Complete published The Collection at Palatka as an active Palatka community with floor plans and starting prices. Treated here as reported from the builder and listing aggregators, not a Putnam PUD ordinance.",
+        sourceLabel: "Century Complete",
+        sourceUrl:
+          "https://www.centurycommunities.com/find-your-new-home/florida/jacksonville-metro/palatka/the-collection-at-palatka/",
+      },
+    ],
+  },
 ];
 
 export const SEED_UPDATES: {
@@ -359,6 +402,14 @@ export const SEED_UPDATES: {
     kind: "whats_new",
     sourceLabel: "Local reporting",
     createdAt: "2026-05-01T12:00:00.000Z",
+  },
+  {
+    projectSlug: "collection-at-palatka",
+    title: "In-town new construction is already selling",
+    body: "The Collection at Palatka by Century Complete is listed as selling near downtown, with advertised prices in the low $200,000s. That is a separate product from Alford Farms on SR 207, which is still in the county file.",
+    kind: "whats_new",
+    sourceLabel: "Builder listing / public marketing",
+    createdAt: "2026-08-19T12:00:00.000Z",
   },
 ];
 
@@ -543,45 +594,63 @@ export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[
     sortOrder: 3,
   },
   {
+    question: "When will Alford Farms homes be available?",
+    answer:
+      "No public sales date is in the records this site reviews. Putnam County approved the PUD in August 2024. Engineering and SJRWMD permitting were still open into 2026. Rezoning is not a model home.",
+    sortOrder: 4,
+  },
+  {
+    question: "What new subdivisions are being built in East Palatka?",
+    answer:
+      "The clearest large planned subdivision in the East Palatka public file is Alford Farms on SR 207 (PUD24-000004). East River Road is a reported second site. In-town Palatka already has selling new construction at The Collection at Palatka by Century Complete — that is Palatka city, not East Palatka.",
+    sortOrder: 5,
+  },
+  {
+    question: "Are there new construction homes for sale in Palatka right now?",
+    answer:
+      "Yes. The Collection at Palatka (Century Complete, 508 N. 17th Street) is marketed as selling, with starting prices in the low-to-mid $200,000s. Alford Farms in East Palatka is not selling lots in the public record this site reviews.",
+    sortOrder: 6,
+  },
+  {
     question: "Where is East Palatka relative to Palatka?",
     answer:
       "East Palatka sits across / along the St. Johns River from downtown Palatka, on the SR 207 side toward St. Augustine. Many people who work in St. Johns County look here because land and list prices are lower. The commute on 207 is real; so are school-district and utility boundaries that do not match the marketing name “Palatka.”",
-    sortOrder: 4,
+    sortOrder: 7,
   },
   {
     question: "Will I have city water and sewer?",
     answer:
       "Inside Palatka city limits, usually yes (confirm with the city). Unincorporated East Palatka and much of Putnam County still use wells and septic on older lots. New PUDs typically extend or build central utilities — that is one reason they take years. Ask the builder and the county utilities staff about the specific parcel; do not assume the neighbor’s setup.",
-    sortOrder: 5,
+    sortOrder: 8,
   },
   {
     question: "Clay Electric or FPL?",
     answer:
       "Both serve Putnam County. Clay Electric Cooperative has a Palatka district office at 300 N. SR 19. FPL also has a large footprint. Territory follows lines on a map, not city names. Use each utility’s address lookup, or the Florida PSC map, before you schedule a connect.",
-    sortOrder: 6,
+    sortOrder: 9,
   },
   {
     question: "What about flood zones and insurance?",
     answer:
       "You are on a major Florida river with tributaries, wetlands, and a hurricane coast two counties away. Pull the FEMA flood map for the exact parcel, budget for Florida property insurance (which has been volatile statewide), and ask about wind-mitigation credits. This site does not sell insurance and will not guess your premium.",
-    sortOrder: 7,
+    sortOrder: 10,
   },
   {
     question: "Which schools would we use?",
     answer:
       "Putnam County School District. Palatka Jr.-Sr. High is the main Palatka secondary campus. Elementary assignments depend on the address — use the district’s school locator, not a Facebook comment. St. Johns River State College has a Palatka campus for dual-enrollment and two-year programs.",
-    sortOrder: 8,
+    sortOrder: 11,
   },
   {
     question: "How does this site stay updated?",
     answer:
       "A scheduled job fetches county pages, water-management notices, and news RSS feeds. New items are matched to projects by name and case number. When an AI key is configured, the job writes a plain-language summary. If the job fails, the last good data stays on the site. An admin can force a refresh.",
-    sortOrder: 9,
+    sortOrder: 12,
   },
   {
     question: "Are you the county or a realtor?",
     answer:
       "No. This is an independent public report and moving guide. It is not Putnam County, not the City of Palatka, not D.R. Horton, and not a brokerage. Sources are linked. If a county PDF and this page disagree, the county PDF wins.",
-    sortOrder: 10,
+    sortOrder: 13,
   },
 ];

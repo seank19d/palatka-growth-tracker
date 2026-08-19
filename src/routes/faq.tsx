@@ -8,10 +8,17 @@ import {
 import { Kicker } from "@/components/brand/kicker";
 import { JsonLd } from "@/components/json-ld";
 import { fetchFaqs } from "@/lib/data/api";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/faq")({
   loader: () => fetchFaqs(),
-  head: () => ({ meta: [{ title: "Palatka FL housing FAQ | Palatka Homes Report" }] }),
+  head: () =>
+    seo({
+      title: "Palatka FL housing FAQ: Alford Farms, utilities, flood zones",
+      description:
+        "Answers on Alford Farms sales timing, 700 vs 559 lots, D.R. Horton, East Palatka vs Palatka, Clay Electric vs FPL, flood maps, and Putnam County schools.",
+      path: "/faq",
+    }),
   component: FaqPage,
 });
 

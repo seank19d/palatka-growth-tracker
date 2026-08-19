@@ -5,9 +5,17 @@ import { StatusPipeline } from "@/components/projects/status-pipeline";
 import { Timeline } from "@/components/projects/timeline";
 import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
 import { JsonLd } from "@/components/json-ld";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { STATUS_META } from "@/lib/constants";
+import { PROJECT_FAQS } from "@/lib/data/project-faqs";
 import { formatDateShort, formatNumber } from "@/lib/format";
 import { fetchProjectPage } from "@/lib/data/api";
+import { breadcrumbJsonLd, faqJsonLd, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/developments/$slug")({
   loader: async ({ params }) => {
@@ -15,24 +23,37 @@ export const Route = createFileRoute("/developments/$slug")({
     if (!page) throw notFound();
     return page;
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: loaderData
-          ? `${loaderData.project.name} in ${loaderData.project.area}, FL — status and public record | Palatka Homes Report`
-          : "Development — Palatka Homes Report",
-      },
-      {
-        name: "description",
-        content: loaderData?.project.latestSummary?.slice(0, 160) ?? "",
-      },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const p = loaderData?.project;
+    if (!p) return seo({ title: "Development", path: "/developments" });
+    const custom =
+      p.slug === "alford-farms"
+        ? {
+            title: "Alford Farms East Palatka, FL: status, 559 lots, D.R. Horton",
+            description:
+              "Alford Farms is a planned subdivision on SR 207 in East Palatka. Putnam County approved PUD24-000004 in August 2024. Public records show permitting, not home sales. Why documents say 700 homes and 559 lots.",
+          }
+        : p.slug === "collection-at-palatka"
+          ? {
+              title: "The Collection at Palatka: new construction homes for sale",
+              description:
+                "The Collection at Palatka by Century Complete is selling in-town new construction at 508 N. 17th Street. Advertised from the low $200,000s. Separate from Alford Farms in East Palatka.",
+            }
+          : {
+              title: `${p.name} in ${p.area}, FL — status and public record`,
+              description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
+                0,
+                160,
+              ),
+            };
+    return seo({ ...custom, path: `/developments/${p.slug}` });
+  },
   component: ProjectPage,
 });
 
 function ProjectPage() {
   const { project, milestones, updates } = Route.useLoaderData();
+  const faqs = PROJECT_FAQS[project.slug] ?? [];
   const facts = [
     { label: "Area", value: project.area },
     { label: "Location", value: project.locationLabel },
@@ -53,22 +74,30 @@ function ProjectPage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Place",
-          name: project.name,
-          description: project.latestSummary,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: project.area,
-            addressRegion: "FL",
-            addressCountry: "US",
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Place",
+            name: project.name,
+            description: project.latestSummary,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: project.area,
+              addressRegion: "FL",
+              addressCountry: "US",
+            },
+            geo:
+              project.lat != null && project.lng != null
+                ? { "@type": "GeoCoordinates", latitude: project.lat, longitude: project.lng }
+                : undefined,
           },
-          geo:
-            project.lat != null && project.lng != null
-              ? { "@type": "GeoCoordinates", latitude: project.lat, longitude: project.lng }
-              : undefined,
-        }}
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Developments", path: "/developments" },
+            { name: project.name, path: `/developments/${project.slug}` },
+          ]),
+          ...(faqs.length ? [faqJsonLd(faqs)] : []),
+        ]}
       />
       <Link to="/developments" className="text-sm text-muted hover:text-primary">
         ← All developments
@@ -87,7 +116,7 @@ function ProjectPage() {
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <article>
-          <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
             Latest summary · {formatDateShort(project.latestSummaryAt)}
           </p>
           <p className="mt-3 max-w-prose text-[1.05rem] leading-relaxed">{project.latestSummary}</p>
@@ -144,6 +173,20 @@ function ProjectPage() {
           </ul>
         </div>
       </section>
+
+      {faqs.length ? (
+        <section className="mt-12">
+          <h2 className="font-display text-2xl font-semibold">Common questions</h2>
+          <Accordion type="single" collapsible className="mt-4">
+            {faqs.map((f) => (
+              <AccordionItem key={f.question} value={f.question}>
+                <AccordionTrigger className="text-left text-base">{f.question}</AccordionTrigger>
+                <AccordionContent className="leading-relaxed">{f.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+      ) : null}
 
       {project.officialLinks.length ? (
         <section className="mt-12">

@@ -7,12 +7,17 @@ import { Button } from "@/components/ui/button";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import { fetchProjects } from "@/lib/data/api";
 import { ProjectFocusProvider } from "@/lib/project-focus";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/developments/")({
   loader: () => fetchProjects(),
-  head: () => ({
-    meta: [{ title: "New subdivisions in Palatka & East Palatka, FL | Palatka Homes Report" }],
-  }),
+  head: () =>
+    seo({
+      title: "New subdivisions in Palatka & East Palatka, FL",
+      description:
+        "Every Palatka and East Palatka housing project we publish: Alford Farms on SR 207, The Collection at Palatka, East River Road, and the Putnam County watch list. Status from public records.",
+      path: "/developments",
+    }),
   component: DevelopmentsPage,
 });
 

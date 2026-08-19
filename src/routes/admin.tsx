@@ -19,9 +19,10 @@ import {
 import { PROJECT_STATUSES, type Project } from "@/lib/types";
 import { STATUS_META } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — Palatka Homes Report" }] }),
+  head: () => seo({ title: "Admin", path: "/admin", noIndex: true }),
   component: AdminPage,
 });
 

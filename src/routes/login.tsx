@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GROK_PROVIDERS, authEnabled, signIn } from "@/lib/auth/client";
 import { Button } from "@/components/ui/button";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "Staff sign in — Palatka Homes Report" }] }),
+  head: () => seo({ title: "Staff sign in", path: "/login", noIndex: true }),
   component: Login,
 });
 

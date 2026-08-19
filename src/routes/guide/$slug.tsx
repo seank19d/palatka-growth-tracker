@@ -3,6 +3,7 @@ import { GuideProse } from "@/components/guide/prose";
 import { ProductBlock } from "@/components/guide/product-block";
 import { formatDateShort } from "@/lib/format";
 import { fetchGuidePage } from "@/lib/data/api";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/guide/$slug")({
   loader: async ({ params }) => {
@@ -10,16 +11,12 @@ export const Route = createFileRoute("/guide/$slug")({
     if (!page) throw notFound();
     return page;
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      {
-        title: loaderData
-          ? `${loaderData.page.title} | Palatka Homes Report`
-          : "Guide — Palatka Homes Report",
-      },
-      { name: "description", content: loaderData?.page.excerpt ?? "" },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    seo({
+      title: loaderData?.page.title ?? "Guide",
+      description: loaderData?.page.excerpt ?? "",
+      path: loaderData ? `/guide/${loaderData.page.slug}` : "/guide",
+    }),
   component: GuidePage,
 });
 

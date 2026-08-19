@@ -2,10 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
 import { StatusBadge } from "@/components/projects/status-badge";
 import { fetchGuideHub } from "@/lib/data/api";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/guide/")({
   loader: () => fetchGuideHub(),
-  head: () => ({ meta: [{ title: "Moving to Palatka, FL: living guide | Palatka Homes Report" }] }),
+  head: () =>
+    seo({
+      title: "Moving to Palatka, FL: living guide",
+      description:
+        "Practical guide to living in Palatka and East Palatka: utilities, flood maps, schools, cost of living, and what pipeline communities like Alford Farms actually mean for a move date.",
+      path: "/guide",
+    }),
   component: GuideHub,
 });
 

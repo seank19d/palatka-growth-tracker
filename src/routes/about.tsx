@@ -1,9 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
 import { DISCLOSURE } from "@/lib/constants";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About & sources | Palatka Homes Report" }] }),
+  head: () =>
+    seo({
+      title: "About & sources",
+      description:
+        "How Palatka Homes Report is compiled from Putnam County, SJRWMD, and public news. Independent of the county, builders, and brokerages.",
+      path: "/about",
+    }),
   component: AboutPage,
 });
 

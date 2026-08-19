@@ -13,12 +13,17 @@ import { APP_DESCRIPTION, APP_NAME, STATUS_META } from "@/lib/constants";
 import { formatDateShort, formatMoney, formatNumber } from "@/lib/format";
 import { fetchHome } from "@/lib/data/api";
 import { ProjectFocusProvider } from "@/lib/project-focus";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
-  head: () => ({
-    meta: [{ title: "What's being built in Palatka, FL | Palatka Homes Report" }],
-  }),
+  head: () =>
+    seo({
+      title: "New construction in Palatka & East Palatka, FL",
+      description:
+        "Independent tracker of new construction and subdivisions in Palatka, East Palatka, and Putnam County, Florida. Alford Farms status, The Collection at Palatka, public records, and a moving guide.",
+      path: "/",
+    }),
   component: Home,
 });
 
@@ -46,12 +51,15 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
           <Kicker>Palatka · East Palatka · Putnam County</Kicker>
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            What’s being built in Palatka.
+            What’s being built in Palatka and East Palatka.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-            Planned and active housing in Palatka and East Palatka, tracked from county
-            files, plats, and permits — not builder renderings. Includes a plain-language
-            guide for people moving here.
+            Planned and active housing in Palatka and East Palatka, Putnam County, Florida — tracked
+            from county files, plats, and permits, not builder renderings. Includes{" "}
+            <Link to="/developments/$slug" params={{ slug: "alford-farms" }} className="text-primary underline-offset-4 hover:underline">
+              Alford Farms
+            </Link>
+            , in-town new construction, and a plain-language guide for people moving here.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>

@@ -1,9 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/seo";
 
 const BODY = `User-agent: *
 Allow: /
 
-Sitemap: /sitemap.xml
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
 `;
 
 export const Route = createFileRoute("/robots.txt")({

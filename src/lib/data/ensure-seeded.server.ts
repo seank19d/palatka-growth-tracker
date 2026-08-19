@@ -24,7 +24,10 @@ export function ensureSeeded(): Promise<void> {
 async function seed(): Promise<void> {
   const sql = await getSql();
   const existing = await sql<{ n: number }>`select count(*)::int as n from projects`;
-  if ((existing[0]?.n ?? 0) > 0) return;
+  if ((existing[0]?.n ?? 0) > 0) {
+    await syncMissingCatalog(sql);
+    return;
+  }
 
   for (const p of SEED_PROJECTS) {
     await sql.query(
@@ -168,3 +171,87 @@ async function seed(): Promise<void> {
     ],
   );
 }
+
+async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
+  const have = await sql<{ slug: string }>`select slug from projects`;
+  const slugs = new Set(have.map((r) => r.slug));
+  for (const p of SEED_PROJECTS) {
+    if (slugs.has(p.slug)) continue;
+    await sql.query(
+      `insert into projects (
+        slug, name, location_label, area, lat, lng, status, acres,
+        lots_current, lots_rezoning, units_note, commercial_sqft, builder, developer,
+        county_case, ordinance, sjrwmd_file, official_links, latest_summary, latest_summary_at,
+        confidence, published, featured
+      ) values (
+        $1,$2,$3,$4,$5,$6,$7,$8,
+        $9,$10,$11,$12,$13,$14,
+        $15,$16,$17,$18,$19,$20,
+        $21,$22,$23
+      )`,
+      [
+        p.slug,
+        p.name,
+        p.locationLabel,
+        p.area,
+        p.lat,
+        p.lng,
+        p.status,
+        p.acres,
+        p.lotsCurrent,
+        p.lotsRezoning,
+        p.unitsNote,
+        p.commercialSqft,
+        p.builder,
+        p.developer,
+        p.countyCase,
+        p.ordinance,
+        p.sjrwmdFile,
+        JSON.stringify(p.officialLinks),
+        p.latestSummary,
+        p.latestSummaryAt,
+        p.confidence,
+        p.published,
+        p.featured,
+      ],
+    );
+    const idRows = await sql<{ id: number }>`select id from projects where slug = ${p.slug}`;
+    const projectId = idRows[0]?.id;
+    if (!projectId) continue;
+    for (let i = 0; i < p.milestones.length; i++) {
+      const m = p.milestones[i];
+      await sql.query(
+        `insert into project_milestones (
+          project_id, occurred_on, title, body, source_url, source_label, sort_order
+        ) values ($1,$2,$3,$4,$5,$6,$7)`,
+        [projectId, m.occurredOn, m.title, m.body, m.sourceUrl ?? null, m.sourceLabel ?? null, i],
+      );
+    }
+  }
+
+  const idRows = await sql<{ id: number; slug: string }>`select id, slug from projects`;
+  const idBySlug = new Map(idRows.map((r) => [r.slug, r.id]));
+
+  const updateRows = await sql<{ title: string }>`select title from project_updates`;
+  const titles = new Set(updateRows.map((r) => r.title));
+  for (const u of SEED_UPDATES) {
+    if (titles.has(u.title)) continue;
+    const projectId = u.projectSlug ? (idBySlug.get(u.projectSlug) ?? null) : null;
+    await sql.query(
+      `insert into project_updates (project_id, title, body, kind, source_label, created_at)
+       values ($1,$2,$3,$4,$5,$6)`,
+      [projectId, u.title, u.body, u.kind, u.sourceLabel, u.createdAt],
+    );
+  }
+
+  const faqRows = await sql<{ question: string }>`select question from faqs`;
+  const questions = new Set(faqRows.map((r) => r.question));
+  for (const f of SEED_FAQS) {
+    if (questions.has(f.question)) continue;
+    await sql.query(
+      `insert into faqs (question, answer, sort_order, generated) values ($1,$2,$3,false)`,
+      [f.question, f.answer, f.sortOrder],
+    );
+  }
+}
+
