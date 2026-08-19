@@ -1,4 +1,4 @@
--- Palatka Growth Tracker schema
+-- Palatka Homes Report schema
 
 create table if not exists projects (
   id serial primary key,

@@ -21,7 +21,7 @@ import { STATUS_META } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "Admin — Palatka Homes Report" }] }),
   component: AdminPage,
 });
 

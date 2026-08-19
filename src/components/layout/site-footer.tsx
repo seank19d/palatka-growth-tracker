@@ -10,7 +10,12 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
         <div>
           <div className="flex items-center gap-3">
             <BrandMark className="size-9" />
-            <p className="font-display text-xl font-semibold">Palatka Growth Tracker</p>
+            <div>
+              <p className="font-display text-xl font-semibold leading-none">Palatka</p>
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                Homes Report
+              </p>
+            </div>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             Independent coverage of housing in Palatka, East Palatka, and Putnam County. Not the

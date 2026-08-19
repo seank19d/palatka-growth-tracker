@@ -3,7 +3,7 @@ import { Kicker } from "@/components/brand/kicker";
 import { DISCLOSURE } from "@/lib/constants";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About & sources — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "About & sources | Palatka Homes Report" }] }),
   component: AboutPage,
 });
 
@@ -11,17 +11,18 @@ function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
       <Kicker>Method</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">About this tracker</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold">About this report</h1>
       <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
         <p>
-          Palatka Growth Tracker is an independent public website. It is not Putnam County, the City
+          Palatka Homes Report is an independent public website. It is not Putnam County, the City
           of Palatka, a builder, a lender, or a real-estate brokerage. Nothing here is an offer to
           sell real property.
         </p>
         <p>
           The site exists because county PDFs are the source of truth and almost nobody reads them
           first. We translate those files — starting with Alford Farms — into a dated status, and we
-          keep a living-in-Putnam guide that is not a listing brochure.
+          keep a living-in-Putnam guide that is not a listing brochure. We call it a report because
+          the job is to read the file and say what it says.
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">Where the facts come from</h2>
         <ul className="list-disc space-y-2 pl-5">

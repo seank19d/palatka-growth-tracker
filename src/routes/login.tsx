@@ -3,7 +3,7 @@ import { GROK_PROVIDERS, authEnabled, signIn } from "@/lib/auth/client";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "Staff sign in — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "Staff sign in — Palatka Homes Report" }] }),
   component: Login,
 });
 
@@ -13,7 +13,7 @@ function Login() {
       <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">Staff</p>
       <h1 className="mt-2 font-display text-3xl font-semibold">Sign in to the console</h1>
       <p className="mt-3 text-sm leading-relaxed text-muted">
-        Public pages do not require an account. Sign-in is for people who maintain the tracker —
+        Public pages do not require an account. Sign-in is for people who maintain the report —
         forcing a source refresh or correcting a status.
       </p>
       <div className="mt-8 space-y-3">

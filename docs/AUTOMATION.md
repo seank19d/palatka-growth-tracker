@@ -1,6 +1,6 @@
 # How the automation works
 
-Palatka Growth Tracker is designed to keep itself current after deploy. People should only step in for a new major PUD or a broken source.
+Palatka Homes Report is designed to keep itself current after deploy. People should only step in for a new major PUD or a broken source.
 
 ## Loop
 

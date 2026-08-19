@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import { getSql } from "@/lib/db";
 import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
 
-const UA = "PalatkaGrowthTracker/1.0 (public civic tracker; contact via /about)";
+const UA = "PalatkaHomesReport/1.0 (independent housing report; contact via /about)";
 
 type SourceRow = {
   id: number;
@@ -121,7 +121,7 @@ async function chatComplete(prompt: string): Promise<string | null> {
         {
           role: "system",
           content:
-            "You write brief public updates for Palatka Growth Tracker, a civic housing site. Voice: service journalism — a local reporter who has read the file. Plain language, specific, dated. No hype, no jokes, no exclamation points, no emojis. Distinguish confirmed public records from news reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences.",
+            "You write brief public updates for Palatka Homes Report, an independent civic housing site. Voice: service journalism — a local reporter who has read the file. Plain language, specific, dated. No hype, no jokes, no exclamation points, no emojis. Distinguish confirmed public records from news reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences.",
         },
         { role: "user", content: prompt },
       ],
@@ -144,7 +144,7 @@ async function maybeAlert(message: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Palatka Growth Tracker <alerts@example.com>",
+        from: "Palatka Homes Report <alerts@example.com>",
         to: [to],
         subject: "Tracker job needs a look",
         text: message,

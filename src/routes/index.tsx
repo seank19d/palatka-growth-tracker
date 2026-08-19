@@ -18,7 +18,7 @@ import { fetchHome } from "@/lib/data/api";
 export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
   head: () => ({
-    meta: [{ title: `${APP_NAME} — Palatka & East Palatka housing` }],
+    meta: [{ title: "What's being built in Palatka, FL | Palatka Homes Report" }],
   }),
   component: Home,
 });
@@ -157,7 +157,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <Kicker>Tracker</Kicker>
+            <Kicker>Developments</Kicker>
             <h2 className="mt-2 font-display text-3xl font-semibold">Developments on the board</h2>
           </div>
           <Link to="/developments" className="hidden text-sm text-primary md:inline">

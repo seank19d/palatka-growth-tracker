@@ -5,7 +5,7 @@ import { fetchUpdates } from "@/lib/data/api";
 
 export const Route = createFileRoute("/whats-new")({
   loader: () => fetchUpdates(),
-  head: () => ({ meta: [{ title: "What’s new — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "Palatka housing updates | Palatka Homes Report" }] }),
   component: WhatsNew,
 });
 

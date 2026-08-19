@@ -13,7 +13,7 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
         {error.message || "An unexpected error occurred. Try reloading the page."}
       </p>
       <Link to="/" className="mt-2 text-sm text-primary underline-offset-4 hover:underline">
-        Back to the tracker
+        Back to the report
       </Link>
     </main>
   );

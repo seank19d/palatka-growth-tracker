@@ -1,9 +1,9 @@
 import type { ProjectStatus } from "./types";
 
-export const APP_NAME = "Palatka Growth Tracker";
+export const APP_NAME = "Palatka Homes Report";
 export const APP_TAGLINE = "What's being built in Palatka — and what it's like to live here.";
 export const APP_DESCRIPTION =
-  "Independent tracker of planned and active housing in Palatka, East Palatka, and Putnam County, Florida, plus a practical guide for people moving here.";
+  "Independent report on new construction, subdivisions, and living in Palatka, East Palatka, and Putnam County, Florida. Status from public records, not renderings.";
 
 export const STATUS_META: Record<
   ProjectStatus,

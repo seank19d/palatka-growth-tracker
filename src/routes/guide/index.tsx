@@ -5,7 +5,7 @@ import { fetchGuideHub } from "@/lib/data/api";
 
 export const Route = createFileRoute("/guide/")({
   loader: () => fetchGuideHub(),
-  head: () => ({ meta: [{ title: "Living guide — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "Moving to Palatka, FL: living guide | Palatka Homes Report" }] }),
   component: GuideHub,
 });
 
@@ -19,7 +19,7 @@ function GuideHub() {
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
         Written for people who are already looking here — not to sell a lot. Pipeline communities
-        below come from the tracker, so this page stays current with the dirt.
+        below come from this report, so this page stays current with the dirt.
       </p>
 
       <section className="mt-10">

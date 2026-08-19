@@ -19,8 +19,8 @@ export const Route = createFileRoute("/developments/$slug")({
     meta: [
       {
         title: loaderData
-          ? `${loaderData.project.name} — Palatka Growth Tracker`
-          : "Development — Palatka Growth Tracker",
+          ? `${loaderData.project.name} in ${loaderData.project.area}, FL — status and public record | Palatka Homes Report`
+          : "Development — Palatka Homes Report",
       },
       {
         name: "description",

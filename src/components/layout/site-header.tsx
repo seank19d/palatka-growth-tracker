@@ -42,13 +42,13 @@ export function SiteHeader() {
       <div className="river-ribbon w-full" />
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 md:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <BrandMark className="size-10" title="Palatka Growth Tracker" />
-          <span className="min-w-0">
-            <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
-              Putnam County, Florida
+          <BrandMark className="size-10" title="Palatka Homes Report" />
+          <span className="min-w-0 leading-none">
+            <span className="block font-display text-[1.55rem] font-semibold tracking-tight md:text-[1.75rem]">
+              Palatka
             </span>
-            <span className="block font-display text-[1.28rem] font-semibold leading-none tracking-tight md:text-[1.5rem]">
-              Palatka Growth Tracker
+            <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+              Homes Report
             </span>
           </span>
         </Link>

@@ -1,6 +1,6 @@
-# Palatka Growth Tracker
+# Palatka Homes Report
 
-Independent public tracker of planned and active housing in **Palatka**, **East Palatka**, and **Putnam County, Florida** — plus a practical living guide for people actually moving here.
+Independent public report on planned and active housing in **Palatka**, **East Palatka**, and **Putnam County, Florida** — plus a practical living guide for people moving here.
 
 **Live:** [palatka-growth.vercel.app](https://palatka-growth.vercel.app)
 

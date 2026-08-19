@@ -9,7 +9,9 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/developments/")({
   loader: () => fetchProjects(),
-  head: () => ({ meta: [{ title: "Developments — Palatka Growth Tracker" }] }),
+  head: () => ({
+    meta: [{ title: "New subdivisions in Palatka & East Palatka, FL | Palatka Homes Report" }],
+  }),
   component: DevelopmentsPage,
 });
 
@@ -35,7 +37,7 @@ function DevelopmentsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>Tracker</Kicker>
+      <Kicker>Developments</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
       <p className="mt-3 max-w-2xl text-muted">
         Every project we currently publish. Pipeline means it is not built-out. Watch-list items are

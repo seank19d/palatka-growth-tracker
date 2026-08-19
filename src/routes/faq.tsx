@@ -11,7 +11,7 @@ import { fetchFaqs } from "@/lib/data/api";
 
 export const Route = createFileRoute("/faq")({
   loader: () => fetchFaqs(),
-  head: () => ({ meta: [{ title: "FAQ — Palatka Growth Tracker" }] }),
+  head: () => ({ meta: [{ title: "Palatka FL housing FAQ | Palatka Homes Report" }] }),
   component: FaqPage,
 });
 

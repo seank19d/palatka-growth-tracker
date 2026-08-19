@@ -581,7 +581,7 @@ export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[
   {
     question: "Are you the county or a realtor?",
     answer:
-      "No. This is an independent public tracker and moving guide. It is not Putnam County, not the City of Palatka, not D.R. Horton, and not a brokerage. Sources are linked. If a county PDF and this page disagree, the county PDF wins.",
+      "No. This is an independent public report and moving guide. It is not Putnam County, not the City of Palatka, not D.R. Horton, and not a brokerage. Sources are linked. If a county PDF and this page disagree, the county PDF wins.",
     sortOrder: 10,
   },
 ];
