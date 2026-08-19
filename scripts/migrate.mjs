@@ -3,21 +3,37 @@
  * Deploy-time database migrator (node-postgres, `pg`).
  *
  * Runs during `npm run build` — on every Vercel deploy — applying pending files
- * in ../migrations to DATABASE_URL. Each file is applied in one transaction and
- * recorded in a `_migrations` table, so it runs once and is safe to re-run.
+ * in ../migrations. Accepts the same connection-string aliases Vercel Marketplace
+ * Neon injects (DATABASE_URL, POSTGRES_URL, etc.).
  *
- * No DATABASE_URL (local / preview builds) -> skip; the PGLite fallback applies
- * the same files at startup instead (see src/lib/db.ts).
+ * No connection string (local / preview builds) -> skip; the PGLite fallback
+ * applies the same files at startup instead (see src/lib/db.ts).
  */
 import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import pg from "pg";
 
-const databaseUrl = process.env.DATABASE_URL;
+function resolveDatabaseUrl() {
+  const candidates = [
+    process.env.DATABASE_URL,
+    process.env.POSTGRES_URL,
+    process.env.POSTGRES_PRISMA_URL,
+    process.env.NEON_DATABASE_URL,
+    process.env.DATABASE_URL_UNPOOLED,
+    process.env.POSTGRES_URL_NON_POOLING,
+  ];
+  for (const raw of candidates) {
+    const value = raw?.trim();
+    if (value) return value;
+  }
+  return undefined;
+}
+
+const databaseUrl = resolveDatabaseUrl();
 if (!databaseUrl) {
   console.log(
-    "[migrate] DATABASE_URL not set — skipping (the PGLite fallback migrates itself).",
+    "[migrate] No database URL set (DATABASE_URL / POSTGRES_URL / …) — skipping. PGLite migrates itself at runtime.",
   );
   process.exit(0);
 }
@@ -49,7 +65,6 @@ async function main() {
       const text = await readFile(join(migrationsDir, name), "utf8");
       try {
         await client.query("BEGIN");
-        // pg's simple-query protocol runs a whole multi-statement file at once.
         await client.query(text);
         await client.query("INSERT INTO _migrations (name) VALUES ($1)", [name]);
         await client.query("COMMIT");
@@ -58,7 +73,7 @@ async function main() {
         try {
           await client.query("ROLLBACK");
         } catch {
-          // ROLLBACK fails when the connection died — keep the original error.
+          // keep original error
         }
         throw err;
       }
@@ -74,7 +89,6 @@ async function main() {
 
 main().catch((err) => {
   console.error("[migrate] failed:", err?.message || err);
-  // pg errors carry the context needed to debug a bad SQL file.
   for (const key of ["code", "detail", "hint", "position", "where"]) {
     if (err?.[key] != null) console.error(`[migrate]   ${key}: ${err[key]}`);
   }
