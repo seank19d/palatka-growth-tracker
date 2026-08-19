@@ -1,0 +1,27 @@
+name: Daily source update
+
+# Backup to Vercel Cron. Runs once a day; no human in the loop.
+on:
+  schedule:
+    - cron: "15 12 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call production cron endpoint
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.palatkahomesreport.com' }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "CRON_SECRET secret not set — skipping"
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/cron-out.json -w "%{http_code}" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$SITE_URL/api/cron/update")
+          echo "HTTP $code"
+          cat /tmp/cron-out.json || true
+          test "$code" = "200"
