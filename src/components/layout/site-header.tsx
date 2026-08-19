@@ -14,12 +14,18 @@ const NAV = [
   { to: "/about", label: "About" },
 ] as const;
 
+const navClass =
+  "relative pb-0.5 text-sm text-muted transition-colors duration-150 hover:text-fg after:absolute after:inset-x-0 after:-bottom-3.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:ease-out data-[status=active]:font-medium data-[status=active]:text-fg data-[status=active]:after:scale-x-100";
+
 function AuthSlot() {
   const { user, isPending } = useCurrentUserState();
   if (isPending || !user) return null;
   return (
     <div className="flex items-center gap-3">
-      <Link to="/admin" className="text-sm text-muted hover:text-primary">
+      <Link
+        to="/admin"
+        className="text-sm text-muted transition-colors duration-150 hover:text-primary data-[status=active]:font-medium data-[status=active]:text-primary"
+      >
         Admin
       </Link>
       <SignedIn>
@@ -47,12 +53,7 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-6 lg:flex">
           {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-sm text-muted transition-colors hover:text-fg"
-              activeProps={{ className: "text-sm text-fg" }}
-            >
+            <Link key={item.to} to={item.to} className={navClass}>
               {item.label}
             </Link>
           ))}
@@ -60,28 +61,46 @@ export function SiteHeader() {
         </nav>
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-sm border border-border lg:hidden"
+          className="relative inline-flex size-11 items-center justify-center rounded-sm border border-border transition-[transform,background-color] duration-150 ease-out hover:bg-secondary active:scale-[0.96] lg:hidden"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          <Menu
+            className={cn(
+              "size-5 transition-[opacity,transform,filter] duration-150",
+              open ? "scale-50 opacity-0 blur-sm" : "scale-100 opacity-100",
+            )}
+          />
+          <X
+            className={cn(
+              "absolute size-5 transition-[opacity,transform,filter] duration-150",
+              open ? "scale-100 opacity-100" : "scale-50 opacity-0 blur-sm",
+            )}
+          />
         </button>
       </div>
-      <div className={cn("border-t border-border lg:hidden", open ? "block" : "hidden")}>
-        <nav className="mx-auto flex max-w-6xl flex-col px-4 py-2">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="flex min-h-11 items-center text-base"
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="flex min-h-11 items-center">
-            <AuthSlot />
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-200 ease-out lg:hidden",
+          open ? "grid-rows-[1fr] border-t border-border" : "grid-rows-[0fr]",
+        )}
+      >
+        <nav className="min-h-0 overflow-hidden">
+          <div className="mx-auto flex max-w-6xl flex-col px-4 py-2">
+            {NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="flex min-h-11 items-center text-base text-muted transition-colors duration-150 data-[status=active]:font-medium data-[status=active]:text-fg"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="flex min-h-11 items-center">
+              <AuthSlot />
+            </div>
           </div>
         </nav>
       </div>

@@ -9,6 +9,7 @@ import {
   polyline,
   project,
 } from "@/lib/geo";
+import { useProjectFocus } from "@/lib/project-focus";
 import { STATUS_META } from "@/lib/constants";
 import type { Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,13 @@ const VW = 720;
 const VH = 520;
 
 export function CountyMap({ projects }: { projects: Project[] }) {
-  const [hover, setHover] = useState<string | null>(null);
+  const focus = useProjectFocus();
+  const [local, setLocal] = useState<string | null>(null);
+  const hover = focus?.slug ?? local;
+  const setHover = (slug: string | null) => {
+    if (focus) focus.setSlug(slug);
+    else setLocal(slug);
+  };
   const located = projects
     .filter((p) => p.lat != null && p.lng != null)
     .slice()
@@ -27,6 +34,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   const barMiles = 10;
   const barPx = barMiles / milesPerPx;
   const land = polyline(PUTNAM_OUTLINE, VW, VH, true);
+  const isDim = (slug: string) => Boolean(focus?.visible && !focus.visible.has(slug));
 
   return (
     <div className="overflow-hidden rounded-md bg-card shadow-[var(--shadow-border)]">
@@ -189,6 +197,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
               const n = i + 1;
               const active = hover === proj.slug;
               const built = proj.status === "built_out";
+              const dim = isDim(proj.slug) && !active;
               return (
                 <a
                   key={proj.slug}
@@ -197,16 +206,25 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                   onMouseLeave={() => setHover(null)}
                   onFocus={() => setHover(proj.slug)}
                   onBlur={() => setHover(null)}
+                  className="outline-none"
                 >
                   <title>{proj.name}</title>
-                  {active ? (
-                    <circle cx={p.x} cy={p.y} r={16} className="fill-primary/20" />
-                  ) : null}
                   <circle
                     cx={p.x}
                     cy={p.y}
-                    r={active ? 11 : 10}
-                    className={built ? "fill-muted" : "fill-primary"}
+                    r={16}
+                    className="fill-primary transition-opacity duration-150"
+                    opacity={active ? 0.22 : 0}
+                  />
+                  <circle
+                    cx={p.x}
+                    cy={p.y}
+                    r={active ? 12 : 10}
+                    className={cn(
+                      "transition-[r,opacity] duration-150",
+                      built ? "fill-muted" : "fill-primary",
+                    )}
+                    opacity={dim ? 0.28 : 1}
                   />
                   <text
                     x={p.x}
@@ -216,6 +234,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                     fontSize={11}
                     fontWeight={600}
                     fontFamily="Source Sans 3, sans-serif"
+                    opacity={dim ? 0.45 : 1}
                   >
                     {n}
                   </text>
@@ -244,6 +263,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
         <ol className="divide-y divide-border border-t border-border lg:border-l lg:border-t-0">
           {located.map((proj, i) => {
             const active = hover === proj.slug;
+            const dim = isDim(proj.slug) && !active;
             return (
               <li key={proj.slug}>
                 <Link
@@ -251,9 +271,12 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                   params={{ slug: proj.slug }}
                   onMouseEnter={() => setHover(proj.slug)}
                   onMouseLeave={() => setHover(null)}
+                  onFocus={() => setHover(proj.slug)}
+                  onBlur={() => setHover(null)}
                   className={cn(
-                    "flex gap-3 px-4 py-3 transition-colors",
+                    "flex gap-3 px-4 py-3 transition-colors duration-150",
                     active ? "bg-accent" : "hover:bg-secondary/60",
+                    dim && "opacity-40",
                   )}
                 >
                   <span

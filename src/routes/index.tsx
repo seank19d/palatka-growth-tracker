@@ -12,6 +12,7 @@ import { ProductBlock } from "@/components/guide/product-block";
 import { APP_DESCRIPTION, APP_NAME, STATUS_META } from "@/lib/constants";
 import { formatDateShort, formatMoney, formatNumber } from "@/lib/format";
 import { fetchHome } from "@/lib/data/api";
+import { ProjectFocusProvider } from "@/lib/project-focus";
 
 export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
@@ -144,14 +145,16 @@ function Home() {
             All developments
           </Link>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {others.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
-        </div>
-        <div className="mt-10">
-          <CountyMap projects={projects} />
-        </div>
+        <ProjectFocusProvider>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {others.map((p) => (
+              <ProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
+          <div className="mt-10">
+            <CountyMap projects={projects} />
+          </div>
+        </ProjectFocusProvider>
         <Card className="mt-10 p-5 md:p-6">
           <Kicker>What’s new</Kicker>
           <ol className="mt-4">

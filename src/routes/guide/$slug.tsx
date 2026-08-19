@@ -35,8 +35,8 @@ function GuidePage() {
               key={g.slug}
               to="/guide/$slug"
               params={{ slug: g.slug }}
-              className="block rounded-md px-2 py-2 text-muted hover:bg-secondary hover:text-fg"
-              activeProps={{ className: "block rounded-md bg-secondary px-2 py-2 text-fg" }}
+              className="block rounded-md px-2 py-2 text-muted transition-colors duration-150 hover:bg-secondary hover:text-fg data-[status=active]:bg-accent data-[status=active]:font-medium data-[status=active]:text-fg"
+              activeProps={{ className: "block rounded-md bg-accent px-2 py-2 font-medium text-fg" }}
             >
               {g.navLabel}
             </Link>
