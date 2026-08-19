@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-bg: #f3eee4;
+  --color-bg-sunken: #e8e0d2;
+  --color-surface: #faf6ee;
+  --color-fg: #1c1915;
+  --color-muted: #5c564c;
+  --color-subtle: #8a8276;
+  --color-primary: #1e4a46;
+  --color-primary-fg: #f3eee4;
+  --color-primary-foreground: #f3eee4;
+  --color-river: #1e4a46;
+  --color-ink: #1c1915;
+  --color-paper: #f3eee4;
+
+  --color-background: #f3eee4;
+  --color-foreground: #1c1915;
+  --color-card: #faf6ee;
+  --color-card-foreground: #1c1915;
+  --color-popover: #faf6ee;
+  --color-popover-foreground: #1c1915;
+  --color-secondary: #e8e0d2;
+  --color-secondary-foreground: #1c1915;
+  --color-muted-foreground: #5c564c;
+  --color-accent: #d8e4e1;
+  --color-accent-foreground: #1e4a46;
+  --color-destructive: #8f2d2d;
+  --color-destructive-foreground: #faf6ee;
+  --color-border: #d4cbb8;
+  --color-input: #d4cbb8;
+  --color-ring: #1e4a46;
+
+  --color-status-concept: #6a6358;
+  --color-status-active: #1e4a46;
+  --color-status-build: #345e4c;
+  --color-status-done: #7a7368;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius: 0.75rem;
+
+  --shadow-border:
+    0px 0px 0px 1px rgba(28, 25, 21, 0.06),
+    0px 1px 2px -1px rgba(28, 25, 21, 0.06),
+    0px 2px 8px 0px rgba(28, 25, 21, 0.04);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

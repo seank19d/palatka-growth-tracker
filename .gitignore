@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+.node_modules.lock
+
+# Build / generated
+dist
+.output
+.nitro
+.vercel
+.tanstack
+.vite
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Tests / agent QA (not part of the product)
+screenshots
+playwright-report
+test-results
+coverage
+
+# Sandbox-only (Grok App Builder workspace)
+.grok
+AGENTS.md
+AGENTS.project.md
+.project_id
+startup.sh
+artifacts
+attachments
