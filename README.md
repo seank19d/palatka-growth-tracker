@@ -2,7 +2,7 @@
 
 Independent public report on planned and active housing in **Palatka**, **East Palatka**, and **Putnam County, Florida** — plus a practical living guide for people moving here.
 
-**Live:** [palatka-growth.vercel.app](https://palatka-growth.vercel.app)
+**Live:** [palatkahomesreport.com](https://www.palatkahomesreport.com)
 
 No renderings-as-promises. Status is based on public records (rezoning, plats, permits) and attributed news.
 
@@ -19,7 +19,7 @@ React 19, TanStack Start, Vite, Tailwind v4. Postgres via Neon when `DATABASE_UR
 
 ## Deploy
 
-This repo is linked to Vercel. Pushes to `main` auto-deploy.
+This repo is linked to Vercel. Pushes to `main` auto-deploy. Custom domain: **palatkahomesreport.com** (www is primary; apex redirects).
 
 Set these in the Vercel project if you want persistence, cron, and sign-in:
 
