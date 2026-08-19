@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
-import { GuideGlyph } from "@/components/brand/guide-glyph";
+import { StatusBadge } from "@/components/projects/status-badge";
 import { fetchGuideHub } from "@/lib/data/api";
 
 export const Route = createFileRoute("/guide/")({
@@ -24,33 +24,34 @@ function GuideHub() {
 
       <section className="mt-10">
         <h2 className="font-display text-2xl font-semibold">Current pipeline communities</h2>
-        <ul className="mt-4 grid gap-3 md:grid-cols-2">
+        <ul className="mt-4 divide-y divide-border border border-border">
           {pipeline.map((p) => (
             <li key={p.slug}>
               <Link
                 to="/developments/$slug"
                 params={{ slug: p.slug }}
-                className="block rounded-lg border border-border bg-card p-4 hover:border-primary/35"
+                className="flex flex-wrap items-center justify-between gap-3 bg-card px-4 py-3 hover:bg-secondary/50"
               >
-                <span className="font-medium">{p.name}</span>
-                <span className="mt-1 block text-sm text-muted">
-                  {p.locationLabel} · {p.status.replace("_", " ")}
+                <span>
+                  <span className="block font-medium">{p.name}</span>
+                  <span className="mt-0.5 block text-sm text-muted">{p.locationLabel}</span>
                 </span>
+                <StatusBadge status={p.status} />
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {guides.map((g) => (
+      <section className="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {guides.map((g, i) => (
           <Link
             key={g.slug}
             to="/guide/$slug"
             params={{ slug: g.slug }}
-            className="rounded-lg border border-border bg-card p-5 hover:border-primary/35"
+            className="bg-card p-5 hover:bg-secondary/50"
           >
-            <GuideGlyph slug={g.slug} />
+            <p className="font-mono text-xs tabular-nums text-subtle">{String(i + 1).padStart(2, "0")}</p>
             <h2 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
           </Link>

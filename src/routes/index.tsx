@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
 import { Kicker } from "@/components/brand/kicker";
-import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { CountyMap } from "@/components/projects/county-map";
 import { MapEmbed } from "@/components/projects/map-embed";
 import { ProjectCard } from "@/components/projects/project-card";
 import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
 import { ProductBlock } from "@/components/guide/product-block";
 import { APP_DESCRIPTION, APP_NAME, STATUS_META } from "@/lib/constants";
-import { formatDateShort, formatNumber } from "@/lib/format";
+import { formatDateShort, formatMoney, formatNumber } from "@/lib/format";
 import { fetchHome } from "@/lib/data/api";
 
 export const Route = createFileRoute("/")({
@@ -154,20 +153,27 @@ function Home() {
           <CountyMap projects={projects} />
         </div>
         <Card className="mt-10 p-5 md:p-6">
-            <Kicker>What’s new</Kicker>
-            <ul className="mt-4 space-y-4">
-              {updates.map((u) => (
-                <li key={u.id} className="border-b border-border pb-4 last:border-0 last:pb-0">
-                  <p className="text-xs text-subtle">{formatDateShort(u.createdAt)}</p>
-                  <p className="mt-1 font-medium">{u.title}</p>
-                  <p className="mt-1 line-clamp-3 text-sm text-muted">{u.body}</p>
-                </li>
-              ))}
-            </ul>
-            <Link to="/whats-new" className="mt-4 inline-flex text-sm text-primary">
-              Full log
-            </Link>
-          </Card>
+          <Kicker>What’s new</Kicker>
+          <ol className="mt-4">
+            {updates.map((u) => (
+              <li
+                key={u.id}
+                className="grid gap-1 border-b border-border py-4 first:pt-0 last:border-0 sm:grid-cols-[7.5rem_1fr] sm:gap-6"
+              >
+                <p className="font-mono text-xs tabular-nums text-subtle">
+                  {formatDateShort(u.createdAt)}
+                </p>
+                <div>
+                  <p className="font-medium">{u.title}</p>
+                  <p className="mt-1 line-clamp-2 text-sm text-muted">{u.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <Link to="/whats-new" className="mt-4 inline-flex text-sm text-primary">
+            Full log
+          </Link>
+        </Card>
       </section>
 
       {market ? (
@@ -177,7 +183,30 @@ function Home() {
             <h2 className="mt-3 font-display text-3xl font-semibold">
               Putnam County housing prices
             </h2>
-            <p className="mt-3 max-w-3xl leading-relaxed text-muted">{market.medianNote}</p>
+            <dl className="mt-8 grid grid-cols-3 gap-4">
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">Low typical</dt>
+                <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
+                  {formatMoney(market.medianSaleLow)}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">High typical</dt>
+                <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
+                  {formatMoney(market.medianSaleHigh)}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">Days on market</dt>
+                <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
+                  {formatNumber(market.daysOnMarket)}
+                </dd>
+              </div>
+            </dl>
+            <div className="mt-6 h-1.5 bg-secondary">
+              <div className="h-full w-full bg-primary/70" />
+            </div>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{market.medianNote}</p>
             <p className="mt-3 text-xs text-subtle">{market.sourceNote}</p>
             <Link
               to="/guide/$slug"
@@ -196,15 +225,17 @@ function Home() {
         <p className="mt-3 max-w-2xl text-muted">
           Utilities, flood maps, schools, and the details a listing will skip.
         </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.slice(0, 6).map((g) => (
+        <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {guides.slice(0, 6).map((g, i) => (
             <Link
               key={g.slug}
               to="/guide/$slug"
               params={{ slug: g.slug }}
-              className="rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/35"
+              className="bg-card p-5 transition-colors hover:bg-secondary/50"
             >
-              <GuideGlyph slug={g.slug} />
+              <p className="font-mono text-xs tabular-nums text-subtle">
+                {String(i + 1).padStart(2, "0")}
+              </p>
               <h3 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
             </Link>
@@ -220,9 +251,14 @@ function Home() {
           <Kicker>FAQ</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold">Common questions</h2>
           <dl className="mt-6 grid gap-6 md:grid-cols-2">
-            {faqs.map((f) => (
-              <div key={f.id}>
-                <dt className="font-medium">{f.question}</dt>
+            {faqs.map((f, i) => (
+              <div key={f.id} className="border-t border-border pt-4">
+                <dt className="font-medium">
+                  <span className="mr-2 font-mono text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {f.question}
+                </dt>
                 <dd className="mt-2 text-sm leading-relaxed text-muted">{f.answer}</dd>
               </div>
             ))}

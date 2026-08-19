@@ -30,6 +30,15 @@ export function formatNumber(value: number | null | undefined): string {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
+export function formatMoney(value: number | null | undefined): string {
+  if (value == null || Number.isNaN(value)) return "—";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
 export function parseJson<T>(raw: string | T, fallback: T): T {
   if (raw && typeof raw === "object") return raw as T;
   if (typeof raw !== "string") return fallback;

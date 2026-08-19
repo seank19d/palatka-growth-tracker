@@ -1,4 +1,3 @@
-import { ExternalLink } from "lucide-react";
 import { DISCLOSURE } from "@/lib/constants";
 import type { AffiliateProduct } from "@/lib/types";
 
@@ -11,23 +10,22 @@ export function ProductBlock({
 }) {
   if (!products.length) return null;
   return (
-    <aside className="rounded-xl border border-border bg-card p-5 md:p-6">
-      <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">{heading}</p>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+    <aside className="border border-border bg-card p-5 md:p-6">
+      <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">{heading}</p>
+      <ul className="mt-4 divide-y divide-border border-t border-border">
         {products.map((p) => (
           <li key={p.id}>
             <a
               href={p.url}
               target="_blank"
               rel="noreferrer sponsored"
-              className="flex h-full flex-col rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary/40"
+              className="flex flex-col py-3 hover:bg-secondary/40 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
             >
-              <span className="flex items-start justify-between gap-2 font-medium">
-                {p.title}
-                <ExternalLink className="mt-0.5 size-3.5 shrink-0 text-subtle" />
+              <span>
+                <span className="block font-medium">{p.title}</span>
+                <span className="mt-1 block text-sm leading-relaxed text-muted">{p.blurb}</span>
               </span>
-              <span className="mt-1 text-sm leading-relaxed text-muted">{p.blurb}</span>
-              <span className="mt-3 text-xs text-primary">View on Amazon</span>
+              <span className="mt-2 shrink-0 text-xs text-primary sm:mt-0">Amazon</span>
             </a>
           </li>
         ))}

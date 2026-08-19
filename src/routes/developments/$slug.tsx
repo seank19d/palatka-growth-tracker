@@ -103,10 +103,10 @@ function ProjectPage() {
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold">File facts</h2>
         <p className="mt-1 text-sm text-muted">Numbers from the public file.</p>
-        <dl className="mt-4 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
+        <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">
-              <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
+              <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
               <dd className="mt-1 text-sm font-medium">{f.value}</dd>
             </div>
           ))}
@@ -122,15 +122,22 @@ function ProjectPage() {
         </div>
         <div>
           <h2 className="font-display text-2xl font-semibold">Updates</h2>
-          <ul className="mt-6 space-y-5">
+          <ul className="mt-6 space-y-0">
             {updates.length === 0 ? (
               <li className="text-sm text-muted">No dated updates beyond the milestone file.</li>
             ) : (
               updates.map((u) => (
-                <li key={u.id} className="border-b border-border pb-4">
-                  <p className="text-xs text-subtle">{formatDateShort(u.createdAt)}</p>
-                  <p className="mt-1 font-medium">{u.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">{u.body}</p>
+                <li
+                  key={u.id}
+                  className="grid gap-1 border-t border-border py-4 first:border-t-0 sm:grid-cols-[7.5rem_1fr] sm:gap-6"
+                >
+                  <p className="font-mono text-xs tabular-nums text-subtle">
+                    {formatDateShort(u.createdAt)}
+                  </p>
+                  <div>
+                    <p className="font-medium">{u.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-muted">{u.body}</p>
+                  </div>
                 </li>
               ))
             )}
@@ -141,16 +148,17 @@ function ProjectPage() {
       {project.officialLinks.length ? (
         <section className="mt-12">
           <h2 className="font-display text-2xl font-semibold">Official links</h2>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 divide-y divide-border border border-border">
             {project.officialLinks.map((l) => (
               <li key={l.url}>
                 <a
                   href={l.url}
-                  className="text-primary underline-offset-4 hover:underline"
+                  className="flex items-baseline justify-between gap-4 bg-card px-4 py-3 text-sm hover:bg-secondary/50"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {l.label}
+                  <span className="font-medium text-fg">{l.label}</span>
+                  <span className="shrink-0 font-mono text-xs text-subtle">Source</span>
                 </a>
               </li>
             ))}

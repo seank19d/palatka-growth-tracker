@@ -19,24 +19,31 @@ function WhatsNew() {
         Short entries when a status changes, a document lands, or a source item is worth keeping.
         Older summaries stay on each project page.
       </p>
-      <ol className="mt-10 space-y-8">
+      <ol className="mt-10">
         {updates.map((u) => (
-          <li key={u.id} className="border-b border-border pb-8">
-            <p className="text-xs uppercase tracking-[0.14em] text-subtle">
+          <li
+            key={u.id}
+            className="grid gap-2 border-t border-border py-8 first:border-t-0 sm:grid-cols-[8.5rem_1fr] sm:gap-8"
+          >
+            <p className="font-mono text-xs tabular-nums text-subtle">
               {formatDateShort(u.createdAt)}
-              {u.projectName ? ` · ${u.projectName}` : ""}
+              {u.projectName ? (
+                <span className="mt-1 block normal-case tracking-normal">{u.projectName}</span>
+              ) : null}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold">{u.title}</h2>
-            <p className="mt-2 leading-relaxed text-fg">{u.body}</p>
-            {u.projectSlug ? (
-              <Link
-                to="/developments/$slug"
-                params={{ slug: u.projectSlug }}
-                className="mt-3 inline-flex text-sm text-primary"
-              >
-                Open project record
-              </Link>
-            ) : null}
+            <div>
+              <h2 className="font-display text-2xl font-semibold">{u.title}</h2>
+              <p className="mt-2 leading-relaxed text-fg">{u.body}</p>
+              {u.projectSlug ? (
+                <Link
+                  to="/developments/$slug"
+                  params={{ slug: u.projectSlug }}
+                  className="mt-3 inline-flex text-sm text-primary"
+                >
+                  Open project record
+                </Link>
+              ) : null}
+            </div>
           </li>
         ))}
       </ol>
