@@ -8,11 +8,11 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
     <footer className="mt-auto border-t border-border bg-bg-sunken">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
         <div>
-          <div className="flex items-center gap-3">
-            <BrandMark className="size-9" />
+          <div className="flex items-center gap-2.5">
+            <BrandMark className="size-8" />
             <div>
               <p className="font-display text-xl font-semibold leading-none">Palatka</p>
-              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+              <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-muted">
                 Homes Report
               </p>
             </div>
@@ -23,7 +23,7 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
           </p>
         </div>
         <div className="text-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Sections</p>
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">Sections</p>
           <ul className="mt-3 space-y-2">
             <li>
               <Link to="/developments" className="hover:text-primary">
@@ -48,7 +48,7 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
           </ul>
         </div>
         <div className="text-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
             Last public update
           </p>
           <p className="mt-3 text-fg">{formatDateShort(lastUpdated)}</p>

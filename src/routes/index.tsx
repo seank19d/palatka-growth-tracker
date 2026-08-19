@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
 import { Kicker } from "@/components/brand/kicker";
-import { RiverDivider } from "@/components/brand/river-divider";
 import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { CountyMap } from "@/components/projects/county-map";
 import { MapEmbed } from "@/components/projects/map-embed";
@@ -43,47 +42,30 @@ function Home() {
         }}
       />
 
-      <section className="overflow-x-clip border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-            <div>
-              <Kicker>Palatka · East Palatka · Putnam County</Kicker>
-              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-                What’s being built in Palatka.
-              </h1>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-                Planned and active housing in Palatka and East Palatka, tracked from county
-                files, plats, and permits — not builder renderings. Includes a plain-language
-                guide for people moving here.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild>
-                  <Link to="/developments">
-                    Browse developments
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <Link to="/guide">Living guide</Link>
-                </Button>
-              </div>
-            </div>
-            <figure>
-              <img
-                src="/hero.jpg"
-                alt="Illustrated view of Palatka: live oaks and downtown on the St. Johns, new houses on the far bank."
-                width={1600}
-                height={520}
-                className="w-full rounded-lg border border-border object-cover"
-              />
-              <figcaption className="mt-3 text-sm leading-relaxed text-muted">
-                Palatka on a wide bend of the St. Johns. New subdivisions are showing up on the east
-                bank; this site follows the public file.
-              </figcaption>
-            </figure>
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+          <Kicker>Palatka · East Palatka · Putnam County</Kicker>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            What’s being built in Palatka.
+          </h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            Planned and active housing in Palatka and East Palatka, tracked from county
+            files, plats, and permits — not builder renderings. Includes a plain-language
+            guide for people moving here.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild>
+              <Link to="/developments">
+                Browse developments
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/guide">Living guide</Link>
+            </Button>
           </div>
 
-          <dl className="mt-10 grid grid-cols-3 gap-3">
+          <dl className="mt-12 grid grid-cols-3 gap-3 border-t border-border pt-8">
             <Stat label="Projects tracked" shortLabel="Projects" value={String(stats.projectCount)} hint="Published files" />
             <Stat label="In the pipeline" shortLabel="Pipeline" value={String(stats.pipelineCount)} hint="Not built-out" />
             <Stat
@@ -190,7 +172,6 @@ function Home() {
 
       {market ? (
         <section className="border-y border-border bg-bg-sunken">
-          <RiverDivider className="opacity-70" />
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
             <Kicker>Housing snapshot · {formatDateShort(market.capturedOn)}</Kicker>
             <h2 className="mt-3 font-display text-3xl font-semibold">
