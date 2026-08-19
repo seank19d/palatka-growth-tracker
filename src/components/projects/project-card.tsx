@@ -29,7 +29,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <p className="font-medium tabular-nums">{formatNumber(project.lotsCurrent)}</p>
           </div>
           <span className="inline-flex items-center gap-1 text-primary">
-            Open the file
+            Record
             <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
           </span>
         </div>

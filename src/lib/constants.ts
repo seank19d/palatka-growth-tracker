@@ -1,9 +1,9 @@
 import type { ProjectStatus } from "./types";
 
 export const APP_NAME = "Palatka Growth Tracker";
-export const APP_TAGLINE = "Palatka is growing. Here's the paper trail.";
+export const APP_TAGLINE = "What's being built in Palatka — and what it's like to live here.";
 export const APP_DESCRIPTION =
-  "Independent tracker of planned and active housing in Palatka, East Palatka, and Putnam County, Florida — plus a practical field guide for people actually moving here.";
+  "Independent tracker of planned and active housing in Palatka, East Palatka, and Putnam County, Florida, plus a practical guide for people moving here.";
 
 export const STATUS_META: Record<
   ProjectStatus,
@@ -12,12 +12,12 @@ export const STATUS_META: Record<
   concept: {
     label: "Concept",
     step: 0,
-    hint: "Talk, rumors, or a pretty site plan. No county entitlement yet.",
+    hint: "Discussed or marketed. No county entitlement yet.",
   },
   rezoning: {
     label: "Rezoning",
     step: 1,
-    hint: "Land-use change is in front of planning staff or the commission.",
+    hint: "A land-use change is in front of planning staff or the commission.",
   },
   engineering: {
     label: "Engineering",
@@ -32,22 +32,22 @@ export const STATUS_META: Record<
   plat_recorded: {
     label: "Plat recorded",
     step: 4,
-    hint: "Lots exist on the official plat. Still not the same as homes for sale.",
+    hint: "Lots exist on the official plat. That is not the same as homes for sale.",
   },
   under_construction: {
     label: "Under construction",
     step: 5,
-    hint: "Dirt is moving, or walls are going up. You can drive by and see it.",
+    hint: "Dirt is moving, or buildings are going up.",
   },
   selling: {
     label: "Selling",
     step: 6,
-    hint: "A builder or seller is taking contracts. Still verify the address.",
+    hint: "A builder or seller is taking contracts on homes or lots.",
   },
   built_out: {
     label: "Built-out",
     step: 7,
-    hint: "Mostly done. Remaining activity is infill, resales, and the HOA.",
+    hint: "The community is largely complete. Remaining activity is infill.",
   },
 };
 

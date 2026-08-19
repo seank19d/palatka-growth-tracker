@@ -16,7 +16,7 @@ Staff can also press **Force source refresh** on `/admin` (signed in). That path
 
 ## Style guide used by the model
 
-Practical, local, no hype. Distinguish public record from reports. Include dates and case numbers. No exclamation points.
+Service journalism: a local reporter who has read the file. Plain language, specific, dated. Distinguish public record from reports. Include dates and case numbers. No hype, no jokes, no exclamation points.
 
 ## What still needs a human
 

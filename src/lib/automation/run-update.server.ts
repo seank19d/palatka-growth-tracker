@@ -121,7 +121,7 @@ async function chatComplete(prompt: string): Promise<string | null> {
         {
           role: "system",
           content:
-            "You write brief public updates for Palatka Growth Tracker, a civic housing-development site. Voice: practical, local, no real-estate hype, no exclamation points, no emojis. Distinguish confirmed public records from reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences.",
+            "You write brief public updates for Palatka Growth Tracker, a civic housing site. Voice: service journalism — a local reporter who has read the file. Plain language, specific, dated. No hype, no jokes, no exclamation points, no emojis. Distinguish confirmed public records from news reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences.",
         },
         { role: "user", content: prompt },
       ],

@@ -14,8 +14,8 @@ export const Route = createFileRoute("/developments/")({
 });
 
 const FILTERS = [
-  { id: "all", label: "All of it" },
-  { id: "pipeline", label: "Still in the pipeline" },
+  { id: "all", label: "All" },
+  { id: "pipeline", label: "Pipeline" },
   { id: "East Palatka", label: "East Palatka" },
   { id: "Palatka", label: "Palatka" },
   { id: "watch", label: "Watch list" },
@@ -36,14 +36,14 @@ function DevelopmentsPage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <Kicker>Tracker</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">The pile of plans</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
       <p className="mt-3 max-w-2xl text-muted">
-        Every file we currently keep. Pipeline means the dirt has not finished the job. Watch-list
-        means we heard it, and we have not yet seen the ordinance. If this page and a sales pitch
-        disagree, trust the PDF.
+        Every project we currently publish. Pipeline means it is not built-out. Watch-list items are
+        reported or unconfirmed. If this page and a sales pitch disagree, use the county PDF.
       </p>
-      <p className="mt-3 max-w-2xl font-display text-lg italic text-primary">
-        Concept is talk. Selling is a contract. Built-out is the HOA newsletter.
+      <p className="mt-3 max-w-2xl text-sm text-muted">
+        <strong className="font-medium text-fg">How to read a status:</strong> Concept is an idea.
+        Rezoning is a county case. Selling is a contract. Built-out is a finished community.
       </p>
       <div className="mt-8 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
@@ -71,7 +71,7 @@ function DevelopmentsPage() {
         ))}
       </div>
       {filtered.length === 0 ? (
-        <p className="mt-10 text-muted">Nothing in this filter. The county has not invented it yet.</p>
+        <p className="mt-10 text-muted">No projects in this filter.</p>
       ) : null}
     </main>
   );

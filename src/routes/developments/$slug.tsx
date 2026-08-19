@@ -71,7 +71,7 @@ function ProjectPage() {
         }}
       />
       <Link to="/developments" className="text-sm text-muted hover:text-primary">
-        ← The pile of plans
+        ← All developments
       </Link>
       <Kicker className="mt-5">Project file</Kicker>
       <div className="mt-4 flex flex-wrap gap-2">
@@ -102,7 +102,7 @@ function ProjectPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold">File facts</h2>
-        <p className="mt-1 text-sm text-muted">The boring numbers. That’s the point.</p>
+        <p className="mt-1 text-sm text-muted">Numbers from the public file.</p>
         <dl className="mt-4 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">

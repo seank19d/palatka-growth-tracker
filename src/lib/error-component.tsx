@@ -23,10 +23,9 @@ export function NotFoundComponent() {
   return (
     <main className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-6 text-center">
       <p className="text-[11px] uppercase tracking-[0.2em] text-muted">404</p>
-      <h1 className="mt-2 font-display text-3xl font-semibold">Page not in this plat book</h1>
+      <h1 className="mt-2 font-display text-3xl font-semibold">Page not found</h1>
       <p className="mt-3 text-muted">
-        That URL does not match a development, a guide, or any other page we keep. The river is still
-        there. This file is not.
+        That URL is not a development, guide, or other page on this site.
       </p>
       <Link to="/" className="mt-6 text-primary underline-offset-4 hover:underline">
         Return home

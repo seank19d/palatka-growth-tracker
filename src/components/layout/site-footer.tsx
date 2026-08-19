@@ -13,21 +13,21 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
             <p className="font-display text-xl font-semibold">Palatka Growth Tracker</p>
           </div>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
-            Independent record of housing in Palatka, East Palatka, and Putnam County. Slightly
-            opinionated about flood maps. Never a brochure.
+            Independent coverage of housing in Palatka, East Palatka, and Putnam County. Not the
+            county, not a builder, not a brokerage.
           </p>
         </div>
         <div className="text-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Jump</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Sections</p>
           <ul className="mt-3 space-y-2">
             <li>
               <Link to="/developments" className="hover:text-primary">
-                The pile of plans
+                Developments
               </Link>
             </li>
             <li>
               <Link to="/guide" className="hover:text-primary">
-                Field guide
+                Living guide
               </Link>
             </li>
             <li>

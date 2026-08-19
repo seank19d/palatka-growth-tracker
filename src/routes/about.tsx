@@ -11,17 +11,17 @@ function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
       <Kicker>Method</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">Who writes this, and from where</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold">About this tracker</h1>
       <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
         <p>
           Palatka Growth Tracker is an independent public website. It is not Putnam County, the City
           of Palatka, a builder, a lender, or a real-estate brokerage. Nothing here is an offer to
-          sell real property. We like the river. We like ordinances more.
+          sell real property.
         </p>
         <p>
-          The point is a dated record of significant residential projects — starting with Alford
-          Farms — and a living-in-Putnam guide that does not read like a listing brochure. Fun is
-          allowed. Hype is not.
+          The site exists because county PDFs are the source of truth and almost nobody reads them
+          first. We translate those files — starting with Alford Farms — into a dated status, and we
+          keep a living-in-Putnam guide that is not a listing brochure.
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">Where the facts come from</h2>
         <ul className="list-disc space-y-2 pl-5">
@@ -54,7 +54,7 @@ function AboutPage() {
         <p>
           If you have a primary document this site is missing — an ordinance, plat, or permit — the
           staff console is the place to file it. Prefer PDFs from the county over screenshots of
-          Facebook. We will take the PDF every time.
+          Facebook. We will take the county PDF every time.
         </p>
       </div>
     </main>

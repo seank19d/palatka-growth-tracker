@@ -47,25 +47,24 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <Kicker>St. Johns River town · Putnam County</Kicker>
+              <Kicker>Palatka · East Palatka · Putnam County</Kicker>
               <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-                Palatka is growing.{" "}
-                <em className="font-medium not-italic text-primary md:italic">Here’s the paper trail.</em>
+                What’s being built in Palatka.
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-                An independent tracker of plats, permits, and pipeline housing in Palatka, East
-                Palatka, and Putnam County — plus a field guide for people who actually have to live
-                here. No renderings-as-promises.
+                Independent coverage of planned and active housing — plus a practical guide for
+                people moving here. Status comes from plats, permits, and county files, not
+                renderings.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild>
                   <Link to="/developments">
-                    See what’s on the board
+                    Browse developments
                     <ArrowRight className="size-4" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link to="/guide">Field guide</Link>
+                  <Link to="/guide">Living guide</Link>
                 </Button>
               </div>
             </div>
@@ -79,17 +78,17 @@ function Home() {
                 className="relative w-full rounded-[1.4rem] border border-border object-cover shadow-[var(--shadow-border)]"
               />
               <figcaption className="mt-3 text-sm leading-relaxed text-muted">
-                Palatka looking across a wide bend of the St. Johns. The pretty part is the river.
-                The useful part is the ordinance number.
+                Palatka on a wide bend of the St. Johns. New subdivisions are showing up on the east
+                bank; this site follows the public file.
               </figcaption>
             </figure>
           </div>
 
           <dl className="mt-10 grid grid-cols-3 gap-3">
-            <Stat label="On the board" shortLabel="Board" value={String(stats.projectCount)} hint="Files we keep" />
-            <Stat label="Still in the pipeline" shortLabel="Pipeline" value={String(stats.pipelineCount)} hint="Not built-out" />
+            <Stat label="Projects tracked" shortLabel="Projects" value={String(stats.projectCount)} hint="Published files" />
+            <Stat label="In the pipeline" shortLabel="Pipeline" value={String(stats.pipelineCount)} hint="Not built-out" />
             <Stat
-              label="Lots on the books"
+              label="Lots in known plans"
               shortLabel="Lots"
               value={formatNumber(stats.lotsPipeline)}
               hint="Best-known layouts"
@@ -102,11 +101,11 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
           <p className="max-w-4xl text-sm leading-relaxed md:text-[0.98rem]">
             Palatka sits on a north-flowing bend of the St. Johns. East Palatka is the other bank.
-            New subdivisions tend to show up on the high ground first — which is why we keep a{" "}
+            Most new subdivisions are proposed on the high ground first, which is why flood maps and{" "}
             <Link to="/guide/$slug" params={{ slug: "local-tips" }} className="underline decoration-sun/80 underline-offset-4">
-              flood-and-road page
+              SR 207
             </Link>{" "}
-            and a lot of PDFs.
+            keep coming up in county hearings.
           </p>
         </div>
       </aside>
@@ -115,7 +114,7 @@ function Home() {
         <section className="border-b border-border">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2 md:px-6 md:py-16">
             <div>
-              <Kicker>The one people keep asking about</Kicker>
+              <Kicker>Featured project</Kicker>
               <div className="mt-4 flex flex-wrap gap-2">
                 <StatusBadge status={featured.status} />
                 <ConfidenceBadge confidence={featured.confidence} />
@@ -143,7 +142,7 @@ function Home() {
               </dl>
               <Button asChild className="mt-8">
                 <Link to="/developments/$slug" params={{ slug: featured.slug }}>
-                  Open the Alford Farms file
+                  Full Alford Farms record
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -159,7 +158,7 @@ function Home() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <Kicker>Tracker</Kicker>
-            <h2 className="mt-2 font-display text-3xl font-semibold">The pile of plans</h2>
+            <h2 className="mt-2 font-display text-3xl font-semibold">Developments on the board</h2>
           </div>
           <Link to="/developments" className="hidden text-sm text-primary md:inline">
             All developments
@@ -173,7 +172,7 @@ function Home() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <CountyMap projects={projects} />
           <Card className="p-5 md:p-6">
-            <Kicker>The log</Kicker>
+            <Kicker>What’s new</Kicker>
             <ul className="mt-4 space-y-4">
               {updates.map((u) => (
                 <li key={u.id} className="border-b border-border pb-4 last:border-0 last:pb-0">
@@ -196,12 +195,9 @@ function Home() {
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
             <Kicker>Housing snapshot · {formatDateShort(market.capturedOn)}</Kicker>
             <h2 className="mt-3 font-display text-3xl font-semibold">
-              Putnam prices sit in a band, not a slogan.
+              Putnam County prices sit in a band, not a slogan.
             </h2>
             <p className="mt-3 max-w-3xl leading-relaxed text-muted">{market.medianNote}</p>
-            <p className="mt-3 font-display text-lg italic text-primary">
-              Please do not ask if Palatka is “the next” anywhere. It is Palatka.
-            </p>
             <p className="mt-3 text-xs text-subtle">{market.sourceNote}</p>
             <Link
               to="/guide/$slug"
@@ -215,10 +211,10 @@ function Home() {
       ) : null}
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <Kicker>If the U-Haul is pointed this way</Kicker>
-        <h2 className="mt-2 font-display text-3xl font-semibold">A field guide, not a listing</h2>
+        <Kicker>Moving here</Kicker>
+        <h2 className="mt-2 font-display text-3xl font-semibold">A practical living guide</h2>
         <p className="mt-3 max-w-2xl text-muted">
-          Utilities, flood maps, schools, and the small stuff a builder brochure will never mention.
+          Utilities, flood maps, schools, and the details a listing will skip.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {guides.slice(0, 6).map((g) => (
@@ -235,7 +231,7 @@ function Home() {
           ))}
         </div>
         <div className="mt-10">
-          <ProductBlock products={products} heading="First-week kit (the unglamorous stuff)" />
+          <ProductBlock products={products} heading="First-week moving kit" />
         </div>
       </section>
 

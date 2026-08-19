@@ -13,17 +13,17 @@ function GuideHub() {
   const { guides, pipeline } = Route.useLoaderData();
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>If the U-Haul is pointed this way</Kicker>
+      <Kicker>Moving here</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
-        A field guide to Palatka & East Palatka
+        A practical guide to Palatka & East Palatka
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-        Written for people who already have Palatka on a map — not to sell you a lot. The pipeline
-        list below ages with the dirt.
+        Written for people who are already looking here — not to sell a lot. Pipeline communities
+        below come from the tracker, so this page stays current with the dirt.
       </p>
 
       <section className="mt-10">
-        <h2 className="font-display text-2xl font-semibold">Communities still in motion</h2>
+        <h2 className="font-display text-2xl font-semibold">Current pipeline communities</h2>
         <ul className="mt-4 grid gap-3 md:grid-cols-2">
           {pipeline.map((p) => (
             <li key={p.slug}>

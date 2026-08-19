@@ -33,8 +33,8 @@ function FaqPage() {
       <Kicker>FAQ</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold">Questions people actually ask</h1>
       <p className="mt-3 text-muted">
-        Answers track the public file, not builder talking points. If a sales agent and this page
-        disagree, ask for the ordinance number. Charm is free. Case numbers are better.
+        Answers follow the public file, not builder talking points. If a sales agent and this page
+        disagree, ask for the ordinance number.
       </p>
       <Accordion type="single" collapsible className="mt-8">
         {faqs.map((f) => (

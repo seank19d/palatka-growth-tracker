@@ -46,7 +46,7 @@ function GuidePage() {
       </aside>
       <article>
         <Link to="/guide" className="text-sm text-muted hover:text-primary">
-          ← Field guide
+          ← Living guide
         </Link>
         <div className="mt-4">
           <GuideGlyph slug={page.slug} className="size-12 rounded-2xl" />

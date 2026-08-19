@@ -16,11 +16,10 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   return (
     <div className="rounded-xl bg-card p-4 shadow-[var(--shadow-border)] md:p-6">
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-        Putnam, as a napkin sketch
+        Putnam County locator
       </p>
       <p className="mt-1 max-w-md text-sm text-muted">
-        Not a survey. River on the east, Interlachen west, Crescent City south. Tap a pin for the
-        file.
+        Schematic — not a survey. River on the east, Interlachen west, Crescent City south.
       </p>
       <svg viewBox="0 0 100 78" className="mt-4 w-full" role="img" aria-label="Locator map of Putnam County">
         <rect width="100" height="78" rx="3" className="fill-bg" />

@@ -45,7 +45,7 @@ export function SiteHeader() {
           <BrandMark className="size-10" title="Palatka Growth Tracker" />
           <span className="min-w-0">
             <span className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
-              St. Johns River town
+              Putnam County, Florida
             </span>
             <span className="block font-display text-[1.28rem] font-semibold leading-none tracking-tight md:text-[1.5rem]">
               Palatka Growth Tracker
