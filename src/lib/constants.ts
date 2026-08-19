@@ -17,7 +17,7 @@ export const STATUS_META: Record<
   rezoning: {
     label: "Rezoning",
     step: 1,
-    hint: "A land-use change is in front of planning staff or the commission.",
+    hint: "A land-use change — often to a planned unit development (PUD), the county term for a master-planned neighborhood — is in front of planning staff or the commission.",
   },
   engineering: {
     label: "Engineering",
