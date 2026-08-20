@@ -1,0 +1,202 @@
+export const SEED_PRODUCTS: {
+  asin: string | null;
+  title: string;
+  category: string;
+  blurb: string;
+  searchQuery: string;
+  sortOrder: number;
+}[] = [
+  {
+    asin: "B00006IC57",
+    title: "Heavy-duty moving boxes",
+    category: "moving",
+    blurb: "Florida humidity and a long I-95 day will crush bargain cartons. Use real moving boxes.",
+    searchQuery: "bankers box moving boxes",
+    sortOrder: 1,
+  },
+  {
+    asin: "B0000DH8GQ",
+    title: "Packing tape (multi-pack)",
+    category: "moving",
+    blurb: "Cheap tape fails in heat. Get a name-brand multi-pack and extra dispensers.",
+    searchQuery: "scotch packing tape 6 pack",
+    sortOrder: 2,
+  },
+  {
+    asin: "B00KT1P03W",
+    title: "First-aid kit",
+    category: "moving",
+    blurb: "For the truck, the first night, and the junk-drawer gap before you unpack.",
+    searchQuery: "family first aid kit",
+    sortOrder: 3,
+  },
+  {
+    asin: "B00CWS7TKE",
+    title: "Basic home tool kit",
+    category: "tools",
+    blurb: "New construction and 1940s cottages both need a driver, level, tape, and hammer on day one.",
+    searchQuery: "home tool kit set",
+    sortOrder: 4,
+  },
+  {
+    asin: null,
+    title: "Mattress protector (waterproof)",
+    category: "home-setup",
+    blurb: "Humidity, spills, and Florida pests. Put one on every bed before the first night.",
+    searchQuery: "waterproof mattress protector queen",
+    sortOrder: 5,
+  },
+  {
+    asin: null,
+    title: "Dehumidifier",
+    category: "home-setup",
+    blurb: "Closets and interior rooms will sweat in summer if the A/C is undersized or you are between systems.",
+    searchQuery: "dehumidifier 50 pint",
+    sortOrder: 6,
+  },
+  {
+    asin: null,
+    title: "Box fan / air circulator",
+    category: "home-setup",
+    blurb: "Useful during move-in, storms, and the week you wait on an A/C appointment.",
+    searchQuery: "lasko air circulator fan",
+    sortOrder: 7,
+  },
+  {
+    asin: null,
+    title: "Outdoor all-weather rug",
+    category: "outdoor",
+    blurb: "A screened porch or lanai is half the reason people move here. Start with a washable outdoor rug.",
+    searchQuery: "indoor outdoor rug 5x7",
+    sortOrder: 8,
+  },
+  {
+    asin: null,
+    title: "Gas or charcoal grill",
+    category: "outdoor",
+    blurb: "Most East Palatka lots have the space. Check HOA/PUD rules before you pour a patio.",
+    searchQuery: "propane grill two burner",
+    sortOrder: 9,
+  },
+  {
+    asin: null,
+    title: "Garden hose and nozzle",
+    category: "outdoor",
+    blurb: "New sod, well water, and sandy soil. A 75-foot hose is not overkill.",
+    searchQuery: "50 foot garden hose nozzle",
+    sortOrder: 10,
+  },
+  {
+    asin: null,
+    title: "Hurricane supply kit",
+    category: "hurricane",
+    blurb: "Season runs June through November. Water, radio, batteries, and a plan beat last-minute stores.",
+    searchQuery: "emergency weather radio batteries water",
+    sortOrder: 11,
+  },
+  {
+    asin: null,
+    title: "LED flashlights and lanterns",
+    category: "hurricane",
+    blurb: "Clay Electric and FPL are generally solid; storms still take trees down on rural laterals.",
+    searchQuery: "led lantern flashlight rechargeable",
+    sortOrder: 12,
+  },
+  {
+    asin: null,
+    title: "Mosquito treatment for yards",
+    category: "outdoor",
+    blurb: "You are next to a river and wetlands. Treat the yard before you host anyone at dusk.",
+    searchQuery: "yard mosquito fogger spray",
+    sortOrder: 13,
+  },
+  {
+    asin: null,
+    title: "Window solar film",
+    category: "home-setup",
+    blurb: "West-facing rooms on new construction can cook. Film is cheaper than fighting the A/C.",
+    searchQuery: "window solar film heat control",
+    sortOrder: 14,
+  },
+];
+
+export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[] = [
+  {
+    question: "Is Alford Farms selling homes yet?",
+    answer:
+      "Not according to the public record this site reviews. The PUD rezoning was approved in August 2024. Engineering and SJRWMD permitting were still the live steps into 2026. Rezoning is not a certificate of occupancy and it is not a sales opening. Check D.R. Horton and the county plat books before you plan a closing date around this community.",
+    sortOrder: 1,
+  },
+  {
+    question: "Why do some pages say 700 homes and others say 559?",
+    answer:
+      "The 700 figure is the entitlement envelope described at rezoning. The 559 figure appears in later engineering documents. Large Florida PUDs often shrink between the political approval and the construction set. Neither number is a promise of a closing calendar.",
+    sortOrder: 2,
+  },
+  {
+    question: "Is D.R. Horton the builder?",
+    answer:
+      "County filings name D.R. Horton, Inc. as an agent on Alford Farms, and local reports also attach Horton to a possible 189-home site at East River Road. “Named in the file” is not the same as a published community on the builder’s website. Confirm on Horton’s site and with the county before treating it as a shoppable community.",
+    sortOrder: 3,
+  },
+  {
+    question: "When will Alford Farms homes be available?",
+    answer:
+      "No public sales date is in the records this site reviews. Putnam County approved the PUD in August 2024. Engineering and SJRWMD permitting were still open into 2026. Rezoning is not a model home.",
+    sortOrder: 4,
+  },
+  {
+    question: "What new subdivisions are being built in East Palatka?",
+    answer:
+      "The clearest large planned subdivision in the East Palatka public file is Alford Farms on SR 207 (PUD24-000004). East River Road is a reported second site. In-town Palatka already has selling new construction at The Collection at Palatka by Century Complete — that is Palatka city, not East Palatka.",
+    sortOrder: 5,
+  },
+  {
+    question: "Are there new construction homes for sale in Palatka right now?",
+    answer:
+      "Yes. The Collection at Palatka (Century Complete, 508 N. 17th Street) is marketed as selling, with starting prices in the low-to-mid $200,000s. Alford Farms in East Palatka is not selling lots in the public record this site reviews.",
+    sortOrder: 6,
+  },
+  {
+    question: "Where is East Palatka relative to Palatka?",
+    answer:
+      "East Palatka sits across / along the St. Johns River from downtown Palatka, on the SR 207 side toward St. Augustine. Many people who work in St. Johns County look here because land and list prices are lower. The commute on 207 is real; so are school-district and utility boundaries that do not match the marketing name “Palatka.”",
+    sortOrder: 7,
+  },
+  {
+    question: "Will I have city water and sewer?",
+    answer:
+      "Inside Palatka city limits, usually yes (confirm with the city). Unincorporated East Palatka and much of Putnam County still use wells and septic on older lots. New PUDs typically extend or build central utilities — that is one reason they take years. Ask the builder and the county utilities staff about the specific parcel; do not assume the neighbor’s setup.",
+    sortOrder: 8,
+  },
+  {
+    question: "Clay Electric or FPL?",
+    answer:
+      "Both serve Putnam County. Clay Electric Cooperative has a Palatka district office at 300 N. SR 19. FPL also has a large footprint. Territory follows lines on a map, not city names. Use each utility’s address lookup, or the Florida PSC map, before you schedule a connect.",
+    sortOrder: 9,
+  },
+  {
+    question: "What about flood zones and insurance?",
+    answer:
+      "You are on a major Florida river with tributaries, wetlands, and a hurricane coast two counties away. Pull the FEMA flood map for the exact parcel, budget for Florida property insurance (which has been volatile statewide), and ask about wind-mitigation credits. This site does not sell insurance and will not guess your premium.",
+    sortOrder: 10,
+  },
+  {
+    question: "Which schools would we use?",
+    answer:
+      "Putnam County School District. Palatka Jr.-Sr. High is the main Palatka secondary campus. Elementary assignments depend on the address — use the district’s school locator, not a Facebook comment. St. Johns River State College has a Palatka campus for dual-enrollment and two-year programs.",
+    sortOrder: 11,
+  },
+  {
+    question: "How does this site stay updated?",
+    answer:
+      "A scheduled job fetches county pages, water-management notices, and news RSS feeds. New items are matched to projects by name and case number. When an AI key is configured, the job writes a plain-language summary. If the job fails, the last good data stays on the site. An admin can force a refresh.",
+    sortOrder: 12,
+  },
+  {
+    question: "Are you the county or a realtor?",
+    answer:
+      "No. This is an independent public report and moving guide. It is not Putnam County, not the City of Palatka, not D.R. Horton, and not a brokerage. Sources are linked. If a county PDF and this page disagree, the county PDF wins.",
+    sortOrder: 13,
+  },
+];
