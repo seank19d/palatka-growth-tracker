@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
 import { MapEmbed } from "@/components/projects/map-embed";
+import { OfficialSources } from "@/components/projects/official-sources";
 import { StatusPipeline } from "@/components/projects/status-pipeline";
 import { Timeline } from "@/components/projects/timeline";
 import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
@@ -131,6 +132,8 @@ function ProjectPage() {
         </dl>
       </section>
 
+      <OfficialSources project={project} />
+
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <article>
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
@@ -189,27 +192,6 @@ function ProjectPage() {
               </AccordionItem>
             ))}
           </Accordion>
-        </section>
-      ) : null}
-
-      {project.officialLinks.length ? (
-        <section className="mt-12">
-          <h2 className="font-display text-2xl font-semibold">Official links</h2>
-          <ul className="mt-4 divide-y divide-border border border-border">
-            {project.officialLinks.map((l) => (
-              <li key={l.url}>
-                <a
-                  href={l.url}
-                  className="flex items-baseline justify-between gap-4 bg-card px-4 py-3 text-sm hover:bg-secondary/50"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="font-medium text-fg">{l.label}</span>
-                  <span className="shrink-0 font-mono text-xs text-subtle">Source</span>
-                </a>
-              </li>
-            ))}
-          </ul>
         </section>
       ) : null}
     </main>
