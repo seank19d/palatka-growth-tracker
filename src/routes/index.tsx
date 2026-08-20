@@ -35,6 +35,7 @@ function Home() {
     featured ??
     projects.find((p) => p.slug === "alford-farms") ??
     projects.find((p) => p.status === "permitting" || p.status === "engineering");
+  const primarySale = sellingNow[0];
   const others = projects.filter(
     (p) =>
       p.slug !== featured?.slug &&
@@ -58,36 +59,42 @@ function Home() {
       />
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <Kicker>Palatka · East Palatka · Putnam County</Kicker>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
             What’s being built in Palatka and East Palatka.
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-            Planned and active housing in Palatka and East Palatka, Putnam County, Florida — tracked
-            from county files, plats, and permits, not builder renderings. Includes{" "}
-            <Link
-              to="/developments/$slug"
-              params={{ slug: "alford-farms" }}
-              className="text-primary underline-offset-4 hover:underline"
-            >
-              Alford Farms
-            </Link>
-            , in-town new construction, and a plain-language guide for people moving here.
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+            Tracked from county files and permits — not builder renderings. Pick a path: homes you can
+            buy now, or pipeline projects that are still a public file.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild>
-              <Link to="/developments">
-                Browse developments
-                <ArrowRight className="size-4" />
-              </Link>
+            <Button asChild size="lg">
+              {primarySale ? (
+                <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
+                  Homes for sale now
+                  <ArrowRight className="size-4" />
+                </Link>
+              ) : (
+                <a href="#for-sale-now">
+                  Homes for sale now
+                  <ArrowRight className="size-4" />
+                </a>
+              )}
             </Button>
-            <Button asChild variant="outline">
-              <Link to="/guide">Living guide</Link>
+            <Button asChild size="lg" variant="outline">
+              <a href="#pipeline">Pipeline (not selling yet)</a>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-muted">
+            Moving here?{" "}
+            <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
+              Open the living guide
+            </Link>
+            .
+          </p>
 
-          <dl className="mt-12 grid grid-cols-3 gap-3 border-t border-border pt-8">
+          <dl className="mt-10 grid grid-cols-3 gap-3 border-t border-border pt-8">
             <Stat
               label="Projects tracked"
               shortLabel="Projects"
@@ -110,47 +117,63 @@ function Home() {
         </div>
       </section>
 
-      <aside className="border-b border-border bg-primary text-primary-fg">
-        <div className="mx-auto max-w-6xl px-4 py-5 md:px-6">
-          <p className="max-w-4xl text-sm leading-relaxed md:text-[0.98rem]">
-            Palatka sits on a north-flowing bend of the St. Johns. East Palatka is the other bank.
-            Most new subdivisions are proposed on the high ground first, which is why flood maps and{" "}
-            <Link
-              to="/guide/$slug"
-              params={{ slug: "local-tips" }}
-              className="underline decoration-sun/80 underline-offset-4"
-            >
-              SR 207
-            </Link>{" "}
-            keep coming up in county hearings.
-          </p>
-        </div>
-      </aside>
-
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <section className="border-b border-border" id="now-vs-later">
+        <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-14">
           <Kicker>Start here</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">Now vs later</h2>
           <p className="mt-3 max-w-2xl text-muted">
             One is taking contracts. The other is still a county file. Do not mix them up.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <NowLaterCard
-              eyebrow="Homes for sale now"
-              empty="No project on this site is marked selling right now."
-              projects={sellingNow}
-            />
-            {inCountyFile ? (
+            <div id="for-sale-now">
               <NowLaterCard
-                eyebrow="Still in the county file"
-                empty=""
-                projects={[inCountyFile]}
-                emphasis="pipeline"
+                eyebrow="Homes for sale now"
+                empty="No project on this site is marked selling right now."
+                projects={sellingNow}
               />
-            ) : null}
+            </div>
+            {inCountyFile ? (
+              <div id="pipeline">
+                <NowLaterCard
+                  eyebrow="Pipeline — not selling yet"
+                  empty=""
+                  projects={[inCountyFile]}
+                  emphasis="pipeline"
+                />
+              </div>
+            ) : (
+              <div id="pipeline" className="border border-border bg-card p-5 md:p-6">
+                <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
+                  Pipeline — not selling yet
+                </p>
+                <p className="mt-4 text-sm text-muted">No pipeline flagship on file.</p>
+              </div>
+            )}
           </div>
+          <p className="mt-6 text-sm text-muted">
+            <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">
+              See every development on file
+            </Link>
+          </p>
         </div>
       </section>
+
+      <aside className="border-b border-border bg-primary text-primary-fg">
+        <div className="mx-auto max-w-6xl px-4 py-3.5 md:px-6">
+          <p className="max-w-4xl text-sm leading-relaxed">
+            East Palatka sits on the SR 207 side of the St. Johns — high ground first, which is why flood
+            maps and{" "}
+            <Link
+              to="/guide/$slug"
+              params={{ slug: "local-tips" }}
+              className="underline decoration-sun/80 underline-offset-4"
+            >
+              commute traffic
+            </Link>{" "}
+            show up in every large PUD hearing.
+          </p>
+        </div>
+      </aside>
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="flex items-end justify-between gap-4">
@@ -329,9 +352,7 @@ function NowLaterCard({
             </div>
             <h3 className="mt-3 font-display text-2xl font-semibold leading-tight">{p.name}</h3>
             <p className="mt-1 text-sm text-muted">{p.locationLabel}</p>
-            <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-fg">
-              {p.latestSummary}
-            </p>
+            <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-fg">{p.latestSummary}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
               <div>
                 <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">Stage</dt>
