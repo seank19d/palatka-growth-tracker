@@ -1,22 +1,57 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Compass } from "lucide-react";
 import {
-  HIGHWAYS,
-  PUTNAM,
-  PUTNAM_OUTLINE,
-  ST_JOHNS_RIVER,
-  TOWNS,
-  polyline,
-  project,
+  boundsFromPoints,
+  fitMapView,
+  lngLatToPercent,
+  scaleBarMiles,
+  viewSize,
 } from "@/lib/geo";
 import { useProjectFocus } from "@/lib/project-focus";
 import { STATUS_META } from "@/lib/constants";
 import type { Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Basemap } from "./basemap";
 
-const VW = 720;
-const VH = 520;
+type Mark = {
+  slug: string;
+  name: string;
+  n: number;
+  x: number;
+  y: number;
+  ox: number;
+  oy: number;
+  built: boolean;
+};
+
+function spreadMarks(marks: Mark[], aspect: number, minPct = 7): Mark[] {
+  const out = marks.map((m) => ({ ...m }));
+  for (let i = 0; i < out.length; i += 1) {
+    for (let step = 0; step < 14; step += 1) {
+      let pushed = false;
+      for (let j = 0; j < i; j += 1) {
+        const dx = (out[i].ox - out[j].ox) * aspect;
+        const dy = out[i].oy - out[j].oy;
+        const dist = Math.hypot(dx, dy);
+        if (dist >= minPct || dist === 0) {
+          if (dist === 0) {
+            out[i].oy -= minPct;
+            pushed = true;
+          }
+          continue;
+        }
+        const ang = Math.atan2(dy, dx || 0.001);
+        const need = minPct - dist + 0.35;
+        out[i].ox += (Math.cos(ang) * need) / aspect;
+        out[i].oy += Math.sin(ang) * need;
+        pushed = true;
+      }
+      if (!pushed) break;
+    }
+  }
+  return out;
+}
 
 export function CountyMap({ projects }: { projects: Project[] }) {
   const focus = useProjectFocus();
@@ -26,245 +61,154 @@ export function CountyMap({ projects }: { projects: Project[] }) {
     if (focus) focus.setSlug(slug);
     else setLocal(slug);
   };
-  const located = projects
-    .filter((p) => p.lat != null && p.lng != null)
-    .slice()
-    .sort((a, b) => (a.lng ?? 0) - (b.lng ?? 0));
+  const located = useMemo(
+    () =>
+      projects
+        .filter((p) => p.lat != null && p.lng != null)
+        .slice()
+        .sort((a, b) => (a.lng ?? 0) - (b.lng ?? 0)),
+    [projects],
+  );
 
-  const milesPerPx = ((PUTNAM.north - PUTNAM.south) * 69.0) / VH;
-  const barMiles = 10;
-  const barPx = barMiles / milesPerPx;
-  const land = polyline(PUTNAM_OUTLINE, VW, VH, true);
+  const view = useMemo(() => {
+    const bounds = boundsFromPoints(
+      located.map((p) => ({ lat: p.lat as number, lng: p.lng as number })),
+    );
+    return fitMapView(bounds);
+  }, [located]);
+
+  const size = viewSize(view);
+  const aspect = size.width / size.height;
+  const scale = scaleBarMiles(view);
+  const marks = spreadMarks(
+    located.map((proj, i) => {
+      const p = lngLatToPercent(proj.lng as number, proj.lat as number, view);
+      return {
+        slug: proj.slug,
+        name: proj.name,
+        n: i + 1,
+        x: p.x,
+        y: p.y,
+        ox: p.x,
+        oy: p.y,
+        built: proj.status === "built_out",
+      };
+    }),
+    aspect,
+  );
+
   const isDim = (slug: string) => Boolean(focus?.visible && !focus.visible.has(slug));
 
   return (
-    <div className="overflow-hidden rounded-md bg-card shadow-[var(--shadow-border)]">
+    <div
+      className="overflow-hidden rounded-md bg-card shadow-[var(--shadow-border)]"
+      data-map="locator"
+      aria-label="Map of Palatka and East Palatka with numbered housing sites"
+    >
       <div className="flex flex-wrap items-end justify-between gap-3 border-b border-border px-4 py-3 md:px-5">
         <div className="flex items-start gap-3">
-          <span className="mt-0.5 inline-flex size-9 items-center justify-center rounded-sm bg-accent text-primary" aria-hidden>
+          <span
+            className="mt-0.5 inline-flex size-9 items-center justify-center rounded-sm bg-accent text-primary"
+            aria-hidden
+          >
             <Compass className="size-4" strokeWidth={1.75} />
           </span>
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-              Putnam County locator
+              Palatka & East Palatka locator
             </p>
             <p className="mt-0.5 max-w-xl text-sm text-muted">
-              Numbered sites from public coordinates. County outline from the U.S. Census.
-              Not a survey plat.
+              Numbered sites from public coordinates on an OpenStreetMap basemap. Not a survey plat.
             </p>
           </div>
         </div>
         <p className="font-mono text-xs tabular-nums text-subtle">FL · 12107</p>
       </div>
 
-      <div className="grid lg:grid-cols-[1.5fr_0.8fr]">
-        <div className="bg-secondary/40 px-1 py-1 md:px-2 md:py-2">
-          <svg
-            viewBox={`0 0 ${VW} ${VH}`}
-            className="w-full"
-            role="img"
-            aria-label="Map of Putnam County, Florida with tracked housing sites"
-          >
-            <defs>
-              <clipPath id="putnam-land">
-                <path d={land} />
-              </clipPath>
-            </defs>
-            <rect width={VW} height={VH} className="fill-bg-sunken" />
-
-            {[29.4, 29.5, 29.6, 29.7, 29.8].map((lat) => {
-              const { y } = project(PUTNAM.west, lat, VW, VH);
+      <div className="grid lg:grid-cols-[1.55fr_0.8fr]">
+        <Basemap view={view}>
+          <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+            {marks.map((m) => {
+              if (Math.abs(m.ox - m.x) < 0.2 && Math.abs(m.oy - m.y) < 0.2) return null;
               return (
                 <line
-                  key={lat}
-                  x1={0}
-                  x2={VW}
-                  y1={y}
-                  y2={y}
-                  className="stroke-border"
-                  strokeWidth={0.5}
+                  key={`lead-${m.slug}`}
+                  x1={`${m.x}%`}
+                  y1={`${m.y}%`}
+                  x2={`${m.ox}%`}
+                  y2={`${m.oy}%`}
+                  className="stroke-primary"
+                  strokeWidth={1.25}
                 />
               );
             })}
-
-            <path d={land} className="fill-card stroke-primary" strokeWidth={1.8} />
-
-            <g clipPath="url(#putnam-land)">
-              {(() => {
-                const c = project(-81.515, 29.445, VW, VH);
-                return (
-                  <ellipse
-                    cx={c.x}
-                    cy={c.y}
-                    rx={22}
-                    ry={14}
-                    className="fill-accent stroke-primary/25"
-                    strokeWidth={0.7}
-                  />
-                );
-              })()}
-              <path
-                d={polyline(ST_JOHNS_RIVER, VW, VH)}
-                fill="none"
-                className="stroke-primary"
-                strokeWidth={8}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity={0.2}
+            {marks.map((m) => (
+              <circle
+                key={`dot-${m.slug}`}
+                cx={`${m.x}%`}
+                cy={`${m.y}%`}
+                r={2.4}
+                className="fill-primary"
               />
-              <path
-                d={polyline(ST_JOHNS_RIVER, VW, VH)}
-                fill="none"
-                className="stroke-primary"
-                strokeWidth={2.2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              {HIGHWAYS.map((hw) => (
-                <path
-                  key={hw.name}
-                  d={polyline(hw.pts, VW, VH)}
-                  fill="none"
-                  className="stroke-fg/40"
-                  strokeWidth={1.3}
-                  strokeLinejoin="round"
-                />
-              ))}
-            </g>
-
-            {HIGHWAYS.map((hw) => {
-              const p = project(hw.labelAt[0], hw.labelAt[1], VW, VH);
-              return (
-                <text
-                  key={`${hw.name}-label`}
-                  x={p.x + hw.ldx}
-                  y={p.y + hw.ldy}
-                  className="fill-muted"
-                  fontSize={9}
-                  fontFamily="Source Sans 3, sans-serif"
-                >
-                  {hw.name}
-                </text>
-              );
-            })}
-
-            {(() => {
-              const t = project(-81.71, 29.81, VW, VH);
-              return (
-                <text x={t.x} y={t.y} className="fill-primary" fontSize={10} fontFamily="Source Sans 3, sans-serif">
-                  St. Johns River
-                </text>
-              );
-            })()}
-            {(() => {
-              const t = project(-81.515, 29.445, VW, VH);
-              return (
-                <text
-                  x={t.x}
-                  y={t.y + 18}
-                  textAnchor="middle"
-                  className="fill-primary"
-                  fontSize={8}
-                  fontFamily="Source Sans 3, sans-serif"
-                >
-                  Crescent Lake
-                </text>
-              );
-            })()}
-
-            {TOWNS.map((town) => {
-              const p = project(town.lng, town.lat, VW, VH);
-              return (
-                <g key={town.name}>
-                  <rect
-                    x={p.x - (town.seat ? 3 : 2)}
-                    y={p.y - (town.seat ? 3 : 2)}
-                    width={town.seat ? 6 : 4}
-                    height={town.seat ? 6 : 4}
-                    className="fill-fg"
-                  />
-                  <text
-                    x={p.x + town.dx}
-                    y={p.y + town.dy}
-                    className="fill-fg"
-                    fontSize={town.seat ? 12 : 10}
-                    fontWeight={town.seat ? 600 : 400}
-                    fontFamily="Source Sans 3, sans-serif"
-                  >
-                    {town.name}
-                    {town.seat ? " (seat)" : ""}
-                  </text>
-                </g>
-              );
-            })}
-
-            {located.map((proj, i) => {
-              const p = project(proj.lng as number, proj.lat as number, VW, VH);
-              const n = i + 1;
-              const active = hover === proj.slug;
-              const built = proj.status === "built_out";
-              const dim = isDim(proj.slug) && !active;
-              return (
-                <a
-                  key={proj.slug}
-                  href={`/developments/${proj.slug}`}
-                  onMouseEnter={() => setHover(proj.slug)}
-                  onMouseLeave={() => setHover(null)}
-                  onFocus={() => setHover(proj.slug)}
-                  onBlur={() => setHover(null)}
-                  className="outline-none"
-                >
-                  <title>{proj.name}</title>
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={16}
-                    className="fill-primary transition-opacity duration-150"
-                    opacity={active ? 0.22 : 0}
-                  />
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={active ? 12 : 10}
-                    className={cn(
-                      "transition-[r,opacity] duration-150",
-                      built ? "fill-muted" : "fill-primary",
-                    )}
-                    opacity={dim ? 0.28 : 1}
-                  />
-                  <text
-                    x={p.x}
-                    y={p.y + 4}
-                    textAnchor="middle"
-                    className="fill-primary-fg"
-                    fontSize={11}
-                    fontWeight={600}
-                    fontFamily="Source Sans 3, sans-serif"
-                    opacity={dim ? 0.45 : 1}
-                  >
-                    {n}
-                  </text>
-                </a>
-              );
-            })}
-
-            <g transform={`translate(18 ${VH - 64})`}>
-              <line x1={8} y1={26} x2={8} y2={4} className="stroke-fg" strokeWidth={1.3} />
-              <polygon points="8,0 5.4,8 10.6,8" className="fill-fg" />
-              <text x={8} y={40} textAnchor="middle" className="fill-fg" fontSize={10} fontWeight={600}>
-                N
-              </text>
-            </g>
-            <g transform={`translate(${VW - barPx - 28} ${VH - 28})`}>
-              <line x1={0} y1={0} x2={barPx} y2={0} className="stroke-fg" strokeWidth={1.5} />
-              <line x1={0} y1={-3.5} x2={0} y2={3.5} className="stroke-fg" strokeWidth={1.5} />
-              <line x1={barPx} y1={-3.5} x2={barPx} y2={3.5} className="stroke-fg" strokeWidth={1.5} />
-              <text x={barPx / 2} y={14} textAnchor="middle" className="fill-fg" fontSize={10}>
-                {barMiles} mi
-              </text>
-            </g>
+            ))}
           </svg>
-        </div>
+
+          <div className="pointer-events-none absolute right-3 top-3 z-10 rounded-sm bg-card/90 px-2 py-1.5 shadow-[var(--shadow-border)]">
+            <p className="text-center font-mono text-[10px] font-semibold tracking-[0.2em] text-fg">
+              N
+            </p>
+            <span className="mx-auto mt-0.5 block h-3 w-px bg-fg" />
+          </div>
+          <div
+            className="pointer-events-none absolute bottom-8 left-3 z-10 h-0.5 bg-fg"
+            style={{ width: `${scale.widthPct}%` }}
+          />
+          <div
+            className="pointer-events-none absolute bottom-8 left-3 z-10 h-1.5 w-px bg-fg"
+          />
+          <div
+            className="pointer-events-none absolute bottom-8 z-10 h-1.5 w-px bg-fg"
+            style={{ left: `calc(0.75rem + ${scale.widthPct}%)` }}
+          />
+          <p className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-sm bg-card/95 px-1.5 py-0.5 font-mono text-[10px] tabular-nums text-fg shadow-[var(--shadow-border)]">
+            {scale.miles} mi
+          </p>
+
+          {marks.map((m) => {
+            const active = hover === m.slug;
+            const dim = isDim(m.slug) && !active;
+            return (
+              <Link
+                key={m.slug}
+                to="/developments/$slug"
+                params={{ slug: m.slug }}
+                title={m.name}
+                onMouseEnter={() => setHover(m.slug)}
+                onMouseLeave={() => setHover(null)}
+                onFocus={() => setHover(m.slug)}
+                onBlur={() => setHover(null)}
+                style={{ left: `${m.ox}%`, top: `${m.oy}%` }}
+                className={cn(
+                  "absolute flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center outline-none",
+                  active ? "z-30" : "z-20",
+                )}
+              >
+                <span
+                  className={cn(
+                    "inline-flex size-7 items-center justify-center rounded-full border-2 text-xs font-semibold shadow-sm transition-[transform,background-color,opacity] duration-150",
+                    m.built
+                      ? "border-card bg-muted text-primary-fg"
+                      : "border-card bg-primary text-primary-fg",
+                    active && "scale-110 ring-2 ring-sun",
+                    dim && "opacity-40",
+                  )}
+                >
+                  {m.n}
+                </span>
+              </Link>
+            );
+          })}
+        </Basemap>
 
         <ol className="divide-y divide-border border-t border-border lg:border-l lg:border-t-0">
           {located.map((proj, i) => {
@@ -280,7 +224,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                   onFocus={() => setHover(proj.slug)}
                   onBlur={() => setHover(null)}
                   className={cn(
-                    "flex gap-3 px-4 py-3 transition-colors duration-150",
+                    "flex min-h-11 gap-3 px-4 py-3 transition-colors duration-150",
                     active ? "bg-accent" : "hover:bg-secondary/60",
                     dim && "opacity-40",
                   )}
@@ -311,6 +255,17 @@ export function CountyMap({ projects }: { projects: Project[] }) {
           })}
         </ol>
       </div>
+      <p className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-2 text-[11px] uppercase tracking-[0.12em] text-subtle">
+        <span>Basemap © OpenStreetMap contributors · CARTO</span>
+        <a
+          className="underline underline-offset-2 hover:text-primary"
+          href="https://www.openstreetmap.org/#map=13/29.656/-81.605"
+          target="_blank"
+          rel="noreferrer"
+        >
+          OpenStreetMap
+        </a>
+      </p>
     </div>
   );
 }

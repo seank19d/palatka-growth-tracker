@@ -16,7 +16,6 @@ import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
 import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { Kicker } from "@/components/brand/kicker";
-import { RiverArt } from "@/components/brand/river-art";
 import { RiverDivider } from "@/components/brand/river-divider";
 import { SectionIcon } from "@/components/brand/section-icon";
 import { CountyMap } from "@/components/projects/county-map";
@@ -74,48 +73,45 @@ function Home() {
       />
 
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-10 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:py-14">
-          <div>
-            <Kicker>Palatka · East Palatka · Putnam County</Kicker>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-              What’s being built in Palatka and East Palatka.
-            </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-              Tracked from county files and permits — not builder renderings. Pick a path: homes you
-              can buy now, or pipeline projects that are still a public file.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                {primarySale ? (
-                  <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
-                    <HomeIcon className="size-4" />
-                    Homes for sale now
-                    <ArrowRight className="size-4" />
-                  </Link>
-                ) : (
-                  <a href="#for-sale-now">
-                    <HomeIcon className="size-4" />
-                    Homes for sale now
-                    <ArrowRight className="size-4" />
-                  </a>
-                )}
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#pipeline">
-                  <FileStack className="size-4" />
-                  Pipeline (not selling yet)
+        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+          <Kicker>Palatka · East Palatka · Putnam County</Kicker>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+            What’s being built in Palatka and East Palatka.
+          </h1>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+            Tracked from county files and permits — not builder renderings. Pick a path: homes you
+            can buy now, or pipeline projects that are still a public file.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              {primarySale ? (
+                <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
+                  <HomeIcon className="size-4" />
+                  Homes for sale now
+                  <ArrowRight className="size-4" />
+                </Link>
+              ) : (
+                <a href="#for-sale-now">
+                  <HomeIcon className="size-4" />
+                  Homes for sale now
+                  <ArrowRight className="size-4" />
                 </a>
-              </Button>
-            </div>
-            <p className="mt-4 text-sm text-muted">
-              Moving here?{" "}
-              <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
-                Open the living guide
-              </Link>
-              .
-            </p>
+              )}
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href="#pipeline">
+                <FileStack className="size-4" />
+                Pipeline (not selling yet)
+              </a>
+            </Button>
           </div>
-          <RiverArt />
+          <p className="mt-4 text-sm text-muted">
+            Moving here?{" "}
+            <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
+              Open the living guide
+            </Link>
+            .
+          </p>
         </div>
 
         <div className="mx-auto max-w-6xl px-4 pb-10 md:px-6">

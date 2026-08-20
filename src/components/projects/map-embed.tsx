@@ -1,27 +1,19 @@
-import { cartoTileUrl, latToTile, lngToTile } from "@/lib/geo";
-
-const ZOOM = 14;
-const COLS = 3;
-const ROWS = 3;
+import { fitMapView, lngLatToPercent } from "@/lib/geo";
+import { Basemap } from "./basemap";
 
 export function MapEmbed({ lat, lng, label }: { lat: number; lng: number; label: string }) {
-  const xf = lngToTile(lng, ZOOM);
-  const yf = latToTile(lat, ZOOM);
-  const x0 = Math.floor(xf) - 1;
-  const y0 = Math.floor(yf) - 1;
-  const leftPct = ((xf - x0) / COLS) * 100;
-  const topPct = ((yf - y0) / ROWS) * 100;
+  const view = fitMapView(
+    {
+      west: lng - 0.016,
+      east: lng + 0.016,
+      north: lat + 0.011,
+      south: lat - 0.011,
+    },
+    640,
+  );
+  const pin = lngLatToPercent(lng, lat, view);
   const n = Math.abs(lat).toFixed(5);
   const w = Math.abs(lng).toFixed(5);
-
-  const tiles: Array<{ key: string; src: string }> = [];
-  for (let row = 0; row < ROWS; row += 1) {
-    for (let col = 0; col < COLS; col += 1) {
-      const x = x0 + col;
-      const y = y0 + row;
-      tiles.push({ key: `${x}-${y}`, src: cartoTileUrl(ZOOM, x, y) });
-    }
-  }
 
   return (
     <figure className="overflow-hidden rounded-md bg-card shadow-[var(--shadow-border)]">
@@ -31,21 +23,14 @@ export function MapEmbed({ lat, lng, label }: { lat: number; lng: number; label:
           {n}°N {w}°W
         </p>
       </div>
-      <div className="relative aspect-square overflow-hidden bg-bg-sunken md:aspect-[4/3]">
-        <div className="absolute inset-0 grid grid-cols-3 grid-rows-3">
-          {tiles.map((t) => (
-            <img
-              key={t.key}
-              src={t.src}
-              alt=""
-              className="h-full w-full object-cover"
-              draggable={false}
-            />
-          ))}
-        </div>
+      <Basemap view={view}>
         <div
           className="pointer-events-none absolute z-10"
-          style={{ left: `${leftPct}%`, top: `${topPct}%`, transform: "translate(-50%, -100%)" }}
+          style={{
+            left: `${pin.x}%`,
+            top: `${pin.y}%`,
+            transform: "translate(-50%, -100%)",
+          }}
         >
           <svg width="28" height="36" viewBox="0 0 28 36" aria-hidden>
             <path
@@ -56,7 +41,7 @@ export function MapEmbed({ lat, lng, label }: { lat: number; lng: number; label:
             <circle cx="14" cy="13" r="3.4" className="fill-primary-fg" />
           </svg>
         </div>
-      </div>
+      </Basemap>
       <figcaption className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 text-xs text-muted">
         <span>{label}</span>
         <a
