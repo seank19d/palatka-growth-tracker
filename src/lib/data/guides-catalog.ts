@@ -11,6 +11,12 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sortOrder: 1,
     sections: [
       {
+        callout: {
+          title: "First three calls",
+          body: "(1) Putnam County Property Appraiser for city vs unincorporated status on the parcel. (2) Putnam County School District locator with the street address. (3) Clay Electric (386) 328-1432 or FPL 1-800-226-3545 — look up which serves the house before you schedule a connect.",
+        },
+      },
+      {
         heading: "Eight weeks out",
         paragraphs: [
           "Decide whether you are buying in Palatka city limits, unincorporated East Palatka, or further out in Putnam County. Those three choices change your water, sewer, trash, school assignment, and flood story. A listing photo of “Palatka” is not a legal address.",
@@ -65,6 +71,12 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sortOrder: 2,
     sections: [
       {
+        callout: {
+          title: "Call these numbers",
+          body: "Clay Electric Cooperative — (386) 328-1432 · Outages 1-888-434-9844 · Office 300 N. State Road 19, Palatka. FPL — 1-800-226-3545. Look up the exact street on each site; territory is by line, not by city name.",
+        },
+      },
+      {
         heading: "Electric",
         paragraphs: [
           "Two providers cover Putnam County: Clay Electric Cooperative and Florida Power & Light. Territory is by line, not by city name. East Palatka lots can go either way.",
@@ -112,6 +124,12 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sortOrder: 3,
     sections: [
       {
+        callout: {
+          title: "First-week priority",
+          body: "Run the A/C, put waterproof mattress protectors on every bed, and check closets for condensation before you unpack decor. Humidity wins if you wait.",
+        },
+      },
+      {
         heading: "Climate first, furniture second",
         paragraphs: [
           "Palatka is humid subtropical. Interior moisture, west-facing glass, and afternoon storms will trash unprotected mattresses, cardboard, and particleboard. Deal with air, light, and water before the sectional.",
@@ -147,6 +165,12 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sortOrder: 4,
     sections: [
       {
+        callout: {
+          title: "Verify the assignment",
+          body: "Putnam County School District — putnamschools.org. Call the district with the parcel or street address. Do not use a builder map or a Facebook comment as the assignment.",
+        },
+      },
+      {
         heading: "District",
         paragraphs: [
           "Public schools are Putnam County School District (putnamschools.org). Assignment is by address. East Palatka and Palatka are not always the same cluster; Interlachen and Crescent City are different high-school worlds entirely.",
@@ -181,6 +205,12 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     affiliateCategory: null,
     sortOrder: 5,
     sections: [
+      {
+        callout: {
+          title: "Local hospital",
+          body: "HCA Florida Putnam Hospital — 611 Zeagler Drive, Palatka · (386) 328-5711. About 99 beds. For many everyday emergencies this is the local facility.",
+        },
+      },
       {
         heading: "In Palatka",
         paragraphs: [
