@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
+import { ProjectAnswerBar } from "@/components/projects/answer-bar";
 import { MapEmbed } from "@/components/projects/map-embed";
 import { StatusPipeline } from "@/components/projects/status-pipeline";
 import { Timeline } from "@/components/projects/timeline";
@@ -109,10 +110,26 @@ function ProjectPage() {
       </div>
       <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">{project.name}</h1>
       <p className="mt-2 text-muted">{project.locationLabel}</p>
-      <div className="mt-6">
+
+      <ProjectAnswerBar project={project} />
+
+      <div className="mt-8">
         <StatusPipeline current={project.status} />
         <p className="mt-2 text-sm text-muted">{STATUS_META[project.status].hint}</p>
       </div>
+
+      <section className="mt-10">
+        <h2 className="font-display text-2xl font-semibold">File facts</h2>
+        <p className="mt-1 text-sm text-muted">Numbers from the public file.</p>
+        <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {facts.map((f) => (
+            <div key={f.label} className="bg-card px-4 py-3">
+              <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
+              <dd className="mt-1 text-sm font-medium">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <article>
@@ -128,19 +145,6 @@ function ProjectPage() {
           <MapEmbed lat={project.lat} lng={project.lng} label={project.name} />
         ) : null}
       </div>
-
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-semibold">File facts</h2>
-        <p className="mt-1 text-sm text-muted">Numbers from the public file.</p>
-        <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {facts.map((f) => (
-            <div key={f.label} className="bg-card px-4 py-3">
-              <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
-              <dd className="mt-1 text-sm font-medium">{f.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
 
       <section className="mt-12 grid gap-12 lg:grid-cols-2">
         <div>
