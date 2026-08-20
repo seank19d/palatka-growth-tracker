@@ -83,13 +83,17 @@ function DevelopmentsPage() {
         ))}
       </div>
       <ProjectFocusProvider visibleSlugs={visibleSlugs}>
-        <div className="mt-8">
-          <CountyMap projects={projects} />
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
+        <div className="mt-8 flex flex-col gap-8">
+          <div className="order-1 md:order-2">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
+            </div>
+          </div>
+          <div className="order-2 md:order-1">
+            <CountyMap projects={projects} />
+          </div>
         </div>
       </ProjectFocusProvider>
       {filtered.length === 0 ? (
