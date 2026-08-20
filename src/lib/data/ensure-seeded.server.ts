@@ -273,4 +273,40 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
       ],
     );
   }
+
+  // Refresh known project summaries and official links from the seed catalog.
+  for (const p of SEED_PROJECTS) {
+    await sql.query(
+      `update projects
+       set latest_summary = $2,
+           latest_summary_at = $3,
+           status = $4,
+           official_links = $5,
+           lots_current = $6,
+           lots_rezoning = $7,
+           builder = $8,
+           developer = $9,
+           county_case = $10,
+           ordinance = $11,
+           sjrwmd_file = $12,
+           units_note = $13,
+           updated_at = now()
+       where slug = $1`,
+      [
+        p.slug,
+        p.latestSummary,
+        p.latestSummaryAt,
+        p.status,
+        JSON.stringify(p.officialLinks),
+        p.lotsCurrent,
+        p.lotsRezoning,
+        p.builder,
+        p.developer,
+        p.countyCase,
+        p.ordinance,
+        p.sjrwmdFile,
+        p.unitsNote,
+      ],
+    );
+  }
 }
