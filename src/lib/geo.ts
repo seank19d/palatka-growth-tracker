@@ -46,12 +46,23 @@ export function mercatorPx(lng: number, lat: number, zoom: number): { x: number;
   return { x, y };
 }
 
+export function inPalatkaFrame(lat: number, lng: number, slack = 0.05): boolean {
+  return (
+    lng >= PALATKA_FRAME.west - slack &&
+    lng <= PALATKA_FRAME.east + slack &&
+    lat >= PALATKA_FRAME.south - slack &&
+    lat <= PALATKA_FRAME.north + slack
+  );
+}
+
 export function boundsFromPoints(
   points: Array<{ lat: number; lng: number }>,
   min: GeoBounds = PALATKA_FRAME,
 ): GeoBounds {
+  const near = points.filter((p) => inPalatkaFrame(p.lat, p.lng));
+  const use = near.length > 0 ? near : points;
   let { west, east, north, south } = min;
-  for (const p of points) {
+  for (const p of use) {
     west = Math.min(west, p.lng);
     east = Math.max(east, p.lng);
     north = Math.max(north, p.lat);
@@ -98,6 +109,15 @@ export function lngLatToPercent(lng: number, lat: number, view: MapView): { x: n
   return {
     x: round(((p.x - nw.x) / size.width) * 100),
     y: round(((p.y - nw.y) / size.height) * 100),
+  };
+}
+
+export function clampPercent(p: { x: number; y: number }, pad = 4): { x: number; y: number; off: boolean } {
+  const off = p.x < pad || p.x > 100 - pad || p.y < pad || p.y > 100 - pad;
+  return {
+    x: Math.min(100 - pad, Math.max(pad, p.x)),
+    y: Math.min(100 - pad, Math.max(pad, p.y)),
+    off,
   };
 }
 

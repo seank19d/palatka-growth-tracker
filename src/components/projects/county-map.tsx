@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Compass } from "lucide-react";
 import {
   boundsFromPoints,
+  clampPercent,
   fitMapView,
   lngLatToPercent,
   scaleBarMiles,
@@ -23,6 +24,7 @@ type Mark = {
   ox: number;
   oy: number;
   built: boolean;
+  off: boolean;
 };
 
 function spreadMarks(marks: Mark[], aspect: number, minPct = 7): Mark[] {
@@ -83,15 +85,17 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   const marks = spreadMarks(
     located.map((proj, i) => {
       const p = lngLatToPercent(proj.lng as number, proj.lat as number, view);
+      const clamped = clampPercent(p);
       return {
         slug: proj.slug,
         name: proj.name,
         n: i + 1,
         x: p.x,
         y: p.y,
-        ox: p.x,
-        oy: p.y,
+        ox: clamped.x,
+        oy: clamped.y,
         built: proj.status === "built_out",
+        off: clamped.off,
       };
     }),
     aspect,
@@ -118,7 +122,8 @@ export function CountyMap({ projects }: { projects: Project[] }) {
               Palatka & East Palatka locator
             </p>
             <p className="mt-0.5 max-w-xl text-sm text-muted">
-              Numbered sites from public coordinates on an OpenStreetMap basemap. Not a survey plat.
+              Numbered sites on an OpenStreetMap basemap, zoomed to the Palatka bend. Sites farther
+              west sit on the edge. Not a survey plat.
             </p>
           </div>
         </div>
@@ -129,6 +134,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
         <Basemap view={view}>
           <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
             {marks.map((m) => {
+              if (m.off) return null;
               if (Math.abs(m.ox - m.x) < 0.2 && Math.abs(m.oy - m.y) < 0.2) return null;
               return (
                 <line
@@ -142,15 +148,17 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                 />
               );
             })}
-            {marks.map((m) => (
-              <circle
-                key={`dot-${m.slug}`}
-                cx={`${m.x}%`}
-                cy={`${m.y}%`}
-                r={2.4}
-                className="fill-primary"
-              />
-            ))}
+            {marks.map((m) =>
+              m.off ? null : (
+                <circle
+                  key={`dot-${m.slug}`}
+                  cx={`${m.x}%`}
+                  cy={`${m.y}%`}
+                  r={2.4}
+                  className="fill-primary"
+                />
+              ),
+            )}
           </svg>
 
           <div className="pointer-events-none absolute right-3 top-3 z-10 rounded-sm bg-card/90 px-2 py-1.5 shadow-[var(--shadow-border)]">
@@ -247,6 +255,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                         ? `${proj.lat.toFixed(4)}°N  ${Math.abs(proj.lng).toFixed(4)}°W`
                         : null}{" "}
                       · {STATUS_META[proj.status].label}
+                      {marks[i]?.off ? " · west of this frame" : ""}
                     </span>
                   </span>
                 </Link>
