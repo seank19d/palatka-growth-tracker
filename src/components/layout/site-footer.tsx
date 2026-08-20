@@ -1,11 +1,21 @@
 import { Link } from "@tanstack/react-router";
+import { BookOpen, Info, MapPinned, Newspaper } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
+import { RiverDivider } from "@/components/brand/river-divider";
 import { DISCLOSURE } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
+
+const LINKS = [
+  { to: "/developments" as const, label: "Developments", icon: MapPinned },
+  { to: "/guide" as const, label: "Living guide", icon: BookOpen },
+  { to: "/whats-new" as const, label: "What's new", icon: Newspaper },
+  { to: "/about" as const, label: "Sources & method", icon: Info },
+];
 
 export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
   return (
     <footer className="mt-auto border-t border-border bg-bg-sunken">
+      <RiverDivider className="text-primary/50" />
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
         <div>
           <div className="flex items-center gap-2.5">
@@ -25,35 +35,29 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
         <div className="text-sm">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">Sections</p>
           <ul className="mt-3 space-y-2">
-            <li>
-              <Link to="/developments" className="hover:text-primary">
-                Developments
-              </Link>
-            </li>
-            <li>
-              <Link to="/guide" className="hover:text-primary">
-                Living guide
-              </Link>
-            </li>
-            <li>
-              <Link to="/whats-new" className="hover:text-primary">
-                What's new
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:text-primary">
-                Sources & method
-              </Link>
-            </li>
+            {LINKS.map((item) => (
+              <li key={item.to}>
+                <Link to={item.to} className="inline-flex items-center gap-2 hover:text-primary">
+                  <item.icon className="size-3.5 text-primary" strokeWidth={1.75} />
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="text-sm">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
             Last public update
           </p>
-          <p className="mt-3 text-fg">{formatDateShort(lastUpdated)}</p>
+          <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-fg">
+            {formatDateShort(lastUpdated)}
+          </p>
           <p className="mt-4 text-xs leading-relaxed text-subtle">{DISCLOSURE}</p>
         </div>
+      </div>
+      <div className="flex h-1.5">
+        <div className="w-16 bg-sun" />
+        <div className="flex-1 bg-primary" />
       </div>
     </footer>
   );

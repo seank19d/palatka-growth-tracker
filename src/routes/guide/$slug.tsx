@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { GuideProse } from "@/components/guide/prose";
 import { ProductBlock } from "@/components/guide/product-block";
 import { formatDateShort } from "@/lib/format";
@@ -55,7 +56,10 @@ function GuidePage() {
               className="block rounded-md px-2 py-2 text-muted transition-colors duration-150 hover:bg-secondary hover:text-fg data-[status=active]:bg-accent data-[status=active]:font-medium data-[status=active]:text-fg"
               activeProps={{ className: "block rounded-md bg-accent px-2 py-2 font-medium text-fg" }}
             >
-              {g.navLabel}
+              <span className="flex items-center gap-2">
+                <GuideGlyph slug={g.slug} className="size-4 text-primary" />
+                {g.navLabel}
+              </span>
             </Link>
           ))}
         </nav>
@@ -65,7 +69,10 @@ function GuidePage() {
           ← Living guide
         </Link>
         <p className="mt-6 text-xs font-medium uppercase tracking-[0.16em] text-muted">Living guide</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">{page.title}</h1>
+        <div className="mt-3 flex items-start gap-3">
+          <GuideGlyph slug={page.slug} className="mt-1 size-10 shrink-0 rounded-sm bg-accent p-2" />
+          <h1 className="font-display text-4xl font-semibold md:text-5xl">{page.title}</h1>
+        </div>
         <p className="mt-3 max-w-prose text-lg text-muted">{page.excerpt}</p>
         <p className="mt-2 text-xs text-subtle">
           Last refreshed {formatDateShort(page.lastRefreshedAt)}

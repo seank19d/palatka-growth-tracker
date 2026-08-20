@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { Building2, Eye, GitBranch, LayoutGrid, Sunrise } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
+import { SectionIcon } from "@/components/brand/section-icon";
 import { CountyMap } from "@/components/projects/county-map";
 import { ProjectCard } from "@/components/projects/project-card";
 import { Button } from "@/components/ui/button";
@@ -22,11 +24,11 @@ export const Route = createFileRoute("/developments/")({
 });
 
 const FILTERS = [
-  { id: "all", label: "All" },
-  { id: "pipeline", label: "Pipeline" },
-  { id: "East Palatka", label: "East Palatka" },
-  { id: "Palatka", label: "Palatka" },
-  { id: "watch", label: "Watch list" },
+  { id: "all", label: "All", icon: LayoutGrid },
+  { id: "pipeline", label: "Pipeline", icon: GitBranch },
+  { id: "East Palatka", label: "East Palatka", icon: Sunrise },
+  { id: "Palatka", label: "Palatka", icon: Building2 },
+  { id: "watch", label: "Watch list", icon: Eye },
 ] as const;
 
 function DevelopmentsPage() {
@@ -56,8 +58,13 @@ function DevelopmentsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>Developments</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
+      <div className="flex items-start gap-3">
+        <SectionIcon icon={LayoutGrid} />
+        <div>
+          <Kicker className="mt-0">Developments</Kicker>
+          <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
+        </div>
+      </div>
       <p className="mt-3 max-w-2xl text-muted">
         Every project we currently publish. Pipeline means it is not built-out. Watch-list items are
         reported or unconfirmed. If this page and a sales pitch disagree, use the county PDF.
@@ -77,6 +84,7 @@ function DevelopmentsPage() {
             onClick={() => setFilter(f.id)}
             className="rounded-full"
           >
+            {f.icon ? <f.icon className="size-3.5" strokeWidth={1.75} /> : null}
             {f.label}
             <span className="font-mono text-xs tabular-nums opacity-70">{counts[f.id]}</span>
           </Button>

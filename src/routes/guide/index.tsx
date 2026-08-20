@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { BookOpen, FileStack } from "lucide-react";
+import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { Kicker } from "@/components/brand/kicker";
+import { SectionIcon } from "@/components/brand/section-icon";
 import { StatusBadge } from "@/components/projects/status-badge";
 import { fetchGuideHub } from "@/lib/data/api";
 import { seo } from "@/lib/seo";
@@ -20,8 +23,11 @@ function GuideHub() {
   const { guides, pipeline } = Route.useLoaderData();
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>Moving here</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
+      <div className="flex items-center gap-3">
+        <SectionIcon icon={BookOpen} tone="sun" />
+        <Kicker className="mt-0">Moving here</Kicker>
+      </div>
+      <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">
         A practical guide to Palatka & East Palatka
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
@@ -30,7 +36,10 @@ function GuideHub() {
       </p>
 
       <section className="mt-10">
-        <h2 className="font-display text-2xl font-semibold">Current pipeline communities</h2>
+        <div className="flex items-center gap-2">
+          <SectionIcon icon={FileStack} tone="river" size="sm" />
+          <h2 className="font-display text-2xl font-semibold">Current pipeline communities</h2>
+        </div>
         <ul className="mt-4 divide-y divide-border border border-border">
           {pipeline.map((p) => (
             <li key={p.slug}>
@@ -58,8 +67,22 @@ function GuideHub() {
             params={{ slug: g.slug }}
             className="bg-card p-5 hover:bg-secondary/50"
           >
-            <p className="font-mono text-xs tabular-nums text-subtle">{String(i + 1).padStart(2, "0")}</p>
-            <h2 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h2>
+            <div className="flex items-center justify-between gap-3">
+              <GuideGlyph
+                slug={g.slug}
+                className={
+                  i % 3 === 0
+                    ? "size-11 rounded-sm bg-accent p-2.5"
+                    : i % 3 === 1
+                      ? "size-11 rounded-sm bg-sun/25 p-2.5 text-sun-fg"
+                      : "size-11 rounded-sm bg-moss/15 p-2.5 text-moss"
+                }
+              />
+              <p className="font-mono text-xs tabular-nums text-subtle">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+            </div>
+            <h2 className="mt-4 font-display text-xl font-semibold">{g.navLabel}</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
           </Link>
         ))}

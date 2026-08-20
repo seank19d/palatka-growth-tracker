@@ -1,4 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import {
+  Briefcase,
+  Building2,
+  FileText,
+  LandPlot,
+  LayoutGrid,
+  MapPin,
+  Store,
+  Waves,
+} from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
 import { MapEmbed } from "@/components/projects/map-embed";
@@ -57,20 +67,21 @@ function ProjectPage() {
   const { project, milestones, updates } = Route.useLoaderData();
   const faqs = PROJECT_FAQS[project.slug] ?? [];
   const facts = [
-    { label: "Area", value: project.area },
-    { label: "Location", value: project.locationLabel },
-    { label: "Acres", value: project.acres != null ? formatNumber(project.acres) : "—" },
-    { label: "Lots (best known)", value: formatNumber(project.lotsCurrent) },
-    { label: "Lots at rezoning", value: formatNumber(project.lotsRezoning) },
+    { label: "Area", value: project.area, icon: MapPin },
+    { label: "Location", value: project.locationLabel, icon: MapPin },
+    { label: "Acres", value: project.acres != null ? formatNumber(project.acres) : "—", icon: LandPlot },
+    { label: "Lots (best known)", value: formatNumber(project.lotsCurrent), icon: LayoutGrid },
+    { label: "Lots at rezoning", value: formatNumber(project.lotsRezoning), icon: LandPlot },
     {
       label: "Commercial sq ft",
       value: project.commercialSqft ? formatNumber(project.commercialSqft) : "—",
+      icon: Store,
     },
-    { label: "Builder / agent", value: project.builder ?? "—" },
-    { label: "Applicant / developer", value: project.developer ?? "—" },
-    { label: "County case", value: project.countyCase ?? "—" },
-    { label: "Ordinance", value: project.ordinance ?? "—" },
-    { label: "SJRWMD file", value: project.sjrwmdFile ?? "—" },
+    { label: "Builder / agent", value: project.builder ?? "—", icon: Building2 },
+    { label: "Applicant / developer", value: project.developer ?? "—", icon: Briefcase },
+    { label: "County case", value: project.countyCase ?? "—", icon: FileText },
+    { label: "Ordinance", value: project.ordinance ?? "—", icon: FileText },
+    { label: "SJRWMD file", value: project.sjrwmdFile ?? "—", icon: Waves },
   ];
 
   return (
@@ -110,7 +121,10 @@ function ProjectPage() {
         <ConfidenceBadge confidence={project.confidence} />
       </div>
       <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">{project.name}</h1>
-      <p className="mt-2 text-muted">{project.locationLabel}</p>
+      <p className="mt-2 inline-flex items-center gap-1.5 text-muted">
+        <MapPin className="size-4 text-primary" strokeWidth={1.75} />
+        {project.locationLabel}
+      </p>
 
       <ProjectAnswerBar project={project} />
 
@@ -125,7 +139,10 @@ function ProjectPage() {
         <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">
-              <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
+              <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-subtle">
+                <f.icon className="size-3.5 text-primary" strokeWidth={1.75} />
+                {f.label}
+              </dt>
               <dd className="mt-1 text-sm font-medium">{f.value}</dd>
             </div>
           ))}

@@ -26,8 +26,8 @@ const GLYPHS = {
 export function GuideGlyph({ slug, className }: { slug: string; className?: string }) {
   const Icon = GLYPHS[slug as keyof typeof GLYPHS] ?? Home;
   return (
-    <span className={cn("inline-flex text-primary", className)} aria-hidden>
-      <Icon className="size-5" strokeWidth={1.6} />
+    <span className={cn("inline-flex size-5 text-primary", className)} aria-hidden>
+      <Icon className="size-full" strokeWidth={1.6} />
     </span>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { Compass } from "lucide-react";
 import {
   HIGHWAYS,
   PUTNAM,
@@ -39,14 +40,19 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   return (
     <div className="overflow-hidden rounded-md bg-card shadow-[var(--shadow-border)]">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b border-border px-4 py-3 md:px-5">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-            Putnam County locator
-          </p>
-          <p className="mt-0.5 max-w-xl text-sm text-muted">
-            Numbered sites from public coordinates. County outline from the U.S. Census.
-            Not a survey plat.
-          </p>
+        <div className="flex items-start gap-3">
+          <span className="mt-0.5 inline-flex size-9 items-center justify-center rounded-sm bg-accent text-primary" aria-hidden>
+            <Compass className="size-4" strokeWidth={1.75} />
+          </span>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
+              Putnam County locator
+            </p>
+            <p className="mt-0.5 max-w-xl text-sm text-muted">
+              Numbered sites from public coordinates. County outline from the U.S. Census.
+              Not a survey plat.
+            </p>
+          </div>
         </div>
         <p className="font-mono text-xs tabular-nums text-subtle">FL · 12107</p>
       </div>

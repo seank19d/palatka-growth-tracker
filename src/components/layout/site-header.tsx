@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { BookOpen, CircleHelp, Info, MapPinned, Menu, Newspaper, X } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
+import { Masthead } from "@/components/brand/masthead";
 import { SignedIn, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { to: "/developments", label: "Developments" },
-  { to: "/guide", label: "Living guide" },
-  { to: "/whats-new", label: "What's new" },
-  { to: "/faq", label: "FAQ" },
-  { to: "/about", label: "About" },
+  { to: "/developments", label: "Developments", icon: MapPinned },
+  { to: "/guide", label: "Living guide", icon: BookOpen },
+  { to: "/whats-new", label: "What's new", icon: Newspaper },
+  { to: "/faq", label: "FAQ", icon: CircleHelp },
+  { to: "/about", label: "About", icon: Info },
 ] as const;
 
 const navClass =
-  "relative pb-0.5 text-sm text-muted transition-colors duration-150 hover:text-fg after:absolute after:inset-x-0 after:-bottom-3.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:ease-out data-[status=active]:font-medium data-[status=active]:text-fg data-[status=active]:after:scale-x-100";
+  "relative inline-flex items-center gap-1.5 pb-0.5 text-sm text-muted transition-colors duration-150 hover:text-fg after:absolute after:inset-x-0 after:-bottom-3.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:ease-out data-[status=active]:font-medium data-[status=active]:text-fg data-[status=active]:after:scale-x-100";
 
 function AuthSlot() {
   const { user, isPending } = useCurrentUserState();
@@ -39,6 +40,10 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="border-b border-border bg-bg">
+      <div className="flex h-1.5">
+        <div className="flex-1 bg-primary" />
+        <div className="w-12 bg-sun sm:w-20" />
+      </div>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-2.5" onClick={() => setOpen(false)}>
           <BrandMark className="size-8" title="Palatka Homes Report" />
@@ -51,9 +56,10 @@ export function SiteHeader() {
             </span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {NAV.map((item) => (
             <Link key={item.to} to={item.to} className={navClass}>
+              <item.icon className="size-3.5 opacity-70" strokeWidth={1.75} />
               {item.label}
             </Link>
           ))}
@@ -92,9 +98,10 @@ export function SiteHeader() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="flex min-h-11 items-center text-base text-muted transition-colors duration-150 data-[status=active]:font-medium data-[status=active]:text-fg"
+                className="flex min-h-11 items-center gap-2 text-base text-muted transition-colors duration-150 data-[status=active]:font-medium data-[status=active]:text-fg"
                 onClick={() => setOpen(false)}
               >
+                <item.icon className="size-4" strokeWidth={1.75} />
                 {item.label}
               </Link>
             ))}
@@ -104,6 +111,7 @@ export function SiteHeader() {
           </div>
         </nav>
       </div>
+      <Masthead />
     </header>
   );
 }

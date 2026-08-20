@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Building2, Droplets, Landmark, LineChart, Newspaper } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
+import { SectionIcon } from "@/components/brand/section-icon";
 import { DISCLOSURE } from "@/lib/constants";
 import { seo } from "@/lib/seo";
 
@@ -14,11 +16,37 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
+const SOURCES = [
+  {
+    icon: Landmark,
+    text: "Putnam County planning, zoning, and Board of County Commissioners materials",
+  },
+  {
+    icon: Droplets,
+    text: "St. Johns River Water Management District permit files",
+  },
+  {
+    icon: Building2,
+    text: "City of Palatka notices when they affect housing",
+  },
+  {
+    icon: Newspaper,
+    text: "Local news RSS and public web pages, fetched on a schedule",
+  },
+  {
+    icon: LineChart,
+    text: "Published market dashboards for the cost-of-living snapshot (always labeled as a band)",
+  },
+];
+
 function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>Method</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">About this report</h1>
+      <div className="flex items-center gap-3">
+        <SectionIcon icon={Landmark} tone="river" />
+        <Kicker className="mt-0">Method</Kicker>
+      </div>
+      <h1 className="mt-3 font-display text-4xl font-semibold">About this report</h1>
       <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
         <p>
           Palatka Homes Report is an independent public website. It is not Putnam County, the City
@@ -31,12 +59,13 @@ function AboutPage() {
           for people moving to Putnam County that is not a listing brochure.
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">Where the facts come from</h2>
-        <ul className="list-disc space-y-2 pl-5">
-          <li>Putnam County planning, zoning, and Board of County Commissioners materials</li>
-          <li>St. Johns River Water Management District permit files</li>
-          <li>City of Palatka notices when they affect housing</li>
-          <li>Local news RSS and public web pages, fetched on a schedule</li>
-          <li>Published market dashboards for the cost-of-living snapshot (always labeled as a band)</li>
+        <ul className="mt-4 space-y-3">
+          {SOURCES.map((s) => (
+            <li key={s.text} className="flex items-start gap-3">
+              <SectionIcon icon={s.icon} tone="paper" size="sm" className="mt-0.5" />
+              <span>{s.text}</span>
+            </li>
+          ))}
         </ul>
         <p>
           Each project carries a confidence mark: <strong>public record</strong> (tied to a case or

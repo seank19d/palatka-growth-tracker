@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Newspaper } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
+import { SectionIcon } from "@/components/brand/section-icon";
 import { formatDateShort } from "@/lib/format";
 import { fetchUpdates } from "@/lib/data/api";
 import { seo } from "@/lib/seo";
@@ -20,8 +22,11 @@ function WhatsNew() {
   const updates = Route.useLoaderData();
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
-      <Kicker>Updates</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">What’s new</h1>
+      <div className="flex items-center gap-3">
+        <SectionIcon icon={Newspaper} tone="paper" />
+        <Kicker className="mt-0">Updates</Kicker>
+      </div>
+      <h1 className="mt-3 font-display text-4xl font-semibold">What’s new</h1>
       <p className="mt-3 text-muted">
         Short entries when a status changes, a document lands, or a source item is worth keeping.
         Older summaries stay on each project page.

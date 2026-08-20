@@ -75,7 +75,12 @@
 
   body {
     min-height: 100dvh;
-    background: var(--color-bg);
+    background-color: var(--color-bg);
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--color-fg) 7%, transparent) 0.8px,
+      transparent 0.9px
+    );
+    background-size: 18px 18px;
     color: var(--color-fg);
     font-family: var(--font-sans);
     line-height: 1.5;
@@ -117,9 +122,25 @@
   font-family: var(--font-display);
 }
 
+.river-stroke {
+  stroke-dasharray: 12 6;
+  animation: river-flow 18s linear infinite;
+}
 
+@keyframes river-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -180;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
+  .river-stroke {
+    animation: none;
+  }
+
   *,
   *::before,
   *::after {

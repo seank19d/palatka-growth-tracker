@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { LandPlot, MapPin, Ruler } from "lucide-react";
 import { formatNumber } from "@/lib/format";
 import { useProjectFocus } from "@/lib/project-focus";
 import type { Project } from "@/lib/types";
@@ -8,6 +9,8 @@ import { ConfidenceBadge, StatusBadge } from "./status-badge";
 export function ProjectCard({ project }: { project: Project }) {
   const focus = useProjectFocus();
   const active = focus?.slug === project.slug;
+  const selling = project.status === "selling";
+  const built = project.status === "built_out";
   return (
     <Link
       to="/developments/$slug"
@@ -20,10 +23,17 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       <article
         className={cn(
-          "flex h-full flex-col border bg-card p-5 transition-[border-color,background-color,transform] duration-150 ease-out",
+          "relative flex h-full flex-col overflow-hidden border bg-card p-5 pl-6 transition-[border-color,background-color,transform] duration-150 ease-out",
           active ? "border-primary bg-accent/50" : "border-border group-hover:border-primary/40",
         )}
       >
+        <span
+          className={cn(
+            "absolute inset-y-0 left-0 w-1.5",
+            selling ? "bg-sun" : built ? "bg-subtle" : "bg-primary",
+          )}
+          aria-hidden
+        />
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="font-mono text-xs tabular-nums text-subtle">
             {project.countyCase ?? project.area}
@@ -41,17 +51,26 @@ export function ProjectCard({ project }: { project: Project }) {
         >
           {project.name}
         </h3>
-        <p className="mt-1 text-sm text-muted">{project.locationLabel}</p>
+        <p className="mt-1 inline-flex items-center gap-1 text-sm text-muted">
+          <MapPin className="size-3.5 shrink-0 text-primary" strokeWidth={1.75} />
+          {project.locationLabel}
+        </p>
         <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-muted">
           {project.latestSummary}
         </p>
         <dl className="mt-4 grid grid-cols-2 gap-3 border-t border-border pt-3 text-sm">
           <div>
-            <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Lots</dt>
+            <dt className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.12em] text-subtle">
+              <LandPlot className="size-3" strokeWidth={1.75} />
+              Lots
+            </dt>
             <dd className="mt-0.5 font-medium tabular-nums">{formatNumber(project.lotsCurrent)}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Acres</dt>
+            <dt className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.12em] text-subtle">
+              <Ruler className="size-3" strokeWidth={1.75} />
+              Acres
+            </dt>
             <dd className="mt-0.5 font-medium tabular-nums">{formatNumber(project.acres)}</dd>
           </div>
         </dl>

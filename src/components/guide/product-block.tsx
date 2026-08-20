@@ -1,3 +1,4 @@
+import { ShoppingBag } from "lucide-react";
 import { DISCLOSURE } from "@/lib/constants";
 import type { AffiliateProduct } from "@/lib/types";
 
@@ -11,7 +12,10 @@ export function ProductBlock({
   if (!products.length) return null;
   return (
     <aside className="border border-border bg-card p-5 md:p-6">
-      <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">{heading}</p>
+      <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-muted">
+        <ShoppingBag className="size-3.5 text-primary" strokeWidth={1.75} />
+        {heading}
+      </p>
       <ul className="mt-4 divide-y divide-border border-t border-border">
         {products.map((p) => (
           <li key={p.id}>

@@ -1,9 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  CircleHelp,
+  FileStack,
+  GitBranch,
+  Grid2x2,
+  Home as HomeIcon,
+  MapPinned,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
+import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { Kicker } from "@/components/brand/kicker";
+import { RiverArt } from "@/components/brand/river-art";
+import { RiverDivider } from "@/components/brand/river-divider";
+import { SectionIcon } from "@/components/brand/section-icon";
 import { CountyMap } from "@/components/projects/county-map";
 import { ProjectCard } from "@/components/projects/project-card";
 import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
@@ -59,55 +74,71 @@ function Home() {
       />
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-          <Kicker>Palatka · East Palatka · Putnam County</Kicker>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            What’s being built in Palatka and East Palatka.
-          </h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            Tracked from county files and permits — not builder renderings. Pick a path: homes you can
-            buy now, or pipeline projects that are still a public file.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              {primarySale ? (
-                <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
-                  Homes for sale now
-                  <ArrowRight className="size-4" />
-                </Link>
-              ) : (
-                <a href="#for-sale-now">
-                  Homes for sale now
-                  <ArrowRight className="size-4" />
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-10 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:py-14">
+          <div>
+            <Kicker>Palatka · East Palatka · Putnam County</Kicker>
+            <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+              What’s being built in Palatka and East Palatka.
+            </h1>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+              Tracked from county files and permits — not builder renderings. Pick a path: homes you
+              can buy now, or pipeline projects that are still a public file.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                {primarySale ? (
+                  <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
+                    <HomeIcon className="size-4" />
+                    Homes for sale now
+                    <ArrowRight className="size-4" />
+                  </Link>
+                ) : (
+                  <a href="#for-sale-now">
+                    <HomeIcon className="size-4" />
+                    Homes for sale now
+                    <ArrowRight className="size-4" />
+                  </a>
+                )}
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a href="#pipeline">
+                  <FileStack className="size-4" />
+                  Pipeline (not selling yet)
                 </a>
-              )}
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href="#pipeline">Pipeline (not selling yet)</a>
-            </Button>
+              </Button>
+            </div>
+            <p className="mt-4 text-sm text-muted">
+              Moving here?{" "}
+              <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
+                Open the living guide
+              </Link>
+              .
+            </p>
           </div>
-          <p className="mt-4 text-sm text-muted">
-            Moving here?{" "}
-            <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
-              Open the living guide
-            </Link>
-            .
-          </p>
+          <RiverArt />
+        </div>
 
-          <dl className="mt-10 grid grid-cols-3 gap-3 border-t border-border pt-8">
+        <div className="mx-auto max-w-6xl px-4 pb-10 md:px-6">
+          <dl className="grid grid-cols-3 gap-3 border-t border-border pt-8">
             <Stat
+              icon={MapPinned}
+              tone="river"
               label="Projects tracked"
               shortLabel="Projects"
               value={String(stats.projectCount)}
               hint="Published files"
             />
             <Stat
+              icon={GitBranch}
+              tone="paper"
               label="In the pipeline"
               shortLabel="Pipeline"
               value={String(stats.pipelineCount)}
               hint="Not built-out"
             />
             <Stat
+              icon={Grid2x2}
+              tone="sun"
               label="Lots in known plans"
               shortLabel="Lots"
               value={formatNumber(stats.lotsPipeline)}
@@ -159,10 +190,12 @@ function Home() {
       </section>
 
       <aside className="border-b border-border bg-primary text-primary-fg">
-        <div className="mx-auto max-w-6xl px-4 py-3.5 md:px-6">
+        <RiverDivider className="text-primary-fg/40" />
+        <div className="mx-auto flex max-w-6xl items-start gap-3 px-4 py-4 md:px-6">
+          <SectionIcon icon={MapPinned} tone="sun" size="sm" className="mt-0.5" />
           <p className="max-w-4xl text-sm leading-relaxed">
-            East Palatka sits on the SR 207 side of the St. Johns — high ground first, which is why flood
-            maps and{" "}
+            East Palatka sits on the SR 207 side of the St. Johns — high ground first, which is why
+            flood maps and{" "}
             <Link
               to="/guide/$slug"
               params={{ slug: "local-tips" }}
@@ -181,8 +214,9 @@ function Home() {
             <Kicker>Developments</Kicker>
             <h2 className="mt-2 font-display text-3xl font-semibold">Other projects on file</h2>
           </div>
-          <Link to="/developments" className="hidden text-sm text-primary md:inline">
+          <Link to="/developments" className="hidden items-center gap-1 text-sm text-primary md:inline-flex">
             All developments
+            <ArrowRight className="size-3.5" />
           </Link>
         </div>
         <ProjectFocusProvider>
@@ -213,8 +247,9 @@ function Home() {
               </li>
             ))}
           </ol>
-          <Link to="/whats-new" className="mt-4 inline-flex text-sm text-primary">
+          <Link to="/whats-new" className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
             Full log
+            <ArrowRight className="size-3.5" />
           </Link>
         </Card>
       </section>
@@ -223,40 +258,49 @@ function Home() {
         <section className="border-y border-border bg-bg-sunken">
           <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
             <Kicker>Housing snapshot · {formatDateShort(market.capturedOn)}</Kicker>
-            <h2 className="mt-3 font-display text-3xl font-semibold">
-              Putnam County housing prices
-            </h2>
+            <h2 className="mt-3 font-display text-3xl font-semibold">Putnam County housing prices</h2>
             <dl className="mt-8 grid grid-cols-3 gap-4">
               <div>
-                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">Low typical</dt>
+                <dt className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-subtle">
+                  <TrendingDown className="size-3.5 text-primary" strokeWidth={1.75} />
+                  Low typical
+                </dt>
                 <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
                   {formatMoney(market.medianSaleLow)}
                 </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">High typical</dt>
+                <dt className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-subtle">
+                  <TrendingUp className="size-3.5 text-sun-fg" strokeWidth={1.75} />
+                  High typical
+                </dt>
                 <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
                   {formatMoney(market.medianSaleHigh)}
                 </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-[0.14em] text-subtle">Days on market</dt>
+                <dt className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-subtle">
+                  <CalendarDays className="size-3.5 text-primary" strokeWidth={1.75} />
+                  Days on market
+                </dt>
                 <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">
                   {formatNumber(market.daysOnMarket)}
                 </dd>
               </div>
             </dl>
-            <div className="mt-6 h-1.5 bg-secondary">
-              <div className="h-full w-full bg-primary/70" />
+            <div className="mt-6 flex h-1.5">
+              <div className="w-2/3 bg-primary" />
+              <div className="w-1/3 bg-sun" />
             </div>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{market.medianNote}</p>
             <p className="mt-3 text-xs text-subtle">{market.sourceNote}</p>
             <Link
               to="/guide/$slug"
               params={{ slug: "cost-of-living" }}
-              className="mt-4 inline-flex text-sm text-primary"
+              className="mt-4 inline-flex items-center gap-1 text-sm text-primary"
             >
               Cost of living notes
+              <ArrowRight className="size-3.5" />
             </Link>
           </div>
         </section>
@@ -276,10 +320,20 @@ function Home() {
               params={{ slug: g.slug }}
               className="bg-card p-5 transition-colors hover:bg-secondary/50"
             >
-              <p className="font-mono text-xs tabular-nums text-subtle">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-3 font-display text-xl font-semibold">{g.navLabel}</h3>
+              <div className="flex items-center justify-between gap-3">
+                <GuideGlyph
+                  slug={g.slug}
+                  className={
+                    i % 2 === 0
+                      ? "size-11 rounded-sm bg-accent p-2.5"
+                      : "size-11 rounded-sm bg-sun/25 p-2.5 text-sun-fg"
+                  }
+                />
+                <p className="font-mono text-xs tabular-nums text-subtle">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+              </div>
+              <h3 className="mt-4 font-display text-xl font-semibold">{g.navLabel}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
             </Link>
           ))}
@@ -291,7 +345,10 @@ function Home() {
 
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-          <Kicker>FAQ</Kicker>
+          <div className="flex items-center gap-3">
+            <SectionIcon icon={CircleHelp} tone="paper" size="sm" />
+            <Kicker className="mt-0">FAQ</Kicker>
+          </div>
           <h2 className="mt-2 font-display text-3xl font-semibold">Common questions</h2>
           <dl className="mt-6 grid gap-6 md:grid-cols-2">
             {faqs.map((f, i) => (
@@ -306,8 +363,9 @@ function Home() {
               </div>
             ))}
           </dl>
-          <Link to="/faq" className="mt-6 inline-flex text-sm text-primary">
+          <Link to="/faq" className="mt-6 inline-flex items-center gap-1 text-sm text-primary">
             All FAQs
+            <ArrowRight className="size-3.5" />
           </Link>
         </div>
       </section>
@@ -338,11 +396,25 @@ function NowLaterCard({
     <div
       className={
         emphasis === "selling"
-          ? "border border-primary/25 bg-accent/40 p-5 md:p-6"
-          : "border border-border bg-card p-5 md:p-6"
+          ? "relative overflow-hidden border border-primary/25 bg-accent/40 p-5 md:p-6"
+          : "relative overflow-hidden border border-border bg-card p-5 md:p-6"
       }
     >
-      <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
+      <span
+        className={
+          emphasis === "selling"
+            ? "absolute inset-y-0 left-0 w-1.5 bg-sun"
+            : "absolute inset-y-0 left-0 w-1.5 bg-primary"
+        }
+        aria-hidden
+      />
+      <div className="flex items-center gap-2 pl-1">
+        <SectionIcon
+          icon={emphasis === "selling" ? HomeIcon : FileStack}
+          tone={emphasis === "selling" ? "sun" : "river"}
+        />
+        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
+      </div>
       <ul className="mt-4 space-y-5">
         {projects.map((p) => (
           <li key={p.slug}>
@@ -379,23 +451,28 @@ function NowLaterCard({
 }
 
 function Stat({
+  icon: Icon,
   label,
   value,
   hint,
   shortLabel,
+  tone,
 }: {
+  icon: typeof MapPinned;
   label: string;
   value: string;
   hint: string;
   shortLabel: string;
+  tone: "river" | "sun" | "paper";
 }) {
   return (
     <div className="rounded-xl bg-card px-3 py-4 shadow-[var(--shadow-border)] md:px-5">
-      <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">
+      <dt className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-subtle">
+        <SectionIcon icon={Icon} tone={tone} size="sm" className="hidden sm:inline-flex" />
         <span className="sm:hidden">{shortLabel}</span>
         <span className="hidden sm:inline">{label}</span>
       </dt>
-      <dd className="mt-1 font-display text-2xl font-semibold tabular-nums md:text-4xl">{value}</dd>
+      <dd className="mt-2 font-display text-2xl font-semibold tabular-nums md:text-4xl">{value}</dd>
       <p className="mt-1 hidden text-xs text-subtle sm:block">{hint}</p>
     </div>
   );
