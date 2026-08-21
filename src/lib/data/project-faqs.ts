@@ -8,7 +8,7 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
     {
       question: "When will Alford Farms homes be available in East Palatka?",
       answer:
-        "There is no confirmed public sales date in the records this site reviews. Through early 2026 the live steps were engineering and St. Johns River Water Management District permitting (file 224892-1). Treat any builder website as marketing until a plat is recorded and a sales office is actually taking contracts.",
+        "No public sales date is in the file. Through early 2026 the live steps were engineering and St. Johns River Water Management District permitting (file 224892-1). Until a plat is recorded, a Horton page is advertising, not inventory.",
     },
     {
       question: "How many homes will be built at Alford Farms?",
@@ -47,7 +47,7 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
     {
       question: "Is D.R. Horton building on East River Road?",
       answer:
-        "Local reports have described a roughly 189-home Horton plan near Putnam County Blvd and East River Road. This tracker has not attached an ordinance number yet. Treat it as reported until a county case is in the file.",
+        "Local reports have described a roughly 189-home Horton plan near Putnam County Blvd and East River Road. No ordinance number is attached yet. Status stays reported until a county case is in the file.",
     },
   ],
 };

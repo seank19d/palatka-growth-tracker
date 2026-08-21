@@ -58,6 +58,7 @@ export const AREAS = ["East Palatka", "Palatka", "Putnam County"] as const;
 export const DISCLOSURE =
   "Some links on this site are affiliate links, including Amazon Associates. If you buy through them, we may earn a commission at no extra cost to you. We are not a real-estate brokerage, not affiliated with Putnam County, and not a builder. Always verify status with county records and licensed professionals.";
 
+/** Dirt still moving through a county file — not open sales, not built-out. */
 export const PIPELINE_STATUSES: ProjectStatus[] = [
   "concept",
   "rezoning",
@@ -65,5 +66,11 @@ export const PIPELINE_STATUSES: ProjectStatus[] = [
   "permitting",
   "plat_recorded",
   "under_construction",
-  "selling",
 ];
+
+/** Existing neighborhoods and catch-alls — not new-construction inventory. */
+export const EXISTING_MARKET_SLUGS = new Set([
+  "interlachen-lakes",
+  "american-gardens",
+  "palatka-riverfront-infill",
+]);

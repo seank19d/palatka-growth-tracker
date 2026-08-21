@@ -10,7 +10,7 @@ import type { GuideSection } from "@/lib/types";
 const SCHOOLS_CALLOUT: GuideSection = {
   callout: {
     title: "Do not trust marketing maps",
-    body: "A planned unit development (PUD) is the county’s name for a master-planned neighborhood on rezoned land — Alford Farms is one. It will eventually get a school assignment. Until Putnam County School District says so in writing, assume nothing. Call the district with the parcel number.",
+    body: "A new PUD will eventually get a school assignment. Until Putnam County School District says so in writing, assume nothing. Call the district with the parcel number.",
   },
 };
 

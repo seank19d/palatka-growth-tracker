@@ -1,14 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import {
-  Briefcase,
-  Building2,
-  FileText,
-  LandPlot,
-  LayoutGrid,
-  MapPin,
-  Store,
-  Waves,
-} from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
 import { MapEmbed } from "@/components/projects/map-embed";
@@ -67,22 +58,21 @@ function ProjectPage() {
   const { project, milestones, updates } = Route.useLoaderData();
   const faqs = PROJECT_FAQS[project.slug] ?? [];
   const facts = [
-    { label: "Area", value: project.area, icon: MapPin },
-    { label: "Location", value: project.locationLabel, icon: MapPin },
-    { label: "Acres", value: project.acres != null ? formatNumber(project.acres) : "—", icon: LandPlot },
-    { label: "Lots (best known)", value: formatNumber(project.lotsCurrent), icon: LayoutGrid },
-    { label: "Lots at rezoning", value: formatNumber(project.lotsRezoning), icon: LandPlot },
+    { label: "Area", value: project.area },
+    { label: "Location", value: project.locationLabel },
+    { label: "Acres", value: project.acres != null ? formatNumber(project.acres) : null },
+    { label: "Lots (best known)", value: project.lotsCurrent != null ? formatNumber(project.lotsCurrent) : null },
+    { label: "Lots at rezoning", value: project.lotsRezoning != null ? formatNumber(project.lotsRezoning) : null },
     {
       label: "Commercial sq ft",
-      value: project.commercialSqft ? formatNumber(project.commercialSqft) : "—",
-      icon: Store,
+      value: project.commercialSqft ? formatNumber(project.commercialSqft) : null,
     },
-    { label: "Builder / agent", value: project.builder ?? "—", icon: Building2 },
-    { label: "Applicant / developer", value: project.developer ?? "—", icon: Briefcase },
-    { label: "County case", value: project.countyCase ?? "—", icon: FileText },
-    { label: "Ordinance", value: project.ordinance ?? "—", icon: FileText },
-    { label: "SJRWMD file", value: project.sjrwmdFile ?? "—", icon: Waves },
-  ];
+    { label: "Builder / agent", value: project.builder },
+    { label: "Applicant / developer", value: project.developer },
+    { label: "County case", value: project.countyCase },
+    { label: "Ordinance", value: project.ordinance },
+    { label: "SJRWMD file", value: project.sjrwmdFile },
+  ].filter((f) => f.value);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
@@ -139,10 +129,7 @@ function ProjectPage() {
         <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">
-              <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-subtle">
-                <f.icon className="size-3.5 text-primary" strokeWidth={1.75} />
-                {f.label}
-              </dt>
+              <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
               <dd className="mt-1 text-sm font-medium">{f.value}</dd>
             </div>
           ))}

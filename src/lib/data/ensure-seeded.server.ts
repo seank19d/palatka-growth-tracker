@@ -156,7 +156,7 @@ async function seed(): Promise<void> {
 
   await sql.query(`insert into site_settings (key, value) values ($1,$2)`, [
     "last_public_update",
-    "2026-08-01T12:00:00.000Z",
+    "2026-08-20T12:00:00.000Z",
   ]);
 
   await sql.query(
@@ -167,7 +167,7 @@ async function seed(): Promise<void> {
       "2026-08-01T12:00:00.000Z",
       "2026-08-01T12:00:00.000Z",
       "ok",
-      "Initial public-record seed: Alford Farms plus five other Palatka-area entries, resident guide, and market snapshot.",
+      "Initial public-record seed: Alford Farms, The Collection at Palatka, the resident guide, and a market snapshot.",
     ],
   );
 }
@@ -247,7 +247,14 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
   const faqRows = await sql<{ question: string }>`select question from faqs`;
   const questions = new Set(faqRows.map((r) => r.question));
   for (const f of SEED_FAQS) {
-    if (questions.has(f.question)) continue;
+    if (questions.has(f.question)) {
+      await sql.query(`update faqs set answer = $2, sort_order = $3 where question = $1`, [
+        f.question,
+        f.answer,
+        f.sortOrder,
+      ]);
+      continue;
+    }
     await sql.query(
       `insert into faqs (question, answer, sort_order, generated) values ($1,$2,$3,false)`,
       [f.question, f.answer, f.sortOrder],

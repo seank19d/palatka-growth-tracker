@@ -82,24 +82,30 @@ export function CountyMap({ projects }: { projects: Project[] }) {
   const size = viewSize(view);
   const aspect = size.width / size.height;
   const scale = scaleBarMiles(view);
-  const marks = spreadMarks(
-    located.map((proj, i) => {
+  const marks = useMemo(() => {
+    let n = 0;
+    const raw: Mark[] = located.map((proj) => {
       const p = lngLatToPercent(proj.lng as number, proj.lat as number, view);
       const clamped = clampPercent(p);
+      const off = clamped.off;
       return {
         slug: proj.slug,
         name: proj.name,
-        n: i + 1,
+        n: off ? 0 : ++n,
         x: p.x,
         y: p.y,
         ox: clamped.x,
         oy: clamped.y,
         built: proj.status === "built_out",
-        off: clamped.off,
+        off,
       };
-    }),
-    aspect,
-  );
+    });
+    return spreadMarks(
+      raw.filter((m) => !m.off),
+      aspect,
+    );
+  }, [located, view, aspect]);
+  const markBySlug = useMemo(() => new Map(marks.map((m) => [m.slug, m])), [marks]);
 
   const isDim = (slug: string) => Boolean(focus?.visible && !focus.visible.has(slug));
 
@@ -122,8 +128,8 @@ export function CountyMap({ projects }: { projects: Project[] }) {
               Palatka & East Palatka locator
             </p>
             <p className="mt-0.5 max-w-xl text-sm text-muted">
-              Numbered sites on an OpenStreetMap basemap, zoomed to the Palatka bend. Sites farther
-              west sit on the edge. Not a survey plat.
+              Numbered sites on an OpenStreetMap basemap, zoomed to the Palatka bend. Sites west of
+              this frame are listed, not pinned.
             </p>
           </div>
         </div>
@@ -219,7 +225,9 @@ export function CountyMap({ projects }: { projects: Project[] }) {
         </Basemap>
 
         <ol className="divide-y divide-border border-t border-border lg:border-l lg:border-t-0">
-          {located.map((proj, i) => {
+          {located.map((proj) => {
+            const mark = markBySlug.get(proj.slug);
+            const off = !mark;
             const active = hover === proj.slug;
             const dim = isDim(proj.slug) && !active;
             return (
@@ -240,12 +248,14 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                   <span
                     className={cn(
                       "mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
-                      proj.status === "built_out"
-                        ? "bg-muted text-primary-fg"
-                        : "bg-primary text-primary-fg",
+                      off
+                        ? "bg-secondary text-muted"
+                        : proj.status === "built_out"
+                          ? "bg-muted text-primary-fg"
+                          : "bg-primary text-primary-fg",
                     )}
                   >
-                    {i + 1}
+                    {off ? "—" : mark.n}
                   </span>
                   <span className="min-w-0">
                     <span className="block font-medium leading-tight">{proj.name}</span>
@@ -255,7 +265,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
                         ? `${proj.lat.toFixed(4)}°N  ${Math.abs(proj.lng).toFixed(4)}°W`
                         : null}{" "}
                       · {STATUS_META[proj.status].label}
-                      {marks[i]?.off ? " · west of this frame" : ""}
+                      {off ? " · west of this frame" : ""}
                     </span>
                   </span>
                 </Link>

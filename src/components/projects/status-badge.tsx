@@ -29,7 +29,7 @@ const STATUS_ICON = {
 export function StatusBadge({ status }: { status: ProjectStatus }) {
   const meta = STATUS_META[status];
   const built = status === "built_out";
-  const live = status === "under_construction" || status === "selling" || status === "permitting";
+  const live = status === "under_construction" || status === "selling";
   const Icon = STATUS_ICON[status];
   return (
     <Badge variant={live ? "default" : built ? "muted" : "river"} className="gap-1 capitalize">

@@ -56,7 +56,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
       {
         heading: "What this checklist is not",
         paragraphs: [
-          "It is not a promise that Alford Farms, or any other pipeline project, will be ready when your lease ends. Match your move date to a house that exists, then watch the tracker for the next community — not the other way around.",
+          "It is not a promise that Alford Farms, or any other pipeline project, will be ready when your lease ends. Match your move date to a house that exists.",
         ],
       },
     ],
@@ -145,7 +145,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
         heading: "Outdoor living",
         paragraphs: [
           "A usable porch or lanai is half the point of being here. Outdoor rugs, a ceiling fan rated for damp locations, and a grill get more use than a formal dining set. Check any PUD or HOA rules before you pour a patio.",
-          "Mosquitoes are not a personality test. Treat standing water, keep screens intact, and plan dusk gatherings accordingly. You are next to the St. Johns and a lot of wetlands.",
+          "Screen the porch. Treat standing water. You are on the St. Johns, next to wetlands, and dusk is mosquito hour.",
         ],
       },
       {
@@ -295,7 +295,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sortOrder: 8,
     sections: [
       {
-        heading: "Housing prices — a band, not a slogan",
+        heading: "What the public medians actually print",
         paragraphs: [
           "As of mid-2026, public dashboards do not agree on a single Putnam County median, because they measure different mixes. Typical-value products print near $220,000. Some sale-median prints for Palatka listings sit closer to $300,000. Redfin’s short-window county median around June 2026 came in near $309,000. Local recaps have also cited county-wide sale medians in the mid-$200,000s. The honest statement: Putnam is still inexpensive by Florida coastal standards, Palatka proper is not a $150,000 town anymore, and waterfront or newer homes pull the average up.",
           "East Palatka new construction, when it actually sells, will price like builder product in a cheaper county — not like a St. Augustine 32084 ZIP. That is the whole economic story of Alford Farms.",
@@ -334,7 +334,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
         ],
       },
       {
-        heading: "207 is a corridor, not a secret",
+        heading: "SR 207 is the commute — and the PUD road",
         paragraphs: [
           "SR 207 is the reason East Palatka is in play for people who work toward St. Augustine. It is also the road every large PUD will dump onto. County hearings about Alford Farms were, in part, hearings about that road. Budget time, not just miles.",
         ],

@@ -14,8 +14,8 @@ import appCss from "../styles.css?url";
 
 const fetchShell = createServerFn({ method: "GET" }).handler(async () => {
   const { getSessionUser } = await import("@/lib/auth/verify.server");
-  const { getSetting } = await import("@/lib/data/queries.server");
-  const [u, lastUpdated] = await Promise.all([getSessionUser(), getSetting("last_public_update")]);
+  const { getLastPublicUpdate } = await import("@/lib/data/queries.server");
+  const [u, lastUpdated] = await Promise.all([getSessionUser(), getLastPublicUpdate()]);
   return {
     lastUpdated,
     sessionUser: u ? { id: u.id, email: u.email } : null,

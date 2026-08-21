@@ -1,15 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpen, Info, MapPinned, Newspaper } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
 import { RiverDivider } from "@/components/brand/river-divider";
 import { DISCLOSURE } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
 
 const LINKS = [
-  { to: "/developments" as const, label: "Developments", icon: MapPinned },
-  { to: "/guide" as const, label: "Living guide", icon: BookOpen },
-  { to: "/whats-new" as const, label: "What's new", icon: Newspaper },
-  { to: "/about" as const, label: "Sources & method", icon: Info },
+  { to: "/developments" as const, label: "Developments" },
+  { to: "/guide" as const, label: "Living guide" },
+  { to: "/whats-new" as const, label: "What's new" },
+  { to: "/about" as const, label: "Sources & method" },
 ];
 
 export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
@@ -37,8 +36,7 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
           <ul className="mt-3 space-y-2">
             {LINKS.map((item) => (
               <li key={item.to}>
-                <Link to={item.to} className="inline-flex items-center gap-2 hover:text-primary">
-                  <item.icon className="size-3.5 text-primary" strokeWidth={1.75} />
+                <Link to={item.to} className="hover:text-primary">
                   {item.label}
                 </Link>
               </li>

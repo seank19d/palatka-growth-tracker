@@ -26,13 +26,13 @@ export function ProjectAnswerBar({ project }: { project: Project }) {
     },
     {
       label: "Builder",
-      value: project.builder ?? "—",
+      value: project.builder ?? "",
       hint:
         project.developer && project.developer !== project.builder ? project.developer : undefined,
     },
     {
       label: "Lots",
-      value: formatNumber(lots),
+      value: lots != null ? formatNumber(lots) : "",
       hint:
         project.lotsRezoning != null &&
         project.lotsCurrent != null &&
@@ -42,7 +42,7 @@ export function ProjectAnswerBar({ project }: { project: Project }) {
     },
     {
       label: "County case",
-      value: project.countyCase ?? "—",
+      value: project.countyCase ?? "",
       hint: project.ordinance ? `Ordinance ${project.ordinance}` : undefined,
     },
     {
@@ -50,13 +50,13 @@ export function ProjectAnswerBar({ project }: { project: Project }) {
       value: formatDateShort(project.latestSummaryAt ?? project.updatedAt),
       hint: "From latest public-file summary on this site",
     },
-  ];
+  ].filter((c) => c.value && c.value !== "—");
 
   return (
     <section aria-label="Quick facts" className="mt-6 overflow-hidden border border-border bg-card">
       <div className="border-b border-border bg-secondary/40 px-4 py-2">
         <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
-          Answer in five seconds
+          File at a glance
         </p>
       </div>
       <dl className="grid sm:grid-cols-2 lg:grid-cols-3">

@@ -5,9 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CircleHelp } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
-import { SectionIcon } from "@/components/brand/section-icon";
 import { JsonLd } from "@/components/json-ld";
 import { fetchFaqs } from "@/lib/data/api";
 import { seo } from "@/lib/seo";
@@ -49,16 +47,10 @@ function FaqPage() {
           })),
         }}
       />
-      <div className="flex items-start gap-3">
-        <SectionIcon icon={CircleHelp} />
-        <div>
-          <Kicker className="mt-0">FAQ</Kicker>
-          <h1 className="mt-2 font-display text-4xl font-semibold">Common questions</h1>
-        </div>
-      </div>
+      <Kicker>FAQ</Kicker>
+      <h1 className="mt-2 font-display text-4xl font-semibold">Common questions</h1>
       <p className="mt-3 text-muted">
-        Answers follow the public file, not builder talking points. If a sales agent and this page
-        disagree, ask for the ordinance number.
+        Answers follow the public file, not builder talking points.
       </p>
       <Accordion type="single" collapsible className="mt-8">
         {all.map((f) => (

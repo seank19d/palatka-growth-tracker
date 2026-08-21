@@ -59,7 +59,6 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-5 lg:flex">
           {NAV.map((item) => (
             <Link key={item.to} to={item.to} className={navClass}>
-              <item.icon className="size-3.5 opacity-70" strokeWidth={1.75} />
               {item.label}
             </Link>
           ))}

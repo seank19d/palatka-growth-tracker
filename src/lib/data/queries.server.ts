@@ -1,6 +1,7 @@
 import { getSql } from "@/lib/db";
 import { amazonUrl } from "@/lib/amazon";
 import { parseJson } from "@/lib/format";
+import { PIPELINE_STATUSES } from "@/lib/constants";
 import type {
   AffiliateProduct,
   Confidence,
@@ -328,19 +329,46 @@ export async function getSetting(key: string): Promise<string | null> {
   return rows[0]?.value ?? null;
 }
 
+export async function getLastPublicUpdate(): Promise<string | null> {
+  await ensureSeeded();
+  const sql = await getSql();
+  const [setting, updates, summaries] = await Promise.all([
+    sql<{ value: string }>`select value from site_settings where key = 'last_public_update'`,
+    sql<{ d: string | null }>`select max(created_at)::text as d from project_updates`,
+    sql<{ d: string | null }>`select max(latest_summary_at)::text as d from projects where published = true`,
+  ]);
+  const dates = [setting[0]?.value, updates[0]?.d, summaries[0]?.d].filter(
+    (v): v is string => Boolean(v),
+  );
+  if (!dates.length) return null;
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+const HOME_FAQ_QUESTIONS = [
+  "Are there new construction homes for sale in Palatka right now?",
+  "Is Alford Farms selling homes yet?",
+  "Where is East Palatka relative to Palatka?",
+  "Will I have city water and sewer?",
+];
+
 export async function getHomeData() {
   const [projects, updates, guides, market, lastUpdated, faqs, products] = await Promise.all([
     listPublishedProjects(),
     getUpdates(6),
     listGuides(),
     latestMarket(),
-    getSetting("last_public_update"),
+    getLastPublicUpdate(),
     listFaqs(),
     getProducts(),
   ]);
   const featured = projects.find((p) => p.featured) ?? projects[0] ?? null;
-  const pipeline = projects.filter((p) => p.status !== "built_out");
+  const pipeline = projects.filter((p) => PIPELINE_STATUSES.includes(p.status));
   const lots = pipeline.reduce((sum, p) => sum + (p.lotsCurrent ?? 0), 0);
+  const homeFaqs = HOME_FAQ_QUESTIONS.map((q) => faqs.find((f) => f.question === q)).filter(
+    (f): f is Faq => Boolean(f),
+  );
+  const faqFill = faqs.filter((f) => !homeFaqs.some((h) => h.id === f.id));
   return {
     projects,
     featured,
@@ -348,7 +376,7 @@ export async function getHomeData() {
     guides,
     market,
     lastUpdated,
-    faqs: faqs.slice(0, 4),
+    faqs: [...homeFaqs, ...faqFill].slice(0, 4),
     products: products.filter((p) => p.category === "moving").slice(0, 4),
     stats: {
       projectCount: projects.length,

@@ -17,6 +17,10 @@ type ProjectLite = { id: number; slug: string; name: string; status: string };
 
 const MATCHERS: { slug: string; keys: string[] }[] = [
   { slug: "alford-farms", keys: ["alford farms", "alford farm", "pud24-000004", "ordinance 2024-017"] },
+  {
+    slug: "collection-at-palatka",
+    keys: ["collection at palatka", "century complete", "508 n. 17th", "17th street"],
+  },
   { slug: "east-river-road", keys: ["east river road", "putnam county blvd", "putnam county boulevard"] },
   { slug: "gilbert-road-tract", keys: ["gilbert road"] },
   { slug: "palatka-riverfront-infill", keys: ["riverfront", "downtown palatka", "palatka cra"] },

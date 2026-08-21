@@ -25,7 +25,7 @@ export const SEED_UPDATES: {
   {
     projectSlug: "gilbert-road-tract",
     title: "Gilbert Road assemblage is not a housing approval",
-    body: "Large-tract marketing and data-center chatter are not a residential PUD. This tracker will only change the status if a county application lands.",
+    body: "Large-tract marketing and data-center chatter are not a residential PUD. Status stays Concept until a county application lands.",
     kind: "whats_new",
     sourceLabel: "Local reporting",
     createdAt: "2026-05-01T12:00:00.000Z",
@@ -81,7 +81,7 @@ export const SEED_MARKET = {
   medianSaleLow: 220000,
   medianSaleHigh: 310000,
   medianNote:
-    "Public market reports for mid-2026 disagree because they measure different things. Zillow-style typical values for Putnam County sit near $220,000. County-wide sale medians in some realtor summaries are in the mid-$200,000s. Redfin’s three-month Putnam median around June 2026 printed near $309,000. Palatka listing medians on Realtor.com were near $300,000. Treat this as a band, not a price tag: mix of sales (waterfront vs inland, new vs old) moves the median more than any one month of “the market.”",
+    "Public dashboards for mid-2026 do not agree on a single Putnam median. Typical-value products print near $220,000. Some Palatka listing medians sit closer to $300,000. Redfin’s short-window county median around June 2026 came in near $309,000. Waterfront and newer homes pull the number up; inland stock pulls it down. Read it as a range, not an asking price.",
   daysOnMarket: 60,
   sourceNote:
     "Compiled from public market dashboards (Zillow, Redfin, Realtor.com, and local MLS recaps) as of June–July 2026. Not an appraisal.",

@@ -124,26 +124,26 @@ export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[
   {
     question: "Is Alford Farms selling homes yet?",
     answer:
-      "Not according to the public record this site reviews. The PUD rezoning was approved in August 2024. Engineering and SJRWMD permitting were still the live steps into 2026. Rezoning is not a certificate of occupancy and it is not a sales opening. Check D.R. Horton and the county plat books before you plan a closing date around this community.",
-    sortOrder: 1,
+      "Not according to the public record this site reviews. The PUD rezoning was approved in August 2024. Engineering and SJRWMD permitting were still the live steps into 2026. The 2024 PUD is an entitlement, not a closing date. Check D.R. Horton and the county plat books before you plan around this community.",
+    sortOrder: 2,
   },
   {
     question: "Why do some pages say 700 homes and others say 559?",
     answer:
       "The 700 figure is the entitlement envelope described at rezoning. The 559 figure appears in later engineering documents. Large Florida PUDs often shrink between the political approval and the construction set. Neither number is a promise of a closing calendar.",
-    sortOrder: 2,
+    sortOrder: 6,
   },
   {
     question: "Is D.R. Horton the builder?",
     answer:
-      "County filings name D.R. Horton, Inc. as an agent on Alford Farms, and local reports also attach Horton to a possible 189-home site at East River Road. “Named in the file” is not the same as a published community on the builder’s website. Confirm on Horton’s site and with the county before treating it as a shoppable community.",
-    sortOrder: 3,
+      "County filings name D.R. Horton, Inc. as an agent on Alford Farms, and local reports also attach Horton to a possible 189-home site at East River Road. Horton is the agent of record. It is not listed as an open Palatka community on Horton’s site. Confirm there and with the county before treating it as shoppable.",
+    sortOrder: 7,
   },
   {
     question: "When will Alford Farms homes be available?",
     answer:
-      "No public sales date is in the records this site reviews. Putnam County approved the PUD in August 2024. Engineering and SJRWMD permitting were still open into 2026. Rezoning is not a model home.",
-    sortOrder: 4,
+      "No public sales date is in the records this site reviews. Putnam County approved the PUD in August 2024. Engineering and SJRWMD permitting were still open into 2026.",
+    sortOrder: 8,
   },
   {
     question: "What new subdivisions are being built in East Palatka?",
@@ -155,19 +155,19 @@ export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[
     question: "Are there new construction homes for sale in Palatka right now?",
     answer:
       "Yes. The Collection at Palatka (Century Complete, 508 N. 17th Street) is marketed as selling, with starting prices in the low-to-mid $200,000s. Alford Farms in East Palatka is not selling lots in the public record this site reviews.",
-    sortOrder: 6,
+    sortOrder: 1,
   },
   {
     question: "Where is East Palatka relative to Palatka?",
     answer:
       "East Palatka sits across / along the St. Johns River from downtown Palatka, on the SR 207 side toward St. Augustine. Many people who work in St. Johns County look here because land and list prices are lower. The commute on 207 is real; so are school-district and utility boundaries that do not match the marketing name “Palatka.”",
-    sortOrder: 7,
+    sortOrder: 3,
   },
   {
     question: "Will I have city water and sewer?",
     answer:
       "Inside Palatka city limits, usually yes (confirm with the city). Unincorporated East Palatka and much of Putnam County still use wells and septic on older lots. New PUDs typically extend or build central utilities — that is one reason they take years. Ask the builder and the county utilities staff about the specific parcel; do not assume the neighbor’s setup.",
-    sortOrder: 8,
+    sortOrder: 4,
   },
   {
     question: "Clay Electric or FPL?",
@@ -190,7 +190,7 @@ export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[
   {
     question: "How does this site stay updated?",
     answer:
-      "A scheduled job fetches county pages, water-management notices, and news RSS feeds. New items are matched to projects by name and case number. When an AI key is configured, the job writes a plain-language summary. If the job fails, the last good data stays on the site. An admin can force a refresh.",
+      "County pages, water-management notices, and news feeds are checked on a schedule. New items are matched by project name and case number. If a check fails, the last good file stays on the site.",
     sortOrder: 12,
   },
   {

@@ -66,7 +66,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
     latestSummary:
-      "As of a public-file review in August 2026, Alford Farms is still in engineering and environmental permitting — not selling homes. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. The entitlement described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering materials (September 2025) show a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file; that is not the same as a published grand opening. St. Johns River Water Management District file 224892-1 was received August 29, 2024. An RAI went out February 20, 2025; a partial response followed in June 2025. No final plat recording or model-home opening is confirmed in the records this tracker reviews. If a builder website lists the community, treat marketing as separate from county status.",
+      "As of a public-file review in August 2026, Alford Farms is still in engineering and environmental permitting. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. The entitlement described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering materials (September 2025) show a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. St. Johns River Water Management District file 224892-1 was received August 29, 2024. An RAI went out February 20, 2025; a partial response followed in June 2025. No plat has been recorded and no model home is open.",
     latestSummaryAt: "2026-08-20T12:00:00.000Z",
     confidence: "confirmed",
     published: true,
@@ -121,7 +121,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
     ],
     latestSummary:
-      "If you are searching “new construction Palatka FL” because you need a house this year, this is the file to open first — not Alford Farms. Century Complete (Century Communities’ value line) is selling The Collection at Palatka at 508 N. 17th Street, with three single-family plans and advertised prices starting around $217,000 as of 2026 listings. Quick move-in homes have been marketed. It is a small in-town community, not a 500-lot greenfield PUD on SR 207. Pricing, incentives, and inventory change on the builder’s site; this tracker records that homes are actually for sale, which Alford Farms is not.",
+      "Need a house this year: The Collection at Palatka, 508 N. 17th Street. Century Complete (Century Communities’ value line) is selling three single-family plans with advertised prices starting around $217,000 as of 2026 listings, including some quick move-in homes. It is a small in-town community. Pricing and inventory change on the builder’s site. Alford Farms, the large East Palatka PUD on SR 207, is still in the county file.",
     latestSummaryAt: "2026-08-19T12:00:00.000Z",
     confidence: "reported",
     published: true,

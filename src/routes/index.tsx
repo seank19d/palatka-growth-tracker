@@ -2,12 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CalendarDays,
-  CircleHelp,
   FileStack,
-  GitBranch,
-  Grid2x2,
   Home as HomeIcon,
-  MapPinned,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
@@ -17,15 +13,14 @@ import { JsonLd } from "@/components/json-ld";
 import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { Kicker } from "@/components/brand/kicker";
 import { RiverDivider } from "@/components/brand/river-divider";
-import { SectionIcon } from "@/components/brand/section-icon";
 import { CountyMap } from "@/components/projects/county-map";
 import { ProjectCard } from "@/components/projects/project-card";
 import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
 import { ProductBlock } from "@/components/guide/product-block";
-import { APP_DESCRIPTION, APP_NAME, STATUS_META } from "@/lib/constants";
+import { APP_DESCRIPTION, APP_NAME, EXISTING_MARKET_SLUGS, STATUS_META } from "@/lib/constants";
 import { formatDateShort, formatMoney, formatNumber } from "@/lib/format";
 import { fetchHome } from "@/lib/data/api";
-import { ProjectFocusProvider } from "@/lib/project-focus";
+import { ProjectFocusProvider, useProjectFocus } from "@/lib/project-focus";
 import { seo } from "@/lib/seo";
 import type { Project } from "@/lib/types";
 
@@ -44,7 +39,13 @@ export const Route = createFileRoute("/")({
 function Home() {
   const data = Route.useLoaderData();
   const { featured, projects, updates, guides, market, stats, faqs, products } = data;
-  const sellingNow = projects.filter((p) => p.status === "selling");
+  const sellingNow = projects
+    .filter((p) => p.status === "selling" && !EXISTING_MARKET_SLUGS.has(p.slug))
+    .sort((a, b) => {
+      if (a.slug === "collection-at-palatka") return -1;
+      if (b.slug === "collection-at-palatka") return 1;
+      return a.name.localeCompare(b.name);
+    });
   const inCountyFile =
     featured ??
     projects.find((p) => p.slug === "alford-farms") ??
@@ -79,8 +80,8 @@ function Home() {
             What’s being built in Palatka and East Palatka.
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            Tracked from county files and permits — not builder renderings. Pick a path: homes you
-            can buy now, or pipeline projects that are still a public file.
+            County files and water-management permits, not builder renderings. Start with homes you
+            can buy this year, or the pipeline that is still sitting in a public file.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
@@ -115,26 +116,20 @@ function Home() {
         </div>
 
         <div className="mx-auto max-w-6xl px-4 pb-10 md:px-6">
-          <dl className="grid grid-cols-3 gap-3 border-t border-border pt-8">
+          <dl className="grid grid-cols-3 gap-6 border-t border-border pt-8">
             <Stat
-              icon={MapPinned}
-              tone="river"
               label="Projects tracked"
               shortLabel="Projects"
               value={String(stats.projectCount)}
               hint="Published files"
             />
             <Stat
-              icon={GitBranch}
-              tone="paper"
               label="In the pipeline"
               shortLabel="Pipeline"
               value={String(stats.pipelineCount)}
-              hint="Not built-out"
+              hint="Not selling yet"
             />
             <Stat
-              icon={Grid2x2}
-              tone="sun"
               label="Lots in known plans"
               shortLabel="Lots"
               value={formatNumber(stats.lotsPipeline)}
@@ -144,12 +139,14 @@ function Home() {
         </div>
       </section>
 
+      <ProjectFocusProvider>
       <section className="border-b border-border" id="now-vs-later">
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-14">
           <Kicker>Start here</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">Now vs later</h2>
           <p className="mt-3 max-w-2xl text-muted">
-            One is taking contracts. The other is still a county file. Do not mix them up.
+            Century Complete is taking contracts on 17th Street. Alford Farms is still a Putnam PUD
+            file.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div id="for-sale-now">
@@ -187,8 +184,7 @@ function Home() {
 
       <aside className="border-b border-border bg-primary text-primary-fg">
         <RiverDivider className="text-primary-fg/40" />
-        <div className="mx-auto flex max-w-6xl items-start gap-3 px-4 py-4 md:px-6">
-          <SectionIcon icon={MapPinned} tone="sun" size="sm" className="mt-0.5" />
+        <div className="mx-auto max-w-6xl px-4 py-4 md:px-6">
           <p className="max-w-4xl text-sm leading-relaxed">
             East Palatka sits on the SR 207 side of the St. Johns — high ground first, which is why
             flood maps and{" "}
@@ -215,8 +211,7 @@ function Home() {
             <ArrowRight className="size-3.5" />
           </Link>
         </div>
-        <ProjectFocusProvider>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {others.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}
@@ -224,7 +219,6 @@ function Home() {
           <div className="mt-10">
             <CountyMap projects={projects} />
           </div>
-        </ProjectFocusProvider>
         <Card className="mt-10 p-5 md:p-6">
           <Kicker>What’s new</Kicker>
           <ol className="mt-4">
@@ -237,7 +231,17 @@ function Home() {
                   {formatDateShort(u.createdAt)}
                 </p>
                 <div>
-                  <p className="font-medium">{u.title}</p>
+                  {u.projectSlug ? (
+                    <Link
+                      to="/developments/$slug"
+                      params={{ slug: u.projectSlug }}
+                      className="font-medium hover:text-primary"
+                    >
+                      {u.title}
+                    </Link>
+                  ) : (
+                    <p className="font-medium">{u.title}</p>
+                  )}
                   <p className="mt-1 line-clamp-2 text-sm text-muted">{u.body}</p>
                 </div>
               </li>
@@ -249,6 +253,7 @@ function Home() {
           </Link>
         </Card>
       </section>
+      </ProjectFocusProvider>
 
       {market ? (
         <section className="border-y border-border bg-bg-sunken">
@@ -316,19 +321,14 @@ function Home() {
               params={{ slug: g.slug }}
               className="bg-card p-5 transition-colors hover:bg-secondary/50"
             >
-              <div className="flex items-center justify-between gap-3">
-                <GuideGlyph
-                  slug={g.slug}
-                  className={
-                    i % 2 === 0
-                      ? "size-11 rounded-sm bg-accent p-2.5"
-                      : "size-11 rounded-sm bg-sun/25 p-2.5 text-sun-fg"
-                  }
-                />
-                <p className="font-mono text-xs tabular-nums text-subtle">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-              </div>
+              <GuideGlyph
+                slug={g.slug}
+                className={
+                  i % 2 === 0
+                    ? "size-11 rounded-sm bg-accent p-2.5"
+                    : "size-11 rounded-sm bg-sun/25 p-2.5 text-sun-fg"
+                }
+              />
               <h3 className="mt-4 font-display text-xl font-semibold">{g.navLabel}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
             </Link>
@@ -341,10 +341,7 @@ function Home() {
 
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6">
-          <div className="flex items-center gap-3">
-            <SectionIcon icon={CircleHelp} tone="paper" size="sm" />
-            <Kicker className="mt-0">FAQ</Kicker>
-          </div>
+          <Kicker>FAQ</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold">Common questions</h2>
           <dl className="mt-6 grid gap-6 md:grid-cols-2">
             {faqs.map((f, i) => (
@@ -380,6 +377,7 @@ function NowLaterCard({
   empty: string;
   emphasis?: "selling" | "pipeline";
 }) {
+  const focus = useProjectFocus();
   if (!projects.length) {
     return (
       <div className="border border-border bg-card p-5 md:p-6">
@@ -404,16 +402,14 @@ function NowLaterCard({
         }
         aria-hidden
       />
-      <div className="flex items-center gap-2 pl-1">
-        <SectionIcon
-          icon={emphasis === "selling" ? HomeIcon : FileStack}
-          tone={emphasis === "selling" ? "sun" : "river"}
-        />
-        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
-      </div>
+      <p className="pl-1 text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
       <ul className="mt-4 space-y-5">
         {projects.map((p) => (
-          <li key={p.slug}>
+          <li
+            key={p.slug}
+            onMouseEnter={() => focus?.setSlug(p.slug)}
+            onMouseLeave={() => focus?.setSlug(null)}
+          >
             <div className="flex flex-wrap gap-2">
               <StatusBadge status={p.status} />
               <ConfidenceBadge confidence={p.confidence} />
@@ -427,8 +423,12 @@ function NowLaterCard({
                 <dd className="mt-0.5 font-medium">{STATUS_META[p.status].label}</dd>
               </div>
               <div>
-                <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">Lots</dt>
-                <dd className="mt-0.5 font-medium tabular-nums">{formatNumber(p.lotsCurrent)}</dd>
+                <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">
+                  {emphasis === "selling" ? "Builder" : "Lots"}
+                </dt>
+                <dd className="mt-0.5 font-medium tabular-nums">
+                  {emphasis === "selling" ? (p.builder ?? "—") : formatNumber(p.lotsCurrent)}
+                </dd>
               </div>
             </dl>
             <Link
@@ -447,24 +447,19 @@ function NowLaterCard({
 }
 
 function Stat({
-  icon: Icon,
   label,
   value,
   hint,
   shortLabel,
-  tone,
 }: {
-  icon: typeof MapPinned;
   label: string;
   value: string;
   hint: string;
   shortLabel: string;
-  tone: "river" | "sun" | "paper";
 }) {
   return (
-    <div className="rounded-xl bg-card px-3 py-4 shadow-[var(--shadow-border)] md:px-5">
-      <dt className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-subtle">
-        <SectionIcon icon={Icon} tone={tone} size="sm" className="hidden sm:inline-flex" />
+    <div>
+      <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">
         <span className="sm:hidden">{shortLabel}</span>
         <span className="hidden sm:inline">{label}</span>
       </dt>
@@ -473,3 +468,4 @@ function Stat({
     </div>
   );
 }
+
