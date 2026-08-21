@@ -283,18 +283,14 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
 
   await sql.query(
     `update projects
-     set latest_summary = replace(
-       replace(replace(latest_summary, 'this tracker’s', 'this report’s'), $$this tracker's$$, $$this report's$$),
-       'this tracker', 'this report'
-     )
-     where latest_summary like '%this tracker%'`,
+     set latest_summary = replace(latest_summary, 'this tracker', 'this report'),
+         units_note = replace(units_note, 'this tracker', 'this report')
+     where coalesce(latest_summary, '') like '%this tracker%'
+        or coalesce(units_note, '') like '%this tracker%'`,
   );
   await sql.query(
     `update project_updates
-     set body = replace(
-       replace(replace(body, 'this tracker’s', 'this report’s'), $$this tracker's$$, $$this report's$$),
-       'this tracker', 'this report'
-     )
+     set body = replace(body, 'this tracker', 'this report')
      where body like '%this tracker%'`,
   );
 
