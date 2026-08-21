@@ -9,12 +9,12 @@ export function GuideProse({ sections }: { sections: GuideSection[] }) {
             <h2 className="font-display text-2xl font-semibold md:text-3xl">{section.heading}</h2>
           ) : null}
           {section.paragraphs?.map((p) => (
-            <p key={p.slice(0, 40)} className="max-w-prose text-[1.05rem] leading-relaxed text-fg">
+            <p key={p.slice(0, 40)} className="max-w-prose text-lg leading-relaxed text-fg">
               {p}
             </p>
           ))}
           {section.list ? (
-            <ul className="max-w-prose list-disc space-y-2 pl-5 text-[1.05rem] leading-relaxed text-fg">
+            <ul className="max-w-prose list-disc space-y-2 pl-5 text-lg leading-relaxed text-fg">
               {section.list.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -25,7 +25,7 @@ export function GuideProse({ sections }: { sections: GuideSection[] }) {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-primary">
                 {section.callout.title}
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-fg">{section.callout.body}</p>
+              <p className="mt-1 text-base leading-relaxed text-fg">{section.callout.body}</p>
             </aside>
           ) : null}
         </section>

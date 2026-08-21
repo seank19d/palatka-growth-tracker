@@ -274,7 +274,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
           })}
         </ol>
       </div>
-      <p className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-2 text-[11px] uppercase tracking-[0.12em] text-subtle">
+      <p className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-2 text-xs uppercase tracking-[0.12em] text-subtle">
         <span>Basemap © OpenStreetMap contributors · CARTO</span>
         <a
           className="underline underline-offset-2 hover:text-primary"

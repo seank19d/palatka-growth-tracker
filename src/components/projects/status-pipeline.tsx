@@ -48,7 +48,7 @@ export function StatusPipeline({ current }: { current: ProjectStatus }) {
               />
               <span
                 className={cn(
-                  "mt-2 text-[11px] leading-tight",
+                  "mt-2 text-xs leading-tight",
                   here ? "font-semibold text-fg" : passed ? "text-fg" : "text-subtle",
                 )}
               >

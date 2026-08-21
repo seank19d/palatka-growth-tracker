@@ -5,7 +5,7 @@ export function Kicker({ children, className }: { children: ReactNode; className
   return (
     <p
       className={cn(
-        "inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted",
+        "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted",
         className,
       )}
     >

@@ -70,7 +70,7 @@ function AdminPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6">
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary">Console</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">Console</p>
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <h1 className="font-display text-3xl font-semibold">Operations</h1>
         <Button type="button" onClick={() => void runJob()} disabled={busy}>

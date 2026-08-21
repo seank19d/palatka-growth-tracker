@@ -45,7 +45,7 @@ export function ConfidenceBadge({ confidence }: { confidence: Confidence }) {
     <Badge
       variant="outline"
       className={cn(
-        "gap-1 uppercase tracking-[0.12em] text-[10px]",
+        "gap-1 uppercase tracking-[0.12em] text-xs",
         confidence === "confirmed" && "border-primary/30 text-primary",
       )}
     >

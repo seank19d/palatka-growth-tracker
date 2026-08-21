@@ -55,7 +55,7 @@ export function ProjectAnswerBar({ project }: { project: Project }) {
   return (
     <section aria-label="Quick facts" className="mt-6 overflow-hidden border border-border bg-card">
       <div className="border-b border-border bg-secondary/40 px-4 py-2">
-        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
           File at a glance
         </p>
       </div>
@@ -65,7 +65,7 @@ export function ProjectAnswerBar({ project }: { project: Project }) {
             key={c.label}
             className="border-b border-border px-4 py-3 last:border-b-0 sm:border-r sm:odd:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
-            <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">{c.label}</dt>
+            <dt className="text-xs uppercase tracking-[0.12em] text-subtle">{c.label}</dt>
             <dd className="mt-1 text-base font-semibold leading-snug text-fg">{c.value}</dd>
             {c.hint ? <p className="mt-1 text-xs leading-snug text-muted">{c.hint}</p> : null}
           </div>

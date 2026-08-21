@@ -167,7 +167,7 @@ function Home() {
               </div>
             ) : (
               <div id="pipeline" className="border border-border bg-card p-5 md:p-6">
-                <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
                   Pipeline — not selling yet
                 </p>
                 <p className="mt-4 text-sm text-muted">No pipeline flagship on file.</p>
@@ -381,7 +381,7 @@ function NowLaterCard({
   if (!projects.length) {
     return (
       <div className="border border-border bg-card p-5 md:p-6">
-        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
         <p className="mt-4 text-sm text-muted">{empty}</p>
       </div>
     );
@@ -402,7 +402,7 @@ function NowLaterCard({
         }
         aria-hidden
       />
-      <p className="pl-1 text-[11px] font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
+      <p className="pl-1 text-xs font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
       <ul className="mt-4 space-y-5">
         {projects.map((p) => (
           <li
@@ -419,11 +419,11 @@ function NowLaterCard({
             <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-fg">{p.latestSummary}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
               <div>
-                <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">Stage</dt>
+                <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Stage</dt>
                 <dd className="mt-0.5 font-medium">{STATUS_META[p.status].label}</dd>
               </div>
               <div>
-                <dt className="text-[11px] uppercase tracking-[0.12em] text-subtle">
+                <dt className="text-xs uppercase tracking-[0.12em] text-subtle">
                   {emphasis === "selling" ? "Builder" : "Lots"}
                 </dt>
                 <dd className="mt-0.5 font-medium tabular-nums">
@@ -459,7 +459,7 @@ function Stat({
 }) {
   return (
     <div>
-      <dt className="text-[11px] uppercase tracking-[0.14em] text-subtle">
+      <dt className="text-xs uppercase tracking-[0.14em] text-subtle">
         <span className="sm:hidden">{shortLabel}</span>
         <span className="hidden sm:inline">{label}</span>
       </dt>

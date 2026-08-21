@@ -6,12 +6,17 @@
   --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.55;
+
   --color-bg: #f3eee4;
   --color-bg-sunken: #e8e0d2;
   --color-surface: #faf6ee;
   --color-fg: #1c1915;
-  --color-muted: #5c564c;
-  --color-subtle: #8a8276;
+  --color-muted: #4d473e;
+  --color-subtle: #6e675c;
   --color-primary: #1e4a46;
   --color-primary-fg: #f3eee4;
   --color-primary-foreground: #f3eee4;
@@ -30,7 +35,7 @@
   --color-popover-foreground: #1c1915;
   --color-secondary: #e8e0d2;
   --color-secondary-foreground: #1c1915;
-  --color-muted-foreground: #5c564c;
+  --color-muted-foreground: #4d473e;
   --color-accent: #d8e4e1;
   --color-accent-foreground: #1e4a46;
   --color-destructive: #8f2d2d;
@@ -69,8 +74,15 @@
   html {
     background: var(--color-bg);
     color: var(--color-fg);
+    font-size: 112.5%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (min-width: 48rem) {
+    html {
+      font-size: 106.25%;
+    }
   }
 
   body {
@@ -83,7 +95,9 @@
     background-size: 18px 18px;
     color: var(--color-fg);
     font-family: var(--font-sans);
-    line-height: 1.5;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    line-height: 1.6;
   }
 
   body::before {
@@ -96,6 +110,7 @@
   h4 {
     text-wrap: balance;
     font-family: var(--font-display);
+    font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.2;
   }

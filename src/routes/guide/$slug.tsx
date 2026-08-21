@@ -46,7 +46,7 @@ function GuidePage() {
   return (
     <main className="mx-auto grid max-w-6xl gap-10 px-4 py-10 md:grid-cols-[13rem_1fr] md:px-6 md:py-14">
       <aside className="hidden md:block">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-muted">Guide</p>
+        <p className="text-xs uppercase tracking-[0.16em] text-muted">Guide</p>
         <nav className="mt-3 space-y-1 text-sm">
           {nav.map((g) => (
             <Link
