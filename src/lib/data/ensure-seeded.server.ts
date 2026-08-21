@@ -281,6 +281,23 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
     );
   }
 
+  await sql.query(
+    `update projects
+     set latest_summary = replace(
+       replace(replace(latest_summary, 'this tracker’s', 'this report’s'), $$this tracker's$$, $$this report's$$),
+       'this tracker', 'this report'
+     )
+     where latest_summary like '%this tracker%'`,
+  );
+  await sql.query(
+    `update project_updates
+     set body = replace(
+       replace(replace(body, 'this tracker’s', 'this report’s'), $$this tracker's$$, $$this report's$$),
+       'this tracker', 'this report'
+     )
+     where body like '%this tracker%'`,
+  );
+
   // Refresh known project summaries and official links from the seed catalog.
   for (const p of SEED_PROJECTS) {
     await sql.query(
