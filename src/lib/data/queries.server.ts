@@ -1,5 +1,5 @@
 import { getSql } from "@/lib/db";
-import { amazonUrl } from "@/lib/amazon";
+import { amazonImageUrl, amazonTag, amazonUrl } from "@/lib/amazon";
 import { parseJson } from "@/lib/format";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import type {
@@ -277,7 +277,10 @@ export async function getProducts(category?: string | null): Promise<AffiliatePr
         category: string;
         blurb: string;
         search_query: string;
-      }>`select id, asin, title, category, blurb, search_query from affiliate_products where category = ${category} order by sort_order`
+        image_url: string | null;
+        price_label: string | null;
+        sort_order: number;
+      }>`select id, asin, title, category, blurb, search_query, image_url, price_label, sort_order from affiliate_products where category = ${category} order by sort_order`
     : await sql<{
         id: number;
         asin: string | null;
@@ -285,7 +288,10 @@ export async function getProducts(category?: string | null): Promise<AffiliatePr
         category: string;
         blurb: string;
         search_query: string;
-      }>`select id, asin, title, category, blurb, search_query from affiliate_products order by sort_order`;
+        image_url: string | null;
+        price_label: string | null;
+        sort_order: number;
+      }>`select id, asin, title, category, blurb, search_query, image_url, price_label, sort_order from affiliate_products order by sort_order`;
   return rows.map((r) => ({
     id: r.id,
     asin: r.asin,
@@ -294,6 +300,9 @@ export async function getProducts(category?: string | null): Promise<AffiliatePr
     blurb: r.blurb,
     searchQuery: r.search_query,
     url: amazonUrl({ asin: r.asin, query: r.search_query }),
+    imageUrl: r.image_url || (r.asin ? amazonImageUrl(r.asin) : null),
+    priceLabel: r.price_label,
+    sortOrder: r.sort_order,
   }));
 }
 
@@ -377,7 +386,7 @@ export async function getHomeData() {
     market,
     lastUpdated,
     faqs: [...homeFaqs, ...faqFill].slice(0, 4),
-    products: products.filter((p) => p.category === "moving").slice(0, 4),
+    products: products.filter((p) => p.sortOrder <= 5).slice(0, 5),
     stats: {
       projectCount: projects.length,
       pipelineCount: pipeline.length,
@@ -467,7 +476,92 @@ export async function getAdminData() {
       }),
     ),
     aiAvailable: Boolean(process.env.XAI_API_KEY),
-    amazonTag: Boolean(process.env.AMAZON_ASSOCIATE_TAG || process.env.VITE_AMAZON_ASSOCIATE_TAG),
+    amazonTag: amazonTag(),
+    amazonApi: Boolean(process.env.AMAZON_CREDENTIAL_ID && process.env.AMAZON_CREDENTIAL_SECRET),
+    affiliate: await getAffiliateDesk(sql),
+  };
+}
+
+async function getAffiliateDesk(sql: Awaited<ReturnType<typeof getSql>>) {
+  const products = await sql<{
+    id: number;
+    asin: string | null;
+    title: string;
+    category: string;
+    last_synced_at: string | null;
+    clicks_30: number;
+    clicks_all: number;
+  }>`
+    select p.id, p.asin, p.title, p.category, p.last_synced_at,
+           coalesce((select count(*)::int from affiliate_clicks c where c.product_id = p.id and c.created_at > now() - interval '30 days'), 0) as clicks_30,
+           coalesce((select count(*)::int from affiliate_clicks c where c.product_id = p.id), 0) as clicks_all
+    from affiliate_products p
+    order by p.sort_order
+  `;
+  const orders = await sql<{
+    id: number;
+    ordered_on: string;
+    items: number;
+    commission_cents: number | null;
+    note: string | null;
+    title: string | null;
+  }>`
+    select o.id, o.ordered_on, o.items, o.commission_cents, o.note, p.title
+    from affiliate_orders o
+    left join affiliate_products p on p.id = o.product_id
+    order by o.ordered_on desc, o.id desc
+    limit 20
+  `;
+  const clickTotal = await sql<{ n: number }>`
+    select count(*)::int as n from affiliate_clicks where created_at > now() - interval '30 days'
+  `;
+  const commission = await sql<{ n: number | null }>`
+    select coalesce(sum(commission_cents), 0)::int as n from affiliate_orders
+  `;
+  return {
+    products: products.map((p) => ({
+      id: p.id,
+      asin: p.asin,
+      title: p.title,
+      category: p.category,
+      lastSyncedAt: p.last_synced_at ? String(p.last_synced_at) : null,
+      clicks30: p.clicks_30,
+      clicksAll: p.clicks_all,
+    })),
+    orders: orders.map((o) => ({
+      id: o.id,
+      orderedOn: String(o.ordered_on).slice(0, 10),
+      items: o.items,
+      commissionCents: o.commission_cents,
+      note: o.note,
+      title: o.title,
+    })),
+    clicks30: clickTotal[0]?.n ?? 0,
+    commissionCents: commission[0]?.n ?? 0,
+  };
+}
+
+export async function getSitemapEntries(): Promise<{
+  lastPublic: string | null;
+  projects: { slug: string; updatedAt: string | null }[];
+  guides: { slug: string; updatedAt: string | null }[];
+}> {
+  await ensureSeeded();
+  const sql = await getSql();
+  const [lastPublic, projects, guides] = await Promise.all([
+    getLastPublicUpdate(),
+    sql<{ slug: string; updated_at: string | null }>`
+      select slug, coalesce(updated_at, latest_summary_at)::text as updated_at
+      from projects where published = true
+    `,
+    sql<{ slug: string; last_refreshed_at: string | null }>`
+      select slug, last_refreshed_at::text as last_refreshed_at from guide_pages
+    `,
+  ]);
+  return {
+    lastPublic,
+    projects: projects.map((p) => ({ slug: p.slug, updatedAt: p.updated_at })),
+    guides: guides.map((g) => ({ slug: g.slug, updatedAt: g.last_refreshed_at })),
   };
 }
 

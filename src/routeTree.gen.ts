@@ -21,6 +21,7 @@ import { Route as DevelopmentsIndexRouteImport } from './routes/developments/ind
 import { Route as DevelopmentsSlugRouteImport } from './routes/developments/$slug'
 import { Route as GuideIndexRouteImport } from './routes/guide/index'
 import { Route as GuideSlugRouteImport } from './routes/guide/$slug'
+import { Route as ApiAffiliateClickRouteImport } from './routes/api/affiliate/click'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiCronUpdateRouteImport } from './routes/api/cron/update'
 
@@ -84,6 +85,11 @@ const GuideSlugRoute = GuideSlugRouteImport.update({
   path: '/guide/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAffiliateClickRoute = ApiAffiliateClickRouteImport.update({
+  id: '/api/affiliate/click',
+  path: '/api/affiliate/click',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/guide/$slug': typeof GuideSlugRoute
   '/developments/': typeof DevelopmentsIndexRoute
   '/guide/': typeof GuideIndexRoute
+  '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
 }
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/guide/$slug': typeof GuideSlugRoute
   '/developments': typeof DevelopmentsIndexRoute
   '/guide': typeof GuideIndexRoute
+  '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
 }
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/guide/$slug': typeof GuideSlugRoute
   '/developments/': typeof DevelopmentsIndexRoute
   '/guide/': typeof GuideIndexRoute
+  '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
 }
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/guide/$slug'
     | '/developments/'
     | '/guide/'
+    | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
   fileRoutesByTo: FileRoutesByTo
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/guide/$slug'
     | '/developments'
     | '/guide'
+    | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
   id:
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/guide/$slug'
     | '/developments/'
     | '/guide/'
+    | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
   fileRoutesById: FileRoutesById
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   GuideSlugRoute: typeof GuideSlugRoute
   DevelopmentsIndexRoute: typeof DevelopmentsIndexRoute
   GuideIndexRoute: typeof GuideIndexRoute
+  ApiAffiliateClickRoute: typeof ApiAffiliateClickRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiCronUpdateRoute: typeof ApiCronUpdateRoute
 }
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuideSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/affiliate/click': {
+      id: '/api/affiliate/click'
+      path: '/api/affiliate/click'
+      fullPath: '/api/affiliate/click'
+      preLoaderRoute: typeof ApiAffiliateClickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuideSlugRoute: GuideSlugRoute,
   DevelopmentsIndexRoute: DevelopmentsIndexRoute,
   GuideIndexRoute: GuideIndexRoute,
+  ApiAffiliateClickRoute: ApiAffiliateClickRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiCronUpdateRoute: ApiCronUpdateRoute,
 }

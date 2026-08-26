@@ -29,7 +29,9 @@ Accepted when either:
 | `DATABASE_URL` | Persistence across serverless instances (Neon) |
 | `CRON_SECRET` | Auth for GitHub Action backup (Vercel Cron sends its own header) |
 | `XAI_API_KEY` | Plain-language summary rewrites |
-| `AMAZON_ASSOCIATE_TAG` | Affiliate earnings on product links |
+| `AMAZON_ASSOCIATE_TAG` | Affiliate earnings on product links (`phr0dc-20`) |
+| `AMAZON_CREDENTIAL_ID` + `AMAZON_CREDENTIAL_SECRET` | Optional Creators API — live Amazon titles/prices/photos after ~10 shipped sales / 30 days |
+| `AMAZON_CREDENTIAL_VERSION` | Optional, default `3.1` (US) |
 | `RESEND_API_KEY` + `ALERT_EMAIL` | Email only when the job is failing hard |
 
 GitHub repo secrets: set `CRON_SECRET` to match Vercel if you want the Actions backup. Optional repo variable `SITE_URL` (defaults to `https://www.palatkahomesreport.com`).

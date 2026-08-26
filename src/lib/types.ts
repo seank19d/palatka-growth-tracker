@@ -104,7 +104,11 @@ export type AffiliateProduct = {
   blurb: string;
   searchQuery: string;
   url: string;
+  imageUrl: string | null;
+  priceLabel: string | null;
+  sortOrder: number;
 };
+
 
 export type MarketSnapshot = {
   id: number;

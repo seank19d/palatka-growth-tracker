@@ -69,3 +69,44 @@ export const saveProjectEdits = createServerFn({ method: "POST" })
     );
     return { ok: true as const };
   });
+
+export const logAffiliateOrder = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator((input: unknown) => {
+    const d = input as {
+      productId: number | null;
+      orderedOn: string;
+      items: number;
+      commission: string;
+      note: string;
+    };
+    const commission = d.commission.trim() === "" ? null : Math.round(Number(d.commission) * 100);
+    if (d.commission.trim() && (commission == null || Number.isNaN(commission))) {
+      throw new Error("Commission must be a dollar amount");
+    }
+    if (!d.orderedOn) throw new Error("Order date is required");
+    return {
+      productId: d.productId && d.productId > 0 ? d.productId : null,
+      orderedOn: d.orderedOn,
+      items: Math.max(1, Number(d.items) || 1),
+      commissionCents: commission,
+      note: String(d.note ?? "").slice(0, 400),
+    };
+  })
+  .handler(async ({ data }) => {
+    const { getSql } = await import("@/lib/db");
+    const sql = await getSql();
+    await sql.query(
+      `insert into affiliate_orders (product_id, ordered_on, items, commission_cents, note)
+       values ($1,$2,$3,$4,$5)`,
+      [data.productId, data.orderedOn, data.items, data.commissionCents, data.note || null],
+    );
+    return { ok: true as const };
+  });
+
+export const refreshAmazonCatalog = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .handler(async () => {
+    const { refreshCatalogFromAmazon } = await import("@/lib/amazon-creators.server");
+    return refreshCatalogFromAmazon();
+  });

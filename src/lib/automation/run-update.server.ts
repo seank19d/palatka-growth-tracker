@@ -450,7 +450,17 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
     }
 
     await sql.query(`update site_settings set value = now()::text where key = 'last_public_update'`);
-    const summary = `Fetched ${sources.length} sources, ${newItems} new items, ${summarized} summaries, ai=${ai ? "yes" : "no"}. ${errors.length ? `Errors: ${errors.join("; ")}` : "No source errors."}`;
+    let amazonNote = "";
+    try {
+      const { creatorsReady, refreshCatalogFromAmazon } = await import("@/lib/amazon-creators.server");
+      if (creatorsReady()) {
+        const r = await refreshCatalogFromAmazon();
+        amazonNote = r.ok ? ` Amazon catalog refreshed (${r.updated}).` : ` Amazon: ${r.error}`;
+      }
+    } catch {
+      /* housing job should not fail on Amazon */
+    }
+    const summary = `Fetched ${sources.length} sources, ${newItems} new items, ${summarized} summaries, ai=${ai ? "yes" : "no"}.${amazonNote} ${errors.length ? `Errors: ${errors.join("; ")}` : "No source errors."}`;
     if (jobId) {
       await sql.query(
         `update job_runs set finished_at = now(), status = $1, summary = $2, error = $3 where id = $4`,

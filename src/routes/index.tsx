@@ -21,7 +21,7 @@ import { APP_DESCRIPTION, APP_NAME, EXISTING_MARKET_SLUGS, STATUS_META } from "@
 import { formatDateShort, formatMoney, formatNumber } from "@/lib/format";
 import { fetchHome } from "@/lib/data/api";
 import { ProjectFocusProvider, useProjectFocus } from "@/lib/project-focus";
-import { seo } from "@/lib/seo";
+import { faqJsonLd, seo } from "@/lib/seo";
 import type { Project } from "@/lib/types";
 
 export const Route = createFileRoute("/")({
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
     seo({
       title: "New construction in Palatka & East Palatka, FL",
       description:
-        "Independent tracker of new construction and subdivisions in Palatka, East Palatka, and Putnam County, Florida. Alford Farms status, The Collection at Palatka, public records, and a moving guide.",
+        "Independent report on new construction in Palatka, East Palatka, and Putnam County, Florida. Alford Farms status, The Collection at Palatka, public records, and a moving guide.",
       path: "/",
     }),
   component: Home,
@@ -61,16 +61,20 @@ function Home() {
   return (
     <main>
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: APP_NAME,
-          description: APP_DESCRIPTION,
-          about: {
-            "@type": "Place",
-            name: "Palatka, East Palatka, and Putnam County, Florida",
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: APP_NAME,
+            url: "https://www.palatkahomesreport.com/",
+            description: APP_DESCRIPTION,
+            about: {
+              "@type": "Place",
+              name: "Palatka, East Palatka, and Putnam County, Florida",
+            },
           },
-        }}
+          ...(faqs.length ? [faqJsonLd(faqs)] : []),
+        ]}
       />
 
       <section className="border-b border-border">

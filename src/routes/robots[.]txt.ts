@@ -3,6 +3,10 @@ import { SITE_URL } from "@/lib/seo";
 
 const BODY = `User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /api/
+Disallow: /go/
 
 User-agent: GPTBot
 Allow: /
@@ -12,6 +16,7 @@ Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
+
 
 export const Route = createFileRoute("/robots.txt")({
   server: {

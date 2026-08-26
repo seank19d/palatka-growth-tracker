@@ -13,14 +13,16 @@ export const fetchProjects = createServerFn({ method: "GET" }).handler(async () 
 export const fetchProjectPage = createServerFn({ method: "GET" })
   .validator((slug: unknown) => String(slug ?? ""))
   .handler(async ({ data: slug }) => {
-    const { getProjectBySlug, getMilestones, getUpdates } = await import("./queries.server");
+    const { getProjectBySlug, getMilestones, getUpdates, getProducts } = await import("./queries.server");
     const project = await getProjectBySlug(slug);
     if (!project) return null;
-    const [milestones, updates] = await Promise.all([
+    const [milestones, updates, allProducts] = await Promise.all([
       getMilestones(project.id),
       getUpdates(8, project.id),
+      project.status === "selling" ? getProducts() : Promise.resolve([]),
     ]);
-    return { project, milestones, updates };
+    const products = allProducts.filter((p) => p.sortOrder <= 8);
+    return { project, milestones, updates, products };
   });
 
 export const fetchGuideHub = createServerFn({ method: "GET" }).handler(async () => {
@@ -54,7 +56,6 @@ export const fetchFaqs = createServerFn({ method: "GET" }).handler(async () => {
 });
 
 export const fetchSitemapData = createServerFn({ method: "GET" }).handler(async () => {
-  const { listAllProjectSlugs, listGuides } = await import("./queries.server");
-  const [slugs, guides] = await Promise.all([listAllProjectSlugs(), listGuides()]);
-  return { slugs, guideSlugs: guides.map((g) => g.slug) };
+  const { getSitemapEntries } = await import("./queries.server");
+  return getSitemapEntries();
 });

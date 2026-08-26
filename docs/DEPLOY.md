@@ -17,7 +17,10 @@ Do not commit a `.env` file.
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `CRON_SECRET` | Yes, in production | Shared secret for `/api/cron/update`. Vercel Cron sends it as `Authorization: Bearer …`. |
-| `AMAZON_ASSOCIATE_TAG` | For monetization | Amazon Associates tag appended to product URLs. |
+| `AMAZON_ASSOCIATE_TAG` | For monetization | Amazon Associates tag (`phr0dc-20`). Already falls back in code. |
+| `AMAZON_CREDENTIAL_ID` | Optional | Creators API credential ID from Associates Central → Tools → Creators API. Needs ~10 shipped sales in 30 days. |
+| `AMAZON_CREDENTIAL_SECRET` | Optional | Creators API secret (shown once). |
+| `AMAZON_CREDENTIAL_VERSION` | Optional | Usually `3.1` for the US. Token endpoint is chosen from this. |
 | `ADMIN_EMAILS` | Recommended | Comma-separated emails allowed into `/admin`. If unset, **any signed-in user** can open the console (useful in preview). |
 | `RESEND_API_KEY` | Optional | Email on repeated scrape failure. |
 | `ALERT_EMAIL` | Optional | Inbox for those alerts. |

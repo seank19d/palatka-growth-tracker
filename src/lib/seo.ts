@@ -75,8 +75,24 @@ export const ORG_JSON_LD = {
   "@type": "NewsMediaOrganization",
   name: APP_NAME,
   url: SITE_URL,
-  logo: absoluteUrl("/favicon.svg"),
+  logo: {
+    "@type": "ImageObject",
+    url: absoluteUrl("/__grok/icon-180.png"),
+    width: 180,
+    height: 180,
+  },
+  image: absoluteUrl("/og.jpg"),
   description: APP_DESCRIPTION,
-  areaServed: ["Palatka, FL", "East Palatka, FL", "Putnam County, FL"],
-  sameAs: [],
+  areaServed: [
+    { "@type": "City", name: "Palatka", address: { "@type": "PostalAddress", addressRegion: "FL", addressCountry: "US" } },
+    { "@type": "Place", name: "East Palatka, FL" },
+    { "@type": "AdministrativeArea", name: "Putnam County, FL" },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Palatka",
+    addressRegion: "FL",
+    addressCountry: "US",
+  },
 };
+

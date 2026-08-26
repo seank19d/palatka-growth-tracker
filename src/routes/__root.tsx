@@ -7,8 +7,8 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { AppErrorComponent, NotFoundComponent, clearStaleChunkReloadFlag } from "@/lib/error-component";
-import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
-import { ORG_JSON_LD, seo } from "@/lib/seo";
+import { APP_NAME } from "@/lib/constants";
+import { ORG_JSON_LD, SITE_URL } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 import appCss from "../styles.css?url";
 
@@ -29,17 +29,12 @@ export const Route = createRootRoute({
   errorComponent: AppErrorComponent,
   notFoundComponent: NotFoundComponent,
   head: () => {
-    const base = seo({
-      title: APP_NAME,
-      description: APP_DESCRIPTION,
-      path: "/",
-    });
     return {
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "theme-color", content: "#1e4a46" },
-        ...base.meta,
+        { name: "application-name", content: APP_NAME },
       ],
       links: [
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -52,7 +47,7 @@ export const Route = createRootRoute({
         { rel: "stylesheet", href: appCss },
         { rel: "manifest", href: "/__grok/manifest.webmanifest" },
         { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
-        ...base.links,
+        { rel: "alternate", type: "text/plain", href: `${SITE_URL}/llms.txt`, title: "LLM" },
       ],
     };
   },

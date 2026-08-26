@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
 import { MapEmbed } from "@/components/projects/map-embed";
+import { ProductBlock } from "@/components/guide/product-block";
 import { OfficialSources } from "@/components/projects/official-sources";
 import { StatusPipeline } from "@/components/projects/status-pipeline";
 import { Timeline } from "@/components/projects/timeline";
@@ -55,7 +56,7 @@ export const Route = createFileRoute("/developments/$slug")({
 });
 
 function ProjectPage() {
-  const { project, milestones, updates } = Route.useLoaderData();
+  const { project, milestones, updates, products } = Route.useLoaderData();
   const faqs = PROJECT_FAQS[project.slug] ?? [];
   const facts = [
     { label: "Area", value: project.area },
@@ -197,6 +198,12 @@ function ProjectPage() {
             ))}
           </Accordion>
         </section>
+      ) : null}
+
+      {products?.length ? (
+        <div className="mt-12">
+          <ProductBlock products={products} heading="For the move-in week" />
+        </div>
       ) : null}
     </main>
   );

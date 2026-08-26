@@ -1,6 +1,17 @@
 import { ShoppingBag } from "lucide-react";
 import { DISCLOSURE } from "@/lib/constants";
+import { amazonImpressionPixel } from "@/lib/amazon";
 import type { AffiliateProduct } from "@/lib/types";
+
+function logClick(id: number) {
+  try {
+    const body = new Blob([JSON.stringify({ id })], { type: "application/json" });
+    if (navigator.sendBeacon) navigator.sendBeacon("/api/affiliate/click", body);
+    else void fetch("/api/affiliate/click", { method: "POST", body, keepalive: true });
+  } catch {
+    /* click still goes to Amazon */
+  }
+}
 
 export function ProductBlock({
   products,
@@ -12,7 +23,7 @@ export function ProductBlock({
   if (!products.length) return null;
   return (
     <aside className="border border-border bg-card p-5 md:p-6">
-      <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-muted">
+      <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
         <ShoppingBag className="size-3.5 text-primary" strokeWidth={1.75} />
         {heading}
       </p>
@@ -22,15 +33,36 @@ export function ProductBlock({
             <a
               href={p.url}
               target="_blank"
-              rel="noreferrer sponsored"
-              className="flex flex-col py-3 hover:bg-secondary/40 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              rel="noopener noreferrer sponsored"
+              onClick={() => logClick(p.id)}
+              className="flex gap-4 py-3 hover:bg-secondary/40 sm:items-center"
             >
-              <span>
+              {p.imageUrl ? (
+                <img
+                  src={p.imageUrl}
+                  alt=""
+                  width={72}
+                  height={72}
+                  className="size-[72px] shrink-0 rounded-sm border border-border bg-secondary object-contain p-1"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              ) : null}
+              <span className="min-w-0 flex-1">
                 <span className="block font-medium">{p.title}</span>
                 <span className="mt-1 block text-base leading-relaxed text-muted">{p.blurb}</span>
+                {p.priceLabel ? (
+                  <span className="mt-1 block text-sm tabular-nums text-fg">{p.priceLabel}</span>
+                ) : null}
               </span>
-              <span className="mt-2 shrink-0 text-xs text-primary sm:mt-0">Amazon</span>
+              <span className="mt-1 shrink-0 self-start text-sm font-medium text-primary sm:mt-0">
+                Amazon
+              </span>
             </a>
+            {p.asin ? (
+              <img src={amazonImpressionPixel(p.asin)} alt="" width={1} height={1} className="sr-only" />
+            ) : null}
           </li>
         ))}
       </ul>

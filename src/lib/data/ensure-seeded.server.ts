@@ -295,6 +295,28 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
   );
 
   await syncSources(sql);
+  await syncProducts(sql);
+}
+
+async function syncProducts(sql: Awaited<ReturnType<typeof getSql>>) {
+  const have = await sql<{ title: string }>`select title from affiliate_products`;
+  const titles = new Set(have.map((r) => r.title));
+  for (const p of SEED_PRODUCTS) {
+    if (titles.has(p.title)) {
+      await sql.query(
+        `update affiliate_products
+         set asin = $2, category = $3, blurb = $4, search_query = $5, sort_order = $6
+         where title = $1`,
+        [p.title, p.asin, p.category, p.blurb, p.searchQuery, p.sortOrder],
+      );
+      continue;
+    }
+    await sql.query(
+      `insert into affiliate_products (asin, title, category, blurb, search_query, sort_order)
+       values ($1,$2,$3,$4,$5,$6)`,
+      [p.asin, p.title, p.category, p.blurb, p.searchQuery, p.sortOrder],
+    );
+  }
 }
 
 async function syncSources(sql: Awaited<ReturnType<typeof getSql>>) {
