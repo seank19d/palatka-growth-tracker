@@ -15,7 +15,9 @@ import appCss from "../styles.css?url";
 const fetchShell = createServerFn({ method: "GET" }).handler(async () => {
   const { getSessionUser } = await import("@/lib/auth/verify.server");
   const { getLastPublicUpdate } = await import("@/lib/data/queries.server");
+  const { kickStaleTrackerUpdate } = await import("@/lib/automation/run-update.server");
   const [u, lastUpdated] = await Promise.all([getSessionUser(), getLastPublicUpdate()]);
+  kickStaleTrackerUpdate();
   return {
     lastUpdated,
     sessionUser: u ? { id: u.id, email: u.email } : null,

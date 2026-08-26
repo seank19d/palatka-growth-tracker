@@ -52,4 +52,4 @@ Schema and seed load automatically into PGLite. `npm run build` must succeed bef
 0 12 * * *  →  /api/cron/update
 ```
 
-Until cron is live, use **Force source refresh** on `/admin`.
+The job writes What’s New when Palatka-area housing sources move. A public page load will kick the same job if a check is more than 18 hours late. GitHub Actions is a backup only if `CRON_SECRET` is set on the repo.

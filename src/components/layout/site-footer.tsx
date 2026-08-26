@@ -45,7 +45,7 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
         </div>
         <div className="text-sm">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-            Last public update
+            Last checked
           </p>
           <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-fg">
             {formatDateShort(lastUpdated)}

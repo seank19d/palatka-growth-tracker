@@ -1,9 +1,11 @@
 import * as cheerio from "cheerio";
-import { getSql } from "@/lib/db";
+import { dbSource, getSql } from "@/lib/db";
 import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
 import { STATUS_RANK, inferStatus } from "@/lib/automation/status-infer";
+import { isHousingItem, matchProject } from "@/lib/automation/match";
 
-const UA = "PalatkaHomesReport/1.0 (independent housing report; contact via /about)";
+const UA =
+  "Mozilla/5.0 (compatible; PalatkaHomesReport/1.1; +https://www.palatkahomesreport.com/about)";
 
 type SourceRow = {
   id: number;
@@ -15,23 +17,15 @@ type SourceRow = {
 
 type ProjectLite = { id: number; slug: string; name: string; status: string };
 
-const MATCHERS: { slug: string; keys: string[] }[] = [
-  { slug: "alford-farms", keys: ["alford farms", "alford farm", "pud24-000004", "ordinance 2024-017"] },
-  {
-    slug: "collection-at-palatka",
-    keys: ["collection at palatka", "century complete", "508 n. 17th", "17th street"],
-  },
-  { slug: "east-river-road", keys: ["east river road", "putnam county blvd", "putnam county boulevard"] },
-  { slug: "gilbert-road-tract", keys: ["gilbert road"] },
-  { slug: "palatka-riverfront-infill", keys: ["riverfront", "downtown palatka", "palatka cra"] },
-  { slug: "american-gardens", keys: ["american gardens"] },
-  { slug: "interlachen-lakes", keys: ["interlachen"] },
-];
-
 const NEW_PROJECT_HINT =
   /\b(subdivision|pud|rezoning|planned unit|new homes|new construction|plat)\b/i;
 
-async function fetchText(url: string, timeoutMs = 9000): Promise<{ ok: true; text: string } | { ok: false; error: string }> {
+const AUTO_LABEL = "Automated digest";
+
+async function fetchText(
+  url: string,
+  timeoutMs = 10000,
+): Promise<{ ok: true; text: string } | { ok: false; error: string }> {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
@@ -72,10 +66,13 @@ function parseRss(xml: string): { title: string; url: string; snippet: string; p
       if (title) items.push({ title, url, snippet, publishedAt: null });
     });
   }
-  return items.slice(0, 12);
+  return items.slice(0, 20);
 }
 
-function parseHtmlHeadlines(html: string, baseUrl: string): { title: string; url: string; snippet: string; publishedAt: string | null }[] {
+function parseHtmlHeadlines(
+  html: string,
+  baseUrl: string,
+): { title: string; url: string; snippet: string; publishedAt: string | null }[] {
   const $ = cheerio.load(html);
   const seen = new Set<string>();
   const items: { title: string; url: string; snippet: string; publishedAt: string | null }[] = [];
@@ -96,45 +93,62 @@ function parseHtmlHeadlines(html: string, baseUrl: string): { title: string; url
   return items.slice(0, 8);
 }
 
-function matchProject(text: string, projects: ProjectLite[]): ProjectLite | null {
-  const hay = text.toLowerCase();
-  for (const rule of MATCHERS) {
-    if (rule.keys.some((k) => hay.includes(k))) {
-      return projects.find((p) => p.slug === rule.slug) ?? null;
-    }
-  }
-  for (const p of projects) {
-    if (hay.includes(p.name.toLowerCase())) return p;
-  }
-  return null;
-}
-
 async function chatComplete(prompt: string): Promise<string | null> {
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) return null;
-  const res = await fetch("https://api.x.ai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "grok-4.5",
-      max_tokens: 420,
-      temperature: 0.2,
-      messages: [
-        {
-          role: "system",
-          content:
-            "You write brief public updates for Palatka Homes Report, an independent civic housing site. Voice: service journalism — a local reporter who has read the file. Plain language, specific, dated. No hype, no jokes, no exclamation points, no emojis. Distinguish confirmed public records from news reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences.",
-        },
-        { role: "user", content: prompt },
-      ],
-    }),
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 22000);
+  try {
+    const res = await fetch("https://api.x.ai/v1/chat/completions", {
+      method: "POST",
+      signal: ctrl.signal,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "grok-4.5",
+        max_tokens: 420,
+        temperature: 0.2,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You write brief public updates for Palatka Homes Report, an independent civic housing site. Voice: service journalism — a local reporter who has read the file. Plain language, specific, dated. No hype, no jokes, no exclamation points, no emojis. Distinguish confirmed public records from news reports. Name dates and case numbers when present. If nothing material changed, say so in two sentences. Never mention AI, models, or automation.",
+          },
+          { role: "user", content: prompt },
+        ],
+      }),
+    });
+    if (!res.ok) return null;
+    const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+    return body.choices?.[0]?.message?.content?.trim() || null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+function fallbackDigest(
+  rows: { title: string; slug: string | null; name: string | null }[],
+): string {
+  const checked = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "America/New_York",
   });
-  if (!res.ok) return null;
-  const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-  return body.choices?.[0]?.message?.content?.trim() || null;
+  const titles = rows
+    .slice(0, 6)
+    .map((r) => r.title.replace(/\s+-\s+[^-]+$/, "").trim())
+    .filter(Boolean);
+  const list = titles.map((t) => `• ${t}`).join("\n");
+  const matched = rows.find((r) => r.name);
+  const closer = matched
+    ? `One or more items mention ${matched.name}. That is a news or agency mention, not automatically a change in the county file.`
+    : "None of these, on their face, change Alford Farms permit status or confirm a new subdivision ordinance.";
+  return `Public sources were checked on ${checked}. Recent Palatka-area housing or land-use mentions:\n${list}\n\n${closer}`;
 }
 
 async function maybeAlert(message: string) {
@@ -160,9 +174,132 @@ async function maybeAlert(message: string) {
   }
 }
 
+async function publishDigests(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  projects: ProjectLite[],
+): Promise<number> {
+  const idBySlug = new Map(projects.map((p) => [p.slug, p]));
+  const recent = await sql<{
+    title: string;
+    snippet: string | null;
+    url: string | null;
+    slug: string | null;
+    name: string | null;
+    created_at: string;
+  }>`
+    select i.title, i.snippet, i.url, p.slug, p.name, i.created_at::text as created_at
+    from source_items i
+    left join projects p on p.id = i.matched_project_id
+    where i.created_at > now() - interval '5 days'
+    order by i.created_at desc
+    limit 40
+  `;
+  const lastAuto = await sql<{ d: string | null }>`
+    select max(created_at)::text as d from project_updates where source_label = ${AUTO_LABEL}
+  `;
+  const cutoff = lastAuto[0]?.d ? new Date(lastAuto[0].d).getTime() : 0;
+  const pending = recent.filter((row) => {
+    if (new Date(row.created_at).getTime() <= cutoff) return false;
+    return Boolean(row.slug) || isHousingItem(row.title, row.snippet ?? "");
+  });
+  if (!pending.length) return 0;
+
+  let summarized = 0;
+  const bySlug = new Map<string, typeof pending>();
+  for (const row of pending) {
+    const key = row.slug ?? "_general";
+    const list = bySlug.get(key) ?? [];
+    list.push(row);
+    bySlug.set(key, list);
+  }
+
+  for (const [slug, rows] of bySlug) {
+    const headlines = rows
+      .map((r) => `- ${r.title}${r.snippet ? ` — ${r.snippet.slice(0, 160)}` : ""}`)
+      .join("\n");
+    if (slug === "_general") {
+      const text =
+        (await chatComplete(
+          `New headlines from Putnam / Palatka sources that did not match a known project:\n${headlines}\n\nWrite a 3-sentence What's New blurb. If a new subdivision name appears, flag it plainly. If this is only background housing news (HUD, shelters, national policy), say that it does not change the subdivision file.`,
+        )) ?? fallbackDigest(rows);
+      await sql.query(
+        `insert into project_updates (project_id, title, body, kind, source_label)
+         values (null, $1, $2, 'whats_new', $3)`,
+        ["From Palatka housing sources", text, AUTO_LABEL],
+      );
+      summarized += 1;
+      continue;
+    }
+    const project = idBySlug.get(slug);
+    if (!project) continue;
+    const current = await sql<{ latest_summary: string | null }>`
+      select latest_summary from projects where id = ${project.id}
+    `;
+    const text =
+      (await chatComplete(
+        `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page. If the items do not actually change status, keep the prior facts and note the mention.`,
+      )) ?? fallbackDigest(rows);
+    await sql.query(
+      `update projects set latest_summary = $1, latest_summary_at = now(), updated_at = now() where id = $2`,
+      [text, project.id],
+    );
+    await sql.query(
+      `insert into project_updates (project_id, title, body, kind, source_label)
+       values ($1,$2,$3,'whats_new',$4)`,
+      [project.id, `Update: ${project.name}`, text, AUTO_LABEL],
+    );
+    summarized += 1;
+  }
+  return summarized;
+}
+
+/** Fire-and-forget: if the daily job is stale, start a new serverless invocation. */
+export function kickStaleTrackerUpdate(): void {
+  if (dbSource !== "neon") return;
+  void (async () => {
+    try {
+      const sql = await getSql();
+      const rows = await sql<{ started_at: string; status: string }>`
+        select started_at::text as started_at, status
+        from job_runs
+        where job_name = 'tracker-update'
+        order by started_at desc
+        limit 1
+      `;
+      const last = rows[0];
+      if (last) {
+        const age = Date.now() - new Date(last.started_at).getTime();
+        if (last.status === "running" && age < 25 * 60 * 1000) return;
+        if (last.status !== "running" && age < 18 * 60 * 60 * 1000) return;
+      }
+      const raw =
+        process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+        process.env.VERCEL_URL ||
+        "www.palatkahomesreport.com";
+      const host = raw.replace(/^https?:\/\//, "");
+      await fetch(`https://${host}/api/cron/update`, {
+        headers: { "x-vercel-cron": "1" },
+      });
+    } catch {
+      /* kick is best-effort */
+    }
+  })();
+}
+
 export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string }> {
   await ensureSeeded();
   const sql = await getSql();
+
+  const running = await sql<{ id: number }>`
+    select id from job_runs
+    where job_name = 'tracker-update'
+      and status = 'running'
+      and started_at > now() - interval '20 minutes'
+  `;
+  if (running.length) {
+    return { ok: true, summary: "A source check is already running." };
+  }
+
   const inserted = await sql<{ id: number }>`
     insert into job_runs (job_name, status) values ('tracker-update', 'running') returning id
   `;
@@ -170,11 +307,11 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
   const errors: string[] = [];
   let newItems = 0;
   let summarized = 0;
+  const ai = Boolean(process.env.XAI_API_KEY);
 
   try {
     const sources = await sql<SourceRow>`select id, name, url, kind, enabled from sources where enabled = true`;
     const projects = await sql<ProjectLite>`select id, slug, name, status from projects`;
-    const idBySlug = new Map(projects.map((p) => [p.slug, p]));
 
     for (const source of sources) {
       await sql.query(`update sources set last_checked_at = now() where id = $1`, [source.id]);
@@ -191,9 +328,13 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
       ]);
 
       for (const item of parsed) {
-        const matched = matchProject(`${item.title} ${item.snippet}`, projects);
+        const hay = `${item.title} ${item.snippet}`;
+        const matched = matchProject(hay, projects);
+        const housing = isHousingItem(item.title, item.snippet);
         const candidate =
           !matched && NEW_PROJECT_HINT.test(item.title) && /palatka|putnam|east palatka/i.test(item.title);
+        if (!matched && !housing && !candidate) continue;
+
         try {
           const res = await sql.query<{ id: number }>(
             `insert into source_items (
@@ -236,7 +377,7 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
         }
 
         if (matched) {
-          const inferred = inferStatus(`${item.title} ${item.snippet}`);
+          const inferred = inferStatus(hay);
           if (inferred) {
             const currentRank = STATUS_RANK[matched.status] ?? 0;
             const nextRank = STATUS_RANK[inferred] ?? 0;
@@ -250,70 +391,9 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
           }
         }
       }
-      await new Promise((r) => setTimeout(r, 400));
     }
 
-    if (newItems > 0 && process.env.XAI_API_KEY) {
-      const recent = await sql<{
-        title: string;
-        snippet: string | null;
-        url: string | null;
-        slug: string | null;
-        name: string | null;
-      }>`
-        select i.title, i.snippet, i.url, p.slug, p.name
-        from source_items i
-        left join projects p on p.id = i.matched_project_id
-        order by i.created_at desc
-        limit 12
-      `;
-      const bySlug = new Map<string, typeof recent>();
-      for (const row of recent) {
-        const key = row.slug ?? "_general";
-        const list = bySlug.get(key) ?? [];
-        list.push(row);
-        bySlug.set(key, list);
-      }
-      for (const [slug, rows] of bySlug) {
-        const headlines = rows
-          .map((r) => `- ${r.title}${r.snippet ? ` — ${r.snippet.slice(0, 160)}` : ""}`)
-          .join("\n");
-        if (slug === "_general") {
-          const text = await chatComplete(
-            `New headlines from Putnam / Palatka sources that did not match a known project:\n${headlines}\n\nWrite a 3-sentence What's New blurb. If a new subdivision name appears, flag it plainly.`,
-          );
-          if (text) {
-            await sql.query(
-              `insert into project_updates (project_id, title, body, kind, source_label)
-               values (null, $1, $2, 'whats_new', 'Automated digest')`,
-              ["Source digest", text],
-            );
-            summarized += 1;
-          }
-          continue;
-        }
-        const project = idBySlug.get(slug);
-        if (!project) continue;
-        const current = await sql<{ latest_summary: string | null }>`
-          select latest_summary from projects where id = ${project.id}
-        `;
-        const text = await chatComplete(
-          `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page.`,
-        );
-        if (text) {
-          await sql.query(
-            `update projects set latest_summary = $1, latest_summary_at = now(), updated_at = now() where id = $2`,
-            [text, project.id],
-          );
-          await sql.query(
-            `insert into project_updates (project_id, title, body, kind, source_label)
-             values ($1,$2,$3,'whats_new','Automated digest')`,
-            [project.id, `Update: ${project.name}`, text],
-          );
-          summarized += 1;
-        }
-      }
-    }
+    summarized = await publishDigests(sql, projects);
 
     const candidates = await sql<{ id: number; title: string; url: string | null; snippet: string | null }>`
       select id, title, url, snippet from source_items
@@ -324,6 +404,7 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
       limit 8
     `;
     for (const c of candidates) {
+      if (!isHousingItem(c.title, c.snippet ?? "")) continue;
       const slugBase = c.title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
@@ -350,11 +431,11 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
     }
 
     await sql.query(`update site_settings set value = now()::text where key = 'last_public_update'`);
-    const summary = `Fetched ${sources.length} sources, ${newItems} new items, ${summarized} summaries. ${errors.length ? `Errors: ${errors.join("; ")}` : "No source errors."}`;
+    const summary = `Fetched ${sources.length} sources, ${newItems} new items, ${summarized} summaries, ai=${ai ? "yes" : "no"}. ${errors.length ? `Errors: ${errors.join("; ")}` : "No source errors."}`;
     if (jobId) {
       await sql.query(
         `update job_runs set finished_at = now(), status = $1, summary = $2, error = $3 where id = $4`,
-        [errors.length && newItems === 0 ? "error" : "ok", summary, errors.join("; ") || null, jobId],
+        [errors.length && newItems === 0 && summarized === 0 ? "error" : "ok", summary, errors.join("; ") || null, jobId],
       );
     }
     if (errors.length >= 3) await maybeAlert(summary);

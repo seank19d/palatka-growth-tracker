@@ -294,39 +294,29 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
      where body like '%this tracker%'`,
   );
 
-  // Refresh known project summaries and official links from the seed catalog.
-  for (const p of SEED_PROJECTS) {
-    await sql.query(
-      `update projects
-       set latest_summary = $2,
-           latest_summary_at = $3,
-           status = $4,
-           official_links = $5,
-           lots_current = $6,
-           lots_rezoning = $7,
-           builder = $8,
-           developer = $9,
-           county_case = $10,
-           ordinance = $11,
-           sjrwmd_file = $12,
-           units_note = $13,
-           updated_at = now()
-       where slug = $1`,
-      [
-        p.slug,
-        p.latestSummary,
-        p.latestSummaryAt,
-        p.status,
-        JSON.stringify(p.officialLinks),
-        p.lotsCurrent,
-        p.lotsRezoning,
-        p.builder,
-        p.developer,
-        p.countyCase,
-        p.ordinance,
-        p.sjrwmdFile,
-        p.unitsNote,
-      ],
-    );
+  await syncSources(sql);
+}
+
+async function syncSources(sql: Awaited<ReturnType<typeof getSql>>) {
+  const have = await sql<{ id: number; name: string; url: string; kind: string; enabled: boolean }>`
+    select id, name, url, kind, enabled from sources
+  `;
+  const byName = new Map(have.map((r) => [r.name, r]));
+  for (const s of SEED_SOURCES) {
+    const row = byName.get(s.name);
+    if (!row) {
+      await sql.query(`insert into sources (name, url, kind, enabled) values ($1,$2,$3,true)`, [
+        s.name,
+        s.url,
+        s.kind,
+      ]);
+      continue;
+    }
+    if (row.url !== s.url || row.kind !== s.kind || !row.enabled) {
+      await sql.query(
+        `update sources set url = $2, kind = $3, last_error = null, enabled = true where id = $1`,
+        [row.id, s.url, s.kind],
+      );
+    }
   }
 }

@@ -51,12 +51,17 @@ export const SEED_UPDATES: {
 export const SEED_SOURCES: { name: string; url: string; kind: string }[] = [
   {
     name: "Google News — Alford Farms / East Palatka housing",
-    url: "https://news.google.com/rss/search?q=Alford+Farms+Palatka+OR+%22East+Palatka%22+subdivision+OR+%22Putnam+County%22+PUD&hl=en-US&gl=US&ceid=US:en",
+    url: "https://news.google.com/rss/search?q=%22Alford+Farms%22+(Palatka+OR+%22East+Palatka%22+OR+Putnam)&hl=en-US&gl=US&ceid=US:en",
     kind: "rss",
   },
   {
     name: "Google News — Palatka development",
-    url: "https://news.google.com/rss/search?q=Palatka+Florida+(housing+OR+subdivision+OR+rezoning+OR+development)&hl=en-US&gl=US&ceid=US:en",
+    url: "https://news.google.com/rss/search?q=Palatka+Florida+(housing+OR+subdivision+OR+rezoning+OR+development+OR+Mattamy+OR+%22new+homes%22)&hl=en-US&gl=US&ceid=US:en",
+    kind: "rss",
+  },
+  {
+    name: "Google News — Collection / Mattamy Palatka",
+    url: "https://news.google.com/rss/search?q=%22Collection+at+Palatka%22+OR+(Mattamy+Palatka)+OR+%22Century+Complete%22+Palatka&hl=en-US&gl=US&ceid=US:en",
     kind: "rss",
   },
   {
@@ -66,13 +71,18 @@ export const SEED_SOURCES: { name: string; url: string; kind: string }[] = [
   },
   {
     name: "Putnam County Planning & Zoning",
-    url: "https://www.putnam-fl.gov/241/Planning-Zoning",
+    url: "https://www.putnam-fl.gov/departments/development-services/planning-and-zoning/",
+    kind: "html",
+  },
+  {
+    name: "City of Palatka Planning",
+    url: "https://palatka-fl.gov/131/Planning-Department",
     kind: "html",
   },
   {
     name: "SJRWMD Putnam County",
-    url: "https://www.sjrwmd.com/district-counties/putnam-county/",
-    kind: "html",
+    url: "https://news.google.com/rss/search?q=SJRWMD+(Palatka+OR+Putnam+OR+%22East+Palatka%22)+(permit+OR+ERP+OR+stormwater)&hl=en-US&gl=US&ceid=US:en",
+    kind: "rss",
   },
 ];
 
