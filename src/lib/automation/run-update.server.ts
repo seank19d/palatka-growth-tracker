@@ -200,7 +200,7 @@ async function publishDigests(
   const cutoff = lastAuto[0]?.d ? new Date(lastAuto[0].d).getTime() : 0;
   const pending = recent.filter((row) => {
     if (new Date(row.created_at).getTime() <= cutoff) return false;
-    return Boolean(row.slug) || isHousingItem(row.title, row.snippet ?? "");
+    return isHousingItem(row.title, row.snippet ?? "");
   });
   if (!pending.length) return 0;
 
@@ -310,6 +310,25 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
   const ai = Boolean(process.env.XAI_API_KEY);
 
   try {
+    await sql.query(`
+      delete from project_updates
+      where source_label = 'Automated digest'
+        and (
+          body ilike '%volleyball%'
+          or body ilike '%prep football%'
+          or body ilike '%police chief%'
+          or body ilike '%direct deposit%'
+        )
+    `);
+    await sql.query(
+      `update projects
+       set latest_summary = $1, latest_summary_at = now()
+       where slug = 'interlachen-lakes' and latest_summary ilike '%volleyball%'`,
+      [
+        "Interlachen-area lakes development is on file as existing-market context, not a current Palatka or East Palatka sale.",
+      ],
+    );
+
     const sources = await sql<SourceRow>`select id, name, url, kind, enabled from sources where enabled = true`;
     const projects = await sql<ProjectLite>`select id, slug, name, status from projects`;
 
