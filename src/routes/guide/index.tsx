@@ -42,7 +42,7 @@ function GuideHub() {
               >
                 <span>
                   <span className="block font-medium">{p.name}</span>
-                  <span className="mt-0.5 block text-sm text-muted">{p.locationLabel}</span>
+                  <span className="mt-0.5 block text-base text-muted">{p.locationLabel}</span>
                 </span>
                 <StatusBadge status={p.status} />
               </Link>
@@ -75,7 +75,7 @@ function GuideHub() {
               </p>
             </div>
             <h2 className="mt-4 font-display text-xl font-semibold">{g.navLabel}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
+            <p className="mt-2 text-base leading-relaxed text-muted">{g.excerpt}</p>
           </Link>
         ))}
       </section>

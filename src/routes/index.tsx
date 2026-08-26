@@ -106,7 +106,7 @@ function Home() {
               </a>
             </Button>
           </div>
-          <p className="mt-4 text-sm text-muted">
+          <p className="mt-4 text-base text-muted">
             Moving here?{" "}
             <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
               Open the living guide
@@ -144,7 +144,7 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-14">
           <Kicker>Start here</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">Now vs later</h2>
-          <p className="mt-3 max-w-2xl text-muted">
+          <p className="mt-3 max-w-2xl text-lg text-muted">
             Century Complete is taking contracts on 17th Street. Alford Farms is still a Putnam PUD
             file.
           </p>
@@ -170,11 +170,11 @@ function Home() {
                 <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
                   Pipeline — not selling yet
                 </p>
-                <p className="mt-4 text-sm text-muted">No pipeline flagship on file.</p>
+                <p className="mt-4 text-base text-muted">No pipeline flagship on file.</p>
               </div>
             )}
           </div>
-          <p className="mt-6 text-sm text-muted">
+          <p className="mt-6 text-base text-muted">
             <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">
               See every development on file
             </Link>
@@ -185,7 +185,7 @@ function Home() {
       <aside className="border-b border-border bg-primary text-primary-fg">
         <RiverDivider className="text-primary-fg/40" />
         <div className="mx-auto max-w-6xl px-4 py-4 md:px-6">
-          <p className="max-w-4xl text-sm leading-relaxed">
+          <p className="max-w-4xl text-base leading-relaxed">
             East Palatka sits on the SR 207 side of the St. Johns — high ground first, which is why
             flood maps and{" "}
             <Link
@@ -242,7 +242,7 @@ function Home() {
                   ) : (
                     <p className="font-medium">{u.title}</p>
                   )}
-                  <p className="mt-1 line-clamp-2 text-sm text-muted">{u.body}</p>
+                  <p className="mt-1 line-clamp-2 text-base text-muted">{u.body}</p>
                 </div>
               </li>
             ))}
@@ -293,7 +293,7 @@ function Home() {
               <div className="w-2/3 bg-primary" />
               <div className="w-1/3 bg-sun" />
             </div>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{market.medianNote}</p>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted">{market.medianNote}</p>
             <p className="mt-3 text-xs text-subtle">{market.sourceNote}</p>
             <Link
               to="/guide/$slug"
@@ -310,7 +310,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <Kicker>Moving here</Kicker>
         <h2 className="mt-2 font-display text-3xl font-semibold">Living in Palatka</h2>
-        <p className="mt-3 max-w-2xl text-muted">
+        <p className="mt-3 max-w-2xl text-lg text-muted">
           Utilities, flood maps, schools, and the details a listing will skip.
         </p>
         <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
@@ -330,7 +330,7 @@ function Home() {
                 }
               />
               <h3 className="mt-4 font-display text-xl font-semibold">{g.navLabel}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{g.excerpt}</p>
+              <p className="mt-2 text-base leading-relaxed text-muted">{g.excerpt}</p>
             </Link>
           ))}
         </div>
@@ -352,7 +352,7 @@ function Home() {
                   </span>
                   {f.question}
                 </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted">{f.answer}</dd>
+                <dd className="mt-2 text-base leading-relaxed text-muted">{f.answer}</dd>
               </div>
             ))}
           </dl>
@@ -382,7 +382,7 @@ function NowLaterCard({
     return (
       <div className="border border-border bg-card p-5 md:p-6">
         <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">{eyebrow}</p>
-        <p className="mt-4 text-sm text-muted">{empty}</p>
+        <p className="mt-4 text-base text-muted">{empty}</p>
       </div>
     );
   }
@@ -415,8 +415,8 @@ function NowLaterCard({
               <ConfidenceBadge confidence={p.confidence} />
             </div>
             <h3 className="mt-3 font-display text-2xl font-semibold leading-tight">{p.name}</h3>
-            <p className="mt-1 text-sm text-muted">{p.locationLabel}</p>
-            <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-fg">{p.latestSummary}</p>
+            <p className="mt-1 text-base text-muted">{p.locationLabel}</p>
+            <p className="mt-3 line-clamp-3 text-base leading-relaxed text-fg">{p.latestSummary}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
               <div>
                 <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Stage</dt>
@@ -434,7 +434,7 @@ function NowLaterCard({
             <Link
               to="/developments/$slug"
               params={{ slug: p.slug }}
-              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary"
+              className="mt-4 inline-flex items-center gap-1 text-base font-medium text-primary"
             >
               Full record
               <ArrowRight className="size-3.5" />

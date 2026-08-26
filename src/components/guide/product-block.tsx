@@ -27,7 +27,7 @@ export function ProductBlock({
             >
               <span>
                 <span className="block font-medium">{p.title}</span>
-                <span className="mt-1 block text-sm leading-relaxed text-muted">{p.blurb}</span>
+                <span className="mt-1 block text-base leading-relaxed text-muted">{p.blurb}</span>
               </span>
               <span className="mt-2 shrink-0 text-xs text-primary sm:mt-0">Amazon</span>
             </a>

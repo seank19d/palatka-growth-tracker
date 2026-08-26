@@ -13,7 +13,7 @@ function Login() {
     <main className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-16">
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">Staff</p>
       <h1 className="mt-2 font-display text-3xl font-semibold">Sign in to the console</h1>
-      <p className="mt-3 text-sm leading-relaxed text-muted">
+      <p className="mt-3 text-lg leading-relaxed text-muted">
         Public pages do not require an account. Sign-in is for people who maintain the report —
         forcing a source refresh or correcting a status.
       </p>

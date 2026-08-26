@@ -6,10 +6,14 @@
   --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --text-xs: 0.8125rem;
-  --text-xs--line-height: 1.4;
-  --text-sm: 0.9375rem;
-  --text-sm--line-height: 1.55;
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.6;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.6;
 
   --color-bg: #f3eee4;
   --color-bg-sunken: #e8e0d2;
@@ -74,15 +78,11 @@
   html {
     background: var(--color-bg);
     color: var(--color-fg);
-    font-size: 112.5%;
+    font-size: 118.75%;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  @media (min-width: 48rem) {
-    html {
-      font-size: 106.25%;
-    }
   }
 
   body {
@@ -96,8 +96,9 @@
     color: var(--color-fg);
     font-family: var(--font-sans);
     font-optical-sizing: auto;
-    font-weight: 450;
-    line-height: 1.6;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.65;
   }
 
   body::before {

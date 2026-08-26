@@ -13,13 +13,13 @@ function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         className={cn(
-          "flex flex-1 items-center justify-between gap-4 py-4 text-left font-medium transition-colors duration-150 hover:text-primary [&[data-state=open]>svg]:rotate-180",
+          "flex flex-1 items-center justify-between gap-4 py-4 text-left text-lg font-medium leading-snug transition-colors duration-150 hover:text-primary [&[data-state=open]>svg]:rotate-180",
           className,
         )}
         {...props}
       >
         {children}
-        <ChevronDown className="size-4 shrink-0 text-muted transition-transform duration-200 ease-out" />
+        <ChevronDown className="size-5 shrink-0 text-muted transition-transform duration-200 ease-out" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );
@@ -28,7 +28,7 @@ function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.
 function AccordionContent({ className, children, ...props }: AccordionPrimitive.AccordionContentProps) {
   return (
     <AccordionPrimitive.Content
-      className="overflow-hidden text-sm text-muted data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+      className="overflow-hidden text-base leading-relaxed text-fg data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
       {...props}
     >
       <div className={cn("pb-4 pt-0", className)}>{children}</div>

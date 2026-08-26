@@ -16,7 +16,7 @@ const NAV = [
 ] as const;
 
 const navClass =
-  "relative inline-flex items-center gap-1.5 pb-0.5 text-sm text-muted transition-colors duration-150 hover:text-fg after:absolute after:inset-x-0 after:-bottom-3.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:ease-out data-[status=active]:font-medium data-[status=active]:text-fg data-[status=active]:after:scale-x-100";
+  "relative inline-flex items-center gap-1.5 pb-0.5 text-base text-muted transition-colors duration-150 hover:text-fg after:absolute after:inset-x-0 after:-bottom-3.5 after:h-px after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:ease-out data-[status=active]:font-medium data-[status=active]:text-fg data-[status=active]:after:scale-x-100";
 
 function AuthSlot() {
   const { user, isPending } = useCurrentUserState();
@@ -25,7 +25,7 @@ function AuthSlot() {
     <div className="flex items-center gap-3">
       <Link
         to="/admin"
-        className="text-sm text-muted transition-colors duration-150 hover:text-primary data-[status=active]:font-medium data-[status=active]:text-primary"
+        className="text-base text-muted transition-colors duration-150 hover:text-primary data-[status=active]:font-medium data-[status=active]:text-primary"
       >
         Admin
       </Link>
@@ -44,14 +44,14 @@ export function SiteHeader() {
         <div className="flex-1 bg-primary" />
         <div className="w-12 bg-sun sm:w-20" />
       </div>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 md:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-2.5" onClick={() => setOpen(false)}>
-          <BrandMark className="size-8" title="Palatka Homes Report" />
+          <BrandMark className="size-9" title="Palatka Homes Report" />
           <span className="min-w-0 leading-none">
-            <span className="block font-display text-xl font-semibold tracking-tight md:text-2xl">
+            <span className="block font-display text-2xl font-semibold tracking-tight">
               Palatka
             </span>
-            <span className="mt-0.5 block text-xs font-medium uppercase tracking-[0.18em] text-muted">
+            <span className="mt-1 block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
               Homes Report
             </span>
           </span>
@@ -97,14 +97,14 @@ export function SiteHeader() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="flex min-h-11 items-center gap-2 text-base text-muted transition-colors duration-150 data-[status=active]:font-medium data-[status=active]:text-fg"
+                className="flex min-h-12 items-center gap-2 text-lg text-muted transition-colors duration-150 data-[status=active]:font-medium data-[status=active]:text-fg"
                 onClick={() => setOpen(false)}
               >
                 <item.icon className="size-4" strokeWidth={1.75} />
                 {item.label}
               </Link>
             ))}
-            <div className="flex min-h-11 items-center">
+            <div className="flex min-h-12 items-center">
               <AuthSlot />
             </div>
           </div>

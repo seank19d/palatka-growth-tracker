@@ -20,19 +20,19 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
           <div className="flex items-center gap-2.5">
             <BrandMark className="size-8" />
             <div>
-              <p className="font-display text-xl font-semibold leading-none">Palatka</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-muted">
+              <p className="font-display text-2xl font-semibold leading-none">Palatka</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                 Homes Report
               </p>
             </div>
           </div>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
+          <p className="mt-3 max-w-sm text-base leading-relaxed text-muted">
             Independent coverage of housing in Palatka, East Palatka, and Putnam County. Not the
             county, not a builder, not a brokerage.
           </p>
         </div>
-        <div className="text-sm">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">Sections</p>
+        <div className="text-base">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Sections</p>
           <ul className="mt-3 space-y-2">
             {LINKS.map((item) => (
               <li key={item.to}>
@@ -43,8 +43,8 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
             ))}
           </ul>
         </div>
-        <div className="text-sm">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
+        <div className="text-base">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
             Last checked
           </p>
           <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-fg">

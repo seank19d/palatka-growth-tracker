@@ -51,11 +51,11 @@ export function ProjectCard({ project }: { project: Project }) {
         >
           {project.name}
         </h3>
-        <p className="mt-1 inline-flex items-center gap-1 text-sm text-muted">
+        <p className="mt-1 inline-flex items-center gap-1 text-base text-muted">
           <MapPin className="size-3.5 shrink-0 text-primary" strokeWidth={1.75} />
           {project.locationLabel}
         </p>
-        <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-muted">
+        <p className="mt-3 line-clamp-4 flex-1 text-base leading-relaxed text-fg">
           {project.latestSummary}
         </p>
         <dl className="mt-4 grid grid-cols-2 gap-3 border-t border-border pt-3 text-sm">

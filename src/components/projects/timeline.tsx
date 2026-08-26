@@ -3,7 +3,7 @@ import type { Milestone } from "@/lib/types";
 
 export function Timeline({ milestones }: { milestones: Milestone[] }) {
   if (!milestones.length) {
-    return <p className="text-sm text-muted">No dated milestones in the public file yet.</p>;
+    return <p className="text-base text-muted">No dated milestones in the public file yet.</p>;
   }
   return (
     <ol>
@@ -15,7 +15,7 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
           <time className="font-mono text-xs tabular-nums text-muted">{formatDateShort(m.occurredOn)}</time>
           <div>
             <h3 className="font-medium leading-snug">{m.title}</h3>
-            {m.body ? <p className="mt-1 text-sm leading-relaxed text-muted">{m.body}</p> : null}
+            {m.body ? <p className="mt-1 text-base leading-relaxed text-muted">{m.body}</p> : null}
             {m.sourceLabel ? (
               <p className="mt-2 text-xs text-subtle">
                 Source:{" "}

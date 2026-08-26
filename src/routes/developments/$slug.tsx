@@ -102,7 +102,7 @@ function ProjectPage() {
           ...(faqs.length ? [faqJsonLd(faqs)] : []),
         ]}
       />
-      <Link to="/developments" className="text-sm text-muted hover:text-primary">
+      <Link to="/developments" className="text-base text-muted hover:text-primary">
         ← All developments
       </Link>
       <Kicker className="mt-5">Project file</Kicker>
@@ -120,17 +120,17 @@ function ProjectPage() {
 
       <div className="mt-8">
         <StatusPipeline current={project.status} />
-        <p className="mt-2 text-sm text-muted">{STATUS_META[project.status].hint}</p>
+        <p className="mt-2 text-base text-muted">{STATUS_META[project.status].hint}</p>
       </div>
 
       <section className="mt-10">
         <h2 className="font-display text-2xl font-semibold">File facts</h2>
-        <p className="mt-1 text-sm text-muted">Numbers from the public file.</p>
+        <p className="mt-1 text-base text-muted">Numbers from the public file.</p>
         <dl className="mt-4 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((f) => (
             <div key={f.label} className="bg-card px-4 py-3">
               <dt className="text-xs uppercase tracking-[0.14em] text-subtle">{f.label}</dt>
-              <dd className="mt-1 text-sm font-medium">{f.value}</dd>
+              <dd className="mt-1 text-base font-medium">{f.value}</dd>
             </div>
           ))}
         </dl>
@@ -143,9 +143,9 @@ function ProjectPage() {
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
             Latest summary · {formatDateShort(project.latestSummaryAt)}
           </p>
-          <p className="mt-3 max-w-prose text-[1.05rem] leading-relaxed">{project.latestSummary}</p>
+          <p className="mt-3 max-w-prose text-lg leading-relaxed">{project.latestSummary}</p>
           {project.unitsNote ? (
-            <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted">{project.unitsNote}</p>
+            <p className="mt-4 max-w-prose text-base leading-relaxed text-muted">{project.unitsNote}</p>
           ) : null}
         </article>
         {project.lat != null && project.lng != null ? (
@@ -164,7 +164,7 @@ function ProjectPage() {
           <h2 className="font-display text-2xl font-semibold">Updates</h2>
           <ul className="mt-6 space-y-0">
             {updates.length === 0 ? (
-              <li className="text-sm text-muted">No dated updates beyond the milestone file.</li>
+              <li className="text-base text-muted">No dated updates beyond the milestone file.</li>
             ) : (
               updates.map((u) => (
                 <li
@@ -176,7 +176,7 @@ function ProjectPage() {
                   </p>
                   <div>
                     <p className="font-medium">{u.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{u.body}</p>
+                    <p className="mt-1 text-base leading-relaxed text-muted">{u.body}</p>
                   </div>
                 </li>
               ))
@@ -191,7 +191,7 @@ function ProjectPage() {
           <Accordion type="single" collapsible className="mt-4">
             {faqs.map((f) => (
               <AccordionItem key={f.question} value={f.question}>
-                <AccordionTrigger className="text-left text-base">{f.question}</AccordionTrigger>
+                <AccordionTrigger className="text-left">{f.question}</AccordionTrigger>
                 <AccordionContent className="leading-relaxed">{f.answer}</AccordionContent>
               </AccordionItem>
             ))}

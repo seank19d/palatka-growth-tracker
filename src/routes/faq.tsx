@@ -49,13 +49,13 @@ function FaqPage() {
       />
       <Kicker>FAQ</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold">Common questions</h1>
-      <p className="mt-3 text-muted">
+      <p className="mt-3 text-lg text-muted">
         Answers follow the public file, not builder talking points.
       </p>
       <Accordion type="single" collapsible className="mt-8">
         {all.map((f) => (
           <AccordionItem key={String(f.id)} value={String(f.id)}>
-            <AccordionTrigger className="text-left text-base">{f.question}</AccordionTrigger>
+            <AccordionTrigger className="text-left">{f.question}</AccordionTrigger>
             <AccordionContent className="leading-relaxed">{f.answer}</AccordionContent>
           </AccordionItem>
         ))}

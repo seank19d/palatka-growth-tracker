@@ -27,7 +27,7 @@ function AboutPage() {
     <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
       <Kicker>Method</Kicker>
       <h1 className="mt-3 font-display text-4xl font-semibold">About this report</h1>
-      <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
+      <div className="mt-6 space-y-4 text-lg leading-relaxed">
         <p>
           Palatka Homes Report is an independent public website. It is not Putnam County, the City
           of Palatka, a builder, a lender, or a real-estate brokerage. Nothing here is an offer to

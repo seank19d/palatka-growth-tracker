@@ -33,7 +33,7 @@ export function OfficialSources({ project }: { project: Project }) {
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div>
           <h2 className="font-display text-2xl font-semibold">Verify yourself</h2>
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-base text-muted">
             County and agency pages win if anything here disagrees.
           </p>
         </div>
@@ -45,7 +45,7 @@ export function OfficialSources({ project }: { project: Project }) {
               href={l.url}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-between gap-3 border border-border bg-card px-4 py-3 text-sm font-medium text-fg transition-colors hover:border-primary/40 hover:bg-secondary/50"
+              className="flex items-center justify-between gap-3 border border-border bg-card px-4 py-3 text-base font-medium text-fg transition-colors hover:border-primary/40 hover:bg-secondary/50"
             >
               <span>{l.label}</span>
               <ExternalLink className="size-3.5 shrink-0 text-subtle" aria-hidden />

@@ -58,11 +58,11 @@ function DevelopmentsPage() {
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <Kicker>Developments</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
-      <p className="mt-3 max-w-2xl text-muted">
+      <p className="mt-3 max-w-2xl text-lg text-muted">
         Every project currently published. Pipeline is still in the county file. Watch-list items
         are unconfirmed. Selling means someone is taking contracts.
       </p>
-      <p className="mt-3 max-w-2xl text-sm text-muted">
+      <p className="mt-3 max-w-2xl text-base text-muted">
         <strong className="font-medium text-fg">How to read a status:</strong> Concept is an idea.
         Rezoning is a county case. Selling is a contract. Built-out is a finished community.
       </p>

@@ -65,7 +65,7 @@ function GuidePage() {
         </nav>
       </aside>
       <article>
-        <Link to="/guide" className="text-sm text-muted hover:text-primary">
+        <Link to="/guide" className="text-base text-muted hover:text-primary">
           ← Living guide
         </Link>
         <p className="mt-6 text-xs font-medium uppercase tracking-[0.16em] text-muted">Living guide</p>
