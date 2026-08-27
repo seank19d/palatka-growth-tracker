@@ -1,5 +1,5 @@
 import { getSql } from "@/lib/db";
-import { amazonImageUrl, amazonTag, amazonUrl } from "@/lib/amazon";
+import { amazonImageUrl, amazonTag, amazonUrl, cleanAsin } from "@/lib/amazon";
 import { parseJson } from "@/lib/format";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import type {
@@ -292,18 +292,21 @@ export async function getProducts(category?: string | null): Promise<AffiliatePr
         price_label: string | null;
         sort_order: number;
       }>`select id, asin, title, category, blurb, search_query, image_url, price_label, sort_order from affiliate_products order by sort_order`;
-  return rows.map((r) => ({
-    id: r.id,
-    asin: r.asin,
-    title: r.title,
-    category: r.category,
-    blurb: r.blurb,
-    searchQuery: r.search_query,
-    url: amazonUrl({ asin: r.asin, query: r.search_query }),
-    imageUrl: r.image_url || (r.asin ? amazonImageUrl(r.asin) : null),
-    priceLabel: r.price_label,
-    sortOrder: r.sort_order,
-  }));
+  return rows.map((r) => {
+    const asin = cleanAsin(r.asin);
+    return {
+      id: r.id,
+      asin: r.asin,
+      title: r.title,
+      category: r.category,
+      blurb: r.blurb,
+      searchQuery: r.search_query,
+      url: amazonUrl({ asin, query: r.search_query }),
+      imageUrl: r.image_url || (asin ? amazonImageUrl(asin) : null),
+      priceLabel: r.price_label,
+      sortOrder: r.sort_order,
+    };
+  });
 }
 
 export async function latestMarket(): Promise<MarketSnapshot | null> {
