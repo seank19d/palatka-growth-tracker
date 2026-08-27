@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DecideRouteImport } from './routes/decide'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
@@ -38,6 +39,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DecideRoute = DecideRouteImport.update({
+  id: '/decide',
+  path: '/decide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/decide'
     | '/faq'
     | '/login'
     | '/robots.txt'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/decide'
     | '/faq'
     | '/login'
     | '/robots.txt'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/decide'
     | '/faq'
     | '/login'
     | '/robots.txt'
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  DecideRoute: typeof DecideRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -246,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/decide': {
+      id: '/decide'
+      path: '/decide'
+      fullPath: '/decide'
+      preLoaderRoute: typeof DecideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -339,6 +359,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  DecideRoute: DecideRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,

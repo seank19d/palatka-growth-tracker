@@ -6,6 +6,7 @@ import { formatDateShort } from "@/lib/format";
 
 const LINKS = [
   { to: "/developments" as const, label: "Developments" },
+  { to: "/decide" as const, label: "Now or wait" },
   { to: "/guide" as const, label: "Living guide" },
   { to: "/whats-new" as const, label: "What's new" },
   { to: "/about" as const, label: "Sources & method" },

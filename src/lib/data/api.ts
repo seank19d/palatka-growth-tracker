@@ -55,6 +55,12 @@ export const fetchFaqs = createServerFn({ method: "GET" }).handler(async () => {
   return listFaqs();
 });
 
+export const fetchDecide = createServerFn({ method: "GET" }).handler(async () => {
+  const { listPublishedProjects, getProducts } = await import("./queries.server");
+  const [projects, products] = await Promise.all([listPublishedProjects(), getProducts()]);
+  return { projects, products };
+});
+
 export const fetchSitemapData = createServerFn({ method: "GET" }).handler(async () => {
   const { getSitemapEntries } = await import("./queries.server");
   return getSitemapEntries();

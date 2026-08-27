@@ -111,7 +111,11 @@ function Home() {
             </Button>
           </div>
           <p className="mt-4 text-base text-muted">
-            Moving here?{" "}
+            Not sure Collection vs Alford?{" "}
+            <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
+              Buy now or wait
+            </Link>
+            . Moving here?{" "}
             <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
               Open the living guide
             </Link>
@@ -179,6 +183,10 @@ function Home() {
             )}
           </div>
           <p className="mt-6 text-base text-muted">
+            <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
+              Get a read for your timeline
+            </Link>
+            {" · "}
             <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">
               See every development on file
             </Link>
