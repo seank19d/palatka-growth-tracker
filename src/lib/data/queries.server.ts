@@ -1,5 +1,5 @@
 import { getSql } from "@/lib/db";
-import { amazonImageUrl, amazonTag, amazonUrl, cleanAsin } from "@/lib/amazon";
+import { amazonTag, amazonUrl, cleanAsin } from "@/lib/amazon";
 import { parseJson } from "@/lib/format";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import type {
@@ -302,7 +302,7 @@ export async function getProducts(category?: string | null): Promise<AffiliatePr
       blurb: r.blurb,
       searchQuery: r.search_query,
       url: amazonUrl({ asin, query: r.search_query }),
-      imageUrl: r.image_url || (asin ? amazonImageUrl(asin) : null),
+      imageUrl: r.image_url && r.image_url.startsWith("/") ? r.image_url : null,
       priceLabel: r.price_label,
       sortOrder: r.sort_order,
     };

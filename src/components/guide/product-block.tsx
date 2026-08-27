@@ -1,7 +1,38 @@
-import { ShoppingBag } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Bandage,
+  BedDouble,
+  Bug,
+  Droplets,
+  Fan,
+  Flame,
+  Grid2x2,
+  Lamp,
+  Package,
+  Radio,
+  ShoppingBag,
+  SunMedium,
+  Wrench,
+} from "lucide-react";
 import { DISCLOSURE } from "@/lib/constants";
-import { amazonImpressionPixel } from "@/lib/amazon";
 import type { AffiliateProduct } from "@/lib/types";
+
+const THUMBS: Record<string, LucideIcon> = {
+  "Heavy-duty moving boxes": Package,
+  "Packing tape (multi-pack)": Package,
+  "First-aid kit": Bandage,
+  "Basic home tool kit": Wrench,
+  "Mattress protector (waterproof)": BedDouble,
+  Dehumidifier: Droplets,
+  "Box fan / air circulator": Fan,
+  "Outdoor all-weather rug": Grid2x2,
+  "Gas or charcoal grill": Flame,
+  "Garden hose and nozzle": Droplets,
+  "Hurricane supply kit": Radio,
+  "LED flashlights and lanterns": Lamp,
+  "Mosquito treatment for yards": Bug,
+  "Window solar film": SunMedium,
+};
 
 function logClick(id: number) {
   try {
@@ -11,6 +42,18 @@ function logClick(id: number) {
   } catch {
     /* click still goes to Amazon */
   }
+}
+
+function ProductThumb({ title }: { title: string }) {
+  const Icon = THUMBS[title] ?? ShoppingBag;
+  return (
+    <span
+      className="flex size-[72px] shrink-0 items-center justify-center rounded-sm border border-border bg-secondary text-primary"
+      aria-hidden
+    >
+      <Icon className="size-8" strokeWidth={1.5} />
+    </span>
+  );
 }
 
 export function ProductBlock({
@@ -37,18 +80,7 @@ export function ProductBlock({
               onClick={() => logClick(p.id)}
               className="flex gap-4 py-3 hover:bg-secondary/40 sm:items-center"
             >
-              {p.imageUrl ? (
-                <img
-                  src={p.imageUrl}
-                  alt=""
-                  width={72}
-                  height={72}
-                  className="size-[72px] shrink-0 rounded-sm border border-border bg-secondary object-contain p-1"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              ) : null}
+              <ProductThumb title={p.title} />
               <span className="min-w-0 flex-1">
                 <span className="block font-medium">{p.title}</span>
                 <span className="mt-1 block text-base leading-relaxed text-muted">{p.blurb}</span>
@@ -60,9 +92,6 @@ export function ProductBlock({
                 Amazon
               </span>
             </a>
-            {p.asin ? (
-              <img src={amazonImpressionPixel(p.asin)} alt="" width={1} height={1} className="sr-only" />
-            ) : null}
           </li>
         ))}
       </ul>
