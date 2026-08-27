@@ -119,6 +119,10 @@ function Home() {
             <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
               Open the living guide
             </Link>
+            . Have a street?{" "}
+            <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">
+              Decode the address
+            </Link>
             .
           </p>
         </div>

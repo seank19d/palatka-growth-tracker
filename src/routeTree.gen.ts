@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AddressRouteImport } from './routes/address'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DecideRouteImport } from './routes/decide'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -34,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AddressRoute = AddressRouteImport.update({
+  id: '/address',
+  path: '/address',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -110,6 +116,7 @@ const ApiCronUpdateRoute = ApiCronUpdateRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/address': typeof AddressRoute
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/address': typeof AddressRoute
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/address': typeof AddressRoute
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/address'
     | '/admin'
     | '/decide'
     | '/faq'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/address'
     | '/admin'
     | '/decide'
     | '/faq'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/address'
     | '/admin'
     | '/decide'
     | '/faq'
@@ -222,6 +234,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AddressRoute: typeof AddressRoute
   AdminRoute: typeof AdminRoute
   DecideRoute: typeof DecideRoute
   FaqRoute: typeof FaqRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/address': {
+      id: '/address'
+      path: '/address'
+      fullPath: '/address'
+      preLoaderRoute: typeof AddressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -358,6 +378,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AddressRoute: AddressRoute,
   AdminRoute: AdminRoute,
   DecideRoute: DecideRoute,
   FaqRoute: FaqRoute,

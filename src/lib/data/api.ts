@@ -61,6 +61,17 @@ export const fetchDecide = createServerFn({ method: "GET" }).handler(async () =>
   return { projects, products };
 });
 
+export const decodeAddress = createServerFn({ method: "GET" })
+  .validator((q: unknown) => String(q ?? "").trim().slice(0, 160))
+  .handler(async ({ data: q }) => {
+    const { listPublishedProjects, getProducts } = await import("./queries.server");
+    const [projects, products] = await Promise.all([listPublishedProjects(), getProducts()]);
+    if (!q) return { result: null as null, products };
+    const { decodeStreet } = await import("../decode.server");
+    const result = await decodeStreet(q, projects);
+    return { result, products };
+  });
+
 export const fetchSitemapData = createServerFn({ method: "GET" }).handler(async () => {
   const { getSitemapEntries } = await import("./queries.server");
   return getSitemapEntries();

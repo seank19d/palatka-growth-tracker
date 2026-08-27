@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BookOpen, CircleHelp, Info, MapPinned, Menu, Newspaper, Scale, X } from "lucide-react";
+import { BookOpen, CircleHelp, Info, LocateFixed, MapPinned, Menu, Newspaper, Scale, X } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
 import { Masthead } from "@/components/brand/masthead";
 import { SignedIn, UserButton } from "@/lib/auth/gates";
@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/developments", label: "Developments", icon: MapPinned },
   { to: "/decide", label: "Now or wait", icon: Scale },
+  { to: "/address", label: "Address", icon: LocateFixed },
   { to: "/guide", label: "Living guide", icon: BookOpen },
   { to: "/whats-new", label: "What's new", icon: Newspaper },
   { to: "/faq", label: "FAQ", icon: CircleHelp },
@@ -57,7 +58,7 @@ export function SiteHeader() {
             </span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-5 lg:flex">
+        <nav className="hidden items-center gap-3 lg:flex">
           {NAV.map((item) => (
             <Link key={item.to} to={item.to} className={navClass}>
               {item.label}

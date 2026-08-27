@@ -240,6 +240,9 @@ function Result({
             <ArrowRight className="size-4" />
           </Link>
         </Button>
+        <Button asChild variant="outline">
+          <Link to="/address">Decode a street</Link>
+        </Button>
         <Button type="button" variant="outline" onClick={onReset}>
           <RotateCcw className="size-4" />
           Start over
