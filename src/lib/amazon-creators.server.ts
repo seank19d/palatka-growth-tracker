@@ -160,12 +160,10 @@ export async function refreshCatalogFromAmazon(): Promise<{ ok: boolean; updated
       if (!item) continue;
       await sql.query(
         `update affiliate_products
-         set title = coalesce($2, title),
-             image_url = coalesce($3, image_url),
-             price_label = coalesce($4, price_label),
+         set price_label = coalesce($2, price_label),
              last_synced_at = now()
          where id = $1`,
-        [row.id, item.title, item.imageUrl, item.priceLabel],
+        [row.id, item.priceLabel],
       );
       updated += 1;
     }

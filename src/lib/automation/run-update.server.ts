@@ -452,13 +452,11 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
     await sql.query(`update site_settings set value = now()::text where key = 'last_public_update'`);
     let amazonNote = "";
     try {
-      const { creatorsReady, refreshCatalogFromAmazon } = await import("@/lib/amazon-creators.server");
-      if (creatorsReady()) {
-        const r = await refreshCatalogFromAmazon();
-        amazonNote = r.ok ? ` Amazon catalog refreshed (${r.updated}).` : ` Amazon: ${r.error}`;
-      }
-    } catch {
-      /* housing job should not fail on Amazon */
+      const { keepAffiliateCatalog } = await import("@/lib/affiliate-keep.server");
+      const kept = await keepAffiliateCatalog();
+      amazonNote = ` Affiliate keep: ${kept.summary}`;
+    } catch (err) {
+      amazonNote = ` Affiliate keep skipped: ${err instanceof Error ? err.message : "error"}`;
     }
     const summary = `Fetched ${sources.length} sources, ${newItems} new items, ${summarized} summaries, ai=${ai ? "yes" : "no"}.${amazonNote} ${errors.length ? `Errors: ${errors.join("; ")}` : "No source errors."}`;
     if (jobId) {

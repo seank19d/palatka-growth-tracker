@@ -486,16 +486,23 @@ export async function getAdminData() {
 }
 
 async function getAffiliateDesk(sql: Awaited<ReturnType<typeof getSql>>) {
+  const { ensureAffiliateKeepSchema } = await import("@/lib/affiliate-keep.server");
+  await ensureAffiliateKeepSchema(sql);
   const products = await sql<{
     id: number;
     asin: string | null;
     title: string;
     category: string;
+    search_query: string;
+    status: string | null;
+    check_note: string | null;
+    last_checked_at: string | null;
     last_synced_at: string | null;
     clicks_30: number;
     clicks_all: number;
   }>`
-    select p.id, p.asin, p.title, p.category, p.last_synced_at,
+    select p.id, p.asin, p.title, p.category, p.search_query,
+           p.status, p.check_note, p.last_checked_at, p.last_synced_at,
            coalesce((select count(*)::int from affiliate_clicks c where c.product_id = p.id and c.created_at > now() - interval '30 days'), 0) as clicks_30,
            coalesce((select count(*)::int from affiliate_clicks c where c.product_id = p.id), 0) as clicks_all
     from affiliate_products p
@@ -521,12 +528,22 @@ async function getAffiliateDesk(sql: Awaited<ReturnType<typeof getSql>>) {
   const commission = await sql<{ n: number | null }>`
     select coalesce(sum(commission_cents), 0)::int as n from affiliate_orders
   `;
+  const keep = await sql<{ value: string }>`
+    select value from site_settings where key = 'affiliate_keep_summary' limit 1
+  `;
+  const keepAt = await sql<{ value: string }>`
+    select value from site_settings where key = 'affiliate_last_keep' limit 1
+  `;
   return {
     products: products.map((p) => ({
       id: p.id,
       asin: p.asin,
       title: p.title,
       category: p.category,
+      searchQuery: p.search_query,
+      status: p.status || "ok",
+      checkNote: p.check_note,
+      lastCheckedAt: p.last_checked_at ? String(p.last_checked_at) : null,
       lastSyncedAt: p.last_synced_at ? String(p.last_synced_at) : null,
       clicks30: p.clicks_30,
       clicksAll: p.clicks_all,
@@ -541,6 +558,8 @@ async function getAffiliateDesk(sql: Awaited<ReturnType<typeof getSql>>) {
     })),
     clicks30: clickTotal[0]?.n ?? 0,
     commissionCents: commission[0]?.n ?? 0,
+    lastKeepAt: keepAt[0]?.value ?? null,
+    keepSummary: keep[0]?.value ?? null,
   };
 }
 

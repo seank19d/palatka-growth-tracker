@@ -107,6 +107,6 @@ export const logAffiliateOrder = createServerFn({ method: "POST" })
 export const refreshAmazonCatalog = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .handler(async () => {
-    const { refreshCatalogFromAmazon } = await import("@/lib/amazon-creators.server");
-    return refreshCatalogFromAmazon();
+    const { keepAffiliateCatalog } = await import("@/lib/affiliate-keep.server");
+    return keepAffiliateCatalog();
   });

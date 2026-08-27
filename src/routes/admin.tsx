@@ -221,8 +221,8 @@ function AmazonDesk({
     setBusy(true);
     try {
       const result = await refreshAmazonCatalog();
-      toast.message(result.ok ? `Updated ${result.updated} products` : "Amazon API not ready", {
-        description: result.error ?? "Titles, images, and prices pulled from Creators API.",
+      toast.message(result.ok ? "Catalog in order" : "Catalog needs a look", {
+        description: result.summary,
       });
       onSaved();
     } catch (err) {
@@ -241,10 +241,18 @@ function AmazonDesk({
         </Button>
       </div>
       <p className="mt-2 max-w-3xl text-base text-muted">
-        Tag {data.amazonTag} is on every product link. Amazon already shows at least one referred
-        order. Creators API (live prices and photos) needs about ten shipped items in 30 days —
-        until then, log orders from Associates Central → Reports so this desk matches the account.
+        Tag {data.amazonTag} is on every product link. The daily source job now runs an affiliate
+        keep: reseeds the 14-item kit, checks each tagged search URL, and flags anything thin or
+        missing. Creators API (live prices) still needs about ten shipped items — until then, log
+        orders from Associates Central so this desk matches the account.
       </p>
+      {aff.keepSummary ? (
+        <p className="mt-2 text-sm text-muted">
+          Last keep{aff.lastKeepAt ? ` · ${formatDateShort(aff.lastKeepAt)}` : ""}: {aff.keepSummary}
+        </p>
+      ) : (
+        <p className="mt-2 text-sm text-muted">No keep has run yet. Use Keep catalog now, or wait for the 12:00 UTC job.</p>
+      )}
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         <Card className="p-4">
           <p className="text-xs uppercase tracking-[0.14em] text-subtle">Clicks · 30 days</p>
@@ -266,7 +274,8 @@ function AmazonDesk({
           <thead className="text-xs uppercase tracking-[0.12em] text-subtle">
             <tr>
               <th className="py-2 pr-4">Product</th>
-              <th className="py-2 pr-4">ASIN</th>
+              <th className="py-2 pr-4">Status</th>
+              <th className="py-2 pr-4">Search</th>
               <th className="py-2 pr-4">Clicks 30d</th>
               <th className="py-2">All clicks</th>
             </tr>
@@ -274,8 +283,17 @@ function AmazonDesk({
           <tbody>
             {aff.products.map((p) => (
               <tr key={p.id} className="border-t border-border">
-                <td className="py-2 pr-4 font-medium">{p.title}</td>
-                <td className="py-2 pr-4 font-mono text-xs">{p.asin ?? "—"}</td>
+                <td className="py-2 pr-4 font-medium">
+                  {p.title}
+                  <span className="mt-0.5 block font-mono text-xs font-normal text-subtle">{p.asin ?? "—"}</span>
+                </td>
+                <td className="py-2 pr-4">
+                  <span className={p.status === "ok" ? "text-primary" : "text-destructive"}>
+                    {p.status === "ok" ? "In order" : "Watch"}
+                  </span>
+                  {p.checkNote ? <span className="mt-0.5 block text-xs text-muted">{p.checkNote}</span> : null}
+                </td>
+                <td className="py-2 pr-4 text-xs text-muted">{p.searchQuery}</td>
                 <td className="py-2 pr-4 tabular-nums">{p.clicks30}</td>
                 <td className="py-2 tabular-nums">{p.clicksAll}</td>
               </tr>

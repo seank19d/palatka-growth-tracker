@@ -342,3 +342,8 @@ async function syncSources(sql: Awaited<ReturnType<typeof getSql>>) {
     }
   }
 }
+
+export async function syncAffiliateProducts() {
+  const sql = await getSql();
+  await syncProducts(sql);
+}
