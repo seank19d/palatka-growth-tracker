@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BookOpen, CircleHelp, Info, LocateFixed, MapPinned, Menu, Newspaper, Scale, X } from "lucide-react";
+import { BookOpen, CircleHelp, CloudLightning, Info, LocateFixed, MapPinned, Menu, Newspaper, Scale, X } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
 import { Masthead } from "@/components/brand/masthead";
 import { SignedIn, UserButton } from "@/lib/auth/gates";
@@ -11,6 +11,7 @@ const NAV = [
   { to: "/developments", label: "Developments", icon: MapPinned },
   { to: "/decide", label: "Now or wait", icon: Scale },
   { to: "/address", label: "Address", icon: LocateFixed },
+  { to: "/storm", label: "Storm kit", icon: CloudLightning },
   { to: "/guide", label: "Living guide", icon: BookOpen },
   { to: "/whats-new", label: "What's new", icon: Newspaper },
   { to: "/faq", label: "FAQ", icon: CircleHelp },

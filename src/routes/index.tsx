@@ -123,6 +123,10 @@ function Home() {
             <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">
               Decode the address
             </Link>
+            . Storm season?{" "}
+            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+              Build this house’s list
+            </Link>
             .
           </p>
         </div>
@@ -189,6 +193,10 @@ function Home() {
           <p className="mt-6 text-base text-muted">
             <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
               Get a read for your timeline
+            </Link>
+            {" · "}
+            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+              Before the next named storm
             </Link>
             {" · "}
             <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">

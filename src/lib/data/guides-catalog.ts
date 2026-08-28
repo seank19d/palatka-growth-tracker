@@ -125,8 +125,8 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sections: [
       {
         callout: {
-          title: "First-week priority",
-          body: "Run the A/C, put waterproof mattress protectors on every bed, and check closets for condensation before you unpack decor. Humidity wins if you wait.",
+          title: "Storm season is June through November",
+          body: "A Collection closing in September is still a first named-storm month. Use the storm list on this site for the house you land — radio, water, and a charged battery beat a last-minute Publix run.",
         },
       },
       {

@@ -104,6 +104,15 @@ function GuidePage() {
         <div className="mt-12">
           <ProductBlock products={products} />
         </div>
+        {page.slug === "home-setup" || page.slug === "utilities" ? (
+          <p className="mt-6 text-base text-muted">
+            Closing into storm season?{" "}
+            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+              Build a list for this house
+            </Link>
+            .
+          </p>
+        ) : null}
       </article>
     </main>
   );

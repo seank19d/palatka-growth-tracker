@@ -12,6 +12,7 @@ This site is not Putnam County, not a builder, and not a brokerage. County PDFs 
 - [The Collection at Palatka](https://www.palatkahomesreport.com/developments/collection-at-palatka): Century Complete, 508 N. 17th Street, selling in-town new construction
 - [Buy now or wait](https://www.palatkahomesreport.com/decide): Collection (selling) vs Alford Farms (still a PUD file)
 - [Decode a Palatka address](https://www.palatkahomesreport.com/address): city vs unincorporated, flood map, utilities
+- [Before the next named storm](https://www.palatkahomesreport.com/storm): Palatka-specific power/well/radio list
 - [Moving to Palatka living guide](https://www.palatkahomesreport.com/guide)
 - [Palatka housing FAQ](https://www.palatkahomesreport.com/faq)
 

@@ -20,6 +20,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { loc: "/guide", lastmod: fallback, changefreq: "weekly", priority: "0.8" },
           { loc: "/decide", lastmod: fallback, changefreq: "weekly", priority: "0.9" },
           { loc: "/address", lastmod: fallback, changefreq: "weekly", priority: "0.85" },
+          { loc: "/storm", lastmod: fallback, changefreq: "weekly", priority: "0.9" },
           { loc: "/whats-new", lastmod: fallback, changefreq: "daily", priority: "0.7" },
           { loc: "/faq", lastmod: fallback, changefreq: "weekly", priority: "0.8" },
           { loc: "/about", lastmod: iso(lastPublic, fallback), changefreq: "monthly", priority: "0.4" },

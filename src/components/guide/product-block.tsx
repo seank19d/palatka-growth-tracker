@@ -1,15 +1,20 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Bandage,
+  BatteryCharging,
   BedDouble,
   Bug,
+  Cable,
   Droplets,
   Fan,
   Flame,
+  FlaskConical,
   Grid2x2,
   Lamp,
   Package,
   Radio,
+  Refrigerator,
+  Shield,
   ShoppingBag,
   SunMedium,
   Wrench,
@@ -32,6 +37,14 @@ const THUMBS: Record<string, LucideIcon> = {
   "LED flashlights and lanterns": Lamp,
   "Mosquito treatment for yards": Bug,
   "Window solar film": SunMedium,
+  "Portable power station": BatteryCharging,
+  "Drinking water containers": Droplets,
+  "Carbon monoxide detector": Shield,
+  "Heavy-duty extension cord": Cable,
+  "Well water test kit": FlaskConical,
+  "AA batteries (bulk)": BatteryCharging,
+  Cooler: Refrigerator,
+  "Heavy-duty tarp": Package,
 };
 
 function logClick(id: number) {

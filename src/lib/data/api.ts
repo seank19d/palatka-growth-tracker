@@ -76,3 +76,11 @@ export const fetchSitemapData = createServerFn({ method: "GET" }).handler(async 
   const { getSitemapEntries } = await import("./queries.server");
   return getSitemapEntries();
 });
+
+export const fetchStorm = createServerFn({ method: "GET" }).handler(async () => {
+  const { syncAffiliateProducts } = await import("./ensure-seeded.server");
+  await syncAffiliateProducts();
+  const { getProducts } = await import("./queries.server");
+  const products = await getProducts();
+  return { products };
+});

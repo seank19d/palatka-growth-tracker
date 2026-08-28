@@ -241,6 +241,9 @@ function Result({
           </Link>
         </Button>
         <Button asChild variant="outline">
+          <Link to="/storm">Storm list</Link>
+        </Button>
+        <Button asChild variant="outline">
           <Link to="/address">Decode a street</Link>
         </Button>
         <Button type="button" variant="outline" onClick={onReset}>
