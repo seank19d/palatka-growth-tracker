@@ -33,15 +33,15 @@ export const Route = createFileRoute("/developments/$slug")({
     const custom =
       p.slug === "alford-farms"
         ? {
-            title: "Alford Farms East Palatka, FL: status, 559 lots, D.R. Horton",
+            title: "Alford Farms East Palatka: 559 lots, not selling",
             description:
-              "Alford Farms is a planned subdivision on SR 207 in East Palatka. Putnam County approved PUD24-000004 in August 2024. Public records show permitting, not home sales. Why documents say 700 homes and 559 lots.",
+              "Alford Farms on SR 207 is a Putnam PUD (PUD24-000004), not a sales opening. 559-lot layout, D.R. Horton named as agent.",
           }
         : p.slug === "collection-at-palatka"
           ? {
-              title: "The Collection at Palatka: new construction homes for sale",
+              title: "The Collection at Palatka: new homes for sale",
               description:
-                "The Collection at Palatka by Century Complete is selling in-town new construction at 508 N. 17th Street. Advertised from the low $200,000s. Separate from Alford Farms in East Palatka.",
+                "Century Complete is selling The Collection at Palatka at 508 N. 17th Street. In-town new homes from the low $200,000s — not Alford Farms.",
             }
           : {
               title: `${p.name} in ${p.area}, FL — status and public record`,
@@ -83,6 +83,7 @@ function ProjectPage() {
             "@context": "https://schema.org",
             "@type": "Place",
             name: project.name,
+            url: `https://www.palatkahomesreport.com/developments/${project.slug}`,
             description: project.latestSummary,
             address: {
               "@type": "PostalAddress",

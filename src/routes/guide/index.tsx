@@ -11,7 +11,7 @@ export const Route = createFileRoute("/guide/")({
     seo({
       title: "Moving to Palatka, FL: living guide",
       description:
-        "Practical guide to living in Palatka and East Palatka: utilities, flood maps, schools, cost of living, and what pipeline communities like Alford Farms actually mean for a move date.",
+        "Moving to Palatka or East Palatka: utilities, flood maps, schools, cost of living, and what a pipeline PUD like Alford Farms actually means for a move date.",
       path: "/guide",
     }),
   component: GuideHub,

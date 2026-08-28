@@ -26,7 +26,7 @@ export const Route = createFileRoute("/address")({
     seo({
       title: "Decode a Palatka or East Palatka address",
       description:
-        "Paste a Putnam County street. See city vs unincorporated, water, electric caution, flood map, school locator, and nearby new construction — Collection vs Alford Farms.",
+        "Paste a Putnam County street. City vs unincorporated, water, electric, flood map, school locator, and nearby new construction — Collection vs Alford.",
       path: "/address",
     }),
   component: AddressPage,

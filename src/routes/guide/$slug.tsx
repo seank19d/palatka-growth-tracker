@@ -2,9 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { GuideGlyph } from "@/components/brand/guide-glyph";
 import { GuideProse } from "@/components/guide/prose";
 import { ProductBlock } from "@/components/guide/product-block";
+import { JsonLd } from "@/components/json-ld";
 import { formatDateShort } from "@/lib/format";
 import { fetchGuidePage } from "@/lib/data/api";
-import { seo } from "@/lib/seo";
+import { breadcrumbJsonLd, seo } from "@/lib/seo";
 import type { GuideSection } from "@/lib/types";
 
 const SCHOOLS_CALLOUT: GuideSection = {
@@ -65,6 +66,26 @@ function GuidePage() {
         </nav>
       </aside>
       <article>
+        <JsonLd
+          data={[
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Living guide", path: "/guide" },
+              { name: page.navLabel, path: `/guide/${page.slug}` },
+            ]),
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: page.title,
+              description: page.excerpt,
+              dateModified: page.lastRefreshedAt,
+              about: {
+                "@type": "Place",
+                name: "Palatka, East Palatka, and Putnam County, Florida",
+              },
+            },
+          ]}
+        />
         <Link to="/guide" className="text-base text-muted hover:text-primary">
           ← Living guide
         </Link>

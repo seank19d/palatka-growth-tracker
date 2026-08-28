@@ -63,10 +63,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "utilities",
-    title: "Utilities & services setup",
+    title: "Palatka utilities: Clay Electric, water, sewer",
     navLabel: "Utilities",
     excerpt:
-      "Electric, water, internet, gas, and trash — with the actual providers that serve Putnam County.",
+      "Clay Electric vs FPL, city water vs well, Palatka Gas, and trash in Putnam County. Look up the street — not the city name.",
     affiliateCategory: "home-setup",
     sortOrder: 2,
     sections: [
@@ -116,10 +116,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "home-setup",
-    title: "Home setup & furnishings",
+    title: "Palatka home setup: humidity, storms, and bugs",
     navLabel: "Home setup",
     excerpt:
-      "What actually matters in a North Florida house: humidity, sun, bugs, storms, and a porch.",
+      "First-week Palatka house setup: run the A/C, waterproof the mattresses, watch west glass, and treat standing water before you unpack.",
     affiliateCategory: "home-setup",
     sortOrder: 3,
     sections: [
@@ -158,9 +158,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "schools",
-    title: "Schools",
+    title: "Palatka FL schools and Putnam County assignment",
     navLabel: "Schools",
-    excerpt: "Putnam County School District, the Palatka campuses, and how to verify an assignment.",
+    excerpt:
+      "Putnam County School District assignment for Palatka and East Palatka. Verify the parcel — a PUD marketing map is not a school assignment.",
     affiliateCategory: null,
     sortOrder: 4,
     sections: [
@@ -199,9 +200,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "healthcare",
-    title: "Healthcare",
+    title: "Healthcare in Palatka and Putnam County",
     navLabel: "Healthcare",
-    excerpt: "The local hospital, what people drive for, and a calm look at rural-care reality.",
+    excerpt:
+      "HCA Florida Putnam Hospital in Palatka, what people drive to Jacksonville or Gainesville for, and the rural-care tradeoff.",
     affiliateCategory: null,
     sortOrder: 5,
     sections: [

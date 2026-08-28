@@ -23,9 +23,9 @@ export const Route = createFileRoute("/faq")({
   loader: () => fetchFaqs(),
   head: () =>
     seo({
-      title: "Palatka FL housing FAQ: Alford Farms, utilities, flood zones",
+      title: "Palatka housing FAQ: Alford Farms, flood, schools",
       description:
-        "Answers on what a PUD is, Alford Farms sales timing, 700 vs 559 lots, D.R. Horton, East Palatka vs Palatka, Clay Electric vs FPL, flood maps, and Putnam County schools.",
+        "Is Alford Farms selling? What a PUD is, 700 vs 559 lots, D.R. Horton, East Palatka vs Palatka, Clay Electric vs FPL, flood maps, and schools.",
       path: "/faq",
     }),
   component: FaqPage,
@@ -48,7 +48,7 @@ function FaqPage() {
         }}
       />
       <Kicker>FAQ</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold">Common questions</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold">Palatka housing FAQ</h1>
       <p className="mt-3 text-lg text-muted">
         Answers follow the public file, not builder talking points.
       </p>

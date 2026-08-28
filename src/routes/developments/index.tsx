@@ -7,15 +7,16 @@ import { Button } from "@/components/ui/button";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import { fetchProjects } from "@/lib/data/api";
 import { ProjectFocusProvider } from "@/lib/project-focus";
-import { seo } from "@/lib/seo";
+import { breadcrumbJsonLd, seo } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
 
 export const Route = createFileRoute("/developments/")({
   loader: () => fetchProjects(),
   head: () =>
     seo({
-      title: "New subdivisions in Palatka & East Palatka, FL",
+      title: "New Palatka subdivisions and East Palatka PUDs",
       description:
-        "Every Palatka and East Palatka housing project we publish: Alford Farms on SR 207, The Collection at Palatka, East River Road, and the Putnam County watch list. Status from public records.",
+        "Alford Farms, The Collection at Palatka, East River Road, and the Putnam watch list. Selling vs still in the county file — status from public records.",
       path: "/developments",
     }),
   component: DevelopmentsPage,
@@ -56,8 +57,30 @@ function DevelopmentsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Developments", path: "/developments" },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Palatka and East Palatka housing developments",
+            numberOfItems: projects.length,
+            itemListElement: projects.map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: p.name,
+              url: `https://www.palatkahomesreport.com/developments/${p.slug}`,
+            })),
+          },
+        ]}
+      />
       <Kicker>Developments</Kicker>
-      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">Developments</h1>
+      <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
+        New Palatka subdivisions
+      </h1>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Every project currently published. Pipeline is still in the county file. Watch-list items
         are unconfirmed. Selling means someone is taking contracts.

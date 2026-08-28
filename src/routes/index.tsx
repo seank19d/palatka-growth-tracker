@@ -28,9 +28,9 @@ export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
   head: () =>
     seo({
-      title: "New construction in Palatka & East Palatka, FL",
+      title: "New construction Palatka & East Palatka, FL",
       description:
-        "Independent report on new construction in Palatka, East Palatka, and Putnam County, Florida. Alford Farms status, The Collection at Palatka, public records, and a moving guide.",
+        "Independent Palatka new-construction report. The Collection is selling in town. Alford Farms in East Palatka is still a county PUD file, not a sales opening.",
       path: "/",
     }),
   component: Home,
