@@ -20,9 +20,9 @@ export const Route = createFileRoute("/storm")({
   loader: () => fetchStorm(),
   head: () =>
     seo({
-      title: "Palatka hurricane kit for a Putnam house",
+      title: "What to have in a Palatka house for storm season",
       description:
-        "Four questions, then a list for the house you’re in: water, lights, well vs city, and who to call. Amazon links; we may earn a commission.",
+        "Hurricane season in Putnam is June through November. Answer a few questions about the house you’re in and get a list — water, lights, well vs city, and who to call. Amazon links; we may earn a commission.",
       path: "/storm",
     }),
   component: StormPage,
@@ -62,13 +62,14 @@ function StormPage() {
           faqJsonLd(STORM_FAQS),
         ]}
       />
-      <Kicker>June–November</Kicker>
+      <Kicker>Storm season</Kicker>
       <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">
-        Storm list for a Palatka house
+        What to have in the house for storm season
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-        Season runs June through November. Four questions, then water, lights, and who to call for
-        the house you’re in.
+        Hurricane season here is June through November. Palatka isn’t on the ocean, but we still
+        lose power and the river comes up. Answer a few questions about the house you’re in and
+        we’ll put together a list.
       </p>
 
       {!complete ? (
@@ -149,16 +150,17 @@ function StormPage() {
             </ul>
           </article>
 
-          <ProductBlock products={kitItems} heading="Your list" />
+          <ProductBlock products={kitItems} heading="What to pick up" />
 
           <p className="text-base text-muted">
-            Putnam County Emergency Management is the official channel. Have a street?{" "}
+            This isn’t an official emergency list — Putnam County Emergency Management handles that.
+            If you have a street, you can{" "}
             <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">
-              Check city vs well
+              check whether it’s city or well
             </Link>
-            . Still choosing Collection vs Alford?{" "}
+            . If you’re still between Collection and Alford, start with{" "}
             <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
-              Buy now or wait
+              buy now or wait
             </Link>
             .
           </p>

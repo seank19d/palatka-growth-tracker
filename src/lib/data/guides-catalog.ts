@@ -126,7 +126,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
       {
         callout: {
           title: "Storm season is June through November",
-          body: "A September closing still sits in hurricane season. Use the storm list on this site for water, lights, and who to call.",
+          body: "You can close in September and still sit through a hurricane the first month. The storm list on this site is water, lights, and who to call for the house you’re in.",
         },
       },
       {
