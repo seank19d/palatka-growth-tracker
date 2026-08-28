@@ -29,59 +29,59 @@ export const STORM_QUESTIONS: [
 ] = [
   {
     key: "house",
-    prompt: "Which house are you in when it hits?",
-    hint: "Putnam is inland. Trees, laterals, and the river still do the damage — not a beach surge.",
+    prompt: "Where will you be?",
+    hint: "Palatka isn’t the coast. Trees still take down lines, and the river still comes up.",
     options: [
       {
         value: "collection",
         label: "New construction in town",
-        detail: "Collection-class house. Warranty, builder glass, no shutters yet.",
+        detail: "Something like The Collection. New roof, no shutters yet.",
       },
       {
         value: "east",
-        label: "East Palatka / acreage",
-        detail: "Unincorporated. Longer laterals, often a well, often clay roads that pond.",
+        label: "East Palatka or acreage",
+        detail: "Unincorporated. Often a well. Roads that hold water.",
       },
       {
         value: "old",
         label: "An older Palatka house",
-        detail: "Cottages and 1970s ranch. Humidity after the outage is the second storm.",
+        detail: "Cottage or ranch. When the A/C dies, the house gets damp.",
       },
       {
         value: "looking",
-        label: "Still looking / not closed",
-        detail: "Buy water and a radio before you buy furniture.",
+        label: "Haven’t closed yet",
+        detail: "Still looking, or waiting on a closing date.",
       },
     ],
   },
   {
     key: "people",
-    prompt: "How many people overnight?",
-    hint: "Water and light scale. A 50-inch TV does not.",
+    prompt: "How many people in the house?",
+    hint: "Used to size water and flashlights.",
     options: [
-      { value: "couple", label: "1–2", detail: "One lantern, one water jug, one pack of batteries can be enough." },
-      { value: "family", label: "3–4", detail: "A cooler and a second water jug beat a last-minute Publix run." },
-      { value: "large", label: "5 or more", detail: "Assume the power is out overnight and the stores are picked over." },
+      { value: "couple", label: "1–2", detail: "One lantern and a couple of water jugs is usually enough." },
+      { value: "family", label: "3–4", detail: "Add a cooler and extra water. Publix runs out of both." },
+      { value: "large", label: "5 or more", detail: "Plan on the power being out overnight." },
     ],
   },
   {
     key: "backup",
-    prompt: "What power do you already have?",
-    hint: "Clay Electric outage line is 1-888-434-9844. FPL is 1-800-4OUTAGE. Neither replaces a light in the house.",
+    prompt: "Do you already have backup power?",
+    hint: "Clay Electric outages: 1-888-434-9844. FPL: 1-800-4OUTAGE.",
     options: [
-      { value: "none", label: "Nothing yet", detail: "A mid-size power station is the item that actually gets used." },
-      { value: "station", label: "A power station / big battery", detail: "Add a heavy cord and a CO detector if you also run a generator." },
-      { value: "generator", label: "A generator", detail: "Carbon monoxide kills people in closed garages. Put the detector in the house, not on the unit." },
+      { value: "none", label: "No", detail: "A small power station will run phones and a lamp." },
+      { value: "station", label: "A power station / big battery", detail: "Add a heavy extension cord if you also have a generator." },
+      { value: "generator", label: "A generator", detail: "Put a carbon monoxide detector in the house. Never run a generator in the garage." },
     ],
   },
   {
     key: "water",
     prompt: "How does the house get water?",
-    hint: "A well pump is an electric appliance. City taps can still go on a boil-water notice.",
+    hint: "A well pump needs electricity. City water can still lose pressure.",
     options: [
-      { value: "city", label: "City of Palatka tap", detail: "Store drinking water anyway. Pressure can drop on a long outage." },
-      { value: "well", label: "Private well", detail: "No power, no pump. Test the well after floodwater, not before." },
-      { value: "unsure", label: "Not sure", detail: "Treat it as a well until the property appraiser and a plumber say otherwise." },
+      { value: "city", label: "City of Palatka", detail: "Keep drinking water on hand anyway." },
+      { value: "well", label: "Private well", detail: "No power, no pump. Test the well if floodwater sat around it." },
+      { value: "unsure", label: "Not sure", detail: "If you don’t know, buy water as if you’re on a well." },
     ],
   },
 ];
@@ -98,50 +98,50 @@ export function scoreStorm(a: StormAnswers): StormRead {
     return {
       kicker: "East Palatka / well",
       headline: "If the power is out, the well is out.",
-      body: "Unincorporated Putnam sits on longer laterals and a lot of private wells. You do not need a bunker. You need drinking water you can lift, light you already own, and a radio that works when the phone tower is busy.",
+      body: "Most East Palatka lots run on a well. When Clay Electric or FPL is down, the pump is down. Keep drinking water you can carry, a flashlight, and a radio. Cell service gets slow when the whole county is on it.",
       points: [
         "Clay Electric Cooperative — outages 1-888-434-9844. Palatka office (386) 328-1432.",
-        "FPL — 1-800-4OUTAGE. Territory is by line, not by the word Palatka on a listing.",
-        "Putnam County Emergency Management is the evacuation record. This page is not.",
-        "After standing water, test the well. Do not guess from the color of the tap.",
+        "FPL — 1-800-4OUTAGE. Look up your street; the word Palatka on a listing doesn’t tell you which company you have.",
+        "Evacuation orders come from Putnam County Emergency Management.",
+        "If water sat around the wellhead, get the well tested before you drink it.",
       ],
     };
   }
   if (a.house === "collection") {
     return {
       kicker: "In-town new construction",
-      headline: "A new house still goes dark when a tree hits a lateral.",
-      body: "The Collection is inside Palatka city, not on the beach. Builder glass and a fresh roof help. They do not replace a radio, drinking water, or a battery you charged on a quiet Tuesday.",
+      headline: "A new house still goes dark when a tree hits the line.",
+      body: "The Collection is inside the city. A new roof helps. You still want drinking water, a radio, and a way to charge phones.",
       points: [
-        "West-facing rooms cook after the A/C dies. Film is cheaper than a hotel.",
-        "HOA/PUD rules can limit generators and fuel on the lot. Read that before you buy a 5,000-watt unit.",
-        "Clay Electric or FPL — look up the street. City limits do not pick the utility.",
-        "Putnam County Emergency Management issues the real notices. Not a builder text thread.",
+        "West-facing rooms get hot once the A/C stops. Window film is cheaper than a hotel.",
+        "If the community has HOA rules, check them before you buy a generator.",
+        "Clay Electric or FPL — look up the street. City limits don’t pick the utility.",
+        "Official notices come from Putnam County Emergency Management.",
       ],
     };
   }
   if (a.house === "old") {
     return {
       kicker: "Older Palatka house",
-      headline: "The second storm is humidity.",
-      body: "When the A/C stops, closets sweat and particleboard swells. A tarp, a dehumidifier you already own, and a fan you can run off a station beat a last-minute generator panic.",
+      headline: "After the power goes out, the house gets damp.",
+      body: "When the A/C stops, closets sweat. A tarp, a dehumidifier, and a fan you can run off a battery are the usual list.",
       points: [
-        "A poly tarp and a real tool kit matter more than sandbags on high ground.",
-        "Run a carbon monoxide detector if anything with a motor lives in the garage.",
-        "Boil-water notices come from the city or county, not from Facebook.",
-        "This is not an official emergency list. Use Putnam County Emergency Management for that.",
+        "A tarp and a basic tool kit cover a lot of roof and yard damage.",
+        "If you have a generator, put a carbon monoxide detector in the house.",
+        "Boil-water notices come from the city or the county.",
+        "For official storm guidance, use Putnam County Emergency Management.",
       ],
     };
   }
   return {
     kicker: "Still looking",
-    headline: "Buy water and a radio before you buy the sofa.",
-    body: "Storm season in Putnam is June through November. You can land a Collection house in September and still sit through a named storm the first month. The cheap mistakes are waiting until the stores are empty.",
+    headline: "Get water and a radio even if you haven’t closed.",
+    body: "Storm season in Putnam is June through November. You can close on a house in September and sit through a hurricane the first month. Stores empty out fast.",
     points: [
-      "A NOAA radio and a water jug travel with you if the closing slips.",
-      "Decode the street for city vs unincorporated before you assume city water.",
-      "Alford Farms is still a PUD file. Do not plan a storm season around a sales date that is not public.",
-      "Putnam County Emergency Management is the official channel.",
+      "A radio and a water jug can go with you if closing slips.",
+      "Check whether the street is city or unincorporated before you assume city water.",
+      "Alford Farms is still a county file. Don’t plan around a sales date that isn’t public.",
+      "Official notices: Putnam County Emergency Management.",
     ],
   };
 }
@@ -196,21 +196,21 @@ export const STORM_FAQS = [
   {
     question: "Does Palatka evacuate for hurricanes?",
     answer:
-      "Putnam County is inland. Evacuation orders, if any, come from Putnam County Emergency Management — not from this site, not from a builder, and not from a Facebook group. Palatka still loses power and takes river flooding on tropical rain, even without a coastal surge.",
+      "Putnam County is inland. If there is an evacuation, Putnam County Emergency Management issues it. Palatka still loses power and can flood from the river on heavy rain.",
   },
   {
     question: "Who do I call when the lights go out?",
     answer:
-      "Clay Electric Cooperative outages: 1-888-434-9844. Palatka district office: (386) 328-1432. FPL: 1-800-4OUTAGE. Look up the street. The word Palatka on a listing does not pick the utility.",
+      "Clay Electric Cooperative: 1-888-434-9844. Palatka office: (386) 328-1432. FPL: 1-800-4OUTAGE. Look up your street — Palatka on a listing doesn’t tell you which company you have.",
   },
   {
     question: "Will a well run during an outage?",
     answer:
-      "No. A private well pump is an electric appliance. Store drinking water. After floodwater around the wellhead, test the water — color is not a lab result.",
+      "No. The pump needs power. Keep drinking water. If floodwater sat around the wellhead, get the well tested.",
   },
   {
     question: "Is this an official emergency kit?",
     answer:
-      "No. It is a Palatka-specific shopping list with Amazon links. We may earn a commission. For official guidance use Putnam County Emergency Management and the National Weather Service Jacksonville office.",
+      "No. It’s a shopping list for a Palatka house, with Amazon links. We may earn a commission. For official guidance use Putnam County Emergency Management and the National Weather Service in Jacksonville.",
   },
 ];

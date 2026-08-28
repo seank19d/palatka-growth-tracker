@@ -208,7 +208,7 @@ function ProjectPage() {
             <p className="mt-4 text-base text-muted">
               Closing into June–November?{" "}
               <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-                Build a storm list for this house
+                Storm list
               </Link>
               .
             </p>

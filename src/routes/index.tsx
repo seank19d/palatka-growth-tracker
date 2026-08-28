@@ -125,7 +125,7 @@ function Home() {
             </Link>
             . Storm season?{" "}
             <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Build this house’s list
+              Storm list
             </Link>
             .
           </p>
@@ -196,7 +196,7 @@ function Home() {
             </Link>
             {" · "}
             <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Before the next named storm
+              Storm list
             </Link>
             {" · "}
             <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">

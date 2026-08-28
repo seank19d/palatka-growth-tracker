@@ -108,7 +108,7 @@ function GuidePage() {
           <p className="mt-6 text-base text-muted">
             Closing into storm season?{" "}
             <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Build a list for this house
+              Storm list
             </Link>
             .
           </p>
