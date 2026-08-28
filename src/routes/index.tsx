@@ -123,9 +123,9 @@ function Home() {
             <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">
               Decode the address
             </Link>
-            . Storm season?{" "}
-            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Storm list
+            . Need a list for the house?{" "}
+            <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
+              Storm, summer, well, closing week
             </Link>
             .
           </p>
@@ -195,8 +195,8 @@ function Home() {
               Get a read for your timeline
             </Link>
             {" · "}
-            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Storm list
+            <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
+              Lists for the house
             </Link>
             {" · "}
             <Link to="/developments" className="font-medium text-primary underline-offset-4 hover:underline">

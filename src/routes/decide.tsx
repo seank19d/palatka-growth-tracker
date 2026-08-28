@@ -241,7 +241,7 @@ function Result({
           </Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/storm">Storm list</Link>
+          <Link to="/house">House lists</Link>
         </Button>
         <Button asChild variant="outline">
           <Link to="/address">Decode a street</Link>

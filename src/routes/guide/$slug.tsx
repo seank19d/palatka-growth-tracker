@@ -106,11 +106,27 @@ function GuidePage() {
         </div>
         {page.slug === "home-setup" || page.slug === "utilities" ? (
           <p className="mt-6 text-base text-muted">
-            Closing into storm season?{" "}
-            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
-              Storm list
-            </Link>
-            .
+            {page.slug === "utilities" ? (
+              <>
+                On a well?{" "}
+                <Link to="/well" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Well-lot list
+                </Link>
+                . Storm season?{" "}
+                <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Storm list
+                </Link>
+                .
+              </>
+            ) : (
+              <>
+                First summer or closing week?{" "}
+                <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Lists for the house
+                </Link>
+                .
+              </>
+            )}
           </p>
         ) : null}
       </article>

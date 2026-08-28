@@ -236,10 +236,10 @@ function Decoded({ result, kit }: { result: DecodeResult; kit: AffiliateProduct[
           </Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/storm">Storm list</Link>
+          <Link to="/well">If you’re on a well</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/guide">Living guide</Link>
+          <Link to="/house">House lists</Link>
         </Button>
       </div>
     </section>

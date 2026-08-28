@@ -17,6 +17,7 @@ import {
   Shield,
   ShoppingBag,
   SunMedium,
+  Wifi,
   Wrench,
 } from "lucide-react";
 import { DISCLOSURE } from "@/lib/constants";
@@ -45,6 +46,19 @@ const THUMBS: Record<string, LucideIcon> = {
   "AA batteries (bulk)": BatteryCharging,
   Cooler: Refrigerator,
   "Heavy-duty tarp": Package,
+  "Closet moisture absorbers": Droplets,
+  "Indoor humidity meter": Droplets,
+  "Whole-house sediment filter": FlaskConical,
+  "Under-sink water filter": Droplets,
+  "Mesh Wi-Fi system": Wifi,
+  "UPS battery backup for modem": BatteryCharging,
+  "Cat 6 ethernet cable": Cable,
+  "LED desk lamp": Lamp,
+  "Patio mosquito repeller": Bug,
+  "Caulk and caulk gun": Wrench,
+  "Outlet tester": Wrench,
+  "Painter's tape": Package,
+  "Step stool": Package,
 };
 
 function logClick(id: number) {

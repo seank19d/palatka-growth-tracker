@@ -206,7 +206,15 @@ function ProjectPage() {
           <ProductBlock products={products} heading="For the move-in week" />
           {project.slug === "collection-at-palatka" ? (
             <p className="mt-4 text-base text-muted">
-              Closing into June–November?{" "}
+              Closing this month?{" "}
+              <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
+                First-week list
+              </Link>
+              . First summer?{" "}
+              <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
+                Humidity and west glass
+              </Link>
+              . Storm season?{" "}
               <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
                 Storm list
               </Link>
