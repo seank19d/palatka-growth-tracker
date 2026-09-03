@@ -1,11 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
+import { FileAlertForm } from "@/components/leads/file-alert-form";
 import { JsonLd } from "@/components/json-ld";
 import { fetchFaqs } from "@/lib/data/api";
 import { seo } from "@/lib/seo";
@@ -49,17 +44,25 @@ function FaqPage() {
       />
       <Kicker>FAQ</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold">Palatka housing FAQ</h1>
-      <p className="mt-3 text-lg text-muted">
-        Answers follow the public file, not builder talking points.
-      </p>
-      <Accordion type="single" collapsible className="mt-8">
+      <p className="mt-3 text-lg text-muted">Answers follow the public file, not builder talking points.</p>
+      <dl className="mt-8 space-y-8">
         {all.map((f) => (
-          <AccordionItem key={String(f.id)} value={String(f.id)}>
-            <AccordionTrigger className="text-left">{f.question}</AccordionTrigger>
-            <AccordionContent className="leading-relaxed">{f.answer}</AccordionContent>
-          </AccordionItem>
+          <div key={String(f.id)} className="border-t border-border pt-6">
+            <dt className="font-display text-xl font-semibold">{f.question}</dt>
+            <dd className="mt-2 text-base leading-relaxed text-muted">{f.answer}</dd>
+          </div>
         ))}
-      </Accordion>
+      </dl>
+      <p className="mt-10 text-base text-muted">
+        Moving here this year?{" "}
+        <Link to="/pack" className="font-medium text-primary underline-offset-4 hover:underline">
+          Moving to Putnam pack
+        </Link>
+        .
+      </p>
+      <div className="mt-8">
+        <FileAlertForm sourcePath="/faq" />
+      </div>
     </main>
   );
 }
