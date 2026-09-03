@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
+import { TipForm } from "@/components/leads/tip-form";
+import { FileAlertForm } from "@/components/leads/file-alert-form";
 import { DISCLOSURE } from "@/lib/constants";
 import { seo } from "@/lib/seo";
 
@@ -34,9 +36,9 @@ function AboutPage() {
           sell real property.
         </p>
         <p>
-          Compiled from Putnam agendas, SJRWMD files, and attributed news. Alford Farms is the lead
-          file because it is the large East Palatka PUD. The living guide is for people moving to
-          Putnam County, not a listing brochure.
+          A Putnam County resident compiles the files. Alford Farms is the lead record because it is
+          the large East Palatka PUD. The living guide is for people moving to Putnam County, not a
+          listing brochure.
         </p>
         <h2 className="pt-4 font-display text-2xl font-semibold">Where the facts come from</h2>
         <ul className="mt-4 list-disc space-y-2 pl-5">
@@ -55,13 +57,34 @@ function AboutPage() {
           New items are matched to projects by name and case number. If a source is down, the last
           good file stays up.
         </p>
-        <h2 className="pt-4 font-display text-2xl font-semibold">Affiliate links</h2>
-        <p>{DISCLOSURE}</p>
-        <h2 className="pt-4 font-display text-2xl font-semibold">Corrections</h2>
+        <h2 className="pt-4 font-display text-2xl font-semibold">Corrections and tips</h2>
         <p>
           Prefer county PDFs over social posts. If a primary document contradicts this site, the
-          county file wins.
+          county file wins. Use the form for a document we missed, a sign on a fence, or a hearing
+          that is not in the log yet.
         </p>
+      </div>
+      <div className="mt-8 space-y-6">
+        <TipForm
+          kind="tip"
+          heading="Send a correction or a tip"
+          lede="A case number, a recorded plat, or a builder page beats a rumor. Anonymous is fine."
+        />
+        <FileAlertForm sourcePath="/about" />
+      </div>
+      <div className="mt-10 space-y-4 text-lg leading-relaxed">
+        <h2 className="font-display text-2xl font-semibold">Local resources</h2>
+        <p>
+          Inspectors, independent insurance, well and septic, movers, and lenders ask about a
+          labeled slot on this site. We do not sell listings and we do not endorse a brokerage.
+          Read the{" "}
+          <Link to="/resources" className="font-medium text-primary underline-offset-4 hover:underline">
+            local resource page
+          </Link>{" "}
+          if that is you.
+        </p>
+        <h2 className="pt-4 font-display text-2xl font-semibold">Affiliate links</h2>
+        <p>{DISCLOSURE}</p>
       </div>
     </main>
   );
