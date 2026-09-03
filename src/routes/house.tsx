@@ -10,7 +10,7 @@ export const Route = createFileRoute("/house")({
     seo({
       title: "Lists for a Palatka house",
       description:
-        "Storm season, the first summer, a well lot, working from home, the yard, and closing week — short Palatka lists with Amazon links. We may earn a commission.",
+        "Moving to Palatka, storm season, the first summer, a well lot, working from home, the yard, and closing week — short lists with Amazon links. We may earn a commission.",
       path: "/house",
     }),
   component: HousePage,
@@ -30,9 +30,9 @@ function HousePage() {
         Lists for a Palatka house
       </h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-        Once you’ve got a house in mind — or the keys — these are the lists people here actually
-        use. A few questions each, then the usual gear. The links go to Amazon; we may earn a
-        commission.
+        Once you’ve got a house in mind — or a truck booked — these are the lists people here
+        actually use. A few questions each, then the usual gear. The links go to Amazon; we may earn
+        a commission.
       </p>
       <ul className="mt-10 space-y-3">
         {HOUSE_CARDS.map((c) => (

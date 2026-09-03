@@ -104,7 +104,7 @@ function GuidePage() {
         <div className="mt-12">
           <ProductBlock products={products} />
         </div>
-        {page.slug === "home-setup" || page.slug === "utilities" ? (
+        {page.slug === "home-setup" || page.slug === "utilities" || page.slug === "moving-checklist" ? (
           <p className="mt-6 text-base text-muted">
             {page.slug === "utilities" ? (
               <>
@@ -115,6 +115,14 @@ function GuidePage() {
                 . Storm season?{" "}
                 <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
                   Storm list
+                </Link>
+                .
+              </>
+            ) : page.slug === "moving-checklist" ? (
+              <>
+                Truck booked?{" "}
+                <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+                  What to pack and have waiting
                 </Link>
                 .
               </>

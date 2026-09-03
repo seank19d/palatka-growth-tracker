@@ -241,6 +241,9 @@ function Result({
           </Link>
         </Button>
         <Button asChild variant="outline">
+          <Link to="/move">Moving list</Link>
+        </Button>
+        <Button asChild variant="outline">
           <Link to="/house">House lists</Link>
         </Button>
         <Button asChild variant="outline">

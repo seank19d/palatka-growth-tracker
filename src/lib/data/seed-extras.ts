@@ -286,6 +286,22 @@ export const SEED_PRODUCTS: {
     searchQuery: "Cosco 2 step folding step stool",
     sortOrder: 35,
   },
+  {
+    asin: null,
+    title: "Moving blankets",
+    category: "moving",
+    blurb: "For the truck. Furniture knocks around on I-95 whether you’re coming from Jacksonville or Ohio.",
+    searchQuery: "moving blankets 6 pack heavy duty",
+    sortOrder: 36,
+  },
+  {
+    asin: null,
+    title: "Stretch wrap",
+    category: "moving",
+    blurb: "Keeps drawers shut and pads from sliding. Buy a real roll, not the kitchen stuff.",
+    searchQuery: "industrial stretch wrap moving 18 inch",
+    sortOrder: 37,
+  },
 ];
 
 export const SEED_FAQS: { question: string; answer: string; sortOrder: number }[] = [

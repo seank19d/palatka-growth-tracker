@@ -12,8 +12,8 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     sections: [
       {
         callout: {
-          title: "First three calls",
-          body: "(1) Putnam County Property Appraiser for city vs unincorporated status on the parcel. (2) Putnam County School District locator with the street address. (3) Clay Electric (386) 328-1432 or FPL 1-800-226-3545 — look up which serves the house before you schedule a connect.",
+          title: "The truck is a different list",
+          body: "Boxes, tape, and the first night are on the moving list on this site. This checklist is the calls — appraiser, schools, electric — before the keys.",
         },
       },
       {

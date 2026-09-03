@@ -116,8 +116,8 @@ function Home() {
               Buy now or wait
             </Link>
             . Moving here?{" "}
-            <Link to="/guide" className="font-medium text-primary underline-offset-4 hover:underline">
-              Open the living guide
+            <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+              What to pack
             </Link>
             . Have a street?{" "}
             <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">

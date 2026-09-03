@@ -210,6 +210,10 @@ function ProjectPage() {
               <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
                 First-week list
               </Link>
+              . Truck booked?{" "}
+              <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+                Moving list
+              </Link>
               . First summer?{" "}
               <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
                 Humidity and west glass

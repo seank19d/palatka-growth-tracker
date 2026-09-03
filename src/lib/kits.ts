@@ -19,7 +19,7 @@ export type KitRead = {
 export type KitFaq = { question: string; answer: string };
 
 export type KitRelated = {
-  to: "/address" | "/storm" | "/house" | "/punch" | "/summer" | "/well" | "/decide" | "/office" | "/yard";
+  to: "/address" | "/storm" | "/house" | "/punch" | "/summer" | "/well" | "/decide" | "/office" | "/yard" | "/move";
   label: string;
 };
 
@@ -589,6 +589,206 @@ export const YARD: KitDef = {
   },
 };
 
+export const MOVE: KitDef = {
+  path: "/move",
+  kicker: "The truck",
+  title: "Moving to Palatka",
+  lede: "People come from Jacksonville, St. Augustine, Ohio, a lease that’s up. The truck still has to sit in Florida heat, and the first night here is humid whether the house is new or not. Tell me where you’re coming from and what’s waiting, and I’ll put together what to put on the truck and what to have at the house.",
+  seoTitle: "Moving to Palatka, Florida: what to pack and what to have waiting",
+  seoDescription:
+    "A Palatka moving list — boxes that survive the heat, the first night, and what changes if you’re coming from up north or landing on a well. Amazon links; we may earn a commission.",
+  breadcrumb: "Moving here",
+  listHeading: "For the truck and the first night",
+  questions: [
+    {
+      key: "from",
+      prompt: "Where are you coming from?",
+      hint: "A two-hour hop from Jacksonville is a different truck than a three-day drive from Ohio.",
+      options: [
+        {
+          value: "florida",
+          label: "Somewhere else in Florida",
+          detail: "Jacksonville, St. Augustine, Orlando, a lease in Clay. Heat on the truck, shorter trip.",
+        },
+        {
+          value: "north",
+          label: "Up north or out of state",
+          detail: "The humidity is the surprise. Protectors on the beds the first night, and something for the air in the house.",
+        },
+        {
+          value: "local",
+          label: "Already in Putnam, just changing houses",
+          detail: "Shorter hop. You still want real boxes — the humidity eats cheap ones either way.",
+        },
+      ],
+    },
+    {
+      key: "when",
+      prompt: "When does the truck actually roll?",
+      hint: "If you’re still picking Collection vs Alford, get the house straight first. Alford Farms is still a county file.",
+      options: [
+        {
+          value: "soon",
+          label: "This month, or the truck is already booked",
+          detail: "Boxes, tape, and the first-night stuff. Don’t wait until the night before.",
+        },
+        {
+          value: "later",
+          label: "In the next few months",
+          detail: "You can order this whenever. Cheap boxes still fail in a hot garage while you wait.",
+        },
+        {
+          value: "looking",
+          label: "I don’t have a house yet",
+          detail: "A few things travel with you. The rest waits until you know city vs well.",
+        },
+      ],
+    },
+    {
+      key: "land",
+      prompt: "What’s waiting at the other end?",
+      hint: "The Collection is in-town new construction that’s selling. East Palatka is often a well. Older Palatka houses sweat in the closets.",
+      options: [
+        {
+          value: "collection",
+          label: "New construction in town",
+          detail: "The Collection, or something like it. Builder walkthrough is a separate list. This one is the truck.",
+        },
+        {
+          value: "well",
+          label: "East Palatka or a well lot",
+          detail: "No power, no pump. Keep drinking water in the house those first nights.",
+        },
+        {
+          value: "old",
+          label: "An older Palatka house",
+          detail: "Humidity in the closets. Run the A/C before you unpack the clothes.",
+        },
+        {
+          value: "unsure",
+          label: "I don’t know yet",
+          detail: "We’ll keep the list to the truck and the beds. You can sort city vs well with an address.",
+        },
+      ],
+    },
+  ],
+  faqs: [
+    {
+      question: "Is Palatka a good place to move right now?",
+      answer:
+        "If you need keys this year, The Collection at Palatka (Century Complete, 508 N. 17th Street) is the in-town new construction that’s actually selling. Alford Farms in East Palatka is a 2024 PUD still in permitting — not a closing date. Decode a street if you have one.",
+    },
+    {
+      question: "I’m moving in September. Is that storm season?",
+      answer:
+        "Yes. Putnam’s season is June through November. The storm list on this site is water, lights, and who to call. This page is the truck and the first night.",
+    },
+    {
+      question: "Do I really need different boxes?",
+      answer:
+        "The cheap ones collapse in a hot truck and in a humid garage. A name-brand carton and real tape is the whole trick. It’s boring and it matters.",
+    },
+    {
+      question: "What about the first night?",
+      answer:
+        "Waterproof protectors on every bed before anyone lies down. Palatka humidity doesn’t wait for you to unpack. If you’re coming from up north, a dehumidifier can sit in a box until you see how the house feels.",
+    },
+  ],
+  related: [
+    { to: "/decide", label: "Collection vs Alford" },
+    { to: "/punch", label: "Closing week" },
+    { to: "/house", label: "All the house lists" },
+  ],
+  score(a) {
+    if (a.when === "looking") {
+      return {
+        kicker: "Still looking",
+        headline: "Get the house straight before you fill a truck.",
+        body: "If the fork is Collection vs Alford, Collection is taking contracts in town and Alford is still a Putnam file. You can buy boxes whenever — they don’t go bad — but don’t time a lease to a sales date that isn’t public. When you have a street, check whether it’s city water or a well so the first night isn’t a surprise.",
+        points: [
+          "Buy now or wait is the timeline tool on this site.",
+          "A street decoder will tell you city vs unincorporated.",
+          "Storm season is June through November. If you’re aiming at the fall, look at that list too.",
+        ],
+      };
+    }
+    if (a.from === "north") {
+      return {
+        kicker: "Coming in from up north",
+        headline: "The drive is the easy part. The house will feel wet.",
+        body: "People say that every summer and they still mean it. Put real boxes on the truck — heat on I-95 will crush the bargain ones — and put waterproof protectors on every bed the first night, before anyone lies down. A dehumidifier can wait in a carton until you’ve lived in the house a week with the A/C running. If you’re landing on a well, the pump dies with the power, so keep drinking water you can carry.",
+        points: [
+          "Run the A/C as soon as you have keys, even if you’re sleeping elsewhere.",
+          "The first-summer list is humidity and west glass after you’re in.",
+          "September is still storm season here. That’s a different page.",
+        ],
+      };
+    }
+    if (a.land === "well") {
+      return {
+        kicker: "Moving onto a well",
+        headline: "Pack the truck like anyone else. Pack water like the power might quit.",
+        body: "East Palatka lots are often a well and a septic. The move is still boxes, tape, and beds. The extra is drinking water in the house those first nights, and a test kit if the well’s been sitting. A long hose matters once you’re watering new sod. The well list on this site is the rest of that story.",
+        points: [
+          "Confirm it’s a well. A listing that says Palatka doesn’t settle it.",
+          "Clay Electric outages: 1-888-434-9844. FPL: 1-800-4OUTAGE.",
+          "Closing-week tools are a separate bag if it’s new construction.",
+        ],
+      };
+    }
+    if (a.land === "collection") {
+      return {
+        kicker: "In-town new construction",
+        headline: "Get the truck right, then walk the house with a real kit in your hand.",
+        body: "The Collection is inside Palatka city, Century Complete, 508 N. 17th Street. Heat still eats cheap boxes on the way in. Protectors on the beds the first night. The builder walkthrough is its own list — tester, caulk, a stool — and it’s worth doing before the sofa comes off the truck.",
+        points: [
+          "Take photos on walkthrough day, one room at a time.",
+          "West glass in these houses works the A/C. That’s the summer list.",
+          "You’re on city water in town. The well list is for East Palatka.",
+        ],
+      };
+    }
+    if (a.land === "old") {
+      return {
+        kicker: "Older Palatka house",
+        headline: "Run the A/C before you hang the clothes.",
+        body: "Older cottages and ranches hold moisture in the closets. Real boxes, tape that doesn’t fail in heat, protectors on the beds, and give the house a day with the air on before you unpack fabric. A dehumidifier is the usual next box if a closet already feels cool and sticky.",
+        points: [
+          "Open the closets the first afternoon. That’s your humidity tell.",
+          "A tarp and a basic tool kit cover a lot of small surprises.",
+        ],
+      };
+    }
+    return {
+      kicker: "The truck",
+      headline: "Name-brand boxes, real tape, protectors on the beds.",
+      body: "That’s the whole move, minus the house-specific stuff. Florida heat will crush bargain cartons, and the first night is humid whether you came from Jacksonville or Cleveland. Once you know if you’re on city water or a well, come back through the other lists.",
+      points: [
+        "If you have a street, decode it for city vs well.",
+        "Storm season is June through November.",
+      ],
+    };
+  },
+  titles(a) {
+    const t = [
+      "Heavy-duty moving boxes",
+      "Packing tape (multi-pack)",
+      "Moving blankets",
+      "Stretch wrap",
+      "Mattress protector (waterproof)",
+      "First-aid kit",
+    ];
+    if (a.from === "north" || a.land === "old") t.push("Dehumidifier");
+    if (a.land === "collection" || a.when === "soon") t.push("Basic home tool kit");
+    if (a.land === "well") t.push("Drinking water containers", "Well water test kit");
+    if (a.land === "old") t.push("Closet moisture absorbers");
+    if (a.when === "looking") {
+      return ["Heavy-duty moving boxes", "Packing tape (multi-pack)", "Mattress protector (waterproof)"];
+    }
+    return t;
+  },
+};
+
 export const PUNCH: KitDef = {
   path: "/punch",
   kicker: "Closing week",
@@ -727,14 +927,20 @@ export const PUNCH: KitDef = {
   },
 };
 
-export const KIT_PAGES = [SUMMER, WELL, OFFICE, YARD, PUNCH] as const;
+export const KIT_PAGES = [MOVE, SUMMER, WELL, OFFICE, YARD, PUNCH] as const;
 
 export const HOUSE_CARDS: {
-  to: "/storm" | "/summer" | "/well" | "/office" | "/yard" | "/punch";
+  to: "/move" | "/storm" | "/summer" | "/well" | "/office" | "/yard" | "/punch";
   kicker: string;
   title: string;
   blurb: string;
 }[] = [
+  {
+    to: "/move",
+    kicker: "The truck",
+    title: "Moving to Palatka",
+    blurb: "Boxes that survive the heat, the first night, and what changes if you’re coming from up north.",
+  },
   {
     to: "/storm",
     kicker: "June–November",

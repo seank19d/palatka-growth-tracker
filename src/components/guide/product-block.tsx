@@ -26,6 +26,8 @@ import type { AffiliateProduct } from "@/lib/types";
 const THUMBS: Record<string, LucideIcon> = {
   "Heavy-duty moving boxes": Package,
   "Packing tape (multi-pack)": Package,
+  "Moving blankets": Package,
+  "Stretch wrap": Package,
   "First-aid kit": Bandage,
   "Basic home tool kit": Wrench,
   "Mattress protector (waterproof)": BedDouble,
