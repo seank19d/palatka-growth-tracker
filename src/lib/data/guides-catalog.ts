@@ -95,7 +95,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
         heading: "Water, sewer, well, septic",
         paragraphs: [
           "Inside the City of Palatka, expect municipal water and sewer — confirm with city utilities. Unincorporated East Palatka and much of the county still rely on private wells and septic systems, especially on older lots and acreage.",
-          "New PUDs (Alford Farms class) usually propose central water/wastewater as part of the engineering. That infrastructure is one of the reasons permitting takes a year or more after rezoning. Until the system is built and accepted, a lot on a plat is not a turn-key city tap.",
+          "New large PUDs like Alford Farms usually propose central water/wastewater as part of the engineering. That infrastructure is one of the reasons permitting takes a year or more after rezoning. Until the system is built and accepted, a lot on a plat is not a turn-key city tap.",
         ],
         list: [
           "City of Palatka utilities — palatka-fl.gov",
@@ -144,14 +144,14 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
       {
         heading: "Outdoor living",
         paragraphs: [
-          "A usable porch or lanai is half the point of being here. Outdoor rugs, a ceiling fan rated for damp locations, and a grill get more use than a formal dining set. Check any PUD or HOA rules before you pour a patio.",
+          "Screened porch or lanai gets used here. Outdoor rugs, a ceiling fan rated for damp locations, and a grill get more use than a formal dining set. Check any PUD or HOA rules before you pour a patio.",
           "Screen the porch. Treat standing water. You are on the St. Johns, next to wetlands, and dusk is mosquito hour.",
         ],
       },
       {
         heading: "New construction vs old Florida house",
         paragraphs: [
-          "Builder homes (when Alford Farms or similar actually sell) come with a warranty, builder-grade appliances, and HOA design rules. Downtown and East Palatka cottages come with charm, possibly well/septic, possibly knob-and-tube stories, and no warranty. Budget a tool kit and a licensed HVAC/electrical look on anything built before the 1990s.",
+          "New builder homes usually mean a warranty and HOA rules. Older Palatka cottages mean charm, maybe well/septic, and no warranty. Budget a tool kit and a licensed HVAC/electrical look on anything built before the 1990s.",
         ],
       },
     ],
