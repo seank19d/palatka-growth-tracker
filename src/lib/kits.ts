@@ -605,7 +605,7 @@ export const MOVE: KitDef = {
   listHeading: "For the truck and the first night",
   starterHeading: "Starter moving picks",
   starterNote:
-    "Answer the questions below for a list tuned to your move. Or grab the truck basics now — heat on I-95 crushes cheap boxes either way.",
+    "Answer below if you want the list matched to your move. Or grab the truck basics now — heat on I-95 crushes cheap boxes either way.",
   starterTitles: [
     "Heavy-duty moving boxes",
     "Packing tape (multi-pack)",
