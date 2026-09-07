@@ -95,6 +95,14 @@ export const SEED_PRODUCTS: {
     sortOrder: 11,
   },
   {
+    asin: "B015QIC1PW",
+    title: "NOAA weather radio",
+    category: "storm",
+    blurb: "County weather alerts when the phone's dead or Clay Electric and FPL take the lines down. Crank or battery — charge it before a named storm.",
+    searchQuery: "Midland ER310 emergency crank NOAA weather radio",
+    sortOrder: 38,
+  },
+  {
     asin: "B099FJYD9S",
     title: "LED flashlights and lanterns",
     category: "home-setup",
