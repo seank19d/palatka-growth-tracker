@@ -83,7 +83,7 @@ function DevelopmentsPage() {
       </h1>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Every project currently published. Pipeline is still in the county file. Watch-list items
-        are unconfirmed. Selling means someone is taking contracts.
+        are unconfirmed. Selling means the builder lists homes for sale.
       </p>
       <p className="mt-3 max-w-2xl text-base text-muted">
         <strong className="font-medium text-fg">How to read a status:</strong> Concept is an idea.

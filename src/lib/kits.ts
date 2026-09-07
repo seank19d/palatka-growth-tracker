@@ -554,7 +554,7 @@ export const YARD: KitDef = {
     if (a.porch === "open" || a.who === "kids") {
       return {
         kicker: "Open yard",
-        headline: "Treat the yard before you invite anyone over at dusk.",
+        headline: "Treat the yard before dusk if you’re sitting outside.",
         body: "The river is why people move here and it’s why the mosquitoes are part of the deal. Spray or granules on a still evening, a hose that reaches the back of the lot, and something for the slab if you’ve got one. If kids or dogs are in the grass, read the product label instead of guessing.",
         points: [
           "Dusk is the test. If you can’t sit for ten minutes, treat again.",
@@ -567,7 +567,7 @@ export const YARD: KitDef = {
       return {
         kicker: "You’ve got a porch",
         headline: "Make the porch usable, and still treat the yard.",
-        body: "A screened porch is half the reason to live here in summer. A washable outdoor rug and a hose for the plants go a long way. The yard still wants mosquito treatment or you’ll walk through a cloud every time you go out to the grill.",
+        body: "A screened porch earns its keep in summer. A washable outdoor rug and a hose for the plants go a long way. The yard still wants mosquito treatment or you’ll walk through a cloud every time you go out to the grill.",
         points: [
           "Check HOA rules before a permanent grill or a patio pour.",
           "West sun on a porch can be brutal. That’s the summer list.",

@@ -34,7 +34,7 @@ function PackPage() {
         <li className="border-t border-border pt-5">
           <h2 className="font-display text-2xl font-semibold">Buy now or wait</h2>
           <p className="mt-2 text-base text-muted">
-            Century Complete is taking contracts on 17th Street. Alford Farms is still a Putnam PUD file.
+            The Collection on 17th Street is listed as selling. Nobles Crossing on Newcastle Road is too. Alford Farms is still a Putnam PUD file.
           </p>
           <Link to="/decide" className="mt-3 inline-block font-medium text-primary underline-offset-4 hover:underline">
             Open
