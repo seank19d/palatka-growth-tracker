@@ -132,7 +132,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
     ],
     latestSummary:
-      "Need a house this year: The Collection at Palatka, 508 N. 17th Street. Century Complete (Century Communities’ value line) is selling three single-family plans with advertised prices starting around $217,000 as of 2026 listings, including some quick move-in homes. It is a small in-town community. Pricing and inventory change on the builder’s site. Alford Farms, the large East Palatka PUD on SR 207, is still in the county file.",
+      "Need keys this year: The Collection at 508 N. 17th Street. Century Complete lists three plans, advertised from about $200,000 in 2026 — some ready sooner. Small in-town community. Prices move on the builder site. Alford Farms on SR 207 is still a Putnam file.",
     latestSummaryAt: "2026-08-19T12:00:00.000Z",
     confidence: "reported",
     published: true,
