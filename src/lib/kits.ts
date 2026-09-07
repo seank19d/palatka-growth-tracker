@@ -827,6 +827,16 @@ export const PUNCH: KitDef = {
     "Tool kit, caulk, an outlet tester, a step stool — the first week in a new Palatka house. Amazon links; we may earn a commission.",
   breadcrumb: "Closing week",
   listHeading: "For the keys and the walkthrough",
+  starterHeading: "Starter closing-week picks",
+  starterNote:
+    "Answer below if you want the list matched to walkthrough day. Or grab the closing-week basics now — tester, caulk, and a real stool beat arguing after the sofa’s in.",
+  starterTitles: [
+    "Basic home tool kit",
+    "Outlet tester",
+    "Caulk and caulk gun",
+    "Step stool",
+    "Mattress protector (waterproof)",
+  ],
   questions: [
     {
       key: "when",
