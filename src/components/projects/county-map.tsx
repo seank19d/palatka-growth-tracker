@@ -128,7 +128,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
               Palatka & East Palatka locator
             </p>
             <p className="mt-0.5 max-w-xl text-base text-muted">
-              Numbered sites on an OpenStreetMap basemap, zoomed to the Palatka bend. Sites west of
+              Numbered sites on a light basemap, zoomed to the Palatka bend. Sites west of
               this frame are listed, not pinned.
             </p>
           </div>
@@ -275,7 +275,7 @@ export function CountyMap({ projects }: { projects: Project[] }) {
         </ol>
       </div>
       <p className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-2 text-xs uppercase tracking-[0.12em] text-subtle">
-        <span>Basemap © OpenStreetMap contributors · CARTO</span>
+        <span>Basemap © Esri · TomTom, Garmin, FAO, NOAA, USGS</span>
         <a
           className="underline underline-offset-2 hover:text-primary"
           href="https://www.openstreetmap.org/#map=13/29.656/-81.605"

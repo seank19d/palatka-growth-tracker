@@ -9,9 +9,15 @@ export function latToTile(lat: number, zoom: number): number {
   );
 }
 
+/** Light gray basemap without a client API key (CARTO free tiles now watermark "API KEY REQUIRED"). */
+export function basemapTileUrl(z: number, x: number, y: number): string {
+  // ArcGIS World Light Gray Base uses /tile/{z}/{y}/{x}
+  return `https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/${z}/${y}/${x}`;
+}
+
+/** @deprecated use basemapTileUrl */
 export function cartoTileUrl(z: number, x: number, y: number): string {
-  const host = ["a", "b", "c", "d"][(x + y) % 4];
-  return `https://${host}.basemaps.cartocdn.com/light_all/${z}/${x}/${y}@2x.png`;
+  return basemapTileUrl(z, x, y);
 }
 
 /** Guest-first frame: Palatka, the river, East Palatka, SR 207. */
@@ -165,7 +171,7 @@ export function tilesForView(view: MapView): Array<{
         top: round(((y * TILE_PX - nw.y) / size.height) * 100),
         width: round((TILE_PX / size.width) * 100),
         height: round((TILE_PX / size.height) * 100),
-        src: cartoTileUrl(view.zoom, xx, y),
+        src: basemapTileUrl(view.zoom, xx, y),
       });
     }
   }
