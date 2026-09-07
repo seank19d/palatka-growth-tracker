@@ -151,7 +151,7 @@ export function scoreDecide(a: DecideAnswers): Verdict {
     );
   } else if (a.budget === "mid") {
     points.push(
-      "Both Century Complete communities — The Collection (17th Street) and Nobles Crossing (Newcastle Road) — are marketed as selling. Verify live prices on the builder site.",
+      "Both Century Complete communities — The Collection (17th Street) and Nobles Crossing (Newcastle Road) — are listed as selling. Verify live prices on the builder site.",
     );
   }
   points.push(
@@ -164,11 +164,11 @@ export function scoreDecide(a: DecideAnswers): Verdict {
       id,
       kicker: "Buy what’s selling",
       headline: preferNobles
-        ? "Two Century Complete communities are taking contracts in Palatka."
+        ? "Two Century Complete communities are listed as selling in Palatka."
         : "Shop what’s selling — then keep Alford on a watch list.",
       body: preferNobles
-        ? "Century Complete lists The Collection at Palatka (508 N. 17th Street, advertised from the low $200,000s) and Nobles Crossing (Newcastle Road; recent advertised listings in the low-to-mid $300,000s). Both are marketed as selling — verify inventory on the builder site. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date."
-        : "Century Complete is taking contracts at The Collection (508 N. 17th Street, advertised from the low $200,000s) and also lists Nobles Crossing on Newcastle Road as selling. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date. If you need keys this year, tour what’s open and keep Alford on a watch list.",
+        ? "Century Complete lists The Collection at Palatka on 17th Street and Nobles Crossing on Newcastle Road. Collection has been advertised from the low $200,000s; recent Nobles asks have been low-to-mid $300,000s. Both are on the builder site as selling — verify inventory there. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date."
+        : "The Collection on 17th Street is on the builder site as selling, advertised from the low $200,000s. Nobles Crossing on Newcastle Road is listed as selling too. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date. If you need keys this year, tour what’s open and keep Alford on a watch list.",
       points,
       primary: preferNobles
         ? {
@@ -200,7 +200,7 @@ export function scoreDecide(a: DecideAnswers): Verdict {
       id,
       kicker: "Watch the East Palatka file",
       headline: "You can follow Alford. Do not time a lease to it.",
-      body: "The large East Palatka project people mean is Alford Farms on SR 207. Putnam approved PUD24-000004 in August 2024. Later engineering shows 559 lots, not the 700 talked up at rezoning. D.R. Horton is named as an agent. Putnam County has also noticed a proposed flood map revision for the Alford Farms area (FIRM 12107C0212C) — that is map process, not a sales calendar. None of that is a sales opening. If your year slips, Century Complete is taking contracts at The Collection (17th Street) and Nobles Crossing (Newcastle Road).",
+      body: "The large East Palatka project people mean is Alford Farms on SR 207. Putnam approved PUD24-000004 in August 2024. Later engineering shows 559 lots, not the 700 talked up at rezoning. D.R. Horton is named as an agent. Putnam County has also noticed a proposed flood map revision for the Alford Farms area (FIRM 12107C0212C) — that is map process, not a sales calendar. None of that is a sales opening. If your year slips, The Collection on 17th Street and Nobles Crossing on Newcastle Road are listed as selling.",
       points,
       primary: {
         slug: "alford-farms",
@@ -219,7 +219,7 @@ export function scoreDecide(a: DecideAnswers): Verdict {
     id,
     kicker: "Read the files",
     headline: "Don’t confuse a PUD with a for-sale sign.",
-    body: "Three different products get sold as “new Palatka.” The Collection (508 N. 17th Street) and Nobles Crossing (Newcastle Road) are Century Complete communities marketed as selling. Alford Farms is a large East Palatka PUD with no public sales date. Tour what is open. Keep Alford in the county file until a plat and a builder sales page exist.",
+    body: "Three different products get sold as “new Palatka.” The Collection on 17th Street and Nobles Crossing on Newcastle Road are Century Complete communities listed as selling. Alford Farms is a large East Palatka PUD with no public sales date. Tour what is open. Keep Alford in the county file until a plat and a builder sales page exist.",
     points,
     primary: {
       slug: "collection-at-palatka",
@@ -269,7 +269,7 @@ export const DECIDE_FAQS = [
   {
     question: "Are there new construction homes for sale in Palatka right now?",
     answer:
-      "Yes. Century Complete markets The Collection at Palatka (508 N. 17th Street; advertised from the low-to-mid $200,000s) and Nobles Crossing (Newcastle Road; recent advertised listings in the low-to-mid $300,000s). Verify live inventory on the builder site. Alford Farms in East Palatka is not selling lots in the public record this site reviews.",
+      "Yes. The Collection at Palatka (508 N. 17th Street) has been advertised from the low-to-mid $200,000s. Nobles Crossing on Newcastle Road has recent asks in the low-to-mid $300,000s. Both are listed as selling on the builder site — verify live inventory there. Alford Farms in East Palatka is not selling lots in the public record this site reviews.",
   },
   {
     question: "Is Alford Farms selling homes yet?",
@@ -279,11 +279,11 @@ export const DECIDE_FAQS = [
   {
     question: "Should I wait for Alford Farms instead of buying The Collection or Nobles Crossing?",
     answer:
-      "Only if you can live without a sales calendar. Alford is East Palatka, unincorporated, and still in the county file. The Collection and Nobles Crossing are in Palatka and advertised as selling. Match your move date to a house that exists.",
+      "Only if you can live without a sales calendar. Alford is East Palatka, unincorporated, and still in the county file. The Collection and Nobles Crossing are in Palatka and listed as selling. Match your move date to a house that exists.",
   },
   {
     question: "What’s the difference between The Collection and Nobles Crossing?",
     answer:
-      "Both are Century Complete communities in Palatka that are marketed as selling. The Collection is at 508 N. 17th Street with advertised pricing in the low-to-mid $200,000s. Nobles Crossing is on Newcastle Road; recent builder-linked listings have been in the low-to-mid $300,000s. Neither is Alford Farms.",
+      "Both are Century Complete communities in Palatka listed as selling. The Collection is at 508 N. 17th Street with advertised pricing in the low-to-mid $200,000s. Nobles Crossing is on Newcastle Road; recent builder-linked listings have been in the low-to-mid $300,000s. Neither is Alford Farms.",
   },
 ];

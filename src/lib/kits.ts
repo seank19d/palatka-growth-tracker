@@ -593,7 +593,7 @@ export const MOVE: KitDef = {
   path: "/move",
   kicker: "The truck",
   title: "Moving to Palatka",
-  lede: "People come from Jacksonville, St. Augustine, Ohio, a lease that’s up. The truck still has to sit in Florida heat, and the first night here is humid whether the house is new or not. If you’re still choosing a community: The Collection (508 N. 17th Street) and Nobles Crossing (Newcastle Road) are Century Complete communities marketed as selling; Alford Farms in East Palatka is still a Putnam PUD file. Clay Electric and FPL both serve Putnam — territory is by power line, not by the word “Palatka.” Tell me where you’re coming from and what’s waiting, and I’ll put together what to put on the truck and what to have at the house.",
+  lede: "People come from Jacksonville, St. Augustine, Ohio, a lease that’s up. The truck still sits in Florida heat, and the first night is humid whether the house is new or not. Still picking a community? The Collection on 17th Street and Nobles Crossing on Newcastle Road are Century Complete and listed as selling. Alford Farms in East Palatka is still a Putnam PUD file — not a closing date. Clay Electric and FPL both serve Putnam; the line on the parcel decides which, not the word “Palatka” on the listing. Tell me where you’re coming from and what’s waiting. I’ll put together what goes on the truck and what should already be at the house.",
   seoTitle: "Moving to Palatka, Florida: what to pack and what to have waiting",
   seoDescription:
     "Moving to Palatka or East Palatka: what to pack, first-night humidity, city vs well, Collection vs Nobles Crossing vs Alford Farms timing, and Clay Electric vs FPL. Amazon links; we may earn a commission.",
@@ -676,7 +676,7 @@ export const MOVE: KitDef = {
     {
       question: "Is Palatka a good place to move right now?",
       answer:
-        "If you need keys this year, Century Complete markets The Collection at Palatka (508 N. 17th Street) and Nobles Crossing (Newcastle Road) as selling. Alford Farms in East Palatka is a 2024 PUD still in permitting — not a closing date. Decode a street if you have one, and check whether you’re on city water or a well.",
+        "If you need keys this year, The Collection at Palatka (508 N. 17th Street) and Nobles Crossing (Newcastle Road) are on the builder site as selling. Alford Farms in East Palatka is a 2024 PUD still in permitting — not a closing date. Decode a street if you have one, and check whether you’re on city water or a well.",
     },
     {
       question: "I’m moving in September. Is that storm season?",
@@ -717,7 +717,7 @@ export const MOVE: KitDef = {
       return {
         kicker: "Still looking",
         headline: "Get the house straight before you fill a truck.",
-        body: "If the fork is Collection / Nobles Crossing vs Alford, the first two are Century Complete communities marketed as selling and Alford is still a Putnam file. You can buy boxes whenever — they don’t go bad — but don’t time a lease to a sales date that isn’t public. When you have a street, check whether it’s city water or a well, and whether Clay Electric or FPL serves the line, so the first night isn’t a surprise.",
+        body: "Collection and Nobles Crossing are listed as selling. Alford is still a Putnam file. Buy boxes whenever — they don’t go bad. Don’t time a lease to a sales date that isn’t public. When you have a street, check city water vs well, and whether Clay Electric or FPL serves the line.",
         points: [
           "Buy now or wait is the timeline tool on this site.",
           "A street decoder will tell you city vs unincorporated.",
@@ -753,7 +753,7 @@ export const MOVE: KitDef = {
       return {
         kicker: "In-town new construction",
         headline: "Get the truck right, then walk the house with a real kit in your hand.",
-        body: "In-town new construction here usually means The Collection (508 N. 17th Street) or Nobles Crossing (Newcastle Road) — both Century Complete and marketed as selling. Heat still eats cheap boxes on the way in. Protectors on the beds the first night. The builder walkthrough is its own list — tester, caulk, a stool — and it’s worth doing before the sofa comes off the truck.",
+        body: "In-town new construction here usually means The Collection (508 N. 17th Street) or Nobles Crossing (Newcastle Road) — both Century Complete and on the builder site as selling. Heat still eats cheap boxes on the way in. Protectors on the beds the first night. The builder walkthrough is its own list — tester, caulk, a stool — and it’s worth doing before the sofa comes off the truck.",
         points: [
           "Take photos on walkthrough day, one room at a time.",
           "West glass in these houses works the A/C. That’s the summer list.",
@@ -902,7 +902,7 @@ export const PUNCH: KitDef = {
       return {
         kicker: "Still deciding",
         headline: "You don’t need a punch list until there’s a house.",
-        body: "If the fork is Collection vs Alford, Collection is the one taking contracts. Alford is still in the county file. When you have a closing date, come back — the kit is a tool bag, a tester, and the first-night stuff, not a hardware-store panic.",
+        body: "If the fork is Collection vs Alford, Collection is listed as selling. Alford is still in the county file. When you have a closing date, come back — the kit is a tool bag, a tester, and the first-night stuff, not a hardware-store panic.",
         points: [
           "Buy now or wait is the timeline tool on this site.",
           "A basic kit is still useful if you’re looking at older houses.",
