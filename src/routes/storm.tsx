@@ -10,6 +10,7 @@ import {
   STORM_FAQS,
   STORM_QUESTIONS,
   buildStormKit,
+  buildStormStarterKit,
   scoreStorm,
   type StormAnswers,
 } from "@/lib/storm";
@@ -40,6 +41,7 @@ function StormPage() {
     () => (complete ? buildStormKit(products, answers as StormAnswers) : []),
     [products, answers, complete],
   );
+  const starterItems = useMemo(() => buildStormStarterKit(products), [products]);
 
   function pick<K extends keyof StormAnswers>(key: K, value: StormAnswers[K]) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
@@ -73,6 +75,17 @@ function StormPage() {
       </p>
 
       {!complete ? (
+        <>
+        <div className="mt-10">
+          <ProductBlock
+            products={starterItems}
+            heading="Starter storm picks"
+          />
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            Answer the questions below for a list tuned to your house. Or grab the basics now —
+            stores empty out once a named storm is on the map.
+          </p>
+        </div>
         <section className="mt-10">
           <div className="flex items-center justify-between gap-4">
             <p className="font-mono text-xs tabular-nums text-subtle">
@@ -131,6 +144,7 @@ function StormPage() {
             })}
           </ul>
         </section>
+        </>
       ) : read ? (
         <section className="mt-10 space-y-10">
           <article className="border border-border bg-card p-5 md:p-7">
