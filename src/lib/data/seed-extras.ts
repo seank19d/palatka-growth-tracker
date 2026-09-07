@@ -119,7 +119,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 14,
   },
   {
-    asin: null,
+    asin: "B082TMBYR6",
     title: "Portable power station",
     category: "storm",
     blurb: "Keeps phones, a lamp, and a small fridge going for a few hours. Charge it before the weather turns.",
@@ -127,7 +127,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 15,
   },
   {
-    asin: null,
+    asin: "B001QC31G6",
     title: "Drinking water containers",
     category: "storm",
     blurb: "Well pumps need power, and city water can lose pressure. Store some you can actually carry.",
@@ -135,7 +135,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 16,
   },
   {
-    asin: null,
+    asin: "B00VGWPR5E",
     title: "Carbon monoxide detector",
     category: "storm",
     blurb: "If you run a generator, put the detector in the house. Never run a generator in the garage.",
@@ -159,7 +159,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 19,
   },
   {
-    asin: null,
+    asin: "B00MNV8E0C",
     title: "AA batteries (bulk)",
     category: "storm",
     blurb: "For radios, lanterns, and detectors. Buy them now. They sell out when a storm is on the map.",
@@ -191,7 +191,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 23,
   },
   {
-    asin: null,
+    asin: "B07WCR5Y4B",
     title: "Indoor humidity meter",
     category: "home-setup",
     blurb: "A number is easier than waiting until you can smell the closet.",
@@ -215,7 +215,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 26,
   },
   {
-    asin: null,
+    asin: "B085WSCTS4",
     title: "Mesh Wi-Fi system",
     category: "home-setup",
     blurb: "Builder modems don’t cover a whole new house, and acreage is worse.",
@@ -223,7 +223,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 27,
   },
   {
-    asin: null,
+    asin: "B01FWAZEIU",
     title: "UPS battery backup for modem",
     category: "home-setup",
     blurb: "Keeps the modem up through the short power blinks so you don’t drop the call.",
@@ -263,7 +263,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 32,
   },
   {
-    asin: null,
+    asin: "B01CTAW3LC",
     title: "Outlet tester",
     category: "tools",
     blurb: "Take it to the walkthrough. Dead outlets are easier to argue about before the sofa is in.",
@@ -271,7 +271,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 33,
   },
   {
-    asin: null,
+    asin: "B002Z8HB2A",
     title: "Painter's tape",
     category: "tools",
     blurb: "For the touch-up list you make on walkthrough day.",
@@ -279,7 +279,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 34,
   },
   {
-    asin: null,
+    asin: "B009R5OFH8",
     title: "Step stool",
     category: "tools",
     blurb: "High paint marks and smoke detectors. A kitchen chair is how people get hurt.",
