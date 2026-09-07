@@ -70,7 +70,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
     latestSummary:
-      "As of a public-file review in September 2026, Alford Farms is still in engineering and environmental permitting — not a sales opening. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. The entitlement described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering materials (September 2025) show a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. St. Johns River Water Management District file 224892-1 was received August 29, 2024. An RAI went out February 20, 2025; a partial response followed in June 2025. Putnam County has also publicly noticed a proposed flood map revision affecting FIRM panel 12107C0212C near SR 207 / Cabbage Patch Road (base flood elevations and Special Flood Hazard Area boundaries may change); review materials with the Putnam County Building Division and verify any lot on the official map. No plat has been recorded and no model home is open.",
+      "Alford Farms is still in engineering and environmental permitting. It is not a sales opening. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. Rezoning materials described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering (September 2025) shows a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. SJRWMD file 224892-1 was received August 29, 2024; an RAI went out February 20, 2025, with a partial response in June 2025. Putnam County has noticed a proposed flood map revision for FIRM panel 12107C0212C near SR 207 / Cabbage Patch Road — base flood elevations and Special Flood Hazard Area boundaries may change. Review that with the Building Division and check the exact lot on the official map. No plat recorded. No model home open.",
     latestSummaryAt: "2026-09-07T12:00:00.000Z",
     confidence: "confirmed",
     published: true,
@@ -160,7 +160,7 @@ export const SEED_PROJECTS: SeedProject[] = [
     lotsCurrent: null,
     lotsRezoning: null,
     unitsNote:
-      "Century Complete lists Nobles Crossing as an active Palatka community on Newcastle Road with single-story plans. Builder inventory and advertised prices change; verify on the Century Complete community page. Separate from The Collection at Palatka (508 N. 17th Street) and from Alford Farms (East Palatka PUD, not selling).",
+      "Century Complete lists Nobles Crossing as an active Palatka community on Newcastle Road with single-story plans. Inventory and advertised prices change — verify on the builder page. Separate from The Collection at Palatka (508 N. 17th Street) and from Alford Farms (East Palatka PUD, not selling).",
     commercialSqft: null,
     builder: "Century Complete (Century Communities)",
     developer: "Century Complete",
@@ -175,7 +175,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
     ],
     latestSummary:
-      "Nobles Crossing is a Century Complete community on Newcastle Road in Palatka, Putnam County. The builder lists the community as selling with move-in-ready and under-construction homes on Newcastle Road and Fenham Court. Advertised asking prices on recent builder-linked listings have been in the low-to-mid $300,000s — verify live inventory and pricing on Century Complete. This is a different product from The Collection at Palatka (508 N. 17th Street, also Century Complete, advertised from the low $200,000s) and from Alford Farms in East Palatka (PUD file, not selling).",
+      "Nobles Crossing is a Century Complete community on Newcastle Road in Palatka. Builder shows inventory on Newcastle Road and Fenham Court — some ready, some still building. Advertised asks have been low-to-mid $300s; verify live. Different from The Collection at Palatka (508 N. 17th Street, also Century Complete, advertised from the low $200,000s) and from Alford Farms in East Palatka (PUD file, not selling).",
     latestSummaryAt: "2026-09-07T12:00:00.000Z",
     confidence: "reported",
     published: true,
