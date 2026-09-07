@@ -21,6 +21,10 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
     () => (complete ? pickTitles(products, kit.titles(answers)) : []),
     [complete, products, kit, answers],
   );
+  const starterItems = useMemo(
+    () => (kit.starterTitles?.length ? pickTitles(products, kit.starterTitles) : []),
+    [products, kit],
+  );
 
   function pick(value: string) {
     setAnswers((prev) => ({ ...prev, [current.key]: value }));
@@ -49,6 +53,18 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{kit.lede}</p>
 
       {!complete ? (
+        <>
+        {starterItems.length ? (
+          <div className="mt-10">
+            <ProductBlock
+              products={starterItems}
+              heading={kit.starterHeading ?? "Starter picks"}
+            />
+            {kit.starterNote ? (
+              <p className="mt-3 text-base leading-relaxed text-muted">{kit.starterNote}</p>
+            ) : null}
+          </div>
+        ) : null}
         <section className="mt-10">
           <div className="flex items-center justify-between gap-4">
             <p className="font-mono text-xs tabular-nums text-subtle">
@@ -107,6 +123,7 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
             })}
           </ul>
         </section>
+        </>
       ) : read ? (
         <section className="mt-10 space-y-10">
           <article className="border border-border bg-card p-5 md:p-7">

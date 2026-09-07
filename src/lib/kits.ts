@@ -32,6 +32,10 @@ export type KitDef = {
   seoDescription: string;
   breadcrumb: string;
   listHeading: string;
+  /** Pre-quiz picks so bounce sessions still see affiliate products. */
+  starterTitles?: string[];
+  starterHeading?: string;
+  starterNote?: string;
   questions: KitQuestion[];
   faqs: KitFaq[];
   related: KitRelated[];
@@ -599,6 +603,17 @@ export const MOVE: KitDef = {
     "Moving to Palatka or East Palatka: what to pack, first-night humidity, city vs well, Collection vs Nobles Crossing vs Alford Farms timing, and Clay Electric vs FPL. Amazon links; we may earn a commission.",
   breadcrumb: "Moving here",
   listHeading: "For the truck and the first night",
+  starterHeading: "Starter moving picks",
+  starterNote:
+    "Answer the questions below for a list tuned to your move. Or grab the truck basics now — heat on I-95 crushes cheap boxes either way.",
+  starterTitles: [
+    "Heavy-duty moving boxes",
+    "Packing tape (multi-pack)",
+    "Moving blankets",
+    "Stretch wrap",
+    "Mattress protector (waterproof)",
+    "First-aid kit",
+  ],
   questions: [
     {
       key: "from",
