@@ -187,6 +187,29 @@ const ALWAYS = [
   "AA batteries (bulk)",
 ];
 
+/** Default picks shown before the quiz so bounce sessions still see affiliate products. */
+const STARTER = [
+  "Portable power station",
+  ...ALWAYS,
+];
+
+const STARTER_ORDER = [
+  "Portable power station",
+  "Hurricane supply kit",
+  "LED flashlights and lanterns",
+  "Drinking water containers",
+  "AA batteries (bulk)",
+  "First-aid kit",
+];
+
+export function buildStormStarterKit(products: AffiliateProduct[]): AffiliateProduct[] {
+  const want = new Set(STARTER);
+  return products
+    .filter((p) => want.has(p.title))
+    .sort((x, y) => STARTER_ORDER.indexOf(x.title) - STARTER_ORDER.indexOf(y.title))
+    .slice(0, 6);
+}
+
 export function buildStormKit(products: AffiliateProduct[], a: StormAnswers): AffiliateProduct[] {
   const want = new Set(ALWAYS);
   if (a.people !== "couple") want.add("Cooler");
