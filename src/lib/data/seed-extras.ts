@@ -87,11 +87,11 @@ export const SEED_PRODUCTS: {
     sortOrder: 10,
   },
   {
-    asin: "B015QIC1PW",
+    asin: null,
     title: "Hurricane supply kit",
     category: "home-setup",
     blurb: "Season runs June through November. Water, radio, batteries, and a plan beat last-minute stores.",
-    searchQuery: "Midland ER310 emergency crank NOAA weather radio",
+    searchQuery: "emergency hurricane preparedness kit water radio flashlight batteries",
     sortOrder: 11,
   },
   {
