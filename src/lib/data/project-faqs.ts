@@ -63,7 +63,7 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
     {
       question: "Is Nobles Crossing the same as Alford Farms?",
       answer:
-        "No. Nobles Crossing is in Palatka and marketed as selling. Alford Farms is a large East Palatka PUD on SR 207 that is still in the county permitting file and not a public sales opening.",
+        "No. Nobles Crossing is in Palatka and listed as selling. Alford Farms is a large East Palatka PUD on SR 207 that is still in the county permitting file and not a public sales opening.",
     },
   ],
   "east-river-road": [
