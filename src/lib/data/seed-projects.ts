@@ -59,6 +59,10 @@ export const SEED_PROJECTS: SeedProject[] = [
         url: "https://www.putnam-fl.gov/241/Planning-Zoning",
       },
       { label: "Putnam County official site", url: "https://www.putnam-fl.gov/" },
+      {
+        label: "FEMA — how flood map revisions work",
+        url: "https://www.fema.gov/flood-maps/change-your-flood-zone/revision-process",
+      },
       { label: "SJRWMD e-permitting", url: "https://permitting.sjrwmd.com/ep/" },
       {
         label: "SJRWMD Putnam County permits",
@@ -66,8 +70,8 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
     latestSummary:
-      "As of a public-file review in August 2026, Alford Farms is still in engineering and environmental permitting. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. The entitlement described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering materials (September 2025) show a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. St. Johns River Water Management District file 224892-1 was received August 29, 2024. An RAI went out February 20, 2025; a partial response followed in June 2025. No plat has been recorded and no model home is open.",
-    latestSummaryAt: "2026-08-20T12:00:00.000Z",
+      "As of a public-file review in September 2026, Alford Farms is still in engineering and environmental permitting — not a sales opening. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. The entitlement described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering materials (September 2025) show a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. St. Johns River Water Management District file 224892-1 was received August 29, 2024. An RAI went out February 20, 2025; a partial response followed in June 2025. Putnam County has also publicly noticed a proposed flood map revision affecting FIRM panel 12107C0212C near SR 207 / Cabbage Patch Road (base flood elevations and Special Flood Hazard Area boundaries may change); review materials with the Putnam County Building Division and verify any lot on the official map. No plat has been recorded and no model home is open.",
+    latestSummaryAt: "2026-09-07T12:00:00.000Z",
     confidence: "confirmed",
     published: true,
     featured: true,
@@ -91,6 +95,13 @@ export const SEED_PROJECTS: SeedProject[] = [
         title: "Permit review still active",
         body: "Public reporting of the file in spring 2026 still showed environmental permitting as open. No confirmed start of home sales.",
         sourceLabel: "Public record compilation",
+      },
+      {
+        occurredOn: "2026-08-29",
+        title: "Flood map revision noticed",
+        body: "Putnam County publicly noticed a proposed flood map revision for the Alford Farms area affecting FIRM panel 12107C0212C (south of SR 207, east of Cabbage Patch Road). Proposed changes would establish base flood elevations and may alter Special Flood Hazard Area boundaries. This is not a sales opening. Confirm hearing materials and lot status with the Putnam County Building Division.",
+        sourceLabel: "Putnam County Building Division / public hearing notice",
+        sourceUrl: "https://www.putnam-fl.gov/",
       },
     ],
   },
@@ -134,6 +145,49 @@ export const SEED_PROJECTS: SeedProject[] = [
         sourceLabel: "Century Complete",
         sourceUrl:
           "https://www.centurycommunities.com/find-your-new-home/florida/jacksonville-metro/palatka/the-collection-at-palatka/",
+      },
+    ],
+  },
+  {
+    slug: "nobles-crossing",
+    name: "Nobles Crossing",
+    locationLabel: "Newcastle Road, Palatka",
+    area: "Palatka",
+    lat: 29.6221,
+    lng: -81.7233,
+    status: "selling",
+    acres: null,
+    lotsCurrent: null,
+    lotsRezoning: null,
+    unitsNote:
+      "Century Complete lists Nobles Crossing as an active Palatka community on Newcastle Road with single-story plans. Builder inventory and advertised prices change; verify on the Century Complete community page. Separate from The Collection at Palatka (508 N. 17th Street) and from Alford Farms (East Palatka PUD, not selling).",
+    commercialSqft: null,
+    builder: "Century Complete (Century Communities)",
+    developer: "Century Complete",
+    countyCase: null,
+    ordinance: null,
+    sjrwmdFile: null,
+    officialLinks: [
+      {
+        label: "Century Complete — Nobles Crossing",
+        url: "https://www.centurycommunities.com/find-your-new-home/florida/jacksonville-metro/palatka/nobles-crossing/",
+      },
+      { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
+    ],
+    latestSummary:
+      "Nobles Crossing is a Century Complete community on Newcastle Road in Palatka, Putnam County. The builder lists the community as selling with move-in-ready and under-construction homes on Newcastle Road and Fenham Court. Advertised asking prices on recent builder-linked listings have been in the low-to-mid $300,000s — verify live inventory and pricing on Century Complete. This is a different product from The Collection at Palatka (508 N. 17th Street, also Century Complete, advertised from the low $200,000s) and from Alford Farms in East Palatka (PUD file, not selling).",
+    latestSummaryAt: "2026-09-07T12:00:00.000Z",
+    confidence: "reported",
+    published: true,
+    featured: true,
+    milestones: [
+      {
+        occurredOn: "2025-01-01",
+        title: "Builder lists community as selling",
+        body: "Century Complete publishes Nobles Crossing as an active Palatka community with floor plans and homesites on Newcastle Road.",
+        sourceLabel: "Century Complete",
+        sourceUrl:
+          "https://www.centurycommunities.com/find-your-new-home/florida/jacksonville-metro/palatka/nobles-crossing/",
       },
     ],
   },

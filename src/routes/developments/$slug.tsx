@@ -35,7 +35,7 @@ export const Route = createFileRoute("/developments/$slug")({
         ? {
             title: "Alford Farms East Palatka: 559 lots, not selling",
             description:
-              "Alford Farms on SR 207 is a Putnam PUD (PUD24-000004), not a sales opening. 559-lot layout, D.R. Horton named as agent.",
+              "Alford Farms on SR 207 is a Putnam PUD (PUD24-000004), not a sales opening. 559-lot layout, D.R. Horton named as agent. Flood map note: FIRM 12107C0212C.",
           }
         : p.slug === "collection-at-palatka"
           ? {
@@ -43,13 +43,19 @@ export const Route = createFileRoute("/developments/$slug")({
               description:
                 "Century Complete is selling The Collection at Palatka at 508 N. 17th Street. In-town new homes from the low $200,000s — not Alford Farms.",
             }
-          : {
-              title: `${p.name} in ${p.area}, FL — status and public record`,
-              description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
-                0,
-                160,
-              ),
-            };
+          : p.slug === "nobles-crossing"
+            ? {
+                title: "Nobles Crossing Palatka: Century Complete homes",
+                description:
+                  "Nobles Crossing on Newcastle Road is a Century Complete community marketed as selling in Palatka — separate from The Collection and from Alford Farms.",
+              }
+            : {
+                title: `${p.name} in ${p.area}, FL — status and public record`,
+                description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
+                  0,
+                  160,
+                ),
+              };
     return seo({ ...custom, path: `/developments/${p.slug}` });
   },
   component: ProjectPage,
@@ -117,6 +123,17 @@ function ProjectPage() {
         <MapPin className="size-4 text-primary" strokeWidth={1.75} />
         {project.locationLabel}
       </p>
+      {project.slug === "alford-farms" ? (
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+          East Palatka PUD on SR 207 — approved for rezoning, still not selling. Answer-first: is it
+          approved, who is named in the file, when homes might be available, and the flood-map note.
+        </p>
+      ) : project.slug === "nobles-crossing" ? (
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+          Century Complete community on Newcastle Road in Palatka, marketed as selling — not Alford
+          Farms, and not The Collection at 508 N. 17th Street.
+        </p>
+      ) : null}
 
       <ProjectAnswerBar project={project} />
 
@@ -189,7 +206,11 @@ function ProjectPage() {
 
       {faqs.length ? (
         <section className="mt-12">
-          <h2 className="font-display text-2xl font-semibold">Common questions</h2>
+          <h2 className="font-display text-2xl font-semibold">
+            {project.slug === "alford-farms"
+              ? "Is Alford Farms approved, selling, or still a county file?"
+              : "Common questions"}
+          </h2>
           <Accordion type="single" collapsible className="mt-4">
             {faqs.map((f) => (
               <AccordionItem key={f.question} value={f.question}>
@@ -204,7 +225,7 @@ function ProjectPage() {
       {products?.length ? (
         <div className="mt-12">
           <ProductBlock products={products} heading="For the move-in week" />
-          {project.slug === "collection-at-palatka" ? (
+          {project.slug === "collection-at-palatka" || project.slug === "nobles-crossing" ? (
             <p className="mt-4 text-base text-muted">
               Closing this month?{" "}
               <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">

@@ -593,10 +593,10 @@ export const MOVE: KitDef = {
   path: "/move",
   kicker: "The truck",
   title: "Moving to Palatka",
-  lede: "People come from Jacksonville, St. Augustine, Ohio, a lease that’s up. The truck still has to sit in Florida heat, and the first night here is humid whether the house is new or not. Tell me where you’re coming from and what’s waiting, and I’ll put together what to put on the truck and what to have at the house.",
+  lede: "People come from Jacksonville, St. Augustine, Ohio, a lease that’s up. The truck still has to sit in Florida heat, and the first night here is humid whether the house is new or not. If you’re still choosing a community: The Collection (508 N. 17th Street) and Nobles Crossing (Newcastle Road) are Century Complete communities marketed as selling; Alford Farms in East Palatka is still a Putnam PUD file. Clay Electric and FPL both serve Putnam — territory is by power line, not by the word “Palatka.” Tell me where you’re coming from and what’s waiting, and I’ll put together what to put on the truck and what to have at the house.",
   seoTitle: "Moving to Palatka, Florida: what to pack and what to have waiting",
   seoDescription:
-    "A Palatka moving list — boxes that survive the heat, the first night, and what changes if you’re coming from up north or landing on a well. Amazon links; we may earn a commission.",
+    "Moving to Palatka or East Palatka: what to pack, first-night humidity, city vs well, Collection vs Nobles Crossing vs Alford Farms timing, and Clay Electric vs FPL. Amazon links; we may earn a commission.",
   breadcrumb: "Moving here",
   listHeading: "For the truck and the first night",
   questions: [
@@ -652,7 +652,7 @@ export const MOVE: KitDef = {
         {
           value: "collection",
           label: "New construction in town",
-          detail: "The Collection, or something like it. Builder walkthrough is a separate list. This one is the truck.",
+          detail: "The Collection, Nobles Crossing, or something like it. Builder walkthrough is a separate list. This one is the truck.",
         },
         {
           value: "well",
@@ -676,12 +676,17 @@ export const MOVE: KitDef = {
     {
       question: "Is Palatka a good place to move right now?",
       answer:
-        "If you need keys this year, The Collection at Palatka (Century Complete, 508 N. 17th Street) is the in-town new construction that’s actually selling. Alford Farms in East Palatka is a 2024 PUD still in permitting — not a closing date. Decode a street if you have one.",
+        "If you need keys this year, Century Complete markets The Collection at Palatka (508 N. 17th Street) and Nobles Crossing (Newcastle Road) as selling. Alford Farms in East Palatka is a 2024 PUD still in permitting — not a closing date. Decode a street if you have one, and check whether you’re on city water or a well.",
     },
     {
       question: "I’m moving in September. Is that storm season?",
       answer:
-        "Yes. Putnam’s season is June through November. The storm list on this site is water, lights, and who to call. This page is the truck and the first night.",
+        "Yes. Putnam’s season is June through November. The storm list on this site is water, lights, well vs city, and who to call. This page is the truck and the first night.",
+    },
+    {
+      question: "Clay Electric or FPL?",
+      answer:
+        "Both serve Putnam County. Territory follows the power line on the parcel, not the city name on the listing. Confirm with the utility or a recent bill for that street before you assume outage numbers.",
     },
     {
       question: "Do I really need different boxes?",
@@ -691,12 +696,20 @@ export const MOVE: KitDef = {
     {
       question: "What about the first night?",
       answer:
-        "Waterproof protectors on every bed before anyone lies down. Palatka humidity doesn’t wait for you to unpack. If you’re coming from up north, a dehumidifier can sit in a box until you see how the house feels.",
+        "Waterproof protectors on every bed before anyone lies down. Palatka humidity doesn’t wait for you to unpack. If you’re coming from up north, a dehumidifier can sit in a box until you see how the house feels. On a well lot, keep drinking water you can carry — the pump dies with the power.",
+    },
+    {
+      question: "Should I time the move to Alford Farms?",
+      answer:
+        "Not unless you can live without a sales calendar. Alford Farms is still a county file (PUD24-000004). Tour The Collection or Nobles Crossing if you need keys; keep Alford on a watch list.",
     },
   ],
   related: [
-    { to: "/decide", label: "Collection vs Alford" },
+    { to: "/decide", label: "Buy now vs wait" },
+    { to: "/address", label: "Decode a street" },
     { to: "/punch", label: "Closing week" },
+    { to: "/storm", label: "Storm list" },
+    { to: "/well", label: "Well lot list" },
     { to: "/house", label: "All the house lists" },
   ],
   score(a) {
@@ -704,7 +717,7 @@ export const MOVE: KitDef = {
       return {
         kicker: "Still looking",
         headline: "Get the house straight before you fill a truck.",
-        body: "If the fork is Collection vs Alford, Collection is taking contracts in town and Alford is still a Putnam file. You can buy boxes whenever — they don’t go bad — but don’t time a lease to a sales date that isn’t public. When you have a street, check whether it’s city water or a well so the first night isn’t a surprise.",
+        body: "If the fork is Collection / Nobles Crossing vs Alford, the first two are Century Complete communities marketed as selling and Alford is still a Putnam file. You can buy boxes whenever — they don’t go bad — but don’t time a lease to a sales date that isn’t public. When you have a street, check whether it’s city water or a well, and whether Clay Electric or FPL serves the line, so the first night isn’t a surprise.",
         points: [
           "Buy now or wait is the timeline tool on this site.",
           "A street decoder will tell you city vs unincorporated.",
@@ -740,7 +753,7 @@ export const MOVE: KitDef = {
       return {
         kicker: "In-town new construction",
         headline: "Get the truck right, then walk the house with a real kit in your hand.",
-        body: "The Collection is inside Palatka city, Century Complete, 508 N. 17th Street. Heat still eats cheap boxes on the way in. Protectors on the beds the first night. The builder walkthrough is its own list — tester, caulk, a stool — and it’s worth doing before the sofa comes off the truck.",
+        body: "In-town new construction here usually means The Collection (508 N. 17th Street) or Nobles Crossing (Newcastle Road) — both Century Complete and marketed as selling. Heat still eats cheap boxes on the way in. Protectors on the beds the first night. The builder walkthrough is its own list — tester, caulk, a stool — and it’s worth doing before the sofa comes off the truck.",
         points: [
           "Take photos on walkthrough day, one room at a time.",
           "West glass in these houses works the A/C. That’s the summer list.",
