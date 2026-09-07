@@ -30,17 +30,40 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
       answer:
         "Along the SR 207 corridor at Alford Road in unincorporated East Palatka, Putnam County, Florida — the St. Augustine-facing side of the river, not downtown Palatka.",
     },
+    {
+      question: "Is there a flood map change at Alford Farms?",
+      answer:
+        "Putnam County has publicly noticed a proposed flood map revision for the Alford Farms area affecting Flood Insurance Rate Map panel 12107C0212C (south of SR 207, east of Cabbage Patch Road). The notice describes establishing base flood elevations and possible Special Flood Hazard Area changes. That is not a sales opening and is not a final map until FEMA/county process completes. Review materials at the Putnam County Building Division and check the exact lot on the official flood map before you buy or insure.",
+    },
   ],
   "collection-at-palatka": [
     {
       question: "Are there new construction homes for sale in Palatka right now?",
       answer:
-        "Yes. The Collection at Palatka by Century Complete is listed as selling, with builder pricing in the low-to-mid $200,000s and quick move-in homes advertised. That is a different product from Alford Farms, which is still in the county file and not selling lots.",
+        "Yes. Century Complete lists The Collection at Palatka (508 N. 17th Street) as selling, with advertised pricing in the low-to-mid $200,000s, and also lists Nobles Crossing on Newcastle Road as selling (recent advertised listings in the low-to-mid $300,000s — verify on the builder site). Both are different from Alford Farms in East Palatka, which is still a PUD file and not selling lots.",
     },
     {
       question: "Who builds The Collection at Palatka?",
       answer:
         "Century Complete, the value line of Century Communities. The builder lists the community at 508 N. 17th Street, Palatka, FL 32177, with three floor plans (about 1,150–1,680 square feet).",
+    },
+  ],
+
+  "nobles-crossing": [
+    {
+      question: "Is Nobles Crossing selling homes in Palatka?",
+      answer:
+        "Yes, according to Century Complete’s community page. Nobles Crossing is listed as an active new-home community on Newcastle Road in Palatka. Inventory and pricing change — confirm on the builder site before you plan a closing date.",
+    },
+    {
+      question: "Who builds Nobles Crossing?",
+      answer:
+        "Century Complete, the value line of Century Communities — the same builder brand as The Collection at Palatka. The two communities are different sites: Nobles Crossing on Newcastle Road, The Collection at 508 N. 17th Street.",
+    },
+    {
+      question: "Is Nobles Crossing the same as Alford Farms?",
+      answer:
+        "No. Nobles Crossing is in Palatka and marketed as selling. Alford Farms is a large East Palatka PUD on SR 207 that is still in the county permitting file and not a public sales opening.",
     },
   ],
   "east-river-road": [
