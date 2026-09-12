@@ -181,6 +181,7 @@ export function scoreStorm(a: StormAnswers): StormRead {
 
 const ALWAYS = [
   "Hurricane supply kit",
+  "NOAA weather radio",
   "LED flashlights and lanterns",
   "First-aid kit",
   "Drinking water containers",
@@ -195,6 +196,7 @@ const STARTER = [
 
 const STARTER_ORDER = [
   "Portable power station",
+  "NOAA weather radio",
   "Hurricane supply kit",
   "LED flashlights and lanterns",
   "Drinking water containers",
@@ -207,7 +209,7 @@ export function buildStormStarterKit(products: AffiliateProduct[]): AffiliatePro
   return products
     .filter((p) => want.has(p.title))
     .sort((x, y) => STARTER_ORDER.indexOf(x.title) - STARTER_ORDER.indexOf(y.title))
-    .slice(0, 6);
+    .slice(0, 7);
 }
 
 export function buildStormKit(products: AffiliateProduct[], a: StormAnswers): AffiliateProduct[] {
@@ -231,6 +233,7 @@ export function buildStormKit(products: AffiliateProduct[], a: StormAnswers): Af
   const picked = products.filter((p) => want.has(p.title));
   const order = [
     "Portable power station",
+    "NOAA weather radio",
     "Hurricane supply kit",
     "LED flashlights and lanterns",
     "Drinking water containers",
