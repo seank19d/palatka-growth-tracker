@@ -63,6 +63,14 @@ export const SUMMER: KitDef = {
     "A short list for the first hot season in Palatka or East Palatka — dehumidifier, mattress protectors, window film. Amazon links; we may earn a commission.",
   breadcrumb: "First summer",
   listHeading: "What to pick up before it gets ugly",
+  starterHeading: "Starter summer picks",
+  starterNote:
+    "Answer below if you want the list matched to the house. Or grab the summer basics now — dehumidifier, bed protectors, and film for west glass beat a July surprise.",
+  starterTitles: [
+    "Dehumidifier",
+    "Mattress protector (waterproof)",
+    "Window solar film",
+  ],
   questions: [
     {
       key: "house",
