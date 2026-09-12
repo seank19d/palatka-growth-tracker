@@ -30,7 +30,8 @@ Set these in the Vercel project if you want persistence, cron, and sign-in:
 | `AMAZON_ASSOCIATE_TAG` | For monetization | Appended to affiliate product URLs. |
 | `ADMIN_EMAILS` | Recommended | Comma-separated emails allowed on `/admin`. If unset, any signed-in user can open it. |
 | `XAI_API_KEY` | Optional | Grok summaries of new source items. |
-| `RESEND_API_KEY` / `ALERT_EMAIL` | Optional | Email when scrapes fail repeatedly. |
+| `RESEND_API_KEY` / `ALERT_EMAIL` | For form + scrape alerts | Email tip/file-alert submissions and scrape failures. Set `ALERT_EMAIL` to your inbox (e.g. seank19d@gmail.com). |
+| `RESEND_FROM` | Optional | Override From. Default `Palatka Homes Report <onboarding@resend.dev>` until the custom domain is verified on Resend. |
 | `VITE_PLAUSIBLE_DOMAIN` | Optional | Plausible analytics. |
 
 Sign-in (Google / X) works when the host injects Better Auth + Grok auth broker credentials. Public pages do not require it.
