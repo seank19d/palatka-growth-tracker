@@ -359,7 +359,20 @@ function Home() {
           ))}
         </div>
         <div className="mt-10">
-          <ProductBlock products={products} heading="First-week moving kit" />
+          <p className="mb-4 max-w-2xl text-base leading-relaxed text-muted">
+            Boxes for the truck, a real tool kit for walkthrough week, and a first-aid kit that isn’t
+            the junk-drawer gap.
+          </p>
+          <ProductBlock products={products} heading="Start with" />
+          <p className="mt-3 text-base text-muted">
+            <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+              Moving list
+            </Link>
+            {" · "}
+            <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
+              Closing-week list
+            </Link>
+          </p>
         </div>
       </section>
 
