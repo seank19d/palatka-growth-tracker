@@ -203,7 +203,7 @@ export const SEED_PROJECTS: SeedProject[] = [
     lotsCurrent: null,
     lotsRezoning: null,
     unitsNote:
-      "Custom new-construction lots on Peniel Church Road marketed as Beverly's Crossing. Listings describe build packages advertised from about $385,000 — verify live on any listing and with the seller. Not Century Complete Collection/Nobles, and not Alford Farms.",
+      "Custom new-construction lots on Peniel Church Road listed as Beverly's Crossing. Listings describe build packages advertised from about $385,000 — verify live on any listing and with the seller. Not Century Complete Collection/Nobles, and not Alford Farms.",
     commercialSqft: null,
     builder: null,
     developer: null,
