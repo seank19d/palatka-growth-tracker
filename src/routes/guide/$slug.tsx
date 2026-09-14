@@ -108,7 +108,9 @@ function GuidePage() {
         page.slug === "utilities" ||
         page.slug === "moving-checklist" ||
         page.slug === "outdoors" ||
-        page.slug === "shopping" ? (
+        page.slug === "shopping" ||
+        page.slug === "cost-of-living" ||
+        page.slug === "local-tips" ? (
           <p className="mt-6 text-base text-muted">
             {page.slug === "utilities" ? (
               <>
@@ -147,6 +149,26 @@ function GuidePage() {
                 . First summer humidity?{" "}
                 <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
                   Summer list
+                </Link>
+                .
+              </>
+            ) : page.slug === "cost-of-living" ? (
+              <>
+                Figuring the truck and whether to buy now?{" "}
+                <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Moving list
+                </Link>{" "}
+                and{" "}
+                <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
+                  buy now or wait
+                </Link>{" "}
+                are here.
+              </>
+            ) : page.slug === "local-tips" ? (
+              <>
+                Storm, summer, well, walkthrough — the house kits are in{" "}
+                <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
+                  one place
                 </Link>
                 .
               </>
