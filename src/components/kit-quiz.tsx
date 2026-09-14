@@ -152,6 +152,23 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
               </span>
             ))}
           </p>
+          {kit.endNote ? (
+            <p className="text-base leading-relaxed text-muted">
+              {kit.endNote.before}
+              {kit.endNote.links.map((l, i) => (
+                <span key={l.href}>
+                  {i === 0 ? null : i === kit.endNote!.links.length - 1 ? " or " : ", "}
+                  <Link
+                    to={l.href}
+                    className="font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {l.label}
+                  </Link>
+                </span>
+              ))}
+              {kit.endNote.after}
+            </p>
+          ) : null}
           <Button type="button" variant="outline" onClick={reset}>
             <RotateCcw className="size-4" />
             Start over

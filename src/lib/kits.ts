@@ -23,6 +23,13 @@ export type KitRelated = {
   label: string;
 };
 
+/** End note with hrefs outside the kit route union (e.g. developments). */
+export type KitEndNote = {
+  before: string;
+  links: { href: string; label: string }[];
+  after: string;
+};
+
 export type KitDef = {
   path: string;
   kicker: string;
@@ -39,6 +46,7 @@ export type KitDef = {
   questions: KitQuestion[];
   faqs: KitFaq[];
   related: KitRelated[];
+  endNote?: KitEndNote;
   score: (a: Record<string, string>) => KitRead;
   titles: (a: Record<string, string>) => string[];
 };
@@ -954,6 +962,15 @@ export const PUNCH: KitDef = {
     { to: "/decide", label: "Buy now or wait" },
     { to: "/house", label: "All the house lists" },
   ],
+  endNote: {
+    before: "Closing on ",
+    links: [
+      { href: "/developments/collection-at-palatka", label: "Collection" },
+      { href: "/developments/nobles-crossing", label: "Nobles" },
+    ],
+    after:
+      "? Status is on those project pages. This list is the walkthrough kit.",
+  },
   score(a) {
     if (a.when === "looking") {
       return {
