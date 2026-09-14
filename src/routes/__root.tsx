@@ -65,6 +65,11 @@ function RootDocument() {
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Impact.com site verification — requires `value`, not `content`. */}
+        <meta
+          name="impact-site-verification"
+          {...{ value: "091c2f2d-0ac9-4147-90fd-942e7b79d13f" }}
+        />
         <JsonLd data={ORG_JSON_LD} />
         {plausible ? (
           <script defer data-domain={plausible} src="https://plausible.io/js/script.js" />
