@@ -263,12 +263,20 @@ export const SEED_PRODUCTS: {
     sortOrder: 31,
   },
   {
-    asin: null,
-    title: "Caulk and caulk gun",
+    asin: "B0000DI82L",
+    title: "Kitchen and bath caulk",
     category: "tools",
     blurb: "Builder caulk lines are the first thing that shows after a Florida summer.",
-    searchQuery: "GE silicone 2 kitchen bath caulk white with caulk gun",
+    searchQuery: "GE Advanced Silicone 2 Kitchen Bath white 10.1 oz",
     sortOrder: 32,
+  },
+  {
+    asin: "B0002YTSYS",
+    title: "Caulk gun",
+    category: "tools",
+    blurb: "A real gun for a 10 oz tube. The throwaway ones strip on the first walkthrough.",
+    searchQuery: "Newborn 250 caulk gun 10 oz",
+    sortOrder: 39,
   },
   {
     asin: "B01CTAW3LC",

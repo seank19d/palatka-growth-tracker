@@ -873,7 +873,8 @@ export const PUNCH: KitDef = {
   starterTitles: [
     "Basic home tool kit",
     "Outlet tester",
-    "Caulk and caulk gun",
+    "Kitchen and bath caulk",
+    "Caulk gun",
     "Step stool",
     "Mattress protector (waterproof)",
   ],
@@ -1007,7 +1008,8 @@ export const PUNCH: KitDef = {
     };
   },
   titles(a) {
-    const t = ["Basic home tool kit", "Caulk and caulk gun", "Outlet tester", "Painter's tape", "Step stool"];
+    const t = ["Basic home tool kit", "Kitchen and bath caulk",
+    "Caulk gun", "Outlet tester", "Painter's tape", "Step stool"];
     if (a.beds === "yes") t.push("Mattress protector (waterproof)", "First-aid kit");
     if (a.when === "looking") return ["Basic home tool kit", "Outlet tester"];
     return t;
