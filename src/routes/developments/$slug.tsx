@@ -47,21 +47,15 @@ export const Route = createFileRoute("/developments/$slug")({
             ? {
                 title: "Nobles Crossing Palatka: Century Complete homes",
                 description:
-                  "Nobles Crossing on Newcastle Road is a Century Complete community marketed as selling in Palatka — separate from The Collection and from Alford Farms.",
+                  "Nobles Crossing on Newcastle Road is a Century Complete community listed as selling in Palatka — separate from The Collection and from Alford Farms.",
               }
-            : p.slug === "fairway-estates"
-              ? {
-                  title: "Fairway Estates Palatka: final plat accepted",
-                  description:
-                    "Fairway Estates final plat accepted March 27, 2025 (Res 2025-R-32). Plat Book 7 / Page 17. Not Fairway Crossing. Not listed as selling here.",
-                }
-              : {
-                  title: `${p.name} in ${p.area}, FL — status and public record`,
-                  description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
-                    0,
-                    160,
-                  ),
-                };
+            : {
+                title: `${p.name} in ${p.area}, FL — status and public record`,
+                description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
+                  0,
+                  160,
+                ),
+              };
     return seo({ ...custom, path: `/developments/${p.slug}` });
   },
   component: ProjectPage,
@@ -138,13 +132,6 @@ function ProjectPage() {
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
           Century Complete community on Newcastle Road in Palatka, listed as selling — not Alford
           Farms, and not The Collection at 508 N. 17th Street.
-        </p>
-      ) : project.slug === "fairway-estates" ? (
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          Fairway Estates is a City of Palatka subdivision. City Commission accepted the final plat
-          on March 27, 2025 (Resolution 2025-R-32). The clerk shows the plat as Fairway Estates, Plat
-          Book 7, Page 17 (section 13, township 10, range 26). This is not Fairway Crossing — no
-          clerk or CivicClerk hit under that name yet.
         </p>
       ) : null}
 
@@ -235,8 +222,7 @@ function ProjectPage() {
       {(project.slug === "alford-farms" ||
         project.slug === "collection-at-palatka" ||
         project.slug === "nobles-crossing" ||
-        project.slug === "beverlys-crossing" ||
-        project.slug === "fairway-estates") ? (
+        project.slug === "beverlys-crossing") ? (
 
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold">Lists for the move</h2>
