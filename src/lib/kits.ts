@@ -212,6 +212,14 @@ export const WELL: KitDef = {
     "Private wells in East Palatka and Putnam County — test kits, a hose, drinking water if the power is out. Amazon links; we may earn a commission.",
   breadcrumb: "Well lot",
   listHeading: "For a house on a well",
+  starterHeading: "Starter well picks",
+  starterNote:
+    "Answer below if you want the list matched to the lot. Or grab the well basics now — water you can carry, a test kit, and a long hose.",
+  starterTitles: [
+    "Drinking water containers",
+    "Well water test kit",
+    "Garden hose and nozzle",
+  ],
   questions: [
     {
       key: "sure",
