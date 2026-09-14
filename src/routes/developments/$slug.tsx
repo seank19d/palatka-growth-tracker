@@ -227,8 +227,8 @@ function ProjectPage() {
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold">Lists for the move</h2>
         <p className="mt-2 max-w-prose text-base leading-relaxed text-muted">
-          Short practical lists on this site — storm season, the truck, closing week, first summer, and
-          well lots. No brokerage pitch.
+          Short practical lists on this site — storm season, the truck, closing week, first summer, well
+          lots, the desk, and the yard. No brokerage pitch.
         </p>
         <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-base">
           <li>
@@ -254,6 +254,16 @@ function ProjectPage() {
           <li>
             <Link to="/well" className="font-medium text-primary underline-offset-4 hover:underline">
               Well lot list
+            </Link>
+          </li>
+          <li>
+            <Link to="/office" className="font-medium text-primary underline-offset-4 hover:underline">
+              Work-from-home list
+            </Link>
+          </li>
+          <li>
+            <Link to="/yard" className="font-medium text-primary underline-offset-4 hover:underline">
+              Yard and porch list
             </Link>
           </li>
           <li>
@@ -322,6 +332,14 @@ function ProjectPage() {
               . Well lot?{" "}
               <Link to="/well" className="font-medium text-primary underline-offset-4 hover:underline">
                 Well list
+              </Link>
+              . Working from the house?{" "}
+              <Link to="/office" className="font-medium text-primary underline-offset-4 hover:underline">
+                Office list
+              </Link>
+              . Yard and porch?{" "}
+              <Link to="/yard" className="font-medium text-primary underline-offset-4 hover:underline">
+                Yard list
               </Link>
               .
             </p>
