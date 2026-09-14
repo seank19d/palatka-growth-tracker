@@ -235,9 +235,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "shopping",
-    title: "Shopping & daily errands",
+    title: "Palatka shopping: Publix, Walmart, and the St. Augustine run",
     navLabel: "Shopping",
-    excerpt: "Where Palatka actually shops, and what people still drive to St. Augustine for.",
+    excerpt:
+      "Groceries and basics in town. What people still drive SR 207 to St. Augustine for. East Palatka isn’t a Target run yet — don’t budget this year’s errands around a site plan.",
     affiliateCategory: "home-setup",
     sortOrder: 6,
     sections: [
