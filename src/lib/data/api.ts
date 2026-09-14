@@ -22,7 +22,12 @@ export const fetchProjectPage = createServerFn({ method: "GET" })
       project.status === "selling" ? getProducts() : Promise.resolve([]),
     ]);
     const products = allProducts.filter((p) => p.sortOrder <= 8);
-    return { project, milestones, updates, products };
+    const keysTitles = ["Outlet tester", "Caulk and caulk gun", "Basic home tool kit"];
+    const byTitle = new Map(allProducts.map((p) => [p.title, p]));
+    const keysProducts = keysTitles
+      .map((t) => byTitle.get(t))
+      .filter((p): p is NonNullable<typeof p> => p != null);
+    return { project, milestones, updates, products, keysProducts };
   });
 
 export const fetchGuideHub = createServerFn({ method: "GET" }).handler(async () => {

@@ -62,7 +62,7 @@ export const Route = createFileRoute("/developments/$slug")({
 });
 
 function ProjectPage() {
-  const { project, milestones, updates, products } = Route.useLoaderData();
+  const { project, milestones, updates, products, keysProducts } = Route.useLoaderData();
   const faqs = PROJECT_FAQS[project.slug] ?? [];
   const facts = [
     { label: "Area", value: project.area },
@@ -141,6 +141,21 @@ function ProjectPage() {
         <StatusPipeline current={project.status} />
         <p className="mt-2 text-base text-muted">{STATUS_META[project.status].hint}</p>
       </div>
+
+      {keysProducts?.length &&
+      (project.slug === "collection-at-palatka" || project.slug === "nobles-crossing") ? (
+        <div className="mt-10">
+          <ProductBlock products={keysProducts} heading="Keys this year" />
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            Closing soon on Collection or Nobles? Take a real kit to the walkthrough — tester, caulk,
+            and a basic tool kit beat arguing after the sofa’s in.{" "}
+            <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
+              Closing-week list
+            </Link>
+            .
+          </p>
+        </div>
+      ) : null}
 
       <section className="mt-10">
         <h2 className="font-display text-2xl font-semibold">File facts</h2>
