@@ -1,22 +1,41 @@
 import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Kicker } from "@/components/brand/kicker";
 import { CountyMap } from "@/components/projects/county-map";
 import { ProjectCard } from "@/components/projects/project-card";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { PIPELINE_STATUSES } from "@/lib/constants";
 import { fetchProjects } from "@/lib/data/api";
 import { ProjectFocusProvider } from "@/lib/project-focus";
-import { breadcrumbJsonLd, seo } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, seo } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
+
+const HUB_FAQS = [
+  {
+    question: "Is Alford Farms selling?",
+    answer:
+      "No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka — rezoning approved, still not a sales opening. See the Alford Farms project page for the public-record status.",
+  },
+  {
+    question: "Which communities are listed as selling?",
+    answer:
+      "On this hub, Century Complete: Collection and Nobles Crossing. Beverly's Crossing is custom new construction listed separately. Fairway Estates has a recorded plat only — not listed as selling here.",
+  },
+] as const;
 
 export const Route = createFileRoute("/developments/")({
   loader: () => fetchProjects(),
   head: () =>
     seo({
-      title: "New Palatka subdivisions and East Palatka PUDs",
+      title: "Alford Farms & Palatka new construction status",
       description:
-        "Alford Farms, The Collection at Palatka, East River Road, and the Putnam watch list. Selling vs still in the county file — status from public records.",
+        "Alford Farms (East Palatka PUD, not selling) vs Collection and Nobles (listed as selling). Fairway Estates plat recorded. Status from public records — not a brokerage.",
       path: "/developments",
     }),
   component: DevelopmentsPage,
@@ -75,19 +94,35 @@ function DevelopmentsPage() {
               url: `https://www.palatkahomesreport.com/developments/${p.slug}`,
             })),
           },
+          faqJsonLd([...HUB_FAQS]),
         ]}
       />
       <Kicker>Developments</Kicker>
       <h1 className="mt-2 font-display text-4xl font-semibold md:text-5xl">
-        New Palatka subdivisions
+        Alford Farms and Palatka subdivisions
       </h1>
+      <p className="mt-3 max-w-2xl text-lg text-muted">
+        Looking for{" "}
+        <Link
+          to="/developments/$slug"
+          params={{ slug: "alford-farms" }}
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Alford Farms
+        </Link>
+        ? East Palatka PUD on SR 207 — rezoning approved, still not selling.
+      </p>
+      <p className="mt-2 max-w-2xl text-lg text-muted">
+        Start on that file, then Collection or Nobles if you want homes listed as selling.
+      </p>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Every project currently published. Pipeline is still in the county file. Watch-list items
         are unconfirmed. Selling means the builder lists homes for sale.
       </p>
       <p className="mt-3 max-w-2xl text-base text-muted">
         <strong className="font-medium text-fg">How to read a status:</strong> Concept is an idea.
-        Rezoning is a county case. Selling is a contract. Built-out is a finished community.
+        Rezoning is a county case. Selling means homes are listed for sale. Built-out is a finished
+        community.
       </p>
       <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter developments">
         {FILTERS.map((f) => (
@@ -119,6 +154,35 @@ function DevelopmentsPage() {
           <CountyMap projects={filtered.length ? filtered : projects} />
         </div>
       </ProjectFocusProvider>
+
+      <section className="mt-12 max-w-2xl">
+        <h2 className="font-display text-2xl font-semibold">Common questions</h2>
+        <Accordion type="single" collapsible className="mt-4">
+          {HUB_FAQS.map((f) => (
+            <AccordionItem key={f.question} value={f.question}>
+              <AccordionTrigger className="text-left">{f.question}</AccordionTrigger>
+              <AccordionContent className="leading-relaxed">
+                {f.question === "Is Alford Farms selling?" ? (
+                  <>
+                    No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka — rezoning
+                    approved, still not a sales opening. See the{" "}
+                    <Link
+                      to="/developments/$slug"
+                      params={{ slug: "alford-farms" }}
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      Alford Farms project page
+                    </Link>{" "}
+                    for the public-record status.
+                  </>
+                ) : (
+                  f.answer
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </section>
     </main>
   );
 }

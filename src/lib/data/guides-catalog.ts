@@ -63,10 +63,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "utilities",
-    title: "Palatka utilities: Clay Electric, water, sewer",
+    title: "Clay Electric vs FPL in Palatka and East Palatka",
     navLabel: "Utilities",
     excerpt:
-      "Clay Electric vs FPL, city water vs well, Palatka Gas, and trash in Putnam County. Look up the street — not the city name.",
+      "Which electric covers your street, city water vs well, gas and trash in Putnam. Look up the address — not the city name.",
     affiliateCategory: "home-setup",
     sortOrder: 2,
     sections: [
