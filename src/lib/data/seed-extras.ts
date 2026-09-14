@@ -175,15 +175,15 @@ export const SEED_PRODUCTS: {
     sortOrder: 20,
   },
   {
-    asin: null,
+    asin: "B003KZSO7S",
     title: "Cooler",
     category: "storm",
     blurb: "If the power is out overnight, this holds the food. Get ice while the station still has it.",
-    searchQuery: "Igloo 50 quart cooler",
+    searchQuery: "Igloo MaxCold 50 quart cooler",
     sortOrder: 21,
   },
   {
-    asin: null,
+    asin: "B07DRQS4RN",
     title: "Heavy-duty tarp",
     category: "storm",
     blurb: "For an older roof or yard debris after a storm.",
@@ -239,7 +239,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 28,
   },
   {
-    asin: null,
+    asin: "B0134QJH4G",
     title: "Cat 6 ethernet cable",
     category: "home-setup",
     blurb: "If the desk can take a cable, it’s cheaper than another year of buffering.",
@@ -247,7 +247,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 29,
   },
   {
-    asin: null,
+    asin: "B07C82HPM7",
     title: "LED desk lamp",
     category: "home-setup",
     blurb: "West rooms get harsh after lunch. Put a lamp on the desk.",
