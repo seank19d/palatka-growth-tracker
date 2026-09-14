@@ -151,7 +151,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 17,
   },
   {
-    asin: null,
+    asin: "B0009ON12G",
     title: "Heavy-duty extension cord",
     category: "storm",
     blurb: "Outdoor-rated, 12-gauge, long enough to keep a generator away from windows.",
@@ -159,7 +159,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 18,
   },
   {
-    asin: null,
+    asin: "B0895439SG",
     title: "Well water test kit",
     category: "storm",
     blurb: "After floodwater around a wellhead, get the well tested before you drink it.",
@@ -191,7 +191,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 22,
   },
   {
-    asin: null,
+    asin: "B00G1HWS06",
     title: "Closet moisture absorbers",
     category: "home-setup",
     blurb: "For closets that feel cool and a little sticky after a closed-up week.",
@@ -255,7 +255,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 30,
   },
   {
-    asin: null,
+    asin: "B093ZK53YQ",
     title: "Patio mosquito repeller",
     category: "outdoor",
     blurb: "For dusk on the patio while the yard treatment works.",
