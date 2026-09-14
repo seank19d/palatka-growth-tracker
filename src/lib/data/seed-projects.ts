@@ -234,4 +234,69 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
   },
+
+  {
+    slug: "fairway-estates",
+    name: "Fairway Estates",
+    locationLabel: "City of Palatka (Plat Book 7 / Page 17)",
+    area: "Palatka",
+    lat: 29.6509,
+    lng: -81.6408,
+    status: "plat_recorded",
+    acres: null,
+    lotsCurrent: null,
+    lotsRezoning: null,
+    unitsNote:
+      "Final plat accepted by City Commission. Lot counts stay off this page until they are pulled from the plat PDF.",
+    commercialSqft: null,
+    builder: "A&M Home Builders, LLC",
+    developer: null,
+    countyCase: null,
+    ordinance: "2025-R-32",
+    sjrwmdFile: null,
+    officialLinks: [
+      {
+        label: "City Commission 2025-03-27 — Fairway Estates packet (CivicClerk)",
+        url: "https://palatkafl.portal.civicclerk.com/event/195/files",
+      },
+      {
+        label: "Resolution 2025-R-32 — Fairway Estates final plat",
+        url: "https://palatkafl.portal.civicclerk.com/event/195/files/attachment/2663",
+      },
+      {
+        label: "Putnam Clerk plat viewer — Fairway Estates (Plat Book 7 / Page 17)",
+        url: "https://apps.putnam-fl.com/peas/peasApplications/recording_maps/frame.php",
+      },
+      { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
+    ],
+    latestSummary:
+      "Fairway Estates is a City of Palatka subdivision. City Commission accepted the final plat on March 27, 2025 (Resolution 2025-R-32). The Putnam clerk shows Fairway Estates at Plat Book 7, Page 17 (section 13, township 10, range 26). Covenant docs in that Commission packet name A&M Home Builders, LLC. Lot count, streets, and utilities stay off this page until they are pulled from the plat PDF. Not listed as selling here. This is not Fairway Crossing — no clerk or CivicClerk hit under that name in this pack.",
+    latestSummaryAt: "2026-09-14T18:00:00.000Z",
+    confidence: "confirmed",
+    published: true,
+    featured: false,
+    milestones: [
+      {
+        occurredOn: "2025-02-04",
+        title: "Planning Board hearing",
+        body: "Resolution 2025-R-32 cites a Planning Board hearing on Fairway Estates on February 4, 2025.",
+        sourceLabel: "Resolution 2025-R-32",
+        sourceUrl: "https://palatkafl.portal.civicclerk.com/event/195/files/attachment/2663",
+      },
+      {
+        occurredOn: "2025-03-04",
+        title: "Planning Board hearing",
+        body: "Resolution 2025-R-32 cites a Planning Board hearing on Fairway Estates on March 4, 2025.",
+        sourceLabel: "Resolution 2025-R-32",
+        sourceUrl: "https://palatkafl.portal.civicclerk.com/event/195/files/attachment/2663",
+      },
+      {
+        occurredOn: "2025-03-27",
+        title: "City Commission accepted final plat",
+        body: "City Commission Resolution 2025-R-32 accepts the Fairway Estates final plat. Putnam clerk indexing shows Fairway Estates at Plat Book 7, Page 17 (STR 13-10-26).",
+        sourceLabel: "Resolution 2025-R-32 + Putnam clerk plat viewer",
+        sourceUrl: "https://palatkafl.portal.civicclerk.com/event/195/files/attachment/2663",
+      },
+    ],
+  },
 ];
