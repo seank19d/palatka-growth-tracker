@@ -167,8 +167,8 @@ export function scoreDecide(a: DecideAnswers): Verdict {
         ? "Two Century Complete communities are listed as selling in Palatka."
         : "Shop what’s selling — then keep Alford on a watch list.",
       body: preferNobles
-        ? "Century Complete lists The Collection at Palatka on 17th Street and Nobles Crossing on Newcastle Road. Collection has been advertised from the low $200,000s; recent Nobles asks have been low-to-mid $300,000s. Both are on the builder site as selling — verify inventory there. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date."
-        : "The Collection on 17th Street is on the builder site as selling, advertised from the low $200,000s. Nobles Crossing on Newcastle Road is listed as selling too. Alford Farms on SR 207 is a 2024 Putnam PUD still in engineering and permitting. A PUD is not a closing date. If you need keys this year, tour what’s open and keep Alford on a watch list.",
+        ? "Century Complete lists The Collection at Palatka on 17th Street and Nobles Crossing on Newcastle Road. Collection has been advertised from the low $200,000s; recent Nobles asks have been low-to-mid $300,000s. Both are on the builder site as selling — verify inventory there. Alford Farms on SR 207 is a 2024 Putnam PUD with an issued SJRWMD ERP (IND-107-224892-1) and no recorded plat yet. A PUD is not a closing date."
+        : "The Collection on 17th Street is on the builder site as selling, advertised from the low $200,000s. Nobles Crossing on Newcastle Road is listed as selling too. Alford Farms on SR 207 is a 2024 Putnam PUD with an issued SJRWMD ERP (IND-107-224892-1) and no recorded plat yet. A PUD is not a closing date. If you need keys this year, tour what’s open and keep Alford on a watch list.",
       points,
       primary: preferNobles
         ? {
@@ -274,7 +274,7 @@ export const DECIDE_FAQS = [
   {
     question: "Is Alford Farms selling homes yet?",
     answer:
-      "Not according to the public record this site reviews. The PUD rezoning was approved in August 2024. Engineering and SJRWMD permitting were still the live steps into 2026, and Putnam County has noticed a proposed flood map revision for the Alford Farms area (FIRM 12107C0212C). A PUD is an entitlement, not a closing date.",
+      "Not according to the public record this site reviews. The PUD rezoning was approved in August 2024. SJRWMD issued ERP IND-107-224892-1 on November 25, 2025, but no plat is recorded yet. Putnam County has noticed a proposed flood map revision for the Alford Farms area (FIRM 12107C0212C). A PUD is an entitlement, not a closing date.",
   },
   {
     question: "Should I wait for Alford Farms instead of buying The Collection or Nobles Crossing?",
