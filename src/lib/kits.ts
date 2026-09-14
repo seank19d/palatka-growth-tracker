@@ -494,6 +494,14 @@ export const YARD: KitDef = {
     "Mosquito treatment, a long hose, an outdoor rug, a grill — the Palatka and East Palatka yard list. Amazon links; we may earn a commission.",
   breadcrumb: "The yard",
   listHeading: "For the yard and the porch",
+  starterHeading: "Starter yard picks",
+  starterNote:
+    "Answer below if you want the list matched to the yard. Or grab the porch basics now — mosquitoes, a hose, and a washable outdoor rug.",
+  starterTitles: [
+    "Mosquito treatment for yards",
+    "Garden hose and nozzle",
+    "Outdoor all-weather rug",
+  ],
   questions: [
     {
       key: "porch",
