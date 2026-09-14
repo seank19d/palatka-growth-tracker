@@ -42,7 +42,7 @@ export const STATUS_META: Record<
   selling: {
     label: "Selling",
     step: 6,
-    hint: "A builder or seller is taking contracts on homes or lots.",
+    hint: "A builder lists homes or lots for sale.",
   },
   built_out: {
     label: "Built-out",

@@ -161,8 +161,8 @@ function Home() {
           <Kicker>Start here</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">Now vs later</h2>
           <p className="mt-3 max-w-2xl text-lg text-muted">
-            Century Complete is taking contracts on 17th Street. Alford Farms is still a Putnam PUD
-            file.
+            The Collection on 17th Street is listed as selling. Nobles Crossing on Newcastle Road is
+            too. Alford Farms is still a Putnam PUD file.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div id="for-sale-now">

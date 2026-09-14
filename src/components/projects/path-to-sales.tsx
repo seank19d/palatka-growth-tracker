@@ -22,7 +22,7 @@ const STEPS = [
     detail: "A Horton (or other) community page with prices is the first public sales signal.",
   },
   {
-    label: "Taking contracts",
+    label: "Homes listed for sale",
     done: false,
     detail: "That is when this tracker flips Alford Farms from pipeline to selling.",
   },
@@ -36,7 +36,7 @@ export function PathToSales() {
       </p>
       <h2 className="mt-2 font-display text-2xl font-semibold">Alford Farms is not late. It is early.</h2>
       <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
-        A PUD is an entitlement. Homes for sale need a recorded plat and a builder taking contracts.
+        A PUD is an entitlement. Homes for sale need a recorded plat and a builder listing homes for sale.
         Need a house this year?{" "}
         <Link to="/developments/$slug" params={{ slug: "collection-at-palatka" }} className="font-medium text-primary underline-offset-4 hover:underline">
           The Collection at Palatka

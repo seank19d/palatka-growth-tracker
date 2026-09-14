@@ -3,7 +3,7 @@ import { formatDateShort, formatNumber } from "@/lib/format";
 import type { Project } from "@/lib/types";
 
 function sellingAnswer(status: Project["status"]): { label: string; detail: string } {
-  if (status === "selling") return { label: "Yes", detail: "Taking contracts or listed for sale" };
+  if (status === "selling") return { label: "Yes", detail: "Listed for sale / on the builder site" };
   if (status === "built_out") return { label: "Built-out", detail: "Community largely complete" };
   if (status === "under_construction")
     return { label: "Not yet", detail: "Dirt or buildings moving; not confirmed open sales" };
