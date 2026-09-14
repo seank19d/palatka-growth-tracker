@@ -361,6 +361,14 @@ export const OFFICE: KitDef = {
     "Mesh Wi-Fi, a battery for the modem, and a cord that actually reaches — for people working from a Palatka or East Palatka house. Amazon links; we may earn a commission.",
   breadcrumb: "Work from the lot",
   listHeading: "For the desk and the modem",
+  starterHeading: "Starter office picks",
+  starterNote:
+    "Answer below if you want the list matched to the desk. Or grab the office basics now — mesh Wi-Fi, a UPS for the modem, and a real ethernet cable.",
+  starterTitles: [
+    "Mesh Wi-Fi system",
+    "UPS battery backup for modem",
+    "Cat 6 ethernet cable",
+  ],
   questions: [
     {
       key: "job",
