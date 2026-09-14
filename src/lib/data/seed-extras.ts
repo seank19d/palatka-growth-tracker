@@ -87,11 +87,11 @@ export const SEED_PRODUCTS: {
     sortOrder: 10,
   },
   {
-    asin: null,
+    asin: "B00DJPPLU2",
     title: "Hurricane supply kit",
     category: "home-setup",
     blurb: "Season runs June through November. Water, radio, batteries, and a plan beat last-minute stores.",
-    searchQuery: "emergency hurricane preparedness kit water radio flashlight batteries",
+    searchQuery: "Ready America 70286 Hurricane Emergency Kit 2 person",
     sortOrder: 11,
   },
   {
