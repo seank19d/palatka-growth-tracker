@@ -104,7 +104,11 @@ function GuidePage() {
         <div className="mt-12">
           <ProductBlock products={products} />
         </div>
-        {page.slug === "home-setup" || page.slug === "utilities" || page.slug === "moving-checklist" ? (
+        {page.slug === "home-setup" ||
+        page.slug === "utilities" ||
+        page.slug === "moving-checklist" ||
+        page.slug === "outdoors" ||
+        page.slug === "shopping" ? (
           <p className="mt-6 text-base text-muted">
             {page.slug === "utilities" ? (
               <>
@@ -116,6 +120,10 @@ function GuidePage() {
                 <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
                   Storm list
                 </Link>
+                . Working from the house?{" "}
+                <Link to="/office" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Office list
+                </Link>
                 .
               </>
             ) : page.slug === "moving-checklist" ? (
@@ -124,13 +132,45 @@ function GuidePage() {
                 <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
                   What to pack and have waiting
                 </Link>
+                . Closing week?{" "}
+                <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Walkthrough kit
+                </Link>
+                .
+              </>
+            ) : page.slug === "outdoors" ? (
+              <>
+                Yard and porch gear?{" "}
+                <Link to="/yard" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Yard list
+                </Link>
+                . First summer humidity?{" "}
+                <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Summer list
+                </Link>
+                .
+              </>
+            ) : page.slug === "shopping" ? (
+              <>
+                More house lists with starter picks?{" "}
+                <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Lists for the house
+                </Link>
                 .
               </>
             ) : (
               <>
-                First summer or closing week?{" "}
-                <Link to="/house" className="font-medium text-primary underline-offset-4 hover:underline">
-                  Lists for the house
+                First summer?{" "}
+                <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Summer list
+                </Link>
+                . Storm season?{" "}
+                <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Storm list
+                </Link>
+                . Working from home?{" "}
+                <Link to="/office" className="font-medium text-primary underline-offset-4 hover:underline">
+                  Office list
                 </Link>
                 .
               </>

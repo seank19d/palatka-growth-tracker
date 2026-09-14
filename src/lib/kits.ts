@@ -1021,47 +1021,56 @@ export const HOUSE_CARDS: {
   kicker: string;
   title: string;
   blurb: string;
+  /** One seed product title shown on the /house hub card. */
+  heroProduct: string;
 }[] = [
   {
     to: "/move",
     kicker: "The truck",
     title: "Moving to Palatka",
     blurb: "Boxes that survive the heat, the first night, and what changes if you’re coming from up north.",
+    heroProduct: "Heavy-duty moving boxes",
   },
   {
     to: "/storm",
     kicker: "June–November",
     title: "Storm season",
     blurb: "Water, lights, the well, and who to call when the power goes out.",
+    heroProduct: "Portable power station",
   },
   {
     to: "/summer",
     kicker: "May–October",
     title: "First summer",
     blurb: "Humidity, west glass, and the first time the closets sweat.",
+    heroProduct: "Dehumidifier",
   },
   {
     to: "/well",
     kicker: "East Palatka",
     title: "If you’re on a well",
     blurb: "Test kits, a hose, and drinking water when the pump is out.",
+    heroProduct: "Well water test kit",
   },
   {
     to: "/office",
     kicker: "The desk",
     title: "Working from the lot",
     blurb: "Mesh Wi-Fi, a battery for the modem, a cord that reaches.",
+    heroProduct: "Mesh Wi-Fi system",
   },
   {
     to: "/yard",
     kicker: "After five",
     title: "The yard before dusk",
     blurb: "Mosquitoes, a long hose, and sitting outside without giving up.",
+    heroProduct: "Mosquito treatment for yards",
   },
   {
     to: "/punch",
     kicker: "Closing week",
     title: "The first week in a new house",
     blurb: "Tools, a tester, caulk, and the beds the first night.",
+    heroProduct: "Basic home tool kit",
   },
 ];
