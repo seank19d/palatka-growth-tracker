@@ -66,6 +66,19 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
         "No. Nobles Crossing is in Palatka and listed as selling. Alford Farms is a large East Palatka PUD on SR 207 that is still in the county permitting file and not a public sales opening.",
     },
   ],
+
+  "beverlys-crossing": [
+    {
+      question: "Is Beverly's Crossing the same as The Collection or Nobles Crossing?",
+      answer:
+        "No. Collection and Nobles Crossing are Century Complete communities listed as selling. Beverly's Crossing is custom new construction on Peniel Church Road with an HOA entity on Sunbiz (N25000010683). Different product, different street.",
+    },
+    {
+      question: "Are Beverly's Crossing homes for sale?",
+      answer:
+        "Listings have advertised custom build packages on Peniel Church Road lots, often from about $385,000. That is listing-level information — verify price, well/septic, and seller on the live MLS or builder sheet. This site is not a brokerage.",
+    },
+  ],
   "east-river-road": [
     {
       question: "Is D.R. Horton building on East River Road?",
