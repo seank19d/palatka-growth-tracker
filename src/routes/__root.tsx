@@ -37,7 +37,9 @@ export const Route = createRootRoute({
         { name: "application-name", content: APP_NAME },
       ],
       links: [
+        { rel: "icon", href: "/favicon.ico", sizes: "any" },
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
         {
@@ -45,8 +47,7 @@ export const Route = createRootRoute({
           href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap",
         },
         { rel: "stylesheet", href: appCss },
-        { rel: "manifest", href: "/__grok/manifest.webmanifest" },
-        { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
+        { rel: "manifest", href: "/site.webmanifest" },
         { rel: "alternate", type: "text/plain", href: `${SITE_URL}/llms.txt`, title: "LLM" },
       ],
     };
