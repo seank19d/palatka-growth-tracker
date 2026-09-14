@@ -191,4 +191,47 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
   },
+  {
+    slug: "beverlys-crossing",
+    name: "Beverly's Crossing",
+    locationLabel: "Peniel Church Road, Palatka",
+    area: "Palatka",
+    lat: 29.6755,
+    lng: -81.6825,
+    status: "selling",
+    acres: null,
+    lotsCurrent: null,
+    lotsRezoning: null,
+    unitsNote:
+      "Custom new-construction lots on Peniel Church Road marketed as Beverly's Crossing. Listings describe build packages advertised from about $385,000 — verify live on any listing and with the seller. Not Century Complete Collection/Nobles, and not Alford Farms.",
+    commercialSqft: null,
+    builder: null,
+    developer: null,
+    countyCase: null,
+    ordinance: null,
+    sjrwmdFile: null,
+    officialLinks: [
+      {
+        label: "Sunbiz — Beverly's Crossing Homeowner's Association, Inc. (N25000010683)",
+        url: "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+      },
+      { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
+      { label: "Putnam County", url: "https://www.putnam-fl.gov/" },
+    ],
+    latestSummary:
+      "Beverly's Crossing shows up as custom new construction on Peniel Church Road in Palatka. Florida Sunbiz lists Beverly's Crossing Homeowner's Association, Inc. as active (document N25000010683, formed August 15, 2025). Multiple MLS-style listings advertise build packages from about $385,000 on well/septic lots — prices and plans change; verify on the live listing. This is a different product from Century Complete's Collection and Nobles Crossing, and from Alford Farms in East Palatka.",
+    latestSummaryAt: "2026-09-14T14:00:00.000Z",
+    confidence: "reported",
+    published: true,
+    featured: false,
+    milestones: [
+      {
+        occurredOn: "2025-08-15",
+        title: "HOA entity filed",
+        body: "Beverly's Crossing Homeowner's Association, Inc. appears on Florida Sunbiz as document N25000010683.",
+        sourceLabel: "Sunbiz N25000010683",
+        sourceUrl: "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+      },
+    ],
+  },
 ];
