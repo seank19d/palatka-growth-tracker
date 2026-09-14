@@ -130,7 +130,7 @@ function ProjectPage() {
         </p>
       ) : project.slug === "nobles-crossing" ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          Century Complete community on Newcastle Road in Palatka, marketed as selling — not Alford
+          Century Complete community on Newcastle Road in Palatka, listed as selling — not Alford
           Farms, and not The Collection at 508 N. 17th Street.
         </p>
       ) : null}
@@ -219,6 +219,65 @@ function ProjectPage() {
         </div>
       </section>
 
+      {(project.slug === "alford-farms" ||
+        project.slug === "collection-at-palatka" ||
+        project.slug === "nobles-crossing" ||
+        project.slug === "beverlys-crossing") ? (
+
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold">Lists for the move</h2>
+        <p className="mt-2 max-w-prose text-base leading-relaxed text-muted">
+          Short practical lists on this site — storm season, the truck, closing week, first summer, and
+          well lots. No brokerage pitch.
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-base">
+          <li>
+            <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
+              Storm list
+            </Link>
+          </li>
+          <li>
+            <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
+              Moving list
+            </Link>
+          </li>
+          <li>
+            <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
+              Closing-week list
+            </Link>
+          </li>
+          <li>
+            <Link to="/summer" className="font-medium text-primary underline-offset-4 hover:underline">
+              First summer
+            </Link>
+          </li>
+          <li>
+            <Link to="/well" className="font-medium text-primary underline-offset-4 hover:underline">
+              Well lot list
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/guide/$slug"
+              params={{ slug: "cost-of-living" }}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Cost of living
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/guide/$slug"
+              params={{ slug: "utilities" }}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Utilities
+            </Link>
+          </li>
+        </ul>
+      </section>
+      ) : null}
+
       {faqs.length ? (
         <section className="mt-12">
           <h2 className="font-display text-2xl font-semibold">
@@ -240,7 +299,9 @@ function ProjectPage() {
       {products?.length ? (
         <div className="mt-12">
           <ProductBlock products={products} heading="For the move-in week" />
-          {project.slug === "collection-at-palatka" || project.slug === "nobles-crossing" ? (
+          {project.slug === "collection-at-palatka" ||
+          project.slug === "nobles-crossing" ||
+          project.slug === "beverlys-crossing" ? (
             <p className="mt-4 text-base text-muted">
               Closing this month?{" "}
               <Link to="/punch" className="font-medium text-primary underline-offset-4 hover:underline">
@@ -257,6 +318,10 @@ function ProjectPage() {
               . Storm season?{" "}
               <Link to="/storm" className="font-medium text-primary underline-offset-4 hover:underline">
                 Storm list
+              </Link>
+              . Well lot?{" "}
+              <Link to="/well" className="font-medium text-primary underline-offset-4 hover:underline">
+                Well list
               </Link>
               .
             </p>
