@@ -289,10 +289,10 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
   },
   {
     slug: "cost-of-living",
-    title: "Cost of living & housing snapshot",
+    title: "Moving to Palatka cost of living, utilities, and commute",
     navLabel: "Cost of living",
     excerpt:
-      "Putnam is cheaper than St. Johns County. Insurance, flood, and commute time are the fine print.",
+      "Moving to Palatka: housing medians, Clay Electric vs FPL, well vs city, and the SR 207 commute. Insurance and flood are the fine print.",
     affiliateCategory: null,
     sortOrder: 8,
     sections: [
@@ -311,6 +311,20 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
           "Well pumps, septic pumping, and lawn on acreage.",
           "Commute fuel on SR 207 if your job is in St. Augustine or Jacksonville.",
           "Higher summer electric bills; Clay Electric and FPL rates are public and not the cheapest thing in your budget.",
+        ],
+      },
+      {
+        heading: "Utilities: Clay Electric vs FPL, city vs well",
+        paragraphs: [
+          "Clay Electric Cooperative and FPL both serve Putnam. Territory follows the power line on the parcel, not the word “Palatka” on the listing. Call Clay Electric at (386) 328-1432 (outages 1-888-434-9844) or FPL at 1-800-226-3545 with the street — the wrong call center cannot start the other company’s service.",
+          "Inside the City of Palatka, expect municipal water and sewer (confirm with city utilities). Unincorporated East Palatka and a lot of the county still run private wells and septic. That changes the first-week list: drinking water you can carry, a test kit, and a long hose. See the utilities guide and the well list on this site.",
+        ],
+      },
+      {
+        heading: "Commute: SR 207, US-17, and what “45 minutes” really means",
+        paragraphs: [
+          "Palatka sits on the St. Johns River in Putnam County. Jacksonville is roughly 45–60 minutes north via US-17 depending on traffic; St. Augustine is about an hour east via SR 207; Gainesville is longer west. If your job is in St. Johns or Duval, budget fuel and leave time — SR 207 is also the corridor every East Palatka PUD (including Alford Farms) will dump onto.",
+          "Drive the actual street at 7:30 a.m. and 5:30 p.m. before you write an offer. “Moving to Palatka” in a group chat often means “cheaper house in Putnam,” not downtown 2nd Street.",
         ],
       },
       {
