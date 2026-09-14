@@ -381,6 +381,15 @@ export async function getHomeData() {
     (f): f is Faq => Boolean(f),
   );
   const faqFill = faqs.filter((f) => !homeFaqs.some((h) => h.id === f.id));
+  const homeStartTitles = [
+    "Heavy-duty moving boxes",
+    "Basic home tool kit",
+    "First-aid kit",
+  ];
+  const byTitle = new Map(products.map((p) => [p.title, p]));
+  const homeProducts = homeStartTitles
+    .map((t) => byTitle.get(t))
+    .filter((p): p is NonNullable<typeof p> => p != null);
   return {
     projects,
     featured,
@@ -389,7 +398,7 @@ export async function getHomeData() {
     market,
     lastUpdated,
     faqs: [...homeFaqs, ...faqFill].slice(0, 4),
-    products: products.filter((p) => p.sortOrder <= 5).slice(0, 5),
+    products: homeProducts,
     stats: {
       projectCount: projects.length,
       pipelineCount: pipeline.length,
