@@ -16,9 +16,14 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
         "Rezoning materials described up to 700 single-family homes plus about 60,000 square feet of commercial space. Later engineering documents describe a 559-lot layout. The drop is normal as wetlands, setbacks, and infrastructure are designed. Neither number is a closing calendar.",
     },
     {
-      question: "Is D.R. Horton building Alford Farms?",
+      question: "Is D.R. Horton building Alford Farms in East Palatka?",
       answer:
         "County filings name D.R. Horton, Inc. as an agent. That is not the same as a published Horton community with prices and a model home. Confirm on Horton’s own site and against the county file before planning a purchase around this name.",
+    },
+    {
+      question: "What is Putnam case PUD24-000004?",
+      answer:
+        "That’s the county rezoning case for Alford Farms. Putnam adopted Ordinance 2024-017 on August 13, 2024, changing about 165 acres on SR 207 / Alford Road from Agriculture to PUD. A PUD case number is not a recorded plat or a sales opening.",
     },
     {
       question: "Is construction underway at Alford Farms?",
