@@ -8,7 +8,7 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
     {
       question: "When will Alford Farms homes be available in East Palatka?",
       answer:
-        "No public sales date is in the file. Through early 2026 the live steps were engineering and St. Johns River Water Management District permitting (file 224892-1). Until a plat is recorded, a Horton page is advertising, not inventory.",
+        "No public sales date is in the file. SJRWMD issued environmental resource permit IND-107-224892-1 on November 25, 2025. Until a plat is recorded, that is not inventory and not a sales opening.",
     },
     {
       question: "How many homes will be built at Alford Farms?",
@@ -28,7 +28,7 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
     {
       question: "Is construction underway at Alford Farms?",
       answer:
-        "Public records reviewed here show permitting and engineering activity, not a finished plat or a public home-sale opening. Land-clearing talk on social media is not a substitute for a recorded plat or a building permit.",
+        "Public records reviewed here show an issued SJRWMD environmental resource permit and county PUD entitlement, not a finished plat or a public home-sale opening. Land-clearing talk on social media is not a substitute for a recorded plat or a building permit.",
     },
     {
       question: "Where is Alford Farms in East Palatka?",

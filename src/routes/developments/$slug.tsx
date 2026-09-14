@@ -35,7 +35,7 @@ export const Route = createFileRoute("/developments/$slug")({
         ? {
             title: "Alford Farms East Palatka (PUD24-000004) — not selling",
             description:
-              "Putnam case PUD24-000004 on SR 207 / Alford Road. Ordinance 2024-017, 559-lot engineering layout, D.R. Horton named as agent. Not a sales opening. Flood-map note: FIRM 12107C0212C.",
+              "Putnam case PUD24-000004 on SR 207 / Alford Road. SJRWMD ERP IND-107-224892-1 issued Nov 2025. No plat recorded. Not a sales opening. Flood-map note: FIRM 12107C0212C.",
           }
         : p.slug === "collection-at-palatka"
           ? {
@@ -126,8 +126,9 @@ function ProjectPage() {
       {project.slug === "alford-farms" ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
           East Palatka PUD on SR 207 at Alford Road — Putnam case PUD24-000004 (Ordinance 2024-017).
-          Rezoning approved August 2024; still not selling. D.R. Horton is named as an agent in the
-          county file, not a public model-home community. Flood-map note: FIRM 12107C0212C.
+          SJRWMD environmental resource permit IND-107-224892-1 issued November 25, 2025. Still no
+          recorded plat and not selling. D.R. Horton is named as an agent in the county file, not a
+          public model-home community. Flood-map note: FIRM 12107C0212C.
         </p>
       ) : project.slug === "nobles-crossing" ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">

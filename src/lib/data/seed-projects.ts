@@ -52,7 +52,7 @@ export const SEED_PROJECTS: SeedProject[] = [
     developer: "Charles Alford Jr. & Kathryn Clapp (applicants on rezoning)",
     countyCase: "PUD24-000004",
     ordinance: "2024-017",
-    sjrwmdFile: "224892-1",
+    sjrwmdFile: "IND-107-224892-1",
     officialLinks: [
       {
         label: "Putnam County Planning & Zoning",
@@ -63,6 +63,18 @@ export const SEED_PROJECTS: SeedProject[] = [
         label: "FEMA — how flood map revisions work",
         url: "https://www.fema.gov/flood-maps/change-your-flood-zone/revision-process",
       },
+      {
+        label: "SJRWMD e-permit — Alford Farms IND-107-224892-1",
+        url: "https://permitting.sjrwmd.com/ep/#/prmtInfo?offclId=224892&seqNo=1",
+      },
+      {
+        label: "SJRWMD permit cover letter (2025-11-25)",
+        url: "https://permitting.sjrwmd.com/apps/idcplg?IdcService=GET_FILE&coreContentOnly=1&RevisionSelectionMethod=Latest&allowInterrupt=1&dDocName=EREG_8693914",
+      },
+      {
+        label: "Recorded Notice of Environmental Resource Permit (2026-01-09)",
+        url: "https://permitting.sjrwmd.com/apps/idcplg?IdcService=GET_FILE&coreContentOnly=1&RevisionSelectionMethod=Latest&allowInterrupt=1&dDocName=EREG_8733431",
+      },
       { label: "SJRWMD e-permitting", url: "https://permitting.sjrwmd.com/ep/" },
       {
         label: "SJRWMD Putnam County permits",
@@ -70,8 +82,8 @@ export const SEED_PROJECTS: SeedProject[] = [
       },
     ],
     latestSummary:
-      "Alford Farms is still in engineering and environmental permitting. It is not a sales opening. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. Rezoning materials described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering (September 2025) shows a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. SJRWMD file 224892-1 was received August 29, 2024; an RAI went out February 20, 2025, with a partial response in June 2025. Putnam County has noticed a proposed flood map revision for FIRM panel 12107C0212C near SR 207 / Cabbage Patch Road — base flood elevations and Special Flood Hazard Area boundaries may change. Review that with the Building Division and check the exact lot on the official map. No plat recorded. No model home open.",
-    latestSummaryAt: "2026-09-07T12:00:00.000Z",
+      "Alford Farms is not a sales opening. Putnam County approved an Agriculture-to-PUD rezoning on August 13, 2024 (Ordinance 2024-017, case PUD24-000004) for roughly 165 acres along SR 207 and Alford Road in East Palatka. Rezoning materials described up to 700 single-family homes plus about 60,000 square feet of commercial space, an amenity center, and a park. Later engineering (September 2025) shows a 559-lot layout. D.R. Horton, Inc. is named as an agent in the county file. St. Johns River Water Management District issued environmental resource permit IND-107-224892-1 on November 25, 2025 (applicant DR Horton Inc–Jacksonville; owner Charles E. Alford Jr.), with recorded ERP notice and confirmation in January 2026. That closes the open RAI on this file. No subdivision plat is recorded yet. Putnam County has noticed a proposed flood map revision for FIRM panel 12107C0212C near SR 207 / Cabbage Patch Road — base flood elevations and Special Flood Hazard Area boundaries may change. Review that with the Building Division and check the exact lot on the official map. No model home open.",
+    latestSummaryAt: "2026-09-14T21:00:00.000Z",
     confidence: "confirmed",
     published: true,
     featured: true,
@@ -91,10 +103,20 @@ export const SEED_PROJECTS: SeedProject[] = [
         sourceUrl: "https://permitting.sjrwmd.com/ep/",
       },
       {
-        occurredOn: "2026-03-01",
-        title: "Permit review still active",
-        body: "Public reporting of the file in spring 2026 still showed environmental permitting as open. No confirmed start of home sales.",
-        sourceLabel: "Public record compilation",
+        occurredOn: "2025-11-25",
+        title: "SJRWMD ERP issued",
+        body: "St. Johns River Water Management District issued environmental resource permit IND-107-224892-1 for Alford Farms. Applicant DR Horton Inc–Jacksonville; owner Charles E. Alford Jr. This is not a recorded plat or a sales opening.",
+        sourceLabel: "SJRWMD IND-107-224892-1 cover letter",
+        sourceUrl:
+          "https://permitting.sjrwmd.com/apps/idcplg?IdcService=GET_FILE&coreContentOnly=1&RevisionSelectionMethod=Latest&allowInterrupt=1&dDocName=EREG_8693914",
+      },
+      {
+        occurredOn: "2026-01-09",
+        title: "ERP notice recorded",
+        body: "Recorded Notice of Environmental Resource Permit filed for IND-107-224892-1, with recorded permit confirmation following on January 12, 2026.",
+        sourceLabel: "Recorded Notice of Environmental Resource Permit",
+        sourceUrl:
+          "https://permitting.sjrwmd.com/apps/idcplg?IdcService=GET_FILE&coreContentOnly=1&RevisionSelectionMethod=Latest&allowInterrupt=1&dDocName=EREG_8733431",
       },
       {
         occurredOn: "2026-08-29",
