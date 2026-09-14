@@ -126,6 +126,14 @@ function GuidePage() {
                 <Link to="/office" className="font-medium text-primary underline-offset-4 hover:underline">
                   Office list
                 </Link>
+                . Alford Farms still a PUD file? Status is on the{" "}
+                <Link
+                  to="/developments/$slug"
+                  params={{ slug: "alford-farms" }}
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  project page
+                </Link>
                 .
               </>
             ) : page.slug === "moving-checklist" ? (
@@ -162,7 +170,15 @@ function GuidePage() {
                 <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
                   buy now or wait
                 </Link>{" "}
-                are here.
+                are here. Alford Farms still a PUD file? Status is on the{" "}
+                <Link
+                  to="/developments/$slug"
+                  params={{ slug: "alford-farms" }}
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  project page
+                </Link>
+                .
               </>
             ) : page.slug === "local-tips" ? (
               <>
