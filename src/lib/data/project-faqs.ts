@@ -79,6 +79,24 @@ export const PROJECT_FAQS: Record<string, Array<{ question: string; answer: stri
         "Listings have advertised custom build packages on Peniel Church Road lots, often from about $385,000. That is listing-level information — verify price, well/septic, and seller on the live MLS or builder sheet. This site is not a brokerage.",
     },
   ],
+
+  "fairway-estates": [
+    {
+      question: "Are Fairway Estates homes for sale?",
+      answer:
+        "City Commission accepted the final plat on March 27, 2025 (Resolution 2025-R-32), and the Putnam clerk shows Fairway Estates at Plat Book 7, Page 17. A recorded plat is not the same as homes listed for sale. This page does not show inventory or prices until a builder listing or other primary source says so.",
+    },
+    {
+      question: "Is Fairway Estates the same as Fairway Crossing?",
+      answer:
+        "No. The public records in this pack are for Fairway Estates. Fairway Crossing has no clerk or CivicClerk hit yet.",
+    },
+    {
+      question: "Who is the builder named in city files?",
+      answer:
+        "Covenant docs in the March 27, 2025 City Commission packet name A&M Home Builders, LLC.",
+    },
+  ],
   "east-river-road": [
     {
       question: "Is D.R. Horton building on East River Road?",
