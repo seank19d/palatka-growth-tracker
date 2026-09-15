@@ -207,15 +207,15 @@ export const SEED_PRODUCTS: {
     sortOrder: 24,
   },
   {
-    asin: null,
+    asin: "B07SYBBRQR",
     title: "Whole-house sediment filter",
     category: "storm",
     blurb: "Well water stirs up sediment, especially when the house has been sitting.",
-    searchQuery: "APEC 5 micron whole house sediment water filter",
+    searchQuery: "APEC CB1-SED10-BB whole house sediment filter",
     sortOrder: 25,
   },
   {
-    asin: null,
+    asin: "B08F7Y8TFW",
     title: "Under-sink water filter",
     category: "storm",
     blurb: "Simple tap filter until you know what the well puts out.",
@@ -303,7 +303,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 35,
   },
   {
-    asin: null,
+    asin: "B07FCQ33FR",
     title: "Moving blankets",
     category: "moving",
     blurb: "For the truck. Furniture knocks around on I-95 whether you’re coming from Jacksonville or Ohio.",
@@ -311,7 +311,7 @@ export const SEED_PRODUCTS: {
     sortOrder: 36,
   },
   {
-    asin: null,
+    asin: "B09JZFGRLZ",
     title: "Stretch wrap",
     category: "moving",
     blurb: "Keeps drawers shut and pads from sliding. Buy a real roll, not the kitchen stuff.",
