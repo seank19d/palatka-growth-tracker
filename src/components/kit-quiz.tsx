@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Check, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
 import { Kicker } from "@/components/brand/kicker";
+import { PackCta } from "@/components/guide/pack-cta";
 import { ProductBlock } from "@/components/guide/product-block";
 import { pickTitles, type KitDef } from "@/lib/kits";
 import { breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
@@ -24,6 +25,10 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
   const starterItems = useMemo(
     () => (kit.starterTitles?.length ? pickTitles(products, kit.starterTitles) : []),
     [products, kit],
+  );
+  const packItems = useMemo(
+    () => (complete && kit.packCta ? pickTitles(products, kit.packCta.titles) : []),
+    [complete, products, kit],
   );
 
   function pick(value: string) {
@@ -141,6 +146,10 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
           </article>
 
           {items.length ? <ProductBlock products={items} heading={kit.listHeading} /> : null}
+
+          {kit.packCta && packItems.length ? (
+            <PackCta heading={kit.packCta.heading} note={kit.packCta.note} products={packItems} />
+          ) : null}
 
           <p className="text-base text-muted">
             {kit.related.map((r, i) => (

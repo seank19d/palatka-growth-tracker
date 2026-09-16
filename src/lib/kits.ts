@@ -30,6 +30,13 @@ export type KitEndNote = {
   after: string;
 };
 
+/** Post-quiz pack CTA — three individual Amazon links by exact seed title. */
+export type KitPackCta = {
+  heading: string;
+  note: string;
+  titles: string[];
+};
+
 export type KitDef = {
   path: string;
   kicker: string;
@@ -43,6 +50,8 @@ export type KitDef = {
   starterTitles?: string[];
   starterHeading?: string;
   starterNote?: string;
+  /** End-of-page pack after the quiz product list (move / punch). */
+  packCta?: KitPackCta;
   questions: KitQuestion[];
   faqs: KitFaq[];
   related: KitRelated[];
@@ -654,6 +663,15 @@ export const MOVE: KitDef = {
     "Mattress protector (waterproof)",
     "First-aid kit",
   ],
+  packCta: {
+    heading: "Get the truck pack",
+    note: "Boxes, tape, and a first-aid kit that survive I-95 heat.",
+    titles: [
+      "Heavy-duty moving boxes",
+      "Packing tape (multi-pack)",
+      "First-aid kit",
+    ],
+  },
   questions: [
     {
       key: "from",
@@ -878,6 +896,15 @@ export const PUNCH: KitDef = {
     "Step stool",
     "Mattress protector (waterproof)",
   ],
+  packCta: {
+    heading: "Get the walkthrough pack",
+    note: "Tool kit, outlet tester, and caulk for walkthrough day.",
+    titles: [
+      "Basic home tool kit",
+      "Outlet tester",
+      "Kitchen and bath caulk",
+    ],
+  },
   questions: [
     {
       key: "when",
