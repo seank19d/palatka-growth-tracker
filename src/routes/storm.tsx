@@ -4,10 +4,13 @@ import { ArrowLeft, ArrowRight, Check, CloudLightning, RotateCcw } from "lucide-
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
 import { Kicker } from "@/components/brand/kicker";
+import { PackCta } from "@/components/guide/pack-cta";
 import { ProductBlock } from "@/components/guide/product-block";
 import { fetchStorm } from "@/lib/data/api";
+import { pickTitles } from "@/lib/kits";
 import {
   STORM_FAQS,
+  STORM_PACK_CTA,
   STORM_QUESTIONS,
   buildStormKit,
   buildStormStarterKit,
@@ -42,6 +45,10 @@ function StormPage() {
     [products, answers, complete],
   );
   const starterItems = useMemo(() => buildStormStarterKit(products), [products]);
+  const packItems = useMemo(
+    () => (complete ? pickTitles(products, [...STORM_PACK_CTA.titles]) : []),
+    [complete, products],
+  );
 
   function pick<K extends keyof StormAnswers>(key: K, value: StormAnswers[K]) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
@@ -165,6 +172,14 @@ function StormPage() {
           </article>
 
           <ProductBlock products={kitItems} heading="What to pick up" />
+
+          {packItems.length ? (
+            <PackCta
+              heading={STORM_PACK_CTA.heading}
+              note={STORM_PACK_CTA.note}
+              products={packItems}
+            />
+          ) : null}
 
           <p className="text-base text-muted">
             This isn’t an official emergency list — Putnam County Emergency Management handles that.

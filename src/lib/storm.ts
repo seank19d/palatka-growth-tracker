@@ -251,6 +251,17 @@ export function buildStormKit(products: AffiliateProduct[], a: StormAnswers): Af
   return picked.sort((x, y) => order.indexOf(x.title) - order.indexOf(y.title)).slice(0, 9);
 }
 
+/** End-of-page pack after the quiz product list — three individual Amazon links. */
+export const STORM_PACK_CTA = {
+  heading: "Get the storm pack",
+  note: "Power station, weather radio, and water you can carry.",
+  titles: [
+    "Portable power station",
+    "NOAA weather radio",
+    "Drinking water containers",
+  ],
+} as const;
+
 export const STORM_FAQS = [
   {
     question: "Does Palatka evacuate for hurricanes?",
