@@ -93,7 +93,7 @@ function StormPage() {
             stores empty out once a named storm is on the map.
           </p>
           <p className="mt-3 text-base leading-relaxed text-muted">
-            Prefer Home Depot? Optional path if you already shop there — a spare{" "}
+            Already shop Home Depot? Optional spare{" "}
             <a
               href="https://www.homedepot.com/p/RYOBI-18V-ONE-6-0-Ah-Lithium-Ion-Battery-PBP007/307848813"
               target="_blank"
@@ -102,7 +102,7 @@ function StormPage() {
             >
               RYOBI 18V ONE+ 6.0 Ah battery
             </a>{" "}
-            for cordless lights and tools when the power is out. We may earn a commission.
+            for cordless lights and tools when power is out. We may earn a commission.
           </p>
         </div>
         <section className="mt-10">
