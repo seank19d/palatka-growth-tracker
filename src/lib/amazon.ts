@@ -1,5 +1,8 @@
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 
+/** Sovrn Commerce skips monetization when this class is on the `<a>` or a parent. */
+export const AMAZON_NOREWRITE_CLASS = "norewrite";
+
 export function amazonTag(): string {
   if (typeof process === "undefined") return "phr0dc-20";
   return (

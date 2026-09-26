@@ -20,8 +20,10 @@ import {
   Wifi,
   Wrench,
 } from "lucide-react";
+import { AMAZON_NOREWRITE_CLASS } from "@/lib/amazon";
 import { DISCLOSURE } from "@/lib/constants";
 import type { AffiliateProduct } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 const THUMBS: Record<string, LucideIcon> = {
   "Heavy-duty moving boxes": Package,
@@ -94,7 +96,7 @@ export function ProductBlock({
 }) {
   if (!products.length) return null;
   return (
-    <aside className="border border-border bg-card p-5 md:p-6">
+    <aside className={cn(AMAZON_NOREWRITE_CLASS, "border border-border bg-card p-5 md:p-6")}>
       <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
         <ShoppingBag className="size-3.5 text-primary" strokeWidth={1.75} />
         {heading}
@@ -107,7 +109,10 @@ export function ProductBlock({
               target="_blank"
               rel="noopener noreferrer sponsored"
               onClick={() => logClick(p.id)}
-              className="flex gap-4 py-3 hover:bg-secondary/40 sm:items-center"
+              className={cn(
+                AMAZON_NOREWRITE_CLASS,
+                "flex gap-4 py-3 hover:bg-secondary/40 sm:items-center",
+              )}
             >
               <ProductThumb title={p.title} />
               <span className="min-w-0 flex-1">

@@ -10,6 +10,7 @@ import { AppErrorComponent, NotFoundComponent, clearStaleChunkReloadFlag } from 
 import { APP_NAME } from "@/lib/constants";
 import { ORG_JSON_LD, SITE_URL } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
+import { SovrnCommerceScript } from "@/components/sovrn-commerce-script";
 import appCss from "../styles.css?url";
 
 const fetchShell = createServerFn({ method: "GET" }).handler(async () => {
@@ -91,6 +92,7 @@ function RootDocument() {
           <SiteFooter lastUpdated={lastUpdated} />
         </AuthProvider>
         <Toaster position="bottom-right" richColors />
+        <SovrnCommerceScript />
         <Scripts />
       </body>
     </html>
