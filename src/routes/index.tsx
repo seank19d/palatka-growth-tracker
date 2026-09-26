@@ -28,9 +28,9 @@ export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
   head: () =>
     seo({
-      title: "New construction Palatka & East Palatka, FL",
+      title: "Alford Farms East Palatka PUD — not selling yet",
       description:
-        "Independent Palatka new-construction report. The Collection is selling in town. Alford Farms in East Palatka is still a county PUD file, not a sales opening.",
+        "Alford Farms (PUD24-000004) on SR 207 in East Palatka: ERP issued, no recorded plat, not selling. Collection and Nobles Crossing are listed as selling in town. Public-record report.",
       path: "/",
     }),
   component: Home,
@@ -47,8 +47,10 @@ function Home() {
       return a.name.localeCompare(b.name);
     });
   const inCountyFile =
-    featured ??
     projects.find((p) => p.slug === "alford-farms") ??
+    (featured && (featured.status === "permitting" || featured.status === "engineering")
+      ? featured
+      : null) ??
     projects.find((p) => p.status === "permitting" || p.status === "engineering");
   const primarySale = sellingNow[0];
   const others = projects.filter(
@@ -81,37 +83,45 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <Kicker>Palatka · East Palatka · Putnam County</Kicker>
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            What’s being built in Palatka and East Palatka.
+            Alford Farms leads East Palatka — and it is not selling.
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            County files and water-management permits, not builder renderings. Start with homes you
-            can buy this year, or the pipeline that is still sitting in a public file.
+            Putnam PUD24-000004 on SR 207 / Alford Road: rezoning approved, SJRWMD ERP issued, no
+            recorded plat. Collection and Nobles Crossing are listed as selling in town if you need
+            keys this year.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              {primarySale ? (
-                <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
-                  <HomeIcon className="size-4" />
-                  Homes for sale now
+              {inCountyFile ? (
+                <Link to="/developments/$slug" params={{ slug: inCountyFile.slug }}>
+                  <FileStack className="size-4" />
+                  Alford Farms file
                   <ArrowRight className="size-4" />
                 </Link>
               ) : (
-                <a href="#for-sale-now">
-                  <HomeIcon className="size-4" />
-                  Homes for sale now
+                <a href="#pipeline">
+                  <FileStack className="size-4" />
+                  Pipeline (not selling yet)
                   <ArrowRight className="size-4" />
                 </a>
               )}
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#pipeline">
-                <FileStack className="size-4" />
-                Pipeline (not selling yet)
-              </a>
+              {primarySale ? (
+                <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
+                  <HomeIcon className="size-4" />
+                  Homes listed as selling
+                </Link>
+              ) : (
+                <a href="#for-sale-now">
+                  <HomeIcon className="size-4" />
+                  Homes listed as selling
+                </a>
+              )}
             </Button>
           </div>
           <p className="mt-4 text-base text-muted">
-            Not sure Collection vs Alford?{" "}
+            Alford vs Collection timing?{" "}
             <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
               Buy now or wait
             </Link>
@@ -161,17 +171,10 @@ function Home() {
           <Kicker>Start here</Kicker>
           <h2 className="mt-2 font-display text-3xl font-semibold md:text-4xl">Now vs later</h2>
           <p className="mt-3 max-w-2xl text-lg text-muted">
-            The Collection on 17th Street is listed as selling. Nobles Crossing on Newcastle Road is
-            too. Alford Farms is still a Putnam PUD file.
+            Alford Farms is still a Putnam PUD file — ERP issued, no plat. Collection on 17th Street
+            and Nobles Crossing on Newcastle Road are listed as selling.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <div id="for-sale-now">
-              <NowLaterCard
-                eyebrow="Homes for sale now"
-                empty="No project on this site is marked selling right now."
-                projects={sellingNow}
-              />
-            </div>
             {inCountyFile ? (
               <div id="pipeline">
                 <NowLaterCard
@@ -189,6 +192,13 @@ function Home() {
                 <p className="mt-4 text-base text-muted">No pipeline flagship on file.</p>
               </div>
             )}
+            <div id="for-sale-now">
+              <NowLaterCard
+                eyebrow="Homes listed as selling"
+                empty="No project on this site is marked selling right now."
+                projects={sellingNow}
+              />
+            </div>
           </div>
           <p className="mt-6 text-base text-muted">
             <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
@@ -358,13 +368,13 @@ function Home() {
             </Link>
           ))}
         </div>
-        <div className="mt-10">
-          <p className="mb-4 max-w-2xl text-base leading-relaxed text-muted">
-            Boxes for the truck, a real tool kit for walkthrough week, and a first-aid kit that isn’t
+        <div className="mt-14 border-t border-border pt-10">
+          <p className="mb-3 max-w-xl text-sm text-muted">
+            Moving or closing soon? Boxes, a walkthrough tool kit, and a first-aid kit that isn’t
             the junk-drawer gap.
           </p>
-          <ProductBlock products={products} heading="Start with" />
-          <p className="mt-3 text-base text-muted">
+          <ProductBlock products={products} heading="Kits" />
+          <p className="mt-3 text-sm text-muted">
             <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
               Moving list
             </Link>
@@ -426,14 +436,14 @@ function NowLaterCard({
   return (
     <div
       className={
-        emphasis === "selling"
+        emphasis === "pipeline"
           ? "relative overflow-hidden border border-primary/25 bg-accent/40 p-5 md:p-6"
           : "relative overflow-hidden border border-border bg-card p-5 md:p-6"
       }
     >
       <span
         className={
-          emphasis === "selling"
+          emphasis === "pipeline"
             ? "absolute inset-y-0 left-0 w-1.5 bg-sun"
             : "absolute inset-y-0 left-0 w-1.5 bg-primary"
         }
