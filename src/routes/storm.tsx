@@ -92,6 +92,18 @@ function StormPage() {
             Answer the questions below for a list tuned to your house. Or grab the basics now —
             stores empty out once a named storm is on the map.
           </p>
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            Already shop Home Depot? Optional spare{" "}
+            <a
+              href="https://www.homedepot.com/p/RYOBI-18V-ONE-6-0-Ah-Lithium-Ion-Battery-PBP007/307848813"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              RYOBI 18V ONE+ 6.0 Ah battery
+            </a>{" "}
+            for cordless lights and tools when power is out. We may earn a commission.
+          </p>
         </div>
         <section className="mt-10">
           <div className="flex items-center justify-between gap-4">
