@@ -25,6 +25,7 @@ Do not commit a `.env` file.
 | `RESEND_API_KEY` | Optional | Email on repeated scrape failure. |
 | `ALERT_EMAIL` | Optional | Inbox for those alerts. |
 | `VITE_PLAUSIBLE_DOMAIN` | Optional | If set, loads Plausible on public pages. |
+| `VITE_SOVRN_API_KEY` | Optional | Sovrn Commerce (vglnk) public client key. Code falls back to the live campaign key. |
 
 Vercel Analytics can be enabled on the project in the Vercel UI; no code change required.
 

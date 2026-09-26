@@ -1,6 +1,8 @@
 import { ExternalLink } from "lucide-react";
+import { AMAZON_NOREWRITE_CLASS } from "@/lib/amazon";
 import { DISCLOSURE } from "@/lib/constants";
 import type { AffiliateProduct } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 function logClick(id: number) {
   try {
@@ -25,7 +27,7 @@ export function PackCta({
 }: PackCtaCopy & { products: AffiliateProduct[] }) {
   if (!products.length) return null;
   return (
-    <aside className="border border-border bg-card p-5 md:p-6">
+    <aside className={cn(AMAZON_NOREWRITE_CLASS, "border border-border bg-card p-5 md:p-6")}>
       <h2 className="font-display text-2xl font-semibold leading-tight">{heading}</h2>
       <p className="mt-2 text-base leading-relaxed text-muted">{note}</p>
       <h3
@@ -45,7 +47,10 @@ export function PackCta({
               target="_blank"
               rel="noopener noreferrer sponsored"
               onClick={() => logClick(p.id)}
-              className="flex items-center justify-between gap-3 py-3 hover:bg-secondary/40"
+              className={cn(
+                AMAZON_NOREWRITE_CLASS,
+                "flex items-center justify-between gap-3 py-3 hover:bg-secondary/40",
+              )}
             >
               <span className="min-w-0">
                 <span className="block font-medium">{p.title}</span>

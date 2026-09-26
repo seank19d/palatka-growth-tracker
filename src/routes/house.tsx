@@ -3,9 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/json-ld";
 import { Kicker } from "@/components/brand/kicker";
 import { fetchStorm } from "@/lib/data/api";
+import { AMAZON_NOREWRITE_CLASS } from "@/lib/amazon";
 import { HOUSE_CARDS } from "@/lib/kits";
 import { breadcrumbJsonLd, seo } from "@/lib/seo";
 import type { AffiliateProduct } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/house")({
   loader: () => fetchStorm(),
@@ -71,7 +73,12 @@ function HousePage() {
                 <ArrowRight className="mt-1 size-4 shrink-0 text-primary" />
               </Link>
               {hero ? (
-                <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3">
+                <div
+                  className={cn(
+                    AMAZON_NOREWRITE_CLASS,
+                    "flex items-center justify-between gap-3 border-t border-border px-4 py-3",
+                  )}
+                >
                   <p className="min-w-0 text-base text-muted">
                     Start with{" "}
                     <span className="font-medium text-fg">{hero.title}</span>
@@ -81,7 +88,10 @@ function HousePage() {
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     onClick={() => logClick(hero.id)}
-                    className="shrink-0 text-sm font-medium text-primary underline-offset-4 hover:underline"
+                    className={cn(
+                      AMAZON_NOREWRITE_CLASS,
+                      "shrink-0 text-sm font-medium text-primary underline-offset-4 hover:underline",
+                    )}
                   >
                     Amazon
                   </a>

@@ -33,6 +33,7 @@ Set these in the Vercel project if you want persistence, cron, and sign-in:
 | `RESEND_API_KEY` / `ALERT_EMAIL` | For form + scrape alerts | Email tip/file-alert submissions and scrape failures. Set `ALERT_EMAIL` to your inbox (e.g. seank19d@gmail.com). |
 | `RESEND_FROM` | Optional | Override From. Default `Palatka Homes Report <onboarding@resend.dev>` until the custom domain is verified on Resend. |
 | `VITE_PLAUSIBLE_DOMAIN` | Optional | Plausible analytics. |
+| `VITE_SOVRN_API_KEY` | Optional | Sovrn Commerce (vglnk) public client key. Built-in fallback is the live campaign key. |
 
 Sign-in (Google / X) works when the host injects Better Auth + Grok auth broker credentials. Public pages do not require it.
 
