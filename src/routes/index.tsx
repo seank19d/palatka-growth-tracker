@@ -28,9 +28,9 @@ export const Route = createFileRoute("/")({
   loader: () => fetchHome(),
   head: () =>
     seo({
-      title: "Alford Farms East Palatka PUD — not selling yet",
+      title: "Alford Farms East Palatka — the pipeline to watch",
       description:
-        "Alford Farms (PUD24-000004) on SR 207 in East Palatka: ERP issued, no recorded plat, not selling. Collection and Nobles Crossing are listed as selling in town. Public-record report.",
+        "Follow Alford Farms (PUD24-000004) on SR 207 in East Palatka: Putnam PUD with ERP issued, still open in the county file. Collection and Nobles Crossing are listed as selling in town. Public-record report.",
       path: "/",
     }),
   component: Home,
@@ -83,25 +83,25 @@ function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <Kicker>Palatka · East Palatka · Putnam County</Kicker>
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            Alford Farms leads East Palatka — and it is not selling.
+            Alford Farms is the East Palatka story to watch.
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            Putnam PUD24-000004 on SR 207 / Alford Road: rezoning approved, SJRWMD ERP issued, no
-            recorded plat. Collection and Nobles Crossing are listed as selling in town if you need
-            keys this year.
+            Open the Putnam PUD on SR 207 / Alford Road and follow what is moving — rezoning
+            approved, SJRWMD ERP issued, still in the county file. Need keys this year? Collection
+            and Nobles Crossing are listed as selling in town.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
               {inCountyFile ? (
                 <Link to="/developments/$slug" params={{ slug: inCountyFile.slug }}>
                   <FileStack className="size-4" />
-                  Alford Farms file
+                  Open the Alford Farms file
                   <ArrowRight className="size-4" />
                 </Link>
               ) : (
                 <a href="#pipeline">
                   <FileStack className="size-4" />
-                  Pipeline (not selling yet)
+                  Open the pipeline file
                   <ArrowRight className="size-4" />
                 </a>
               )}
@@ -110,12 +110,12 @@ function Home() {
               {primarySale ? (
                 <Link to="/developments/$slug" params={{ slug: primarySale.slug }}>
                   <HomeIcon className="size-4" />
-                  Homes listed as selling
+                  See homes listed as selling
                 </Link>
               ) : (
                 <a href="#for-sale-now">
                   <HomeIcon className="size-4" />
-                  Homes listed as selling
+                  See homes listed as selling
                 </a>
               )}
             </Button>
