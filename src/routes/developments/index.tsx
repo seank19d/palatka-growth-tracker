@@ -157,7 +157,7 @@ function DevelopmentsPage() {
           <p className="mt-1 text-base text-muted">{alford.locationLabel}</p>
           <p className="mt-3 max-w-3xl text-base leading-relaxed text-fg">
             PUD24-000004 · SJRWMD ERP IND-107-224892-1 issued Nov 25, 2025 · no recorded plat · not
-            selling. {alford.latestSummary}
+            selling.
           </p>
           <dl className="mt-4 grid max-w-md grid-cols-2 gap-3 text-sm">
             <div>

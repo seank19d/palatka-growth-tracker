@@ -371,7 +371,7 @@ function Home() {
         <div className="mt-14 border-t border-border pt-10">
           <p className="mb-3 max-w-xl text-sm text-muted">
             Moving or closing soon? Boxes, a walkthrough tool kit, and a first-aid kit that isn’t
-            junk-drawer filler.
+            the junk-drawer gap.
           </p>
           <ProductBlock products={products} heading="Kits" />
           <p className="mt-3 text-sm text-muted">
