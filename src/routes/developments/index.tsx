@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { CountyMap } from "@/components/projects/county-map";
 import { ProjectCard } from "@/components/projects/project-card";
+import { ConfidenceBadge, StatusBadge } from "@/components/projects/status-badge";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -10,7 +12,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PIPELINE_STATUSES } from "@/lib/constants";
+import { PIPELINE_STATUSES, STATUS_META } from "@/lib/constants";
+import { formatNumber } from "@/lib/format";
 import { fetchProjects } from "@/lib/data/api";
 import { ProjectFocusProvider } from "@/lib/project-focus";
 import { breadcrumbJsonLd, faqJsonLd, seo } from "@/lib/seo";
@@ -20,7 +23,7 @@ const HUB_FAQS = [
   {
     question: "Is Alford Farms selling?",
     answer:
-      "No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka — rezoning approved, still not a sales opening. See the Alford Farms project page for the public-record status.",
+      "No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka (PUD24-000004). SJRWMD issued environmental resource permit IND-107-224892-1 on November 25, 2025. There is still no recorded plat and it is not selling. See the Alford Farms project page for the public-record status.",
   },
   {
     question: "Which communities are listed as selling?",
@@ -49,16 +52,29 @@ const FILTERS = [
   { id: "watch", label: "Watch list" },
 ] as const;
 
+function pinAlfordFirst<T extends { slug: string }>(list: T[]): T[] {
+  return [...list].sort((a, b) => {
+    if (a.slug === "alford-farms") return -1;
+    if (b.slug === "alford-farms") return 1;
+    return 0;
+  });
+}
+
 function DevelopmentsPage() {
   const projects = Route.useLoaderData();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
+  const alford = useMemo(
+    () => projects.find((p) => p.slug === "alford-farms") ?? null,
+    [projects],
+  );
   const filtered = useMemo(() => {
-    return projects.filter((p) => {
+    const list = projects.filter((p) => {
       if (filter === "all") return true;
       if (filter === "pipeline") return PIPELINE_STATUSES.includes(p.status);
       if (filter === "watch") return p.confidence === "watch";
       return p.area === filter;
     });
+    return filter === "all" ? pinAlfordFirst(list) : list;
   }, [projects, filter]);
   const counts = useMemo(() => {
     const tally: Record<string, number> = {};
@@ -110,7 +126,7 @@ function DevelopmentsPage() {
         >
           Alford Farms
         </Link>
-        ? East Palatka PUD on SR 207 — rezoning approved, still not selling.
+        ? East Palatka PUD on SR 207 — rezoning approved, ERP issued, still not selling.
       </p>
       <p className="mt-2 max-w-2xl text-lg text-muted">
         Start on that file, then Collection or Nobles if you want homes listed as selling.
@@ -124,6 +140,48 @@ function DevelopmentsPage() {
         Rezoning is a county case. Selling means homes are listed for sale. Built-out is a finished
         community.
       </p>
+
+      {alford ? (
+        <aside className="relative mt-8 overflow-hidden border border-primary/25 bg-accent/40 p-5 pl-6 md:p-6">
+          <span className="absolute inset-y-0 left-0 w-1.5 bg-sun" aria-hidden />
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
+              Featured · East Palatka pipeline
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <StatusBadge status={alford.status} />
+              <ConfidenceBadge confidence={alford.confidence} />
+            </div>
+          </div>
+          <h2 className="mt-3 font-display text-2xl font-semibold md:text-3xl">{alford.name}</h2>
+          <p className="mt-1 text-base text-muted">{alford.locationLabel}</p>
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-fg">
+            PUD24-000004 · SJRWMD ERP IND-107-224892-1 issued Nov 25, 2025 · no recorded plat · not
+            selling. {alford.latestSummary}
+          </p>
+          <dl className="mt-4 grid max-w-md grid-cols-2 gap-3 text-sm">
+            <div>
+              <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Stage</dt>
+              <dd className="mt-0.5 font-medium">{STATUS_META[alford.status].label}</dd>
+            </div>
+            <div>
+              <dt className="text-xs uppercase tracking-[0.12em] text-subtle">Lots</dt>
+              <dd className="mt-0.5 font-medium tabular-nums">
+                {formatNumber(alford.lotsCurrent)}
+              </dd>
+            </div>
+          </dl>
+          <Link
+            to="/developments/$slug"
+            params={{ slug: "alford-farms" }}
+            className="mt-4 inline-flex items-center gap-1 text-base font-medium text-primary"
+          >
+            Full Alford Farms record
+            <ArrowRight className="size-3.5" />
+          </Link>
+        </aside>
+      ) : null}
+
       <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter developments">
         {FILTERS.map((f) => (
           <Button
@@ -164,8 +222,9 @@ function DevelopmentsPage() {
               <AccordionContent className="leading-relaxed">
                 {f.question === "Is Alford Farms selling?" ? (
                   <>
-                    No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka — rezoning
-                    approved, still not a sales opening. See the{" "}
+                    No. Alford Farms is a Putnam County PUD file on SR 207 in East Palatka
+                    (PUD24-000004). SJRWMD issued environmental resource permit IND-107-224892-1 on
+                    November 25, 2025. There is still no recorded plat and it is not selling. See the{" "}
                     <Link
                       to="/developments/$slug"
                       params={{ slug: "alford-farms" }}
