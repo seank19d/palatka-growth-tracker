@@ -55,8 +55,19 @@ export const STATUS_ORDER = Object.keys(STATUS_META) as ProjectStatus[];
 
 export const AREAS = ["East Palatka", "Palatka", "Putnam County"] as const;
 
+/** One short line under commerce modules (ProductBlock, PackCta). Not per product row. */
+export const SHORT_AFFILIATE_DISCLOSURE =
+  "As an Amazon Associate we earn from qualifying purchases.";
+
+/**
+ * Fuller affiliate + independent / not-a-brokerage note — footer (and About) only.
+ * Do not re-stack this under every product module.
+ */
 export const DISCLOSURE =
   "Some links on this site are affiliate links, including Amazon Associates. If you buy through them, we may earn a commission at no extra cost to you. We are not a real-estate brokerage, not affiliated with Putnam County, and not a builder. Always verify status with county records and licensed professionals.";
+
+/** Alias for the fuller footer note. Prefer this name for new footer wiring. */
+export const FOOTER_DISCLOSURE = DISCLOSURE;
 
 /** Dirt still moving through a county file — not open sales, not built-out. */
 export const PIPELINE_STATUSES: ProjectStatus[] = [
