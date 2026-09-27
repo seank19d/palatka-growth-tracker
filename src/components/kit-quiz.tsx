@@ -27,8 +27,8 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
     [products, kit],
   );
   const packItems = useMemo(
-    () => (complete && kit.packCta ? pickTitles(products, kit.packCta.titles) : []),
-    [complete, products, kit],
+    () => (kit.packCta ? pickTitles(products, kit.packCta.titles) : []),
+    [products, kit],
   );
 
   function pick(value: string) {
@@ -56,6 +56,12 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
       <Kicker>{kit.kicker}</Kicker>
       <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">{kit.title}</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{kit.lede}</p>
+
+      {kit.packCta && packItems.length ? (
+        <div className="mt-10">
+          <PackCta heading={kit.packCta.heading} note={kit.packCta.note} products={packItems} />
+        </div>
+      ) : null}
 
       {!complete ? (
         <>
@@ -146,10 +152,6 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
           </article>
 
           {items.length ? <ProductBlock products={items} heading={kit.listHeading} /> : null}
-
-          {kit.packCta && packItems.length ? (
-            <PackCta heading={kit.packCta.heading} note={kit.packCta.note} products={packItems} />
-          ) : null}
 
           <p className="text-base text-muted">
             {kit.related.map((r, i) => (
