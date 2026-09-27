@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { MapPin } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
@@ -19,9 +19,26 @@ import { STATUS_META } from "@/lib/constants";
 import { PROJECT_FAQS } from "@/lib/data/project-faqs";
 import { formatDateShort, formatNumber } from "@/lib/format";
 import { fetchProjectPage } from "@/lib/data/api";
-import { breadcrumbJsonLd, faqJsonLd, seo } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, seo, truncateMetaDescription } from "@/lib/seo";
+
+/** Legacy Collection slug aliases → canonical project slug (301). */
+const COLLECTION_SLUG_ALIASES: Record<string, string> = {
+  "the-collection-at-17th-street": "collection-at-palatka",
+  "collection-at-17th-street": "collection-at-palatka",
+  "the-collection-at-palatka": "collection-at-palatka",
+};
 
 export const Route = createFileRoute("/developments/$slug")({
+  beforeLoad: ({ params }) => {
+    const canonical = COLLECTION_SLUG_ALIASES[params.slug];
+    if (canonical) {
+      throw redirect({
+        to: "/developments/$slug",
+        params: { slug: canonical },
+        statusCode: 301,
+      });
+    }
+  },
   loader: async ({ params }) => {
     const page = await fetchProjectPage({ data: params.slug });
     if (!page) throw notFound();
@@ -33,9 +50,9 @@ export const Route = createFileRoute("/developments/$slug")({
     const custom =
       p.slug === "alford-farms"
         ? {
-            title: "Alford Farms East Palatka (PUD24-000004) — not selling",
+            title: "Alford Farms East Palatka (PUD24-000004) — county file to watch",
             description:
-              "Putnam case PUD24-000004 on SR 207 / Alford Road. SJRWMD ERP IND-107-224892-1 issued Nov 2025. No plat recorded. Not a sales opening. Flood-map note: FIRM 12107C0212C.",
+              "Putnam case PUD24-000004 on SR 207 / Alford Road. SJRWMD ERP IND-107-224892-1 issued Nov 2025. No plat recorded yet — watch the county file. Flood-map note: FIRM 12107C0212C.",
           }
         : p.slug === "collection-at-palatka"
           ? {
@@ -49,13 +66,18 @@ export const Route = createFileRoute("/developments/$slug")({
                 description:
                   "Nobles Crossing on Newcastle Road is a Century Complete community listed as selling in Palatka — separate from The Collection and from Alford Farms.",
               }
-            : {
-                title: `${p.name} in ${p.area}, FL — status and public record`,
-                description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
-                  0,
-                  160,
-                ),
-              };
+            : p.slug === "fairway-estates"
+              ? {
+                  title: "Fairway Estates Palatka: recorded plat status",
+                  description:
+                    "Fairway Estates, City of Palatka: recorded plat at Plat Book 7 / Page 17. City Commission accepted the final plat (Res 2025-R-32). Not listed as selling here.",
+                }
+              : {
+                  title: `${p.name} in ${p.area}, FL — status and public record`,
+                  description: truncateMetaDescription(
+                    p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`,
+                  ),
+                };
     return seo({ ...custom, path: `/developments/${p.slug}` });
   },
   component: ProjectPage,
@@ -124,16 +146,21 @@ function ProjectPage() {
         {project.locationLabel}
       </p>
       {project.slug === "alford-farms" ? (
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          East Palatka PUD on SR 207 at Alford Road — Putnam case PUD24-000004 (Ordinance 2024-017).
-          SJRWMD environmental resource permit IND-107-224892-1 issued November 25, 2025. Still no
-          recorded plat and not selling. D.R. Horton is named as an agent in the county file, not a
-          public model-home community. Flood-map note: FIRM 12107C0212C.
-        </p>
+        <>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+            East Palatka PUD on SR 207 at Alford Road — Putnam case PUD24-000004. SJRWMD ERP
+            IND-107-224892-1 issued Nov 25, 2025. Open the file below; no recorded plat and not
+            listed as selling yet. D.R. Horton is named as an agent in the county file, not a public
+            model-home community.
+          </p>
+          <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
+            Flood-map note: FIRM 12107C0212C.
+          </p>
+        </>
       ) : project.slug === "nobles-crossing" ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          Century Complete community on Newcastle Road in Palatka, listed as selling — not Alford
-          Farms, and not The Collection at 508 N. 17th Street.
+          Century Complete community on Newcastle Road in Palatka, listed as selling — separate from
+          The Collection at 508 N. 17th Street.
         </p>
       ) : null}
 

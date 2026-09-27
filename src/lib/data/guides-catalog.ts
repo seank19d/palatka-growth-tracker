@@ -66,7 +66,7 @@ export const SEED_GUIDES: Omit<GuidePage, "lastRefreshedAt">[] = [
     title: "Clay Electric vs FPL in Palatka and East Palatka",
     navLabel: "Utilities",
     excerpt:
-      "Which electric covers your street, city water vs well, gas and trash in Putnam. Look up the address — not the city name.",
+      "Clay Electric vs FPL in Palatka and East Palatka is by street, not city name. City water vs well and septic differ inside city limits vs unincorporated Putnam.",
     affiliateCategory: "home-setup",
     sortOrder: 2,
     sections: [

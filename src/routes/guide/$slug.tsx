@@ -162,7 +162,15 @@ function GuidePage() {
               </>
             ) : page.slug === "cost-of-living" ? (
               <>
-                Figuring the truck and whether to buy now?{" "}
+                Street-level electric and water?{" "}
+                <Link
+                  to="/guide/$slug"
+                  params={{ slug: "utilities" }}
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Clay Electric vs FPL utilities guide
+                </Link>
+                . Figuring the truck and whether to buy now?{" "}
                 <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
                   Moving list
                 </Link>{" "}

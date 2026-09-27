@@ -2,9 +2,30 @@ import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 
 export const SITE_URL = "https://www.palatkahomesreport.com";
 
+/** Soft SERP description length — keep full words, never mid-token cuts. */
+export const META_DESCRIPTION_MAX = 158;
+
 export function absoluteUrl(path = "/"): string {
   if (path.startsWith("http")) return path;
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+/**
+ * Truncate meta description on a word boundary within `max` chars (default 158).
+ * Collapses whitespace; strips trailing punctuation left by the cut.
+ */
+export function truncateMetaDescription(
+  text: string,
+  max: number = META_DESCRIPTION_MAX,
+): string {
+  const t = String(text ?? "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (t.length <= max) return t;
+  let cut = t.slice(0, max);
+  const sp = cut.lastIndexOf(" ");
+  if (sp >= Math.floor(max * 0.7)) cut = cut.slice(0, sp);
+  return cut.replace(/[\s.,;:!?]+$/g, "").trimEnd();
 }
 
 export function seo({
@@ -20,11 +41,12 @@ export function seo({
 }) {
   const url = absoluteUrl(path);
   const fullTitle = title.includes(APP_NAME) ? title : `${title} | ${APP_NAME}`;
+  const metaDescription = truncateMetaDescription(description);
   const image = absoluteUrl("/og.jpg");
   return {
     meta: [
       { title: fullTitle },
-      { name: "description", content: description },
+      { name: "description", content: metaDescription },
       {
         name: "robots",
         content: noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
@@ -33,7 +55,7 @@ export function seo({
       { property: "og:site_name", content: APP_NAME },
       { property: "og:locale", content: "en_US" },
       { property: "og:title", content: fullTitle },
-      { property: "og:description", content: description },
+      { property: "og:description", content: metaDescription },
       { property: "og:url", content: url },
       { property: "og:image", content: image },
       { property: "og:image:width", content: "1200" },
@@ -41,7 +63,7 @@ export function seo({
       { property: "og:image:alt", content: fullTitle },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: fullTitle },
-      { name: "twitter:description", content: description },
+      { name: "twitter:description", content: metaDescription },
       { name: "twitter:image", content: image },
     ],
     links: [{ rel: "canonical", href: url }],

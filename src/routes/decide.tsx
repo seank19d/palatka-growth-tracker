@@ -27,7 +27,7 @@ export const Route = createFileRoute("/decide")({
     seo({
       title: "Buy Palatka new construction now or wait?",
       description:
-        "Six questions: The Collection and Nobles Crossing are selling in Palatka. Alford Farms in East Palatka is still a PUD file. Get a plain read and a first-week kit.",
+        "Six questions: Collection and Nobles Crossing are selling in Palatka; Alford Farms is still a PUD file. Get a plain read — house lists are on /house.",
       path: "/decide",
     }),
   component: DecidePage,

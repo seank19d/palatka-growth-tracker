@@ -1,4 +1,21 @@
 {
+  "redirects": [
+    {
+      "source": "/developments/the-collection-at-17th-street",
+      "destination": "/developments/collection-at-palatka",
+      "permanent": true
+    },
+    {
+      "source": "/developments/collection-at-17th-street",
+      "destination": "/developments/collection-at-palatka",
+      "permanent": true
+    },
+    {
+      "source": "/developments/the-collection-at-palatka",
+      "destination": "/developments/collection-at-palatka",
+      "permanent": true
+    }
+  ],
   "crons": [
     {
       "path": "/api/cron/update",
