@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { MapPin } from "lucide-react";
 import { Kicker } from "@/components/brand/kicker";
 import { ProjectAnswerBar } from "@/components/projects/answer-bar";
@@ -19,9 +19,26 @@ import { STATUS_META } from "@/lib/constants";
 import { PROJECT_FAQS } from "@/lib/data/project-faqs";
 import { formatDateShort, formatNumber } from "@/lib/format";
 import { fetchProjectPage } from "@/lib/data/api";
-import { breadcrumbJsonLd, faqJsonLd, seo } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, seo, truncateMetaDescription } from "@/lib/seo";
+
+/** Legacy Collection slug aliases → canonical project slug (301). */
+const COLLECTION_SLUG_ALIASES: Record<string, string> = {
+  "the-collection-at-17th-street": "collection-at-palatka",
+  "collection-at-17th-street": "collection-at-palatka",
+  "the-collection-at-palatka": "collection-at-palatka",
+};
 
 export const Route = createFileRoute("/developments/$slug")({
+  beforeLoad: ({ params }) => {
+    const canonical = COLLECTION_SLUG_ALIASES[params.slug];
+    if (canonical) {
+      throw redirect({
+        to: "/developments/$slug",
+        params: { slug: canonical },
+        statusCode: 301,
+      });
+    }
+  },
   loader: async ({ params }) => {
     const page = await fetchProjectPage({ data: params.slug });
     if (!page) throw notFound();
@@ -49,13 +66,18 @@ export const Route = createFileRoute("/developments/$slug")({
                 description:
                   "Nobles Crossing on Newcastle Road is a Century Complete community listed as selling in Palatka — separate from The Collection and from Alford Farms.",
               }
-            : {
-                title: `${p.name} in ${p.area}, FL — status and public record`,
-                description: (p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`).slice(
-                  0,
-                  160,
-                ),
-              };
+            : p.slug === "fairway-estates"
+              ? {
+                  title: "Fairway Estates Palatka: recorded plat status",
+                  description:
+                    "Fairway Estates, City of Palatka: recorded plat at Plat Book 7 / Page 17. City Commission accepted the final plat (Res 2025-R-32). Not listed as selling here.",
+                }
+              : {
+                  title: `${p.name} in ${p.area}, FL — status and public record`,
+                  description: truncateMetaDescription(
+                    p.latestSummary ?? `${p.name} in ${p.area}, Putnam County, Florida.`,
+                  ),
+                };
     return seo({ ...custom, path: `/developments/${p.slug}` });
   },
   component: ProjectPage,

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { TriangleAlert } from "lucide-react";
+import { APP_NAME } from "@/lib/constants";
 
 const RELOAD_KEY = "phr-stale-chunk-reload";
 
@@ -46,8 +47,13 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
 }
 
 export function NotFoundComponent() {
+  const title = `Page not found | ${APP_NAME}`;
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
   return (
     <main className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-6 text-center">
+      <title>{title}</title>
       <p className="text-xs uppercase tracking-[0.2em] text-muted">404</p>
       <h1 className="mt-2 font-display text-3xl font-semibold">Page not found</h1>
       <p className="mt-3 text-muted">

@@ -36,9 +36,9 @@ export const Route = createFileRoute("/developments/")({
   loader: () => fetchProjects(),
   head: () =>
     seo({
-      title: "Alford Farms & Palatka new construction status",
+      title: "Palatka new construction status: Alford, Collection, Nobles",
       description:
-        "Alford Farms is the East Palatka PUD to watch in the county file; Collection and Nobles are listed as selling. Fairway Estates plat recorded. Status from public records — not a brokerage.",
+        "What's selling vs still a PUD file — Collection and Nobles listed as selling; Alford Farms ERP issued, no plat yet. Fairway Estates plat (Book 7 / Page 17).",
       path: "/developments",
     }),
   component: DevelopmentsPage,

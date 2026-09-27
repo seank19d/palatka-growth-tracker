@@ -49,7 +49,23 @@ function FaqPage() {
         {all.map((f) => (
           <div key={String(f.id)} className="border-t border-border pt-6">
             <dt className="font-display text-xl font-semibold">{f.question}</dt>
-            <dd className="mt-2 text-base leading-relaxed text-muted">{f.answer}</dd>
+            <dd className="mt-2 text-base leading-relaxed text-muted">
+              {f.question === "Clay Electric or FPL?" ? (
+                <>
+                  {f.answer} See the{" "}
+                  <Link
+                    to="/guide/$slug"
+                    params={{ slug: "utilities" }}
+                    className="font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    Clay Electric vs FPL utilities guide
+                  </Link>
+                  .
+                </>
+              ) : (
+                f.answer
+              )}
+            </dd>
           </div>
         ))}
       </dl>
@@ -57,6 +73,14 @@ function FaqPage() {
         Moving here this year?{" "}
         <Link to="/pack" className="font-medium text-primary underline-offset-4 hover:underline">
           Moving to Putnam pack
+        </Link>
+        . Need the street-level utility picture?{" "}
+        <Link
+          to="/guide/$slug"
+          params={{ slug: "utilities" }}
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Clay Electric vs FPL
         </Link>
         .
       </p>
