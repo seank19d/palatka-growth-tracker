@@ -182,7 +182,7 @@ export const SEED_PROJECTS: SeedProject[] = [
     lotsCurrent: null,
     lotsRezoning: null,
     unitsNote:
-      "Century Complete lists Nobles Crossing as an active Palatka community on Newcastle Road with single-story plans. Inventory and advertised prices change — verify on the builder page. Separate from The Collection at Palatka (508 N. 17th Street) and from Alford Farms (East Palatka PUD, not selling).",
+      "Century Complete lists Nobles Crossing as an active Palatka community on Newcastle Road with single-story plans. Inventory and advertised prices change — verify on the builder page. Separate from The Collection at Palatka (508 N. 17th Street).",
     commercialSqft: null,
     builder: "Century Complete (Century Communities)",
     developer: "Century Complete",
@@ -197,7 +197,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       { label: "City of Palatka", url: "https://www.palatka-fl.gov/" },
     ],
     latestSummary:
-      "Nobles Crossing is a Century Complete community on Newcastle Road in Palatka. Builder shows inventory on Newcastle Road and Fenham Court — some ready, some still building. Advertised asks have been low-to-mid $300s; verify live. Different from The Collection at Palatka (508 N. 17th Street, also Century Complete, advertised from the low $200,000s) and from Alford Farms in East Palatka (PUD file, not selling).",
+      "Nobles Crossing is a Century Complete community on Newcastle Road in Palatka. Builder shows inventory on Newcastle Road and Fenham Court — some ready, some still building. Advertised asks have been low-to-mid $300s; verify live. This is a different product from The Collection at Palatka (508 N. 17th Street, also Century Complete, advertised from the low $200,000s).",
     latestSummaryAt: "2026-09-07T12:00:00.000Z",
     confidence: "reported",
     published: true,
@@ -225,7 +225,7 @@ export const SEED_PROJECTS: SeedProject[] = [
     lotsCurrent: null,
     lotsRezoning: null,
     unitsNote:
-      "Custom new-construction lots on Peniel Church Road listed as Beverly's Crossing. Listings describe build packages advertised from about $385,000 — verify live on any listing and with the seller. Not Century Complete Collection/Nobles, and not Alford Farms.",
+      "Custom new-construction lots on Peniel Church Road listed as Beverly's Crossing. Listings describe build packages advertised from about $385,000 — verify live on any listing and with the seller. Not Century Complete Collection/Nobles.",
     commercialSqft: null,
     builder: null,
     developer: null,
@@ -241,7 +241,7 @@ export const SEED_PROJECTS: SeedProject[] = [
       { label: "Putnam County", url: "https://www.putnam-fl.gov/" },
     ],
     latestSummary:
-      "Beverly's Crossing shows up as custom new construction on Peniel Church Road in Palatka. Florida Sunbiz lists Beverly's Crossing Homeowner's Association, Inc. as active (document N25000010683, formed August 15, 2025). Multiple MLS-style listings advertise build packages from about $385,000 on well/septic lots — prices and plans change; verify on the live listing. This is a different product from Century Complete's Collection and Nobles Crossing, and from Alford Farms in East Palatka.",
+      "Beverly's Crossing shows up as custom new construction on Peniel Church Road in Palatka. Florida Sunbiz lists Beverly's Crossing Homeowner's Association, Inc. as active (document N25000010683, formed August 15, 2025). Multiple MLS-style listings advertise build packages from about $385,000 on well/septic lots — prices and plans change; verify on the live listing. This is a different product from Century Complete's Collection and Nobles Crossing.",
     latestSummaryAt: "2026-09-14T14:00:00.000Z",
     confidence: "reported",
     published: true,

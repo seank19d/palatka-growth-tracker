@@ -153,7 +153,7 @@ function Home() {
               label="In the pipeline"
               shortLabel="Pipeline"
               value={String(stats.pipelineCount)}
-              hint="Not selling yet"
+              hint="In the county file"
             />
             <Stat
               label="Lots in known plans"
@@ -178,7 +178,7 @@ function Home() {
             {inCountyFile ? (
               <div id="pipeline">
                 <NowLaterCard
-                  eyebrow="Pipeline — not selling yet"
+                  eyebrow="Pipeline — county file"
                   empty=""
                   projects={[inCountyFile]}
                   emphasis="pipeline"
@@ -187,7 +187,7 @@ function Home() {
             ) : (
               <div id="pipeline" className="border border-border bg-card p-5 md:p-6">
                 <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted">
-                  Pipeline — not selling yet
+                  Pipeline — county file
                 </p>
                 <p className="mt-4 text-base text-muted">No pipeline flagship on file.</p>
               </div>

@@ -38,7 +38,7 @@ export const Route = createFileRoute("/developments/")({
     seo({
       title: "Alford Farms & Palatka new construction status",
       description:
-        "Alford Farms (East Palatka PUD, not selling) vs Collection and Nobles (listed as selling). Fairway Estates plat recorded. Status from public records — not a brokerage.",
+        "Alford Farms is the East Palatka PUD to watch in the county file; Collection and Nobles are listed as selling. Fairway Estates plat recorded. Status from public records — not a brokerage.",
       path: "/developments",
     }),
   component: DevelopmentsPage,
@@ -126,10 +126,8 @@ function DevelopmentsPage() {
         >
           Alford Farms
         </Link>
-        ? East Palatka PUD on SR 207 — rezoning approved, ERP issued, still not selling.
-      </p>
-      <p className="mt-2 max-w-2xl text-lg text-muted">
-        Start on that file, then Collection or Nobles if you want homes listed as selling.
+        ? Start on the East Palatka PUD file on SR 207 — rezoning approved, ERP issued, still in the
+        county file. Need keys this year? Collection and Nobles are listed as selling.
       </p>
       <p className="mt-3 max-w-2xl text-lg text-muted">
         Every project currently published. Pipeline is still in the county file. Watch-list items

@@ -8,6 +8,7 @@ import {
   SEED_SOURCES,
   SEED_UPDATES,
 } from "./projects-catalog";
+import { VOICE_CARD_SUMMARIES } from "./voice-card-summaries";
 
 const globalRef = globalThis as typeof globalThis & {
   __pgtSeedPromise__?: Promise<void>;
@@ -293,6 +294,35 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
      set body = replace(body, 'this tracker', 'this report')
      where body like '%this tracker%'`,
   );
+
+  // Voice copy: replace botty Gilbert digest + cut Alford card cross-sells on Nobles/Beverly.
+  for (const row of VOICE_CARD_SUMMARIES) {
+    if (row.unitsNote) {
+      await sql.query(
+        `update projects
+         set latest_summary = $2,
+             latest_summary_at = now(),
+             units_note = $3,
+             updated_at = now()
+         where slug = $1
+           and (
+             coalesce(latest_summary, '') is distinct from $2
+             or coalesce(units_note, '') is distinct from $3
+           )`,
+        [row.slug, row.latestSummary, row.unitsNote],
+      );
+    } else {
+      await sql.query(
+        `update projects
+         set latest_summary = $2,
+             latest_summary_at = now(),
+             updated_at = now()
+         where slug = $1
+           and coalesce(latest_summary, '') is distinct from $2`,
+        [row.slug, row.latestSummary],
+      );
+    }
+  }
 
   await syncSources(sql);
   await syncProducts(sql);

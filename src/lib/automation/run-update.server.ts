@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import { dbSource, getSql } from "@/lib/db";
 import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
+import { GILBERT_ROAD_LATEST_SUMMARY } from "@/lib/data/voice-card-summaries";
 import { STATUS_RANK, inferStatus } from "@/lib/automation/status-infer";
 import { isHousingItem, matchProject } from "@/lib/automation/match";
 
@@ -235,10 +236,13 @@ async function publishDigests(
     const current = await sql<{ latest_summary: string | null }>`
       select latest_summary from projects where id = ${project.id}
     `;
+    // Pin Gilbert to one human watch-list line — never the botty bullet digest.
     const text =
-      (await chatComplete(
-        `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page. If the items do not actually change status, keep the prior facts and note the mention.`,
-      )) ?? fallbackDigest(rows);
+      slug === "gilbert-road-tract"
+        ? GILBERT_ROAD_LATEST_SUMMARY
+        : ((await chatComplete(
+            `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page. If the items do not actually change status, keep the prior facts and note the mention.`,
+          )) ?? fallbackDigest(rows));
     await sql.query(
       `update projects set latest_summary = $1, latest_summary_at = now(), updated_at = now() where id = $2`,
       [text, project.id],

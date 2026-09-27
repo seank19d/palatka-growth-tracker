@@ -33,9 +33,9 @@ export const Route = createFileRoute("/developments/$slug")({
     const custom =
       p.slug === "alford-farms"
         ? {
-            title: "Alford Farms East Palatka (PUD24-000004) — not selling",
+            title: "Alford Farms East Palatka (PUD24-000004) — county file to watch",
             description:
-              "Putnam case PUD24-000004 on SR 207 / Alford Road. SJRWMD ERP IND-107-224892-1 issued Nov 2025. No plat recorded. Not a sales opening. Flood-map note: FIRM 12107C0212C.",
+              "Putnam case PUD24-000004 on SR 207 / Alford Road. SJRWMD ERP IND-107-224892-1 issued Nov 2025. No plat recorded yet — watch the county file. Flood-map note: FIRM 12107C0212C.",
           }
         : p.slug === "collection-at-palatka"
           ? {
@@ -124,16 +124,21 @@ function ProjectPage() {
         {project.locationLabel}
       </p>
       {project.slug === "alford-farms" ? (
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          East Palatka PUD on SR 207 at Alford Road — Putnam case PUD24-000004 (Ordinance 2024-017).
-          SJRWMD environmental resource permit IND-107-224892-1 issued November 25, 2025. Still no
-          recorded plat and not selling. D.R. Horton is named as an agent in the county file, not a
-          public model-home community. Flood-map note: FIRM 12107C0212C.
-        </p>
+        <>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+            East Palatka PUD on SR 207 at Alford Road — Putnam case PUD24-000004. SJRWMD ERP
+            IND-107-224892-1 issued Nov 25, 2025. Open the file below; no recorded plat and not
+            listed as selling yet. D.R. Horton is named as an agent in the county file, not a public
+            model-home community.
+          </p>
+          <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
+            Flood-map note: FIRM 12107C0212C.
+          </p>
+        </>
       ) : project.slug === "nobles-crossing" ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-          Century Complete community on Newcastle Road in Palatka, listed as selling — not Alford
-          Farms, and not The Collection at 508 N. 17th Street.
+          Century Complete community on Newcastle Road in Palatka, listed as selling — separate from
+          The Collection at 508 N. 17th Street.
         </p>
       ) : null}
 
