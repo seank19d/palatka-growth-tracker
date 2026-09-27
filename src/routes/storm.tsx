@@ -95,12 +95,12 @@ function StormPage() {
           <p className="mt-3 text-base leading-relaxed text-muted">
             Already shop Home Depot? Optional spare{" "}
             <a
-              href="https://www.homedepot.com/p/RYOBI-18V-ONE-6-0-Ah-Lithium-Ion-Battery-PBP007/307848813"
+              href="https://www.homedepot.com/p/RYOBI-ONE-18V-Lithium-6-0-Ah-Battery-PBP007/315039437"
               target="_blank"
               rel="noopener noreferrer sponsored"
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
-              RYOBI 18V ONE+ 6.0 Ah battery
+              RYOBI ONE+ 18V 6.0 Ah battery
             </a>{" "}
             for cordless lights and tools when power is out. We may earn a commission.
           </p>
