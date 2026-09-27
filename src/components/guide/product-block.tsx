@@ -21,7 +21,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { AMAZON_NOREWRITE_CLASS } from "@/lib/amazon";
-import { DISCLOSURE } from "@/lib/constants";
+import { SHORT_AFFILIATE_DISCLOSURE } from "@/lib/constants";
 import type { AffiliateProduct } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -129,7 +129,7 @@ export function ProductBlock({
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-subtle">{DISCLOSURE}</p>
+      <p className="mt-4 text-xs leading-relaxed text-subtle">{SHORT_AFFILIATE_DISCLOSURE}</p>
     </aside>
   );
 }

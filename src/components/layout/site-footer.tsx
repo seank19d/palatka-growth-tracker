@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { BrandMark } from "@/components/brand/mark";
 import { RiverDivider } from "@/components/brand/river-divider";
-import { DISCLOSURE } from "@/lib/constants";
+import { FOOTER_DISCLOSURE } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
 
 const LINKS = [
@@ -53,7 +53,7 @@ export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
           <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-fg">
             {formatDateShort(lastUpdated)}
           </p>
-          <p className="mt-4 text-xs leading-relaxed text-subtle">{DISCLOSURE}</p>
+          <p className="mt-4 text-xs leading-relaxed text-subtle">{FOOTER_DISCLOSURE}</p>
         </div>
       </div>
       <div className="flex h-1.5">
