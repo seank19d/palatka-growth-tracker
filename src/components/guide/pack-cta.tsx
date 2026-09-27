@@ -19,7 +19,7 @@ export type PackCtaCopy = {
   note: string;
 };
 
-/** End-of-page pack with three individual Amazon product links (no multi-cart). */
+/** Three individual Amazon product links (no multi-cart). Shown above the quiz when ungated. */
 export function PackCta({
   heading,
   note,
@@ -32,12 +32,12 @@ export function PackCta({
       <p className="mt-2 text-base leading-relaxed text-muted">{note}</p>
       <h3
         id="pack-amazon-picks"
-        className="mt-5 inline-flex h-12 items-center justify-center rounded-full bg-primary px-5 text-base font-medium text-primary-fg"
+        className="mt-5 font-display text-lg font-semibold leading-tight"
       >
         Open Amazon picks
       </h3>
       <ul
-        className="mt-4 divide-y divide-border border-t border-border"
+        className="mt-3 divide-y divide-border border-t border-border"
         aria-labelledby="pack-amazon-picks"
       >
         {products.map((p) => (

@@ -46,8 +46,8 @@ function StormPage() {
   );
   const starterItems = useMemo(() => buildStormStarterKit(products), [products]);
   const packItems = useMemo(
-    () => (complete ? pickTitles(products, [...STORM_PACK_CTA.titles]) : []),
-    [complete, products],
+    () => pickTitles(products, [...STORM_PACK_CTA.titles]),
+    [products],
   );
 
   function pick<K extends keyof StormAnswers>(key: K, value: StormAnswers[K]) {
@@ -80,6 +80,16 @@ function StormPage() {
         lose power and the river comes up. Answer a few questions about the house you’re in and
         we’ll put together a list.
       </p>
+
+      {packItems.length ? (
+        <div className="mt-10">
+          <PackCta
+            heading={STORM_PACK_CTA.heading}
+            note={STORM_PACK_CTA.note}
+            products={packItems}
+          />
+        </div>
+      ) : null}
 
       {!complete ? (
         <>
@@ -184,14 +194,6 @@ function StormPage() {
           </article>
 
           <ProductBlock products={kitItems} heading="What to pick up" />
-
-          {packItems.length ? (
-            <PackCta
-              heading={STORM_PACK_CTA.heading}
-              note={STORM_PACK_CTA.note}
-              products={packItems}
-            />
-          ) : null}
 
           <p className="text-base text-muted">
             This isn’t an official emergency list — Putnam County Emergency Management handles that.

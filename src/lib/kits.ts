@@ -30,7 +30,7 @@ export type KitEndNote = {
   after: string;
 };
 
-/** Post-quiz pack CTA — three individual Amazon links by exact seed title. */
+/** Pack CTA — three individual Amazon links by exact seed title. */
 export type KitPackCta = {
   heading: string;
   note: string;
@@ -50,7 +50,7 @@ export type KitDef = {
   starterTitles?: string[];
   starterHeading?: string;
   starterNote?: string;
-  /** End-of-page pack after the quiz product list (move / punch). */
+  /** Ungated 3-SKU pack above the quiz (move / punch). */
   packCta?: KitPackCta;
   questions: KitQuestion[];
   faqs: KitFaq[];

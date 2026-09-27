@@ -373,7 +373,7 @@ function Home() {
             Moving or closing soon? Boxes, a walkthrough tool kit, and a first-aid kit that isn’t
             the junk-drawer gap.
           </p>
-          <ProductBlock products={products} heading="Kits" />
+          <ProductBlock products={products} heading="Start with" />
           <p className="mt-3 text-sm text-muted">
             <Link to="/move" className="font-medium text-primary underline-offset-4 hover:underline">
               Moving list
