@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./editorial.css";
 
 @theme {
-  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --text-xs: 0.8125rem;
@@ -15,41 +16,41 @@
   --text-lg: 1.1875rem;
   --text-lg--line-height: 1.6;
 
-  --color-bg: #f3eee4;
-  --color-bg-sunken: #e8e0d2;
-  --color-surface: #faf6ee;
-  --color-fg: #1c1915;
-  --color-muted: #4d473e;
-  --color-subtle: #6e675c;
-  --color-primary: #1e4a46;
-  --color-primary-fg: #f3eee4;
-  --color-primary-foreground: #f3eee4;
-  --color-river: #1e4a46;
-  --color-ink: #1c1915;
-  --color-paper: #f3eee4;
-  --color-sun: #e0a04a;
-  --color-sun-fg: #3d2808;
+  --color-bg: #ffffff;
+  --color-bg-sunken: #edf2e8;
+  --color-surface: #f5f7f3;
+  --color-fg: #173b36;
+  --color-muted: #56685d;
+  --color-subtle: #697b6d;
+  --color-primary: #123b36;
+  --color-primary-fg: #ffffff;
+  --color-primary-foreground: #ffffff;
+  --color-river: #123b36;
+  --color-ink: #173b36;
+  --color-paper: #ffffff;
+  --color-sun: #dcef8b;
+  --color-sun-fg: #38521c;
   --color-moss: #3f5d3c;
 
-  --color-background: #f3eee4;
-  --color-foreground: #1c1915;
-  --color-card: #faf6ee;
-  --color-card-foreground: #1c1915;
-  --color-popover: #faf6ee;
-  --color-popover-foreground: #1c1915;
-  --color-secondary: #e8e0d2;
-  --color-secondary-foreground: #1c1915;
-  --color-muted-foreground: #4d473e;
-  --color-accent: #d8e4e1;
-  --color-accent-foreground: #1e4a46;
+  --color-background: #ffffff;
+  --color-foreground: #173b36;
+  --color-card: #f5f7f3;
+  --color-card-foreground: #173b36;
+  --color-popover: #f5f7f3;
+  --color-popover-foreground: #173b36;
+  --color-secondary: #edf2e8;
+  --color-secondary-foreground: #173b36;
+  --color-muted-foreground: #56685d;
+  --color-accent: #e9f0e0;
+  --color-accent-foreground: #123b36;
   --color-destructive: #8f2d2d;
-  --color-destructive-foreground: #faf6ee;
-  --color-border: #d4cbb8;
-  --color-input: #d4cbb8;
-  --color-ring: #1e4a46;
+  --color-destructive-foreground: #f5f7f3;
+  --color-border: #dce2dc;
+  --color-input: #dce2dc;
+  --color-ring: #123b36;
 
   --color-status-concept: #6a6358;
-  --color-status-active: #1e4a46;
+  --color-status-active: #123b36;
   --color-status-build: #345e4c;
   --color-status-done: #7a7368;
 
@@ -61,8 +62,7 @@
   --radius: 0.75rem;
 
   --shadow-border:
-    0px 0px 0px 1px rgba(28, 25, 21, 0.06),
-    0px 1px 2px -1px rgba(28, 25, 21, 0.06),
+    0px 0px 0px 1px rgba(28, 25, 21, 0.06), 0px 1px 2px -1px rgba(28, 25, 21, 0.06),
     0px 2px 8px 0px rgba(28, 25, 21, 0.04);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -78,7 +78,9 @@
   html {
     background: var(--color-bg);
     color: var(--color-fg);
-    font-size: 110%;
+    font-size: 100%;
+    scroll-padding-top: 105px;
+    scroll-behavior: smooth;
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -88,11 +90,6 @@
   body {
     min-height: 100dvh;
     background-color: var(--color-bg);
-    background-image: radial-gradient(
-      color-mix(in oklab, var(--color-fg) 7%, transparent) 0.8px,
-      transparent 0.9px
-    );
-    background-size: 18px 18px;
     color: var(--color-fg);
     font-family: var(--font-sans);
     font-optical-sizing: auto;
