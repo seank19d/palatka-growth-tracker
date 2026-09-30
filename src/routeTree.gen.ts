@@ -15,10 +15,22 @@ import { Route as AddressRouteImport } from './routes/address'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DecideRouteImport } from './routes/decide'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as HouseRouteImport } from './routes/house'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MoveRouteImport } from './routes/move'
+import { Route as OfficeRouteImport } from './routes/office'
+import { Route as PackRouteImport } from './routes/pack'
+import { Route as PunchRouteImport } from './routes/punch'
+import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as StormRouteImport } from './routes/storm'
+import { Route as SummerRouteImport } from './routes/summer'
+import { Route as WellRouteImport } from './routes/well'
 import { Route as WhatsNewRouteImport } from './routes/whats-new'
+import { Route as YardRouteImport } from './routes/yard'
+import { Route as ApiAlertsRouteImport } from './routes/api/alerts'
+import { Route as ApiTipsRouteImport } from './routes/api/tips'
 import { Route as DevelopmentsIndexRouteImport } from './routes/developments/index'
 import { Route as DevelopmentsSlugRouteImport } from './routes/developments/$slug'
 import { Route as GuideIndexRouteImport } from './routes/guide/index'
@@ -26,6 +38,7 @@ import { Route as GuideSlugRouteImport } from './routes/guide/$slug'
 import { Route as ApiAffiliateClickRouteImport } from './routes/api/affiliate/click'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiCronUpdateRouteImport } from './routes/api/cron/update'
+import { Route as ApiInternalAffiliateStatsRouteImport } from './routes/api/internal/affiliate-stats'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,9 +70,39 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HouseRoute = HouseRouteImport.update({
+  id: '/house',
+  path: '/house',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoveRoute = MoveRouteImport.update({
+  id: '/move',
+  path: '/move',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfficeRoute = OfficeRouteImport.update({
+  id: '/office',
+  path: '/office',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PackRoute = PackRouteImport.update({
+  id: '/pack',
+  path: '/pack',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PunchRoute = PunchRouteImport.update({
+  id: '/punch',
+  path: '/punch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -72,9 +115,39 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StormRoute = StormRouteImport.update({
+  id: '/storm',
+  path: '/storm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SummerRoute = SummerRouteImport.update({
+  id: '/summer',
+  path: '/summer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WellRoute = WellRouteImport.update({
+  id: '/well',
+  path: '/well',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhatsNewRoute = WhatsNewRouteImport.update({
   id: '/whats-new',
   path: '/whats-new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YardRoute = YardRouteImport.update({
+  id: '/yard',
+  path: '/yard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAlertsRoute = ApiAlertsRouteImport.update({
+  id: '/api/alerts',
+  path: '/api/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTipsRoute = ApiTipsRouteImport.update({
+  id: '/api/tips',
+  path: '/api/tips',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevelopmentsIndexRoute = DevelopmentsIndexRouteImport.update({
@@ -112,6 +185,12 @@ const ApiCronUpdateRoute = ApiCronUpdateRouteImport.update({
   path: '/api/cron/update',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiInternalAffiliateStatsRoute =
+  ApiInternalAffiliateStatsRouteImport.update({
+    id: '/api/internal/affiliate-stats',
+    path: '/api/internal/affiliate-stats',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -120,10 +199,22 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
+  '/house': typeof HouseRoute
   '/login': typeof LoginRoute
+  '/move': typeof MoveRoute
+  '/office': typeof OfficeRoute
+  '/pack': typeof PackRoute
+  '/punch': typeof PunchRoute
+  '/resources': typeof ResourcesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/storm': typeof StormRoute
+  '/summer': typeof SummerRoute
+  '/well': typeof WellRoute
   '/whats-new': typeof WhatsNewRoute
+  '/yard': typeof YardRoute
+  '/api/alerts': typeof ApiAlertsRoute
+  '/api/tips': typeof ApiTipsRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
   '/guide/$slug': typeof GuideSlugRoute
   '/developments/': typeof DevelopmentsIndexRoute
@@ -131,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
+  '/api/internal/affiliate-stats': typeof ApiInternalAffiliateStatsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,10 +231,22 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
+  '/house': typeof HouseRoute
   '/login': typeof LoginRoute
+  '/move': typeof MoveRoute
+  '/office': typeof OfficeRoute
+  '/pack': typeof PackRoute
+  '/punch': typeof PunchRoute
+  '/resources': typeof ResourcesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/storm': typeof StormRoute
+  '/summer': typeof SummerRoute
+  '/well': typeof WellRoute
   '/whats-new': typeof WhatsNewRoute
+  '/yard': typeof YardRoute
+  '/api/alerts': typeof ApiAlertsRoute
+  '/api/tips': typeof ApiTipsRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
   '/guide/$slug': typeof GuideSlugRoute
   '/developments': typeof DevelopmentsIndexRoute
@@ -150,6 +254,7 @@ export interface FileRoutesByTo {
   '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
+  '/api/internal/affiliate-stats': typeof ApiInternalAffiliateStatsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -159,10 +264,22 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/decide': typeof DecideRoute
   '/faq': typeof FaqRoute
+  '/house': typeof HouseRoute
   '/login': typeof LoginRoute
+  '/move': typeof MoveRoute
+  '/office': typeof OfficeRoute
+  '/pack': typeof PackRoute
+  '/punch': typeof PunchRoute
+  '/resources': typeof ResourcesRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/storm': typeof StormRoute
+  '/summer': typeof SummerRoute
+  '/well': typeof WellRoute
   '/whats-new': typeof WhatsNewRoute
+  '/yard': typeof YardRoute
+  '/api/alerts': typeof ApiAlertsRoute
+  '/api/tips': typeof ApiTipsRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
   '/guide/$slug': typeof GuideSlugRoute
   '/developments/': typeof DevelopmentsIndexRoute
@@ -170,6 +287,7 @@ export interface FileRoutesById {
   '/api/affiliate/click': typeof ApiAffiliateClickRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/cron/update': typeof ApiCronUpdateRoute
+  '/api/internal/affiliate-stats': typeof ApiInternalAffiliateStatsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -180,10 +298,22 @@ export interface FileRouteTypes {
     | '/admin'
     | '/decide'
     | '/faq'
+    | '/house'
     | '/login'
+    | '/move'
+    | '/office'
+    | '/pack'
+    | '/punch'
+    | '/resources'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/storm'
+    | '/summer'
+    | '/well'
     | '/whats-new'
+    | '/yard'
+    | '/api/alerts'
+    | '/api/tips'
     | '/developments/$slug'
     | '/guide/$slug'
     | '/developments/'
@@ -191,6 +321,7 @@ export interface FileRouteTypes {
     | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
+    | '/api/internal/affiliate-stats'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,10 +330,22 @@ export interface FileRouteTypes {
     | '/admin'
     | '/decide'
     | '/faq'
+    | '/house'
     | '/login'
+    | '/move'
+    | '/office'
+    | '/pack'
+    | '/punch'
+    | '/resources'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/storm'
+    | '/summer'
+    | '/well'
     | '/whats-new'
+    | '/yard'
+    | '/api/alerts'
+    | '/api/tips'
     | '/developments/$slug'
     | '/guide/$slug'
     | '/developments'
@@ -210,6 +353,7 @@ export interface FileRouteTypes {
     | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
+    | '/api/internal/affiliate-stats'
   id:
     | '__root__'
     | '/'
@@ -218,10 +362,22 @@ export interface FileRouteTypes {
     | '/admin'
     | '/decide'
     | '/faq'
+    | '/house'
     | '/login'
+    | '/move'
+    | '/office'
+    | '/pack'
+    | '/punch'
+    | '/resources'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/storm'
+    | '/summer'
+    | '/well'
     | '/whats-new'
+    | '/yard'
+    | '/api/alerts'
+    | '/api/tips'
     | '/developments/$slug'
     | '/guide/$slug'
     | '/developments/'
@@ -229,6 +385,7 @@ export interface FileRouteTypes {
     | '/api/affiliate/click'
     | '/api/auth/$'
     | '/api/cron/update'
+    | '/api/internal/affiliate-stats'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -238,10 +395,22 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   DecideRoute: typeof DecideRoute
   FaqRoute: typeof FaqRoute
+  HouseRoute: typeof HouseRoute
   LoginRoute: typeof LoginRoute
+  MoveRoute: typeof MoveRoute
+  OfficeRoute: typeof OfficeRoute
+  PackRoute: typeof PackRoute
+  PunchRoute: typeof PunchRoute
+  ResourcesRoute: typeof ResourcesRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StormRoute: typeof StormRoute
+  SummerRoute: typeof SummerRoute
+  WellRoute: typeof WellRoute
   WhatsNewRoute: typeof WhatsNewRoute
+  YardRoute: typeof YardRoute
+  ApiAlertsRoute: typeof ApiAlertsRoute
+  ApiTipsRoute: typeof ApiTipsRoute
   DevelopmentsSlugRoute: typeof DevelopmentsSlugRoute
   GuideSlugRoute: typeof GuideSlugRoute
   DevelopmentsIndexRoute: typeof DevelopmentsIndexRoute
@@ -249,6 +418,7 @@ export interface RootRouteChildren {
   ApiAffiliateClickRoute: typeof ApiAffiliateClickRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiCronUpdateRoute: typeof ApiCronUpdateRoute
+  ApiInternalAffiliateStatsRoute: typeof ApiInternalAffiliateStatsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -295,11 +465,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/house': {
+      id: '/house'
+      path: '/house'
+      fullPath: '/house'
+      preLoaderRoute: typeof HouseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/move': {
+      id: '/move'
+      path: '/move'
+      fullPath: '/move'
+      preLoaderRoute: typeof MoveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/office': {
+      id: '/office'
+      path: '/office'
+      fullPath: '/office'
+      preLoaderRoute: typeof OfficeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pack': {
+      id: '/pack'
+      path: '/pack'
+      fullPath: '/pack'
+      preLoaderRoute: typeof PackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/punch': {
+      id: '/punch'
+      path: '/punch'
+      fullPath: '/punch'
+      preLoaderRoute: typeof PunchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -316,11 +528,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/storm': {
+      id: '/storm'
+      path: '/storm'
+      fullPath: '/storm'
+      preLoaderRoute: typeof StormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/summer': {
+      id: '/summer'
+      path: '/summer'
+      fullPath: '/summer'
+      preLoaderRoute: typeof SummerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/well': {
+      id: '/well'
+      path: '/well'
+      fullPath: '/well'
+      preLoaderRoute: typeof WellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/whats-new': {
       id: '/whats-new'
       path: '/whats-new'
       fullPath: '/whats-new'
       preLoaderRoute: typeof WhatsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yard': {
+      id: '/yard'
+      path: '/yard'
+      fullPath: '/yard'
+      preLoaderRoute: typeof YardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/alerts': {
+      id: '/api/alerts'
+      path: '/api/alerts'
+      fullPath: '/api/alerts'
+      preLoaderRoute: typeof ApiAlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tips': {
+      id: '/api/tips'
+      path: '/api/tips'
+      fullPath: '/api/tips'
+      preLoaderRoute: typeof ApiTipsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/developments/': {
@@ -372,6 +626,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCronUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/internal/affiliate-stats': {
+      id: '/api/internal/affiliate-stats'
+      path: '/api/internal/affiliate-stats'
+      fullPath: '/api/internal/affiliate-stats'
+      preLoaderRoute: typeof ApiInternalAffiliateStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -382,10 +643,22 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   DecideRoute: DecideRoute,
   FaqRoute: FaqRoute,
+  HouseRoute: HouseRoute,
   LoginRoute: LoginRoute,
+  MoveRoute: MoveRoute,
+  OfficeRoute: OfficeRoute,
+  PackRoute: PackRoute,
+  PunchRoute: PunchRoute,
+  ResourcesRoute: ResourcesRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StormRoute: StormRoute,
+  SummerRoute: SummerRoute,
+  WellRoute: WellRoute,
   WhatsNewRoute: WhatsNewRoute,
+  YardRoute: YardRoute,
+  ApiAlertsRoute: ApiAlertsRoute,
+  ApiTipsRoute: ApiTipsRoute,
   DevelopmentsSlugRoute: DevelopmentsSlugRoute,
   GuideSlugRoute: GuideSlugRoute,
   DevelopmentsIndexRoute: DevelopmentsIndexRoute,
@@ -393,6 +666,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAffiliateClickRoute: ApiAffiliateClickRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiCronUpdateRoute: ApiCronUpdateRoute,
+  ApiInternalAffiliateStatsRoute: ApiInternalAffiliateStatsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

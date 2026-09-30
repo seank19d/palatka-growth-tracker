@@ -1,64 +1,97 @@
 import { Link } from "@tanstack/react-router";
 import { BrandMark } from "@/components/brand/mark";
-import { RiverDivider } from "@/components/brand/river-divider";
 import { FOOTER_DISCLOSURE } from "@/lib/constants";
 import { formatDateShort } from "@/lib/format";
-
 const LINKS = [
-  { to: "/developments" as const, label: "Developments" },
-  { to: "/decide" as const, label: "Now or wait" },
-  { to: "/address" as const, label: "Address" },
-  { to: "/house" as const, label: "The house" },
-  { to: "/guide" as const, label: "Living guide" },
-  { to: "/whats-new" as const, label: "What's new" },
-  { to: "/about" as const, label: "Sources & method" },
-];
-
+  { to: "/developments", label: "Developments" },
+  { to: "/decide", label: "Now or wait" },
+  { to: "/address", label: "Check an address" },
+  { to: "/house", label: "The house" },
+  { to: "/guide", label: "Living here" },
+  { to: "/whats-new", label: "The latest" },
+  { to: "/faq", label: "Common questions" },
+  { to: "/about", label: "Sources & approach" },
+] as const;
 export function SiteFooter({ lastUpdated }: { lastUpdated?: string | null }) {
   return (
-    <footer className="mt-auto border-t border-border bg-bg-sunken">
-      <RiverDivider className="text-primary/50" />
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <BrandMark className="size-8" />
+    <footer className="phr-footer">
+      <div className="phr-container">
+        <div className="phr-footer-top">
+          <Link
+            className="phr-brand phr-footer-brand"
+            to="/"
+            aria-label="Palatka Homes Report home"
+          >
+            <BrandMark className="phr-shell-mark" />
+            <span className="phr-wordmark">
+              Palatka<span>HOMES REPORT</span>
+            </span>
+          </Link>
+          <p>
+            An independent look at homes, growth,
+            <br />
+            and life on both sides of the river.
+          </p>
+          <nav className="phr-footer-links" aria-label="Footer navigation">
+            {LINKS.map((item) => (
+              <Link key={item.to} to={item.to}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <p className="phr-footer-disclosure">{FOOTER_DISCLOSURE}</p>
+        <div className="phr-footer-bottom">
+          <span>Palatka Homes Report</span>
+          <span>Last checked: {formatDateShort(lastUpdated)}</span>
+          <details className="phr-photo-credits">
+            <summary>Photo credits</summary>
             <div>
-              <p className="font-display text-2xl font-semibold leading-none">Palatka</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                Homes Report
+              <p>
+                Memorial Bridge / St. Johns River: Ebyabe,{" "}
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Palatka_old_memorial_bridge02.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Wikimedia Commons
+                </a>
+                ,{" "}
+                <a
+                  href="https://creativecommons.org/licenses/by-sa/3.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY-SA 3.0
+                </a>
+                .
+              </p>
+              <p>
+                Ravine Gardens: Usflibstudent21,{" "}
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Ravine_Gardens,_Palatka,_Florida.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Wikimedia Commons
+                </a>
+                ,{" "}
+                <a
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY-SA 4.0
+                </a>
+                .
+              </p>
+              <p>
+                Photos are resized and displayed with responsive crops and overlays. Adapted image
+                assets retain their respective licenses.
               </p>
             </div>
-          </div>
-          <p className="mt-3 max-w-sm text-base leading-relaxed text-muted">
-            Independent coverage of housing in Palatka, East Palatka, and Putnam County. Not the
-            county, not a builder, not a brokerage.
-          </p>
+          </details>
         </div>
-        <div className="text-base">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Sections</p>
-          <ul className="mt-3 space-y-2">
-            {LINKS.map((item) => (
-              <li key={item.to}>
-                <Link to={item.to} className="hover:text-primary">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="text-base">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-            Last checked
-          </p>
-          <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-fg">
-            {formatDateShort(lastUpdated)}
-          </p>
-          <p className="mt-4 text-xs leading-relaxed text-subtle">{FOOTER_DISCLOSURE}</p>
-        </div>
-      </div>
-      <div className="flex h-1.5">
-        <div className="w-16 bg-sun" />
-        <div className="flex-1 bg-primary" />
       </div>
     </footer>
   );

@@ -6,7 +6,11 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { AppErrorComponent, NotFoundComponent, clearStaleChunkReloadFlag } from "@/lib/error-component";
+import {
+  AppErrorComponent,
+  NotFoundComponent,
+  clearStaleChunkReloadFlag,
+} from "@/lib/error-component";
 import { APP_NAME } from "@/lib/constants";
 import { ORG_JSON_LD, SITE_URL } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
@@ -34,7 +38,7 @@ export const Route = createRootRoute({
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "theme-color", content: "#1e4a46" },
+        { name: "theme-color", content: "#123b36" },
         { name: "application-name", content: APP_NAME },
       ],
       links: [
@@ -45,7 +49,7 @@ export const Route = createRootRoute({
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap",
         },
         { rel: "stylesheet", href: appCss },
         { rel: "manifest", href: "/site.webmanifest" },
