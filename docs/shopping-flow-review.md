@@ -18,4 +18,4 @@ Existing click records measure outbound interest, not completed purchases. Compa
 
 ## Validation
 
-TypeScript, production build, existing tests, and browser checks of search, filters, empty-state recovery, responsive layout, and affiliate link attributes.
+TypeScript, production build, existing tests, and browser checks of search, filters, empty-state recovery, affiliate link attributes, and desktop layout. Responsive styles were reviewed in code; mobile-device browser testing remains outstanding.
