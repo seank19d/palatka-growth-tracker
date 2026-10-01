@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { BrandMark } from "@/components/brand/mark";
 import { SignedIn, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
@@ -13,7 +13,6 @@ const NAV = [
 ] as const;
 const MORE = [
   { to: "/address", label: "Check an address" },
-  { to: "/house", label: "The house" },
   { to: "/faq", label: "Common questions" },
   { to: "/about", label: "Sources & approach" },
 ] as const;
@@ -60,8 +59,8 @@ export function SiteHeader() {
             ))}
             <AuthSlot />
           </nav>
-          <Link className="phr-header-cta" to="/developments">
-            Explore the report <Search aria-hidden="true" />
+          <Link className="phr-header-cta" to="/house">
+            Shop essentials <ShoppingBag aria-hidden="true" />
           </Link>
           <button
             type="button"
@@ -80,7 +79,7 @@ export function SiteHeader() {
           aria-label="Mobile navigation"
           hidden={!open}
         >
-          {[...NAV, ...MORE].map((item) => (
+          {[{ to: "/house", label: "Shop essentials" }, ...NAV, ...MORE].map((item) => (
             <Link key={item.to} to={item.to} onClick={() => setOpen(false)}>
               {item.label}
             </Link>
