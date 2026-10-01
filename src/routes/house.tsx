@@ -1,117 +1,65 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { JsonLd } from "@/components/json-ld";
-import { Kicker } from "@/components/brand/kicker";
+import { ProductBlock } from "@/components/guide/product-block";
 import { fetchStorm } from "@/lib/data/api";
-import { AMAZON_NOREWRITE_CLASS } from "@/lib/amazon";
 import { HOUSE_CARDS } from "@/lib/kits";
 import { breadcrumbJsonLd, seo } from "@/lib/seo";
-import type { AffiliateProduct } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/house")({
   loader: () => fetchStorm(),
-  head: () =>
-    seo({
-      title: "Lists for a Palatka house",
-      description:
-        "Moving to Palatka, storm season, the first summer, a well lot, working from home, the yard, and closing week — short lists with Amazon links. We may earn a commission.",
-      path: "/house",
-    }),
+  head: () => seo({
+    title: "Shop moving & home essentials for Palatka",
+    description: "Browse moving supplies, home setup, tools and outdoor essentials. Compare options on Amazon, or use a short guide to narrow your list. Affiliate links.",
+    path: "/house",
+  }),
   component: HousePage,
 });
-
-function heroFor(products: AffiliateProduct[], title: string): AffiliateProduct | undefined {
-  return products.find((p) => p.title === title);
-}
-
-function logClick(id: number) {
-  try {
-    const body = new Blob([JSON.stringify({ id })], { type: "application/json" });
-    if (navigator.sendBeacon) navigator.sendBeacon("/api/affiliate/click", body);
-    else void fetch("/api/affiliate/click", { method: "POST", body, keepalive: true });
-  } catch {
-    /* click still goes to Amazon */
-  }
-}
-
+const CATEGORY_LABELS: Record<string, string> = {
+  moving: "Moving supplies", "home-setup": "Home setup", tools: "Tools & repairs",
+  outdoor: "Outdoor living", storm: "Storm supplies", safety: "Safety",
+};
 function HousePage() {
   const { products } = Route.useLoaderData();
+  const [category, setCategory] = useState("all");
+  const [query, setQuery] = useState("");
+  const categories = useMemo(() => [...new Set(products.map(p => p.category))], [products]);
+  const filtered = useMemo(() => products.filter(p =>
+    (category === "all" || p.category === category) &&
+    `${p.title} ${p.blurb} ${CATEGORY_LABELS[p.category] ?? p.category}`.toLowerCase().includes(query.trim().toLowerCase())
+  ), [products, category, query]);
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "The house", path: "/house" },
-        ])}
-      />
-      <Kicker>For the house</Kicker>
-      <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">
-        Lists for a Palatka house
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
-        Once you’ve got a house in mind — or a truck booked — these are the lists people here
-        actually use. A few questions each, then the usual gear. The links go to Amazon; we may earn
-        a commission.
-      </p>
-      <ul className="mt-10 space-y-3">
-        {HOUSE_CARDS.map((c) => {
-          const hero = heroFor(products, c.heroProduct);
-          return (
-            <li key={c.to} className="border border-border bg-card">
-              <Link
-                to={c.to}
-                className="flex items-start justify-between gap-4 px-4 py-4 transition-colors duration-150 hover:bg-secondary/50"
-              >
-                <span>
-                  <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                    {c.kicker}
-                  </span>
-                  <span className="mt-2 block font-display text-2xl font-semibold">{c.title}</span>
-                  <span className="mt-2 block text-base leading-relaxed text-muted">{c.blurb}</span>
-                </span>
-                <ArrowRight className="mt-1 size-4 shrink-0 text-primary" />
-              </Link>
-              {hero ? (
-                <div
-                  className={cn(
-                    AMAZON_NOREWRITE_CLASS,
-                    "flex items-center justify-between gap-3 border-t border-border px-4 py-3",
-                  )}
-                >
-                  <p className="min-w-0 text-base text-muted">
-                    Start with{" "}
-                    <span className="font-medium text-fg">{hero.title}</span>
-                  </p>
-                  <a
-                    href={hero.url}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    onClick={() => logClick(hero.id)}
-                    className={cn(
-                      AMAZON_NOREWRITE_CLASS,
-                      "shrink-0 text-sm font-medium text-primary underline-offset-4 hover:underline",
-                    )}
-                  >
-                    Amazon
-                  </a>
-                </div>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
-      <p className="mt-10 text-base text-muted">
-        Still choosing Collection vs Alford?{" "}
-        <Link to="/decide" className="font-medium text-primary underline-offset-4 hover:underline">
-          Buy now or wait
-        </Link>
-        . Have a street?{" "}
-        <Link to="/address" className="font-medium text-primary underline-offset-4 hover:underline">
-          Check city vs well
-        </Link>
-        .
-      </p>
+    <main className="phr-shop">
+      <JsonLd data={breadcrumbJsonLd([{name: "Home", path: "/"}, {name: "Shop essentials", path: "/house"}])} />
+      <section className="phr-shop-hero">
+        <div className="phr-container">
+          <span className="phr-eyebrow">THE EVERYDAY ESSENTIALS</span>
+          <h1>Make yourself<br /><em>at home.</em></h1>
+          <p>Moving boxes. First-night basics. The tools you’ll reach for again. Find what you need for your next chapter in Palatka.</p>
+          <div className="phr-shop-actions">
+            <a href="#shop-products" className="phr-button phr-lime">Browse essentials <ArrowRight size={18} aria-hidden /></a>
+            <a href="#shopping-guides" className="phr-text-link phr-light-link">Help me choose</a>
+          </div>
+          <p className="phr-shop-how">Browse here → Compare options on Amazon → Buy there</p>
+        </div>
+      </section>
+      <section className="phr-container phr-shop-catalog" id="shop-products" aria-labelledby="shop-title">
+        <div className="phr-shop-catalog-heading">
+          <div><span className="phr-eyebrow">YOUR LIST STARTS HERE</span><h2 id="shop-title">What do you need?</h2></div>
+          <label className="phr-shop-search"><Search size={20} aria-hidden /><input type="search" aria-label="Search essentials" placeholder="Try boxes, lights, or tools" value={query} onChange={e => setQuery(e.target.value)} /></label>
+        </div>
+        <div className="phr-shop-filters" role="group" aria-label="Filter essentials by category">
+          {["all", ...categories].map(key => <button key={key} type="button" aria-pressed={category === key} onClick={() => setCategory(key)}>{key === "all" ? "All essentials" : CATEGORY_LABELS[key] ?? key.replaceAll("-", " ")}</button>)}
+        </div>
+        <p role="status" className="phr-shop-count">{filtered.length} {filtered.length === 1 ? "item" : "items"}{category !== "all" || query.trim() ? " match your selection" : " to explore"}</p>
+        {filtered.length ? <ProductBlock products={filtered} heading={category === "all" ? "Essentials for your next chapter" : CATEGORY_LABELS[category] ?? category} grid /> : <div className="phr-shop-empty"><h3>No matching essentials.</h3><p>Try a different search, or browse the full list.</p><button type="button" className="phr-button phr-dark" onClick={() => {setCategory("all"); setQuery("");}}>Show all essentials</button></div>}
+      </section>
+      <section className="phr-container phr-shop-guides" id="shopping-guides" aria-labelledby="guides-title">
+        <span className="phr-eyebrow">A LITTLE HELP CHOOSING</span><h2 id="guides-title">Shop for the moment you’re in.</h2>
+        <p>Prefer a shorter list? Pick a guide. Each one includes essentials you can shop right away, plus optional questions to tailor the list.</p>
+        <ul>{HOUSE_CARDS.map(c => <li key={c.to}><Link to={c.to}><span className="phr-eyebrow">{c.kicker}</span><h3>{c.title}</h3><p>{c.blurb}</p><span className="phr-text-link">Explore this list <ArrowRight size={18} aria-hidden /></span></Link></li>)}</ul>
+      </section>
     </main>
   );
 }

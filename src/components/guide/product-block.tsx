@@ -65,11 +65,11 @@ const THUMBS: Record<string, LucideIcon> = {
   "Step stool": Package,
 };
 
-function logClick(id: number) {
+export function logClick(id: number) {
   try {
     const body = new Blob([JSON.stringify({ id })], { type: "application/json" });
-    if (navigator.sendBeacon) navigator.sendBeacon("/api/affiliate/click", body);
-    else void fetch("/api/affiliate/click", { method: "POST", body, keepalive: true });
+    if (navigator.sendBeacon?.("/api/affiliate/click", body)) return;
+    void fetch("/api/affiliate/click", { method: "POST", body, keepalive: true }).catch(() => {});
   } catch {
     /* click still goes to Amazon */
   }
@@ -89,47 +89,40 @@ function ProductThumb({ title }: { title: string }) {
 
 export function ProductBlock({
   products,
-  heading = "Useful for this page",
+  heading = "Shop essentials for this guide",
+  note,
+  grid = false,
 }: {
   products: AffiliateProduct[];
   heading?: string;
+  note?: string;
+  grid?: boolean;
 }) {
   if (!products.length) return null;
   return (
-    <aside className={cn(AMAZON_NOREWRITE_CLASS, "border border-border bg-card p-5 md:p-6")}>
-      <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-        <ShoppingBag className="size-3.5 text-primary" strokeWidth={1.75} />
-        {heading}
-      </p>
-      <ul className="mt-4 divide-y divide-border border-t border-border">
+    <aside className={cn(AMAZON_NOREWRITE_CLASS, "phr-commerce")}>
+      <h2 className="phr-commerce-heading"><ShoppingBag size={20} aria-hidden />{heading}</h2>
+      {note && <p className="phr-commerce-note">{note}</p>}
+      <p className="phr-commerce-disclosure">{SHORT_AFFILIATE_DISCLOSURE}</p>
+      <ul className={cn("phr-product-list", grid && "phr-product-grid")}>
         {products.map((p) => (
           <li key={p.id}>
-            <a
-              href={p.url}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
+            <a href={p.url} target="_blank" rel="noopener noreferrer sponsored"
               onClick={() => logClick(p.id)}
-              className={cn(
-                AMAZON_NOREWRITE_CLASS,
-                "flex gap-4 py-3 hover:bg-secondary/40 sm:items-center",
-              )}
-            >
+              className={cn(AMAZON_NOREWRITE_CLASS, "phr-product-link")}
+              aria-label={`${p.title}: see options on Amazon (opens in a new tab)`}>
               <ProductThumb title={p.title} />
-              <span className="min-w-0 flex-1">
-                <span className="block font-medium">{p.title}</span>
-                <span className="mt-1 block text-base leading-relaxed text-muted">{p.blurb}</span>
-                {p.priceLabel ? (
-                  <span className="mt-1 block text-sm tabular-nums text-fg">{p.priceLabel}</span>
-                ) : null}
-              </span>
-              <span className="mt-1 shrink-0 self-start text-sm font-medium text-primary sm:mt-0">
-                Amazon
+              <span className="phr-product-copy">
+                <span className="phr-product-title">{p.title}</span>
+                <span className="phr-product-benefit">{p.blurb}</span>
+                <span className="phr-product-action">See options on Amazon <span aria-hidden>↗</span></span>
+                <span className="phr-product-detail">Compare current prices &amp; availability</span>
               </span>
             </a>
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-subtle">{SHORT_AFFILIATE_DISCLOSURE}</p>
+      <p className="phr-commerce-note">Links open Amazon in a new tab. Choose an option and complete your purchase there. Items are sold separately; prices and availability may change.</p>
     </aside>
   );
 }

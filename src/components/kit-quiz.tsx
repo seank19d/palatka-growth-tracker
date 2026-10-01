@@ -65,7 +65,7 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
 
       {!complete ? (
         <>
-        {starterItems.length ? (
+        {starterItems.length && !packItems.length ? (
           <div className="mt-10">
             <ProductBlock
               products={starterItems}
@@ -77,6 +77,8 @@ export function KitQuiz({ kit, products }: { kit: KitDef; products: AffiliatePro
           </div>
         ) : null}
         <section className="mt-10">
+          <h2 className="mb-4 font-display text-2xl font-semibold">Want a list matched to your home?</h2>
+          <p className="mb-5 text-muted">The questions are optional. You can shop the essentials above at any time.</p>
           <div className="flex items-center justify-between gap-4">
             <p className="font-mono text-xs tabular-nums text-subtle">
               {String(step + 1).padStart(2, "0")} / {String(kit.questions.length).padStart(2, "0")}

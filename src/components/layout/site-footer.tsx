@@ -6,7 +6,7 @@ const LINKS = [
   { to: "/developments", label: "Developments" },
   { to: "/decide", label: "Now or wait" },
   { to: "/address", label: "Check an address" },
-  { to: "/house", label: "The house" },
+  { to: "/house", label: "Shop essentials" },
   { to: "/guide", label: "Living here" },
   { to: "/whats-new", label: "The latest" },
   { to: "/faq", label: "Common questions" },

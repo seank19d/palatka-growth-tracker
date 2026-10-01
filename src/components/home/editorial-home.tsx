@@ -294,6 +294,26 @@ export function EditorialHome({ data }: { data: HomeData }) {
           </p>
         </div>
       </section>
+      {!!products.length && (
+        <section className="phr-home-essentials">
+          <div className="phr-container">
+            <div className="phr-section-heading">
+              <div>
+                <span className="phr-eyebrow">CLOSING OR MOVING SOON?</span>
+                <h2>
+                  A few things
+                  <br />
+                  for day one.
+                </h2>
+              </div>
+              <Link to="/house" className="phr-text-link">
+                Shop all home essentials
+              </Link>
+            </div>
+            <ProductBlock products={products} heading="Start with these essentials" grid />
+          </div>
+        </section>
+      )}
       <ProjectFocusProvider>
         <section className="phr-section phr-projects-section" id="developments" ref={explorer}>
           <div className="phr-container">
@@ -711,26 +731,6 @@ export function EditorialHome({ data }: { data: HomeData }) {
             </div>
             <p className="phr-market-note">{market.medianNote}</p>
             <p className="phr-data-note">{market.sourceNote}</p>
-          </div>
-        </section>
-      )}
-      {!!products.length && (
-        <section className="phr-home-essentials">
-          <div className="phr-container">
-            <div className="phr-section-heading">
-              <div>
-                <span className="phr-eyebrow">CLOSING OR MOVING SOON?</span>
-                <h2>
-                  A few things
-                  <br />
-                  for day one.
-                </h2>
-              </div>
-              <Link to="/punch" className="phr-text-link">
-                Open the closing-week checklist
-              </Link>
-            </div>
-            <ProductBlock products={products} heading="Start with" />
           </div>
         </section>
       )}
