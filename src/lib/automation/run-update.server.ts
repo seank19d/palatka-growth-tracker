@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 import { dbSource, getSql } from "@/lib/db";
 import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
-import { GILBERT_ROAD_LATEST_SUMMARY } from "@/lib/data/voice-card-summaries";
+import { VOICE_CARD_BY_SLUG } from "@/lib/data/voice-card-summaries";
 import { STATUS_RANK, inferStatus } from "@/lib/automation/status-infer";
 import { isHousingItem, matchProject } from "@/lib/automation/match";
 
@@ -236,13 +236,13 @@ async function publishDigests(
     const current = await sql<{ latest_summary: string | null }>`
       select latest_summary from projects where id = ${project.id}
     `;
-    // Pin Gilbert to one human watch-list line — never the botty bullet digest.
+    // Pin voice-card projects (Alford ERP, Gilbert watch line, etc.) — never bot digests.
+    const pinned = VOICE_CARD_BY_SLUG.get(slug);
     const text =
-      slug === "gilbert-road-tract"
-        ? GILBERT_ROAD_LATEST_SUMMARY
-        : ((await chatComplete(
-            `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page. If the items do not actually change status, keep the prior facts and note the mention.`,
-          )) ?? fallbackDigest(rows));
+      pinned ??
+      ((await chatComplete(
+        `Project: ${project.name} (${slug}). Current summary:\n${current[0]?.latest_summary ?? "(none)"}\n\nNew items:\n${headlines}\n\nWrite an updated latest-summary (120-180 words) for the public project page. If the items do not actually change status, keep the prior facts and note the mention.`,
+      )) ?? fallbackDigest(rows));
     await sql.query(
       `update projects set latest_summary = $1, latest_summary_at = now(), updated_at = now() where id = $2`,
       [text, project.id],
@@ -252,6 +252,22 @@ async function publishDigests(
        values ($1,$2,$3,'whats_new',$4)`,
       [project.id, `Update: ${project.name}`, text, AUTO_LABEL],
     );
+    if (slug === "gilbert-road-tract") {
+      // Keep a single Gilbert notebook item so the homepage does not show near-duplicates.
+      await sql.query(
+        `delete from project_updates
+         where id in (
+           select id from (
+             select id,
+                    row_number() over (order by created_at desc) as rn
+             from project_updates
+             where project_id = $1 and title = $2
+           ) ranked
+           where rn > 1
+         )`,
+        [project.id, `Update: ${project.name}`],
+      );
+    }
     summarized += 1;
   }
   return summarized;
@@ -323,6 +339,21 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
           or body ilike '%police chief%'
           or body ilike '%direct deposit%'
         )
+    `);
+    // Drop older Gilbert "Update: …" digests; keep the newest (homepage was showing Sep 5 + Sep 9).
+    await sql.query(`
+      delete from project_updates
+      where id in (
+        select id from (
+          select u.id,
+                 row_number() over (order by u.created_at desc) as rn
+          from project_updates u
+          join projects p on p.id = u.project_id
+          where p.slug = 'gilbert-road-tract'
+            and u.title = 'Update: Gilbert Road large tract'
+        ) ranked
+        where rn > 1
+      )
     `);
     await sql.query(
       `update projects

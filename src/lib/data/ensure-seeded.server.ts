@@ -295,7 +295,7 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
      where body like '%this tracker%'`,
   );
 
-  // Voice copy: replace botty Gilbert digest + cut Alford card cross-sells on Nobles/Beverly.
+  // Voice copy: pin Alford ERP card + Gilbert watch line; cut cross-sells on Nobles/Beverly.
   for (const row of VOICE_CARD_SUMMARIES) {
     if (row.unitsNote) {
       await sql.query(
@@ -323,6 +323,23 @@ async function syncMissingCatalog(sql: Awaited<ReturnType<typeof getSql>>) {
       );
     }
   }
+
+  // Homepage notebook showed two near-identical Gilbert digests (Sep 5 + Sep 9).
+  // Keep only the newest "Update: Gilbert Road large tract" row.
+  await sql.query(`
+    delete from project_updates
+    where id in (
+      select id from (
+        select u.id,
+               row_number() over (order by u.created_at desc) as rn
+        from project_updates u
+        join projects p on p.id = u.project_id
+        where p.slug = 'gilbert-road-tract'
+          and u.title = 'Update: Gilbert Road large tract'
+      ) ranked
+      where rn > 1
+    )
+  `);
 
   await syncSources(sql);
   await syncProducts(sql);
