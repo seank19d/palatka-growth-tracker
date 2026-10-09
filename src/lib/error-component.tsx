@@ -37,7 +37,8 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
       <p className="max-w-md text-sm break-words text-muted">
         {isStaleChunkError(error)
           ? "A new version of the site just went live. Reload the page."
-          : error.message || "An unexpected error occurred. Try reloading the page."}
+          : (error instanceof Error ? error.message : String(error ?? "")) ||
+            "An unexpected error occurred. Try reloading the page."}
       </p>
       <a href="/" className="mt-2 text-sm text-primary underline-offset-4 hover:underline">
         Back to the report

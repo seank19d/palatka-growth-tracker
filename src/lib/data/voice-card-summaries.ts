@@ -1,9 +1,16 @@
+import { SEED_PROJECTS } from "./seed-projects";
+
 /** Inviteful card summaries pinned so automation digests cannot re-bot them. */
 export const VOICE_CARD_SUMMARIES: {
   slug: string;
   latestSummary: string;
   unitsNote?: string;
 }[] = [
+  {
+    slug: "alford-farms",
+    // Keep homepage project-file card aligned with /developments/alford-farms ERP facts.
+    latestSummary: SEED_PROJECTS.find((p) => p.slug === "alford-farms")!.latestSummary,
+  },
   {
     slug: "gilbert-road-tract",
     latestSummary:
@@ -25,5 +32,11 @@ export const VOICE_CARD_SUMMARIES: {
   },
 ];
 
+export const VOICE_CARD_BY_SLUG = new Map(
+  VOICE_CARD_SUMMARIES.map((row) => [row.slug, row.latestSummary] as const),
+);
+
 export const GILBERT_ROAD_LATEST_SUMMARY =
-  VOICE_CARD_SUMMARIES.find((r) => r.slug === "gilbert-road-tract")!.latestSummary;
+  VOICE_CARD_BY_SLUG.get("gilbert-road-tract")!;
+
+export const ALFORD_FARMS_LATEST_SUMMARY = VOICE_CARD_BY_SLUG.get("alford-farms")!;
