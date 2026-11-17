@@ -26,7 +26,7 @@ Set these in the Vercel project if you want persistence, cron, and sign-in:
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | Recommended in production | Neon (or other Postgres). Without it, each serverless instance uses ephemeral PGLite. |
-| `CRON_SECRET` | For cron | Bearer token for `GET /api/cron/update` (once daily, see `vercel.json`). |
+| `CRON_SECRET` | Required for cron | Bearer token for `GET /api/cron/update` (once daily, see `vercel.json`). Route returns 401 if unset. |
 | `AMAZON_ASSOCIATE_TAG` | For monetization | Appended to affiliate product URLs. |
 | `ADMIN_EMAILS` | Recommended | Comma-separated emails allowed on `/admin`. If unset, any signed-in user can open it. |
 | `XAI_API_KEY` | Optional | Grok summaries of new source items. |

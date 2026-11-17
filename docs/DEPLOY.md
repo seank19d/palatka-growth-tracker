@@ -16,7 +16,7 @@ Do not commit a `.env` file.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `CRON_SECRET` | Yes, in production | Shared secret for `/api/cron/update`. Vercel Cron sends it as `Authorization: Bearer …`. |
+| `CRON_SECRET` | Yes, in production | Shared secret for `/api/cron/update`. Required — the route returns 401 without it. Vercel Cron sends `Authorization: Bearer …` when this is set. |
 | `AMAZON_ASSOCIATE_TAG` | For monetization | Amazon Associates tag (`phr0dc-20`). Already falls back in code. |
 | `AMAZON_CREDENTIAL_ID` | Optional | Creators API credential ID from Associates Central → Tools → Creators API. Needs ~10 shipped sales in 30 days. |
 | `AMAZON_CREDENTIAL_SECRET` | Optional | Creators API secret (shown once). |

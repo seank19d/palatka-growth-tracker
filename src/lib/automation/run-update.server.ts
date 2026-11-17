@@ -4,9 +4,11 @@ import { ensureSeeded } from "@/lib/data/ensure-seeded.server";
 import { GILBERT_ROAD_LATEST_SUMMARY } from "@/lib/data/voice-card-summaries";
 import { STATUS_RANK, inferStatus } from "@/lib/automation/status-infer";
 import { isHousingItem, matchProject } from "@/lib/automation/match";
-
-const UA =
-  "Mozilla/5.0 (compatible; PalatkaHomesReport/1.1; +https://www.palatkahomesreport.com/about)";
+import {
+  createHostThrottle,
+  fetchText,
+  shouldAlertOnSourceErrors,
+} from "@/lib/automation/http-fetch.mjs";
 
 type SourceRow = {
   id: number;
@@ -23,30 +25,7 @@ const NEW_PROJECT_HINT =
 
 const AUTO_LABEL = "Automated digest";
 
-async function fetchText(
-  url: string,
-  timeoutMs = 10000,
-): Promise<{ ok: true; text: string } | { ok: false; error: string }> {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      signal: ctrl.signal,
-      redirect: "follow",
-      headers: {
-        "User-Agent": UA,
-        Accept: "application/rss+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.8",
-      },
-    });
-    if (!res.ok) return { ok: false, error: `HTTP ${res.status}` };
-    const text = await res.text();
-    return { ok: true, text };
-  } catch (err) {
-    return { ok: false, error: err instanceof Error ? err.message : "fetch failed" };
-  } finally {
-    clearTimeout(t);
-  }
-}
+const sourceThrottle = createHostThrottle();
 
 function parseRss(xml: string): { title: string; url: string; snippet: string; publishedAt: string | null }[] {
   const $ = cheerio.load(xml, { xml: true });
@@ -262,6 +241,10 @@ export function kickStaleTrackerUpdate(): void {
   if (dbSource !== "neon") return;
   void (async () => {
     try {
+      const secret = process.env.CRON_SECRET?.trim();
+      // Fail closed: without CRON_SECRET the kick cannot authenticate.
+      if (!secret) return;
+
       const sql = await getSql();
       const rows = await sql<{ started_at: string; status: string }>`
         select started_at::text as started_at, status
@@ -282,7 +265,7 @@ export function kickStaleTrackerUpdate(): void {
         "www.palatkahomesreport.com";
       const host = raw.replace(/^https?:\/\//, "");
       await fetch(`https://${host}/api/cron/update`, {
-        headers: { "x-vercel-cron": "1" },
+        headers: { Authorization: `Bearer ${secret}` },
       });
     } catch {
       /* kick is best-effort */
@@ -338,7 +321,8 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
 
     for (const source of sources) {
       await sql.query(`update sources set last_checked_at = now() where id = $1`, [source.id]);
-      const fetched = await fetchText(source.url);
+      // Retries + host spacing live in fetchText; on failure we keep prior source_items.
+      const fetched = await fetchText(source.url, { throttle: sourceThrottle });
       if (!fetched.ok) {
         await sql.query(`update sources set last_error = $1 where id = $2`, [fetched.error, source.id]);
         errors.push(`${source.name}: ${fetched.error}`);
@@ -469,7 +453,8 @@ export async function runTrackerUpdate(): Promise<{ ok: boolean; summary: string
         [errors.length && newItems === 0 && summarized === 0 ? "error" : "ok", summary, errors.join("; ") || null, jobId],
       );
     }
-    if (errors.length >= 3) await maybeAlert(summary);
+    // Rate-limit leftovers after retries do not page — next cron can recover.
+    if (shouldAlertOnSourceErrors(errors)) await maybeAlert(summary);
     return { ok: true, summary };
   } catch (err) {
     const message = err instanceof Error ? err.message : "unknown error";

@@ -354,6 +354,7 @@ async function syncSources(sql: Awaited<ReturnType<typeof getSql>>) {
     select id, name, url, kind, enabled from sources
   `;
   const byName = new Map(have.map((r) => [r.name, r]));
+  const seedNames = new Set(SEED_SOURCES.map((s) => s.name));
   for (const s of SEED_SOURCES) {
     const row = byName.get(s.name);
     if (!row) {
@@ -369,6 +370,12 @@ async function syncSources(sql: Awaited<ReturnType<typeof getSql>>) {
         `update sources set url = $2, kind = $3, last_error = null, enabled = true where id = $1`,
         [row.id, s.url, s.kind],
       );
+    }
+  }
+  // Retire removed seed rows (e.g. old per-topic Google News feeds) so they stop fetching.
+  for (const row of have) {
+    if (!seedNames.has(row.name) && row.enabled) {
+      await sql.query(`update sources set enabled = false where id = $1`, [row.id]);
     }
   }
 }
