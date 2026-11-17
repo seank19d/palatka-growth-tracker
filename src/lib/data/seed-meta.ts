@@ -50,18 +50,10 @@ export const SEED_UPDATES: {
 
 export const SEED_SOURCES: { name: string; url: string; kind: string }[] = [
   {
-    name: "Google News — Alford Farms / East Palatka housing",
-    url: "https://news.google.com/rss/search?q=%22Alford+Farms%22+(Palatka+OR+%22East+Palatka%22+OR+Putnam)&hl=en-US&gl=US&ceid=US:en",
-    kind: "rss",
-  },
-  {
-    name: "Google News — Palatka development",
-    url: "https://news.google.com/rss/search?q=Palatka+Florida+(housing+OR+subdivision+OR+rezoning+OR+development+OR+Mattamy+OR+%22new+homes%22)&hl=en-US&gl=US&ceid=US:en",
-    kind: "rss",
-  },
-  {
-    name: "Google News — Collection / Mattamy Palatka",
-    url: "https://news.google.com/rss/search?q=%22Collection+at+Palatka%22+OR+(Mattamy+Palatka)+OR+%22Century+Complete%22+Palatka&hl=en-US&gl=US&ceid=US:en",
+    // One Google News query covers Alford / Collection / Mattamy / SJRWMD keywords.
+    // Fewer news.google.com hits → fewer 429s; host throttle spaces remaining calls.
+    name: "Google News — Palatka housing & permits",
+    url: "https://news.google.com/rss/search?q=(Palatka+OR+%22East+Palatka%22+OR+Putnam)+(housing+OR+subdivision+OR+rezoning+OR+%22Alford+Farms%22+OR+%22Collection+at+Palatka%22+OR+Mattamy+OR+%22Century+Complete%22+OR+SJRWMD+OR+ERP+OR+stormwater)&hl=en-US&gl=US&ceid=US:en",
     kind: "rss",
   },
   {
@@ -80,9 +72,10 @@ export const SEED_SOURCES: { name: string; url: string; kind: string }[] = [
     kind: "html",
   },
   {
-    name: "SJRWMD Putnam County",
-    url: "https://news.google.com/rss/search?q=SJRWMD+(Palatka+OR+Putnam+OR+%22East+Palatka%22)+(permit+OR+ERP+OR+stormwater)&hl=en-US&gl=US&ceid=US:en",
-    kind: "rss",
+    // Real district portal (not a Google News proxy). HTML scrape; keep last good on failure.
+    name: "SJRWMD Permitting Portal",
+    url: "https://permitting.sjrwmd.com/",
+    kind: "html",
   },
 ];
 
